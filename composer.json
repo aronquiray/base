@@ -1,0 +1,40 @@
+{
+        "name": "halcyon-laravel/base",
+        "description": "Base",
+        "require": {
+        },
+        "require-dev": {
+            "orchestra/testbench": "~3.3.0|~3.4.2|^3.5.0",
+            "phpunit/phpunit" : "^5.7|6.2|^7.0",
+            "friendsofphp/php-cs-fixer": "^2.10"
+        },
+        "autoload": {
+            "psr-4": {
+                "HalcyonLaravel\\Base\\": "src/"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "HalcyonLaravel\\Base\\Tests\\": "tests/",
+                "App\\": "tests/App/"
+            }
+        },
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "HalcyonLaravel\\Base\\Providers\\BaseServiceProvider"
+                ],
+                "aliases": {
+                    "Base": "HalcyonLaravel\\Base\\Facades\\Base"
+                }
+            }
+        },
+        "scripts": { 
+            "test": "./vendor/bin/phpunit --verbose",
+            "format": [
+                "./vendor/bin/php-cs-fixer fix src/ --show-progress=estimating",
+                "./vendor/bin/php-cs-fixer fix tests/ --show-progress=estimating"
+            ]
+        }
+    }
+    
