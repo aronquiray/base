@@ -2,46 +2,36 @@
 
 namespace HalcyonLaravel\Base\Traits;
 
+use Illuminate\Database\Eloquent\Model;
+
 trait Baseable
 {
     /**
-     * Return the baseable configuration array for this model.
+     * The module class.
      *
-     * @return array
+     * @var \Illuminate\Database\Eloquent\Model
      */
-    abstract public function baseable(): array;
-
+    protected $model;
 
     /**
-     * Returns the value of a given key in the baseable function
+     * Specify Model class name.
      *
      * @return mixed
      */
-    public function base($key)
-    {
-        $config = $this->baseable();
-        if (! is_array($config)) {
-            $config = ['source' => $this->baseable()];
-        }
-        if (array_key_exists($key, $config)) {
-            return $config[$key];
-        }
-        $key = $config['source'];
-        return $this->$key;
-    }
-
+    abstract public function model();
 
     /**
-     * Return the action at a given key.
-     * @param bool $type : frontend | backend
-     * @param String $key
-     * @return String $action
+     * @return Model|mixed
+     * @throws GeneralException
      */
-    public function action($type, $key): String
+    public function makeModel()
     {
-        if (! method_exists($this, 'actions')) {
-            return '#';
+        $model = app()->make($this->model());
+
+        if (! $model instanceof Model) {
+            throw new GeneralException("Class {$this->model()} must be an instance of ". Model::class);
         }
-        return array_key_exists($key, $this->actions($type)) ? $this->actions($type)[$key]['link'] : '#';
+
+        return $this->model = $model;
     }
 }

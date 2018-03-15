@@ -5,12 +5,13 @@ use Illuminate\Support\ServiceProvider;
 
 class BaseServiceProvider extends ServiceProvider
 {
+	/**
+	 * Perform post-registration booting of services.
+	 *
+	 * @return void
+	 */
     public function boot()
     {
-    }
-
-    public function register()
-    {
-        $this->loadViewsFrom(__DIR__.'/views', 'base');
+    	$this->loadTranslationsFrom(__DIR__.'/resources/lang', 'base');
     }
 }
