@@ -1,6 +1,10 @@
 {
         "name": "halcyon-laravel/base",
         "description": "Base",
+        "repositories": [{
+            "type": "vcs",
+             "url": "git@bitbucket.org:halcyonlaravel/base.git"
+        }],
         "require": {
         },
         "require-dev": {

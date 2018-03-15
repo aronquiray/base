@@ -7,11 +7,17 @@ use HalcyonLaravel\Base\Traits\Baseable;
 
 class BaseRepository
 {
-    use Baseable;
-    
-    public function __construct()
+    /**
+     * @param Model $model
+     */
+    protected $model;
+
+    /**
+     * BaseRepository Constructor
+     */
+    public function __construct(Model $model)
     {
-        $this->makeModel();
+        $this->model = $model;
     }
 
     /**

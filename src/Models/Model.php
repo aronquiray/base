@@ -17,35 +17,33 @@ abstract class Model extends BaseModel implements ModelContract
      * 
      * @return String
      */
-    protected $module_name;
+    public $module_name;
 
     /**
      * Path of the module for the crud backend
      * 
      * @return String
      */
-    public function view_backend_path() { return "backend.$this->module_name"; }
+    public $view_backend_path;
 
     /**
      * Path of the module for the crud frontend
      * 
      * @return String
      */
-    public function view_frontend_path() { return "frontend.$this->module_name"; }
+    public $view_frontend_path;
 
     /**
      * Path of the module for the admin route
      * 
      * @return String
      */
-    public function route_admin_path() { return "admin.$this->module_name"; }
+    public $route_admin_path;
 
     /**
      * Path of the module for the frontend route
      * 
      * @return String
      */
-    public function route_frontend_path() { return "frontend.$this->module_name"; }
-
-    
+    public $route_frontend_path;
 }

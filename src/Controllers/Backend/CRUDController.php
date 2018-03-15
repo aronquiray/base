@@ -5,20 +5,20 @@ namespace HalcyonLaravel\Base\Controllers\Backend;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
+use HalcyonLaravel\Base\Controllers\Backend\Contract\CRUDContract;
 
 /**
  * Class CRUDController.
  */
-abstract class CRUDController extends Controller
+abstract class CRUDController extends Controller implements CRUDContract
 {
     /**
      * CRUDController Constructor
      */
     public function __construct()
     {   
-        parent::__construct();
-        $this->view_name    = $this->model->view_backend_path();
-        $this->route_name   = $this->model->route_backend_path();
+        $this->view_path    = $this->model->view_backend_path;
+        $this->route_path   = $this->model->route_admin_path;
     }
 
 
@@ -103,27 +103,5 @@ abstract class CRUDController extends Controller
         return $this->response('delete', $request->ajax(), $model, $redirect);
     }
 
-    /**
-     * @param Request $request
-     * @param Model $model | nullable
-     * 
-     * @return array 
-     */
-    abstract public function generateStub(Request $request) : array;
-
-    /**
-     * Validate input on store 
-     * 
-     * @return array 
-     */
-    abstract public function storeRules() : array;
     
-    /**
-     * Validate input on update 
-     * 
-     * @param Model $model | nullable
-     * 
-     * @return array 
-     */
-    abstract public function updateRules($model) : array;
 }

@@ -5,33 +5,29 @@ namespace HalcyonLaravel\Base\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-use HalcyonLaravel\Base\Traits\Baseable;
 
 abstract class BaseController extends Controller
 {
-    use Baseable;
+    /**
+     * Model $model
+     * 
+     * @return Model $model
+     */
+    protected $model;
 
     /**
-     * View Path Name
+     * View Path
      * 
      * @return String
      */
-    protected static $view_name;
+    protected $view_path;
 
     /**
-     * View Path Name
+     * Route Path 
      * 
      * @return String
      */
-    protected static $route_name;
-
-    /**
-     * Class constructor   
-     */    
-    public function __contruct()
-    {
-        parent::__construct();        
-    }
+    protected $route_path;
 
     /**
      * Return the model by the given key
