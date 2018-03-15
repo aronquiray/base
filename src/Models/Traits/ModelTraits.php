@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Models\Traits;
 
-trait ModelHelpers
+trait ModelTraits
 {
    /**
      * Returns the value of a given key in the baseable function

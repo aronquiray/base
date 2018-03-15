@@ -3,14 +3,16 @@
 namespace HalcyonLaravel\Base\Models;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
+
+use Spatie\Sluggable\HasSlug;
 use HalcyonLaravel\Base\Models\Contracts\ModelContract;
-use HalcyonLaravel\Base\Models\Traits\ModelHelpers;
+use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 /**
  * Class Model.
  */
 abstract class Model extends BaseModel implements ModelContract
 {
-	use ModelHelpers;
+	use HasSlug, ModelTraits;
 
 	/**
      * Module Name

@@ -85,7 +85,7 @@ abstract class CRUDController extends Controller implements CRUDContract
         $model = $this->getModel($routeKeyName);
         $this->validate($request, $this->updateRules($model));
         $data = $this->generateStub($request, $model);
-        $model = $this->repo->store($data, $model);
+        $model = $this->repo->update($data, $model);
         return $this->response('update', $request->ajax(), $model, route("$this->route_path.show", $model));
     }
 
