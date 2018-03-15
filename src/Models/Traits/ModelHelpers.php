@@ -1,6 +1,6 @@
 <?php
 
-namespace HalcyonLaravel\Base\Traits;
+namespace HalcyonLaravel\Base\Models\Traits;
 
 trait ModelHelpers
 {
