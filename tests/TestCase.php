@@ -70,6 +70,7 @@ class TestCase extends Orchestra
             $table->increments('id');
             $table->string('name')->unique();
             $table->text('content');
+            $table->string('slug');
             $table->timestamps();
         });
     }

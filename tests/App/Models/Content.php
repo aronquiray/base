@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use HalcyonLaravel\Base\Models\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\SlugOptions;
 
-use HalcyonLaravel\Base\Traits\Baseable;
-use HalcyonLaravel\Base\Contracts\BaseableInterface;
 
-class Content extends Model implements BaseableInterface
+class Content extends Model 
 {
-    use Baseable;
 
     protected $fillable = [
         'name',
         'content',
+        'slug',
     ];
 
     /**
@@ -29,17 +28,24 @@ class Content extends Model implements BaseableInterface
         ];
     }
 
-    /**
-     * Return the sluggable configuration array for this model.
+	/**
+     * Return the links related to this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function links(): array
     {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
+        return [];
     }
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['first_name', 'last_name'])
+            ->saveSlugsTo('slug');
+    }
+
 }
