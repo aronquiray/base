@@ -24,7 +24,7 @@ class DeletedController extends Controller
     /**
      * @param Request $request
      * @param String $routeKeyName
-     * 
+     *
      * @return $response
      */
     public function restore(Request $request, String $routeKeyName)

@@ -4,13 +4,13 @@ namespace HalcyonLaravel\Base\Models\Traits;
 
 trait ModelTraits
 {
-   /**
-     * Returns the value of a given key in the baseable function
-     * 
-     * @param String $key
-     *
-     * @return mixed
-     */
+    /**
+      * Returns the value of a given key in the baseable function
+      *
+      * @param String $key
+      *
+      * @return mixed
+      */
     public function base($key)
     {
         $config = $this->baseable();
@@ -27,7 +27,7 @@ trait ModelTraits
 
     /**
      * Returns the list of links within the selected group
-     * 
+     *
      * @param String $group
      *
      * @return array $links
@@ -49,12 +49,14 @@ trait ModelTraits
      * Return the action at a given group and key.
      * @param String $group
      * @param String $key
-     * 
+     *
      * @return String $action
      */
     public function action($group, $key): String
     {
-        if (! method_exists($this, 'actions')) { return '#'; }
+        if (! method_exists($this, 'actions')) {
+            return '#';
+        }
         return array_key_exists($key, $this->actions($group)) ? $this->actions($group)[$key]['link'] : '#';
     }
 }
