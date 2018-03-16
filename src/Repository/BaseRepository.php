@@ -28,7 +28,7 @@ class BaseRepository
      */
     public function table(array $request) : Builder
     {
-        $query = $this->model->select($this->model->getFillables());
+        $query = $this->model->select($this->model->getFillable());
         return $query;
     }
     /**
