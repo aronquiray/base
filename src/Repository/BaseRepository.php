@@ -19,6 +19,16 @@ class BaseRepository
     {
         $this->model = $model;
     }
+
+    /**
+     * @param array $data
+     * 
+     * @return QueryBuilder $query
+     */
+    public function table(array $request) : Builder
+    {
+        return $this->model->query();
+    }
     /**
      | ------------------------------------------------------------
      |   
