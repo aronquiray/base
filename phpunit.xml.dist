@@ -11,6 +11,7 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="League Test Suite">
+            <directory suffix=".php">./tests/Features/</directory>
             <directory suffix=".php">./tests/Units/</directory>
         </testsuite>
     </testsuites>

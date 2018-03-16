@@ -17,8 +17,9 @@ class BaseRepository
      */
     public function __construct(Model $model)
     {
-        $this->model = $model;
+        $this->model =  $model;
     }
+
     /**
      | ------------------------------------------------------------
      |
@@ -30,7 +31,7 @@ class BaseRepository
     /**
       * This will handle DB transaction actiosn
       *
-      * @param String $closure
+      * @param function $closure
       * @return mixed $data
       * @throws Exception $e
       */
@@ -61,6 +62,9 @@ class BaseRepository
         ])) {
             return $args;
         }
+
+        $this->_handleErrors('not found: ' . $name);
+
     }
 
     /**
@@ -82,9 +86,12 @@ class BaseRepository
     public function store($data)
     {
         return $this->action(function () use ($data) {
-            $data = $this->storing($data);
-            $model = $model->store($data);
-            return $this->stored($data, $model);
+            // $data = $this->storing($data)[0];
+            // dd($data);
+       return     $model = $this->model::create($data);
+
+
+            // return $this->stored($data, $model)[0];
         });
     }
 
