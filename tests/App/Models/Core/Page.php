@@ -4,9 +4,10 @@ namespace App\Models\Core;
 
 use HalcyonLaravel\Base\Models\Model;
 use Spatie\Sluggable\SlugOptions;
-
+use HalcyonLaravel\Models\Traits\ModelDefaultTraits as DefaultTrait;
 class Page extends Model
 {
+    use DefaultTrait;
     /**
      * Declared Fillables
      */
@@ -49,18 +50,6 @@ class Page extends Model
     {
         return [
             'source' => 'title'
-        ];
-    }
-
-    /**
-     * Return the baseable source for this model.
-     *
-     * @return array
-     */
-    public function links() : array
-    {
-        return [
-
         ];
     }
 
