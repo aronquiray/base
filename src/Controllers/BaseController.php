@@ -10,21 +10,21 @@ abstract class BaseController extends Controller
 {
     /**
      * Model $model
-     * 
+     *
      * @return Model $model
      */
     protected $model;
 
     /**
      * View Path
-     * 
+     *
      * @return String
      */
     protected $view_path;
 
     /**
-     * Route Path 
-     * 
+     * Route Path
+     *
      * @return String
      */
     protected $route_path;
@@ -40,7 +40,9 @@ abstract class BaseController extends Controller
     public function getModel($key, $trash = false)
     {
         $model = $this->model->where($this->model->getRouteKeyName(), $key);
-        if ($trash && method_exists($this->model, 'bootSoftDeletes')) { $model->withTrashed(); }
+        if ($trash && method_exists($this->model, 'bootSoftDeletes')) {
+            $model->withTrashed();
+        }
         return $model->firstOrFail();
     }
 

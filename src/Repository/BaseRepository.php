@@ -17,7 +17,7 @@ class BaseRepository
      */
     public function __construct(Model $model)
     {
-        $this->model = $model;
+        $this->model =  $model;
     }
 
     /**
@@ -31,7 +31,7 @@ class BaseRepository
     }
     /**
      | ------------------------------------------------------------
-     |   
+     |
      |                  CRUD Actions
      |
      | ------------------------------------------------------------
@@ -39,8 +39,8 @@ class BaseRepository
 
     /**
       * This will handle DB transaction actiosn
-      * 
-      * @param String $closure
+      *
+      * @param function $closure
       * @return mixed $data
       * @throws Exception $e
       */
@@ -71,6 +71,9 @@ class BaseRepository
         ])) {
             return $args;
         }
+
+        $this->_handleErrors('not found: ' . $name);
+
     }
 
     /**
@@ -80,7 +83,7 @@ class BaseRepository
      */
     private function _handleErrors($e)
     {
-        $message = $e instanceOf \Exception ? $e->getMessage() : $e;
+        $message = $e instanceof \Exception ? $e->getMessage() : $e;
         throw new \Exception($message);
     }
 
@@ -91,10 +94,13 @@ class BaseRepository
      */
     public function store($data)
     {
-        return $this->action(function () use ( $data ) {
-            $data = $this->storing($data);
-            $model = $model->store($data);
-            return $this->stored($data, $model);
+        return $this->action(function () use ($data) {
+            // $data = $this->storing($data)[0];
+            // dd($data);
+       return     $model = $this->model::create($data);
+
+
+            // return $this->stored($data, $model)[0];
         });
     }
 
@@ -105,7 +111,7 @@ class BaseRepository
      */
     public function update($data, $model)
     {
-        return $this->action(function () use ( $data, $model ) {
+        return $this->action(function () use ($data, $model) {
             $model = $this->updating($data, $model);
             $model->update($data);
             return $this->updated($data, $model);
@@ -121,7 +127,7 @@ class BaseRepository
      */
     public function destroy($model)
     {
-        return $this->action(function () use ( $model ) {
+        return $this->action(function () use ($model) {
             $model = $this->deleting($model);
             $model->delete();
             return $this->deleted($model);
@@ -138,7 +144,7 @@ class BaseRepository
      */
     public function mark($data, $model)
     {
-        return $this->action(function () use ( $data, $model ) {
+        return $this->action(function () use ($data, $model) {
             $model = $this->updating($data, $model);
             $model->update($data);
             return $this->updated($data, $model);
@@ -158,7 +164,7 @@ class BaseRepository
             $this->_handleErrors('This content has not been deleted yet.');
         }
 
-        return $this->action(function () use ( $model ) {
+        return $this->action(function () use ($model) {
             $model = $this->restoring($model);
             $model->restore();
             return $this->restored($model);
@@ -177,7 +183,7 @@ class BaseRepository
             $this->_handleErrors('This content has not been deleted yet.');
         }
 
-        return $this->action(function () use ( $model ) {
+        return $this->action(function () use ($model) {
             $model = $this->purging($model);
             $model->forceDelete();
             return $this->purged($model);

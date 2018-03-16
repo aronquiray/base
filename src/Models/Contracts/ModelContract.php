@@ -2,9 +2,9 @@
 
 namespace HalcyonLaravel\Base\Models\Contracts;
 
-interface ModelContract 
+interface ModelContract
 {
-	/**
+    /**
      * Return the links related to this model.
      *
      * @return array

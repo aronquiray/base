@@ -6,10 +6,8 @@ use HalcyonLaravel\Base\Models\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\SlugOptions;
 
-
-class Content extends Model 
+class Content extends Model
 {
-
     protected $fillable = [
         'name',
         'content',
@@ -28,7 +26,7 @@ class Content extends Model
         ];
     }
 
-	/**
+    /**
      * Return the links related to this model.
      *
      * @return array
@@ -47,5 +45,4 @@ class Content extends Model
             ->generateSlugsFrom(['first_name', 'last_name'])
             ->saveSlugsTo('slug');
     }
-
 }

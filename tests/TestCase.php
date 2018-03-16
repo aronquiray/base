@@ -6,6 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use App\Models\User;
 use App\Models\Content;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Route;
 
 class TestCase extends Orchestra
 {
@@ -18,12 +19,29 @@ class TestCase extends Orchestra
         parent::setUp();
         $this->setUpDatabase($this->app);
         $this->setUpSeed();
+        $this->setUpRoutes();
     }
 
 
     public function tearDown()
     {
         parent::tearDown();
+    }
+
+    protected function setUpRoutes()
+    {
+        Route::group([
+            'namespace' => 'App\Http\Controllers\Backend',
+            'prefix' => 'admin',
+            'as' => 'admin.',
+            // 'middleware' => 'admin'
+        ], function () {
+            Route::group([
+                'namespace'  => 'Core\Page',
+            ], function () {
+                Route::resource('page', 'PagesController');
+            });
+        });
     }
 
     protected function setUpSeed()
@@ -65,12 +83,22 @@ class TestCase extends Orchestra
 
 
 
-        // Main Migration
         $app['db']->connection()->getSchemaBuilder()->create('contents', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
             $table->text('content');
             $table->string('slug');
+            $table->timestamps();
+        });
+        $app['db']->connection()->getSchemaBuilder()->create('pages', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title')->unique();
+            $table->string('slug');
+            $table->string('url')->nullable();
+            $table->string('type')->unique()->nullable();
+            $table->string('template')->nullable();
+            $table->text('description')->nullable();
+            $table->enum('status', ['enable', 'disabled'])->nullable();
             $table->timestamps();
         });
     }
@@ -102,7 +130,8 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-                "HalcyonLaravel\\Base\\Providers\\BaseServiceProvider",
+            "HalcyonLaravel\\Base\\Providers\\BaseServiceProvider",
+            "HalcyonLaravel\\Base\\Providers\\EventServiceProvider",
         ];
     }
 }
