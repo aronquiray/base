@@ -3,7 +3,7 @@ namespace HalcyonLaravel\Base\Repository;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use HalcyonLaravel\Base\Traits\Baseable;
 
 class BaseRepository
