@@ -35,6 +35,9 @@
             }
         },
         "scripts": { 
+            "phpunit": [
+                "./vendor/bin/phpunit --verbose > output.txt -d memory_limit=2048M"
+            ],
             "test": "./vendor/bin/phpunit --verbose",
             "format": [
                 "./vendor/bin/php-cs-fixer fix src/ --show-progress=estimating",
