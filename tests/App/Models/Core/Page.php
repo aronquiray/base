@@ -4,7 +4,7 @@ namespace App\Models\Core;
 
 use HalcyonLaravel\Base\Models\Model;
 use Spatie\Sluggable\SlugOptions;
-use HalcyonLaravel\Models\Traits\ModelDefaultTraits as DefaultTrait;
+use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits as DefaultTrait;
 class Page extends Model
 {
     use DefaultTrait;

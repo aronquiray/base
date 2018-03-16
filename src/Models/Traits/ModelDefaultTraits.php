@@ -1,6 +1,6 @@
 <?php
 
-namespace HalcyonLaravel\Models\Traits;
+namespace HalcyonLaravel\Base\Models\Traits;
 
 
 trait ModelDefaultTraits
