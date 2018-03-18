@@ -23,7 +23,7 @@ class BaseRepository
 
     /**
      * @param array $data
-     * 
+     *
      * @return QueryBuilder $query
      */
     public function table(array $request) : Builder
@@ -75,7 +75,6 @@ class BaseRepository
         }
 
         $this->_handleErrors('not found: ' . $name);
-
     }
 
     /**
@@ -99,7 +98,7 @@ class BaseRepository
         return $this->action(function () use ($data) {
             // $data = $this->storing($data)[0];
             // dd($data);
-       return     $model = $this->model::create($data);
+            return     $model = $this->model::create($data);
 
 
             // return $this->stored($data, $model)[0];
