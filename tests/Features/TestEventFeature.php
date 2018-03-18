@@ -2,7 +2,8 @@
 
 namespace HalcyonLaravel\Base\Tests\Features;
 
-use  HalcyonLaravel\Base\Tests\TestCase;
+use HalcyonLaravel\Base\Tests\TestCase;
+use App\Models\Core\Page;
 
 class TestEventFeature extends TestCase
 {
@@ -12,14 +13,17 @@ class TestEventFeature extends TestCase
             'X-Header' => 'Value',
         ])->json('POST', route('admin.page.store'), [
             'title' => 'Salliess',
+            'description' => 'description test',
         ]);
-
-
-        dd($response);
+        
         $response
-            ->assertStatus(200);
-        // ->assertJson([
-            //     'created' => true,
-            // ]);
+            ->assertStatus(302)
+            ->assertSessionHas('flash_success', 'Salliess has been created.')
+            ->assertRedirect(route('admin.page.show', Page::latest()->first()));
+
+        $this->assertDatabaseHas((new Page)->getTable(), [
+            'title' => 'Salliess',
+            'description' => 'description test',
+        ]);
     }
 }

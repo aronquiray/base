@@ -40,7 +40,7 @@ class PagesController extends Controller
      */
     public function generateStub(Request $request) : array
     {
-        return $request->only(['title']);
+        return $request->only(['title', 'description']);
     }
 
 

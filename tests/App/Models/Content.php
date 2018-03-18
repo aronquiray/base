@@ -4,10 +4,13 @@ namespace App\Models;
 
 use HalcyonLaravel\Base\Models\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Content extends Model
 {
+    use HasSlug;
+    
     protected $fillable = [
         'name',
         'content',

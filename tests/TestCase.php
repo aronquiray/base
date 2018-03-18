@@ -93,12 +93,8 @@ class TestCase extends Orchestra
         $app['db']->connection()->getSchemaBuilder()->create('pages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
+            $table->string('description');
             $table->string('slug');
-            $table->string('url')->nullable();
-            $table->string('type')->unique()->nullable();
-            $table->string('template')->nullable();
-            $table->text('description')->nullable();
-            $table->enum('status', ['enable', 'disabled'])->nullable();
             $table->timestamps();
         });
     }
