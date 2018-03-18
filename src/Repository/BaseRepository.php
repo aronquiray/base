@@ -3,6 +3,7 @@ namespace HalcyonLaravel\Base\Repository;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use HalcyonLaravel\Base\Traits\Baseable;
 
 class BaseRepository
@@ -20,6 +21,16 @@ class BaseRepository
         $this->model =  $model;
     }
 
+    /**
+     * @param array $data
+     * 
+     * @return QueryBuilder $query
+     */
+    public function table(array $request) : Builder
+    {
+        $query = $this->model->select($this->model->getFillable());
+        return $query;
+    }
     /**
      | ------------------------------------------------------------
      |
