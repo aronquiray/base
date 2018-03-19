@@ -6,6 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use HalcyonLaravel\Base\Traits\Baseable;
 
+
+use HalcyonLaravel\Base\Events\BaseStoringEvent;
+use HalcyonLaravel\Base\Events\BaseStoredEvent;
+
+use HalcyonLaravel\Base\Events\BaseUpdatingEvent;
+use HalcyonLaravel\Base\Events\BaseUpdatedEvent;
+
+use HalcyonLaravel\Base\Events\BaseDeletingEvent;
+use HalcyonLaravel\Base\Events\BaseDeletedEvent;
+
+use HalcyonLaravel\Base\Events\BaseRestoringEvent;
+use HalcyonLaravel\Base\Events\BaseRestoredEvent;
+
+use HalcyonLaravel\Base\Events\BasePurgingEvent;
+use HalcyonLaravel\Base\Events\BasePurgedEvent;
+
 class BaseRepository
 {
     /**
@@ -71,7 +87,54 @@ class BaseRepository
             'restoring', 'restored',
             'purging', 'purged',
         ])) {
-            return $args;
+            switch ($name) {
+                case 'storing':
+                    event(new BaseStoringEvent);
+                break;
+                case 'stored':
+                    event(new BaseStoredEvent);
+                break;
+                case 'updating':
+                    event(new BaseUpdatingEvent);
+                break;
+                case 'updated':
+                    event(new BaseUpdatedEvent);
+                break;
+                case 'deleting':
+                    event(new BaseDeletingEvent);
+                break;
+                case 'deleted':
+                    event(new BaseDeletedEvent);
+                break;
+                case 'restoring':
+                    event(new BaseRestoringEvent);
+                break;
+                case 'restored':
+                    event(new BaseRestoredEvent);
+                break;
+                case 'purging':
+                    event(new BasePurgingEvent);
+                break;
+                case 'purged':
+                    event(new BasePurgedEvent);
+                break;
+            }
+            switch ($name) {
+                case 'storing':
+                case 'purged':
+                    return $args[0];
+                break;
+                case 'stored':
+                case 'updating':
+                case 'updated':
+                case 'deleting':
+                case 'deleted':
+                case 'restoring':
+                case 'restored':
+                case 'purging':
+                    return $args[1];
+                break;
+            }
         }
 
         $this->_handleErrors('not found: ' . $name);
@@ -96,12 +159,9 @@ class BaseRepository
     public function store($data)
     {
         return $this->action(function () use ($data) {
-            // $data = $this->storing($data)[0];
-            // dd($data);
-            return     $model = $this->model::create($data);
-
-
-            // return $this->stored($data, $model)[0];
+            $data = $this->storing($data);
+            $model = $this->model::create($data);
+            return $this->stored($data, $model);
         });
     }
 

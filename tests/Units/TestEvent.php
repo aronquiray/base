@@ -4,6 +4,22 @@ namespace HalcyonLaravel\Base\Tests\Units;
 
 use  HalcyonLaravel\Base\Tests\TestCase;
 
+
+use HalcyonLaravel\Base\Events\BaseStoringEvent;
+use HalcyonLaravel\Base\Events\BaseStoredEvent;
+
+use HalcyonLaravel\Base\Events\BaseUpdatingEvent;
+use HalcyonLaravel\Base\Events\BaseUpdatedEvent;
+
+use HalcyonLaravel\Base\Events\BaseDeletingEvent;
+use HalcyonLaravel\Base\Events\BaseDeletedEvent;
+
+use HalcyonLaravel\Base\Events\BaseRestoringEvent;
+use HalcyonLaravel\Base\Events\BaseRestoredEvent;
+
+use HalcyonLaravel\Base\Events\BasePurgingEvent;
+use HalcyonLaravel\Base\Events\BasePurgedEvent;
+
 class TestEvent extends TestCase
 {
     public function setUp()
@@ -14,14 +30,14 @@ class TestEvent extends TestCase
 
     public function testLogStoring()
     {
-        event(new \HalcyonLaravel\Base\Events\BaseStoringEvent);
+        event(new BaseStoringEvent);
         $this->assertTrue(
             !empty(file_get_contents(storage_path('/logs/laravel.log')))
         );
     }
     public function testLogStored()
     {
-        event(new \HalcyonLaravel\Base\Events\BaseStoredEvent);
+        event(new BaseStoredEvent);
         $this->assertTrue(
             !empty(file_get_contents(storage_path('/logs/laravel.log')))
         );
@@ -29,14 +45,14 @@ class TestEvent extends TestCase
 
     public function testLogUpdating()
     {
-        event(new \HalcyonLaravel\Base\Events\BaseUpdatingEvent);
+        event(new BaseUpdatingEvent);
         $this->assertTrue(
             !empty(file_get_contents(storage_path('/logs/laravel.log')))
         );
     }
     public function testLogUpdated()
     {
-        event(new \HalcyonLaravel\Base\Events\BaseUpdatedEvent);
+        event(new BaseUpdatedEvent);
         $this->assertTrue(
             !empty(file_get_contents(storage_path('/logs/laravel.log')))
         );
@@ -44,14 +60,14 @@ class TestEvent extends TestCase
 
     public function testLogDeleting()
     {
-        event(new \HalcyonLaravel\Base\Events\BaseDeletingEvent);
+        event(new BaseDeletingEvent);
         $this->assertTrue(
             !empty(file_get_contents(storage_path('/logs/laravel.log')))
         );
     }
     public function testLogDeleted()
     {
-        event(new \HalcyonLaravel\Base\Events\BaseDeletedEvent);
+        event(new BaseDeletedEvent);
         $this->assertTrue(
             !empty(file_get_contents(storage_path('/logs/laravel.log')))
         );
@@ -59,14 +75,14 @@ class TestEvent extends TestCase
 
     public function testLogRestoring()
     {
-        event(new \HalcyonLaravel\Base\Events\BaseRestoringEvent);
+        event(new BaseRestoringEvent);
         $this->assertTrue(
             !empty(file_get_contents(storage_path('/logs/laravel.log')))
         );
     }
     public function testLogRestored()
     {
-        event(new \HalcyonLaravel\Base\Events\BaseRestoredEvent);
+        event(new BaseRestoredEvent);
         $this->assertTrue(
             !empty(file_get_contents(storage_path('/logs/laravel.log')))
         );
@@ -74,14 +90,14 @@ class TestEvent extends TestCase
 
     public function testLogPurging()
     {
-        event(new \HalcyonLaravel\Base\Events\BasePurgingEvent);
+        event(new BasePurgingEvent);
         $this->assertTrue(
             !empty(file_get_contents(storage_path('/logs/laravel.log')))
         );
     }
     public function testLogPurged()
     {
-        event(new \HalcyonLaravel\Base\Events\BasePurgedEvent);
+        event(new BasePurgedEvent);
         $this->assertTrue(
             !empty(file_get_contents(storage_path('/logs/laravel.log')))
         );
