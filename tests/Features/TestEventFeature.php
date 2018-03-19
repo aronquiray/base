@@ -14,6 +14,7 @@ class TestEventFeature extends TestCase
         ])->json('POST', route('admin.page.store'), [
             'title' => 'Salliess',
             'description' => 'description test',
+            'status' => 'enable',
         ]);
         
         $response
@@ -24,6 +25,7 @@ class TestEventFeature extends TestCase
         $this->assertDatabaseHas((new Page)->getTable(), [
             'title' => 'Salliess',
             'description' => 'description test',
+            'status' => 'enable',
         ]);
     }
 }

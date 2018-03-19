@@ -3,13 +3,10 @@
 namespace App\Models\Core;
 
 use HalcyonLaravel\Base\Models\Model;
-use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits as DefaultTrait;
 
 class Page extends Model
 {
-    use DefaultTrait,HasSlug;
     /**
      * Declared Fillables
      */
@@ -25,15 +22,18 @@ class Page extends Model
     public $route_frontend_path  = 'frontend.page';
 
     /**
-     * Get the options for generating the slug.
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
      */
-    public function getSlugOptions() : SlugOptions
+    public function sluggable()
     {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
-
 
     public function getRouteKeyName()
     {
@@ -50,5 +50,27 @@ class Page extends Model
         return [
             'source' => 'title'
         ];
+    }
+
+    /**
+     * Return the baseable source for this model.
+     *
+     * @return array
+     */
+    public function links() : array
+    {
+        return [
+
+        ];
+    }
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
     }
 }
