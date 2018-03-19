@@ -122,13 +122,13 @@ class BaseRepository
             switch ($name) {
                 case 'storing':
                 case 'purged':
+                case 'deleting':
+                case 'deleted':
                     return $args[0];
                 break;
                 case 'stored':
                 case 'updating':
                 case 'updated':
-                case 'deleting':
-                case 'deleted':
                 case 'restoring':
                 case 'restored':
                 case 'purging':

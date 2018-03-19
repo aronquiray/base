@@ -100,6 +100,6 @@ abstract class CRUDController extends Controller implements CRUDContract
         $model = $this->getModel($slug);
         $this->repo->destroy($model);
         $redirect = route("{$this->route_path}." . (method_exists($this->model, 'bootSoftDeletes') ? 'deleted' : 'index'));
-        return $this->response('delete', $request->ajax(), $model, $redirect);
+        return $this->response('destroy', $request->ajax(), $model, $redirect);
     }
 }

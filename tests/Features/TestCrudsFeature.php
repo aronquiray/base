@@ -81,4 +81,22 @@ class TestCrudsFeature extends TestCase
 
         $this->assertDatabaseHas((new Page)->getTable(), $dataNew);
     }
+
+    public function testLogDeleteOnNOTSoftdelete()
+    {
+
+        $this->expectsEvents(BaseDeletingEvent::class);
+        $this->expectsEvents(BaseDeletedEvent::class);
+
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->json('DELETE', route('admin.page.destroy', $this->page), []);
+       
+        $response
+            ->assertStatus(302)
+            ->assertSessionHas('flash_success', 'Title Name has been deleted.')
+            ->assertRedirect(route('admin.page.index'));
+
+        $this->assertDatabaseMissing((new Page)->getTable(), ['id'=>1]);
+    }
 }
