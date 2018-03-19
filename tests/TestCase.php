@@ -5,6 +5,7 @@ namespace HalcyonLaravel\Base\Tests;
 use Illuminate\Database\Schema\Blueprint;
 use App\Models\User;
 use App\Models\Content;
+use App\Models\Core\Page;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Route;
 
@@ -13,6 +14,7 @@ class TestCase extends Orchestra
     protected $user;
     protected $admin;
     protected $content;
+    protected $page;
     
     public function setUp()
     {
@@ -62,6 +64,11 @@ class TestCase extends Orchestra
             'description' => 'Content content',
             'image' => 'http://test.com/me.png',
             'status' => 'active',
+        ]);
+
+        $this->page = Page::create([
+            'title' => 'Title Name',
+            'status' => 'enable',
         ]);
     }
 
