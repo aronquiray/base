@@ -5,7 +5,7 @@ namespace HalcyonLaravel\Base\Tests\Features;
 use HalcyonLaravel\Base\Tests\TestCase;
 use App\Models\Core\Page;
 
-class TestEventFeature extends TestCase
+class TestCrudsFeature extends TestCase
 {
     public function testLogStore()
     {
@@ -36,7 +36,7 @@ class TestEventFeature extends TestCase
             'description' => 'new description test',
             'status' => 'enable',
         ];
-        
+
         $response = $this->withHeaders([
             'X-Header' => 'Value',
         ])->json('PUT', route('admin.page.update', $this->page), $dataNew);
