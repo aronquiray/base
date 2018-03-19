@@ -2,6 +2,7 @@
 
 namespace HalcyonLaravel\Base\Tests\Features;
 
+use Illuminate\Database\Schema\Blueprint;
 use HalcyonLaravel\Base\Tests\TestCase;
 use App\Models\Core\Page;
 
@@ -21,9 +22,6 @@ use HalcyonLaravel\Base\Events\BaseRestoredEvent;
 
 use HalcyonLaravel\Base\Events\BasePurgingEvent;
 use HalcyonLaravel\Base\Events\BasePurgedEvent;
-
-// use Mockery as m;
-// use Event;
 
 class TestCrudsFeature extends TestCase
 {
@@ -84,7 +82,6 @@ class TestCrudsFeature extends TestCase
 
     public function testLogDeleteOnNOTSoftdelete()
     {
-
         $this->expectsEvents(BaseDeletingEvent::class);
         $this->expectsEvents(BaseDeletedEvent::class);
 
