@@ -14,7 +14,7 @@ class Page extends Model
      * Declared Fillables
      */
     protected $fillable = [
-        'title', 'slug', 'content', 'description', 'status', 'template', 'type', 'url'
+        'title', 'slug', 'description', 'status', 'template', 'type', 'url'
     ];
 
 

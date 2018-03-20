@@ -43,13 +43,12 @@ class PagesTableController extends Controller
         return DataTables::of($this->repo->table([
                 'trashOnly' => $trashOnly,
         ]))
-            ->escapeColumns(['id'])
             ->editColumn('status', function ($model) use ($user) {
                 return [
                     'type' => $model->status == "enable" ? 'success' : 'danger',
                     'label' => ucfirst($model->status),
                     'value' => $model->status,
-                    'link' => route('admin.page.mark', $model),
+                    'link' => route('admin.page.status', $model),
                     'can' => $user->can('page change status')
                 ];
             })
