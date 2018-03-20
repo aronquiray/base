@@ -247,7 +247,7 @@ class BaseRepository
     public function purge($model)
     {
         if (is_null($model->deleted_at)) {
-           throw RepositoryException::notDeleted();
+            throw RepositoryException::notDeleted();
         }
 
         return $this->action(function () use ($model) {
