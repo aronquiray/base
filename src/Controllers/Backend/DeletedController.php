@@ -5,20 +5,21 @@ namespace HalcyonLaravel\Base\Controllers\Backend;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
+use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 
 /**
  * Class DeletedController.
  */
 class DeletedController extends Controller
 {
-    use CRUDTraits;
+    use ModelTraits;
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function deleted()
     {
-        return view("$this->view_path.deleted");
+        return view("{$this->view_path}.deleted");
     }
 
     /**
@@ -31,7 +32,7 @@ class DeletedController extends Controller
     {
         $model = $this->getModel($routeKeyName, $trash = true);
         $this->repo->restore($model);
-        return $this->response('restore', $request, $model, route("$this->route_path.index"));
+        return $this->response('restore', $request->ajax(), $model, route("{$this->route_path}.index"));
     }
 
     /**
@@ -43,6 +44,6 @@ class DeletedController extends Controller
     {
         $model = $this->getModel($routeKeyName, $trash = true);
         $this->repo->purge($model);
-        return $this->response('purge', $request, $model, route("$this->route_path.deleted"));
+        return $this->response('purge', $request->ajax(), $model, route("{$this->route_path}.deleted"));
     }
 }

@@ -27,7 +27,7 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function index()
     {
-        return view("$this->view_path.index");
+        return view("{$this->view_path}.index");
     }
 
     /**
@@ -35,7 +35,7 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function create()
     {
-        return view("$this->view_path.create");
+        return view("{$this->view_path}.create");
     }
 
     /**
@@ -46,7 +46,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function edit(String $routeKeyName)
     {
         $model = $this->getModel($routeKeyName);
-        return view("$this->view_path.edit", compact('model'));
+        return view("{$this->view_path}.edit", compact('model'));
     }
 
     /**
@@ -57,7 +57,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function show(String $routeKeyName)
     {
         $model = $this->getModel($routeKeyName);
-        return view("$this->view_path.show", compact('model'));
+        return view("{$this->view_path}.show", compact('model'));
     }
 
 
@@ -71,7 +71,7 @@ abstract class CRUDController extends Controller implements CRUDContract
         $this->validate($request, $this->storeRules($request));
         $data = $this->generateStub($request);
         $model = $this->repo->store($data);
-        return $this->response('store', $request->ajax(), $model, route("$this->route_path.show", $model));
+        return $this->response('store', $request->ajax(), $model, route("{$this->route_path}.show", $model));
     }
 
     /**
@@ -86,7 +86,7 @@ abstract class CRUDController extends Controller implements CRUDContract
         $this->validate($request, $this->updateRules($request, $model));
         $data = $this->generateStub($request, $model);
         $model = $this->repo->update($data, $model);
-        return $this->response('update', $request->ajax(), $model, route("$this->route_path.show", $model));
+        return $this->response('update', $request->ajax(), $model, route("{$this->route_path}.show", $model));
     }
 
     /**
@@ -99,7 +99,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     {
         $model = $this->getModel($slug);
         $this->repo->destroy($model);
-        $redirect = route("$this->route_path." . (method_exists($this->model, 'bootSoftDeletes') ? 'deleted' : 'index'));
-        return $this->response('delete', $request->ajax(), $model, $redirect);
+        $redirect = route("{$this->route_path}." . (method_exists($this->model, 'bootSoftDeletes') ? 'deleted' : 'index'));
+        return $this->response('destroy', $request->ajax(), $model, $redirect);
     }
 }

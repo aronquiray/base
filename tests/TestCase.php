@@ -5,6 +5,7 @@ namespace HalcyonLaravel\Base\Tests;
 use Illuminate\Database\Schema\Blueprint;
 use App\Models\User;
 use App\Models\Content;
+use App\Models\Core\Page;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Route;
 
@@ -13,6 +14,7 @@ class TestCase extends Orchestra
     protected $user;
     protected $admin;
     protected $content;
+    protected $page;
     
     public function setUp()
     {
@@ -39,9 +41,14 @@ class TestCase extends Orchestra
             Route::group([
                 'namespace'  => 'Core\Page',
             ], function () {
+                Route::post('page/disabled', 'PageStatusController@inactive')->name('page.disabled');
+                Route::post('page/table', 'PagesTableController')->name('page.table');
+                Route::patch('page/{page}/status', 'PageStatusController')->name('page.status');
                 Route::resource('page', 'PagesController');
             });
         });
+
+        // Route::get('page', 'tt')->name('frontend.page.show');
     }
 
     protected function setUpSeed()
@@ -62,6 +69,11 @@ class TestCase extends Orchestra
             'description' => 'Content content',
             'image' => 'http://test.com/me.png',
             'status' => 'active',
+        ]);
+
+        $this->page = Page::create([
+            'title' => 'Title Name',
+            'status' => 'enable',
         ]);
     }
 
@@ -98,7 +110,7 @@ class TestCase extends Orchestra
             $table->string('type')->unique()->nullable();
             $table->string('template')->nullable();
             $table->text('description')->nullable();
-            $table->enum('status', ['enable', 'disabled'])->nullable();
+            $table->enum('status', ['enable', 'disabled']);
             $table->timestamps();
         });
     }
@@ -124,6 +136,7 @@ class TestCase extends Orchestra
     protected function getPackageAliases($app)
     {
         return [
+            "DataTables" => "Yajra\\DataTables\\Facades\\DataTables"
         ];
     }
 
@@ -132,6 +145,9 @@ class TestCase extends Orchestra
         return [
             "HalcyonLaravel\\Base\\Providers\\BaseServiceProvider",
             "HalcyonLaravel\\Base\\Providers\\EventServiceProvider",
+
+            // --
+            "Yajra\\DataTables\\DataTablesServiceProvider",
         ];
     }
 }

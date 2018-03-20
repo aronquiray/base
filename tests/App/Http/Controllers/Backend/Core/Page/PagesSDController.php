@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Backend\Core\Page;
 use Illuminate\Http\Request;
 use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
-use App\Models\Core\Page as Model;
+use App\Models\Core\PageSoftDelete as Model;
 
 /**
  * Class PagesController.
  */
-class PagesController extends Controller
+class PagesSDController extends Controller
 {
     /**
      * PagesController Constructor
@@ -67,10 +67,5 @@ class PagesController extends Controller
     {
         return [
         ];
-    }
-
-    public function testForMethodNotFound()
-    {
-        $this->repo->imNotExist();
     }
 }
