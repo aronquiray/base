@@ -68,4 +68,10 @@ class PagesController extends Controller
         return [
         ];
     }
+
+    public function testForMethodNotFound()
+    {
+        $this->repo->imNotExist();
+    
+    }
 }

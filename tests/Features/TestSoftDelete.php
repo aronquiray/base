@@ -115,4 +115,40 @@ class TestSoftDelete extends TestCase
 
         $this->assertDatabaseMissing((new PageSoftDelete)->getTable(), ['id'=>$this->pageSoftdelete->id,]);
     }
+
+    public function testOnPurgeOnNotDeleted()
+    {
+        // $this->expectsEvents(BasePurgingEvent::class);
+        // $this->expectsEvents(BasePurgedEvent::class);
+        
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+            ])->json('DELETE', route('admin.page-sd.purge', $this->pageSoftdelete), []);
+    
+        $response
+            ->assertStatus(403)
+            ->assertJson([
+                'message'=>'This content has not been deleted yet.'
+        ]);
+
+        $this->assertDatabaseHas((new PageSoftDelete)->getTable(), ['id'=>$this->pageSoftdelete->id,]);
+    }
+
+    public function testOnRestoreOnNotDeleted()
+    {
+        // $this->expectsEvents(BaseRestoringEvent::class);
+        // $this->expectsEvents(BaseRestoredEvent::class);
+        
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+            ])->json('PATCH', route('admin.page-sd.restore', $this->pageSoftdelete), []);
+    
+        $response
+            ->assertStatus(403)
+            ->assertJson([
+                'message'=>'This content has not been deleted yet.'
+        ]);
+
+        $this->assertDatabaseHas((new PageSoftDelete)->getTable(), ['id'=>$this->pageSoftdelete->id,'deleted_at'=>null]);
+    }
 }
