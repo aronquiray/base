@@ -13,9 +13,9 @@ trait CRUDTrait
      *
      * @return void
      */
-    protected function _redirectAfterAction(String $submission = null, $args) : String 
+    protected function _redirectAfterAction(String $submission = null, $args) : String
     {
-        if ($submission && strpos($submission, 'http') !== false) {  
+        if ($submission && strpos($submission, 'http') !== false) {
             return $submission;
         }
         $submission = $submission ?? 'show';
