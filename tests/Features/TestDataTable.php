@@ -30,10 +30,12 @@ class TestDataTable extends TestCase
 
     public function testWithDataOneRow()
     {
+        $now = now()->format('Y-m-d H:i:s');
         $page = Page::create([
             'title' => 'Unit Test Title',
             'status' => 'enable',
             'description' => 'Dessdription blah blah',
+            'updated_at' => $now,
         ]);
 
         $expectedJson = [
@@ -55,7 +57,7 @@ class TestDataTable extends TestCase
                     "template"=> null,
                     "type"=> null,
                     "url"=> null,
-                    "updated_at"=> "20 Mar, 2018 06:03 AM",
+                    "updated_at"=> $page->updated_at->format('d M, Y h:m A'),
                     "actions"=> [
                         "show"=> [
                             "type"=> "show",
