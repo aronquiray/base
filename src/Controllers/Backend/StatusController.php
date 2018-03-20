@@ -4,13 +4,14 @@ namespace HalcyonLaravel\Base\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
+use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 
 /**
  * Class StatusController.
  */
 abstract class StatusController extends Controller
 {
-    use CRUDTraits;
+    use ModelTraits;
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -41,5 +42,5 @@ abstract class StatusController extends Controller
      *
      * @return $response
      */
-    abstract public function modelIsActive(Model $model) : bool;
+    abstract public function modelIsActive($model) : bool;
 }

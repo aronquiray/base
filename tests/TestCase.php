@@ -41,9 +41,13 @@ class TestCase extends Orchestra
             Route::group([
                 'namespace'  => 'Core\Page',
             ], function () {
+                Route::post('page/table', 'PagesTableController')->name('page.table');
+                Route::patch('page/{page}/mark', 'PageStatusController@mark')->name('page.mark');
                 Route::resource('page', 'PagesController');
             });
         });
+
+        // Route::get('page', 'tt')->name('frontend.page.show');
     }
 
     protected function setUpSeed()
@@ -131,6 +135,7 @@ class TestCase extends Orchestra
     protected function getPackageAliases($app)
     {
         return [
+            "DataTables" => "Yajra\\DataTables\\Facades\\DataTables"
         ];
     }
 
@@ -139,6 +144,9 @@ class TestCase extends Orchestra
         return [
             "HalcyonLaravel\\Base\\Providers\\BaseServiceProvider",
             "HalcyonLaravel\\Base\\Providers\\EventServiceProvider",
+
+            // --
+            "Yajra\\DataTables\\DataTablesServiceProvider",
         ];
     }
 }

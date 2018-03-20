@@ -44,7 +44,15 @@ class BaseRepository
      */
     public function table(array $request) : Builder
     {
-        $query = $this->model->select($this->model->getFillable());
+        $fillable = array_merge($this->model->getFillable(), ['updated_at']);
+        $query = $this->model->select($fillable);
+
+        if (method_exists(app(get_class($this->model)), 'bootSoftDeletes')) {
+            if (isset($request['trashOnly']) && $request['trashOnly']) {
+                $query->onlyTrashed();
+            }
+        }
+
         return $query;
     }
     /**

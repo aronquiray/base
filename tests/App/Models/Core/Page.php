@@ -4,9 +4,12 @@ namespace App\Models\Core;
 
 use HalcyonLaravel\Base\Models\Model;
 use Spatie\Sluggable\SlugOptions;
+use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits;
 
 class Page extends Model
 {
+    use ModelDefaultTraits;
+
     /**
      * Declared Fillables
      */
@@ -52,17 +55,6 @@ class Page extends Model
         ];
     }
 
-    /**
-     * Return the baseable source for this model.
-     *
-     * @return array
-     */
-    public function links() : array
-    {
-        return [
-
-        ];
-    }
 
     /**
      * Get the options for generating the slug.
