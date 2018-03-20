@@ -201,23 +201,6 @@ class BaseRepository
         });
     }
 
-
-
-    /**
-     * @param Request $request
-     * @param Model  $model
-     *
-     * @return mixed
-     */
-    public function mark($data, $model)
-    {
-        return $this->action(function () use ($data, $model) {
-            $model = $this->updating($data, $model);
-            $model->update($data);
-            return $this->updated($data, $model);
-        });
-    }
-
     /**
      * @param Model $model
      *
