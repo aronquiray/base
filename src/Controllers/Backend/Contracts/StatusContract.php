@@ -1,6 +1,6 @@
 <?php
 
-namespace HalcyonLaravel\Base\Controllers\Backend\Contract;
+namespace HalcyonLaravel\Base\Controllers\Backend\Contracts;
 
 interface StatusContract
 {

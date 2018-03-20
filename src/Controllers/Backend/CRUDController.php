@@ -5,13 +5,15 @@ namespace HalcyonLaravel\Base\Controllers\Backend;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
-use HalcyonLaravel\Base\Controllers\Backend\Contract\CRUDContract;
+use HalcyonLaravel\Base\Controllers\Backend\Contracts\CRUDContract;
+use HalcyonLaravel\Base\Controllers\Backend\Traits\CRUDTrait;
 
 /**
  * Class CRUDController.
  */
 abstract class CRUDController extends Controller implements CRUDContract
 {
+    use CRUDTrait;
     /**
      * CRUDController Constructor
      */
@@ -71,7 +73,7 @@ abstract class CRUDController extends Controller implements CRUDContract
         $this->validate($request, $this->storeRules($request));
         $data = $this->generateStub($request);
         $model = $this->repo->store($data);
-        return $this->response('store', $request->ajax(), $model, route("{$this->route_path}.show", $model));
+        return $this->response('store', $request->ajax(), $model, $this->_redirectAfterAction($request->_submission, $model));
     }
 
     /**
@@ -86,7 +88,7 @@ abstract class CRUDController extends Controller implements CRUDContract
         $this->validate($request, $this->updateRules($request, $model));
         $data = $this->generateStub($request, $model);
         $model = $this->repo->update($data, $model);
-        return $this->response('update', $request->ajax(), $model, route("{$this->route_path}.show", $model));
+        return $this->response('update', $request->ajax(), $model, $this->_redirectAfterAction($request->_submission, $model));
     }
 
     /**
