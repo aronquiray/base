@@ -18,7 +18,7 @@ trait CRUDTrait
         if ($submission && strpos($submission, 'http') !== false) {  
             return $submission;
         }
-        $submission = $submission ?? 'view';
+        $submission = $submission ?? 'show';
         return route("$this->route_path.$submission", $args);
     }
 }
