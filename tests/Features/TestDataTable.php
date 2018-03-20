@@ -4,6 +4,7 @@ namespace HalcyonLaravel\Base\Tests\Features;
 
 use HalcyonLaravel\Base\Tests\TestCase;
 use App\Models\Core\Page;
+use Faker\Factory as Faker;
 
 class TestDataTable extends TestCase
 {
@@ -30,53 +31,61 @@ class TestDataTable extends TestCase
 
     public function testWithDataOneRow()
     {
+        $faker = Faker::create();
         $now = now()->format('Y-m-d H:i:s');
-        $page = Page::create([
-            'title' => 'Unit Test Title',
-            'status' => 'enable',
-            'description' => 'Dessdription blah blah',
-            'updated_at' => $now,
-        ]);
+        foreach(range(1,20) as $index)
+        {
+            Page::create([
+                    'title' => $faker->sentence(),
+                    'status' => 'enable',
+                    'description' => $faker->sentence(50),
+                    'updated_at' => $now,
+                ]);
+        }
+
+        $pages = [];
+
+        foreach(Page::all() as $page)
+        {
+            $pages[] = [
+                "title"=> $page->title,
+                "slug"=> $page->slug,
+                "description"=> $page->description,
+                "status"=> [
+                    "type"=> "success",
+                    "label"=> "Enable",
+                    "value"=> "enable",
+                    "link"=> "http://localhost/admin/page/{$page->slug}/status",
+                    "can"=> false
+                ],
+                "template"=> null,
+                "type"=> null,
+                "url"=> null,
+                "updated_at"=> $page->updated_at->format('d M, Y h:m A'),
+                "actions"=> [
+                    "show"=> [
+                        "type"=> "show",
+                        "url"=> "http://localhost/admin/page/{$page->slug}"
+                    ],
+                    "edit"=> [
+                        "type"=> "edit",
+                        "url"=> "http://localhost/admin/page/{$page->slug}/edit"
+                    ],
+                    "destroy"=> [
+                        "type"=> "destroy",
+                        "url"=> "http://localhost/admin/page/{$page->slug}",
+                        "group"=> "more",
+                        "redirect"=> "http://localhost/admin/page"
+                    ]
+                ]
+            ];
+        }
 
         $expectedJson = [
             "draw"=> 0,
-            "recordsTotal"=> 1,
-            "recordsFiltered"=> 1,
-            "data"=>[
-                [
-                    "title"=> $page->title,
-                    "slug"=> $page->slug,
-                    "description"=> $page->description,
-                    "status"=> [
-                        "type"=> "success",
-                        "label"=> "Enable",
-                        "value"=> "enable",
-                        "link"=> "http://localhost/admin/page/{$page->slug}/status",
-                        "can"=> false
-                    ],
-                    "template"=> null,
-                    "type"=> null,
-                    "url"=> null,
-                    "updated_at"=> $page->updated_at->format('d M, Y h:m A'),
-                    "actions"=> [
-                        "show"=> [
-                            "type"=> "show",
-                            "url"=> "http://localhost/admin/page/{$page->slug}"
-                        ],
-                        "edit"=> [
-                            "type"=> "edit",
-                            "url"=> "http://localhost/admin/page/{$page->slug}/edit"
-                        ],
-                        "destroy"=> [
-                            "type"=> "destroy",
-                            "url"=> "http://localhost/admin/page/{$page->slug}",
-                            "group"=> "more",
-                            "redirect"=> "http://localhost/admin/page"
-                        ]
-                    ]
-                ],
-            ]
-            
+            "recordsTotal"=> count($pages),
+            "recordsFiltered"=>  count($pages),
+            "data"=>$pages            
         ];
 
         
