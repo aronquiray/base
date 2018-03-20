@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Backend\Core\Page;
 
 use Illuminate\Http\Request;
-use HalcyonLaravel\Base\Controllers\Backend\DeletedController as Controller;
+use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
 use App\Models\Core\PageSoftDelete as Model;
 
 /**
  * Class PagesController.
  */
-class PagesSoftDeleteController extends Controller
+class PagesSDController extends Controller
 {
     /**
      * PagesController Constructor
@@ -19,8 +19,7 @@ class PagesSoftDeleteController extends Controller
     {
         $this->model = $model;
         $this->repo = new Repository($model);
-        $this->route_path = 'admin.page-sd';
-        // parent::__construct();
+        parent::__construct();
     }
 
     /**
@@ -69,8 +68,4 @@ class PagesSoftDeleteController extends Controller
         return [
         ];
     }
-
-    // public function deleted()
-    // {
-    // }
 }

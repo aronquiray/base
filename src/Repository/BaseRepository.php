@@ -124,20 +124,20 @@ class BaseRepository
                 case 'purged':
                 case 'deleting':
                 case 'deleted':
+                case 'purging':
+                case 'restoring':
+                case 'restored':
                     return $args[0];
                 break;
                 case 'stored':
                 case 'updating':
                 case 'updated':
-                case 'restoring':
-                case 'restored':
-                case 'purging':
                     return $args[1];
                 break;
             }
         }
 
-        $this->_handleErrors('not found: ' . $name);
+        $this->_handleErrors(trans('base::errors.function_not_found', ['functionName' => $name]));
     }
 
     /**
@@ -222,7 +222,7 @@ class BaseRepository
     public function restore($model)
     {
         if (is_null($model->deleted_at)) {
-            $this->_handleErrors('This content has not been deleted yet.');
+            $this->_handleErrors(trans('base::errors.not_deleted'));
         }
 
         return $this->action(function () use ($model) {
@@ -241,7 +241,7 @@ class BaseRepository
     public function purge($model)
     {
         if (is_null($model->deleted_at)) {
-            $this->_handleErrors('This content has not been deleted yet.');
+            $this->_handleErrors(trans('base::errors.not_deleted'));
         }
 
         return $this->action(function () use ($model) {
