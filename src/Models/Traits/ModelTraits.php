@@ -46,20 +46,4 @@ trait ModelTraits
 
         return $links;
     }
-
-
-    /**
-     * Return the action at a given group and key.
-     * @param string $group
-     * @param string $key
-     *
-     * @return string $action
-     */
-    public function action($group, $key): string
-    {
-        if (! method_exists($this, 'actions')) {
-            return '#';
-        }
-        return array_key_exists($key, $this->actions($group)) ? $this->actions($group)[$key]['link'] : '#';
-    }
 }

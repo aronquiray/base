@@ -1,6 +1,6 @@
 <?php
 
-namespace HalcyonLaravel\Base\Tests\Features;
+namespace HalcyonLaravel\Base\Tests\Units;
 
 use HalcyonLaravel\Base\Tests\TestCase;
 use HalcyonLaravel\Base\Repository\BaseRepository;
