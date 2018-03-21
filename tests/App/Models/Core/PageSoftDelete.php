@@ -5,10 +5,11 @@ namespace App\Models\Core;
 use HalcyonLaravel\Base\Models\Model;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits;
 
 class PageSoftDelete extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,ModelDefaultTraits;
     protected $table = 'pages_sd';
     /**
      * Declared Fillables
@@ -18,11 +19,11 @@ class PageSoftDelete extends Model
     ];
 
 
-    public $module_name          = 'page';
-    public $view_backend_path    = 'backend.core.page';
-    public $view_frontend_path   = 'frontend.core.page';
+    public $module_name          = 'page-sd';
+    public $view_backend_path    = 'backend.core.page-sd';
+    public $view_frontend_path   = 'frontend.core.page-sd';
     public $route_admin_path     = 'admin.page-sd';
-    public $route_frontend_path  = 'frontend.page';
+    public $route_frontend_path  = 'frontend.page-sd';
 
     /**
      * Return the sluggable configuration array for this model.
@@ -55,18 +56,7 @@ class PageSoftDelete extends Model
         ];
     }
 
-    /**
-     * Return the baseable source for this model.
-     *
-     * @return array
-     */
-    public function links() : array
-    {
-        return [
-
-        ];
-    }
-
+ 
     /**
      * Get the options for generating the slug.
      */

@@ -25,38 +25,6 @@ class TestSoftDelete extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->app['db']->connection()->getSchemaBuilder()->create('pages_sd', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title')->unique();
-            $table->string('slug');
-            $table->string('url')->nullable();
-            $table->string('type')->unique()->nullable();
-            $table->string('template')->nullable();
-            $table->text('description')->nullable();
-            $table->enum('status', ['enable', 'disabled']);
-            $table->timestamps();
-            $table->softDeletes();
-        });
-        Route::group([
-            'namespace' => 'App\Http\Controllers\Backend',
-            'prefix' => 'admin',
-            'as' => 'admin.',
-            // 'middleware' => 'admin'
-        ], function () {
-            Route::group([
-                'namespace'  => 'Core\Page',
-        ], function () {
-            Route::resource('page-sd', 'PagesSDController');
-        });
-            Route::get('page-sd/deleted', 'Core\Page\PagesSoftDeleteController@deleted')->name('page-sd.deleted');
-            Route::patch('page-sd/{page_sd}/deleted', 'Core\Page\PagesSoftDeleteController@restore')->name('page-sd.restore');
-            Route::delete('page-sd/{page_sd}/deleted', 'Core\Page\PagesSoftDeleteController@purge')->name('page-sd.purge');
-        });
-
-        $this->pageSoftdelete = PageSoftDelete::create([
-            'title' => 'test me to delete',
-            'status' => 'enable',
-        ]);
     }
     
        

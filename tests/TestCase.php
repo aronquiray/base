@@ -6,6 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use App\Models\User;
 use App\Models\Content;
 use App\Models\Core\Page;
+use App\Models\Core\PageSoftDelete;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Route;
 
@@ -48,6 +49,30 @@ class TestCase extends Orchestra
             });
         });
 
+
+        // Softdelete
+        Route::group([
+            'namespace' => 'App\Http\Controllers\Backend',
+            'prefix' => 'admin',
+            'as' => 'admin.',
+            // 'middleware' => 'admin'
+        ], function () {
+            Route::group([
+                    'namespace'  => 'Core\Page',
+                ], function () {
+                    Route::post('page-sd/table', 'PagesSoftDeleteTableController')->name('page-sd.table');
+                    Route::patch('page-sd/{page_sd}/status', 'PageStatusController')->name('page-sd.status');
+                    Route::resource('page-sd', 'PagesSDController');
+            });
+            Route::get('page-sd/deleted', 'Core\Page\PagesSoftDeleteController@deleted')->name('page-sd.deleted');
+            Route::patch('page-sd/{page_sd}/deleted', 'Core\Page\PagesSoftDeleteController@restore')->name('page-sd.restore');
+            Route::delete('page-sd/{page_sd}/deleted', 'Core\Page\PagesSoftDeleteController@purge')->name('page-sd.purge');
+        });
+
+        $this->pageSoftdelete = PageSoftDelete::create([
+            'title' => 'test me to delete',
+            'status' => 'enable',
+        ]);
         // Route::get('page', 'tt')->name('frontend.page.show');
     }
 
@@ -84,6 +109,19 @@ class TestCase extends Orchestra
      */
     protected function setUpDatabase($app)
     {
+        $this->app['db']->connection()->getSchemaBuilder()->create('pages_sd', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title')->unique();
+            $table->string('slug');
+            $table->string('url')->nullable();
+            $table->string('type')->unique()->nullable();
+            $table->string('template')->nullable();
+            $table->text('description')->nullable();
+            $table->enum('status', ['enable', 'disabled']);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         // test Migrations
         $app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
             $table->increments('id');
