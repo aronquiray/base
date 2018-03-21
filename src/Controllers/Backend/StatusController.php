@@ -14,7 +14,7 @@ abstract class StatusController extends Controller implements StatusContract
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function inactive()
+    public function disabled()
     {
         return view("{$this->view_path}.disabled");
     }

@@ -38,4 +38,22 @@ class TestCrudsResourcesFeature extends TestCase
         $response
                 ->assertStatus(200);
     }
+
+    public function testDisabled()
+    {
+        $response = $this->json('GET', route('admin.page.disabled'));
+
+        $response
+                ->assertStatus(200);
+    }
+
+//     public function testDeleted()
+//     {
+//         // $this->artisan('route:list');
+//         // dd(\Artisan::output());
+//         $response = $this->json('GET', route('admin.page-sd.deleted'));
+// // dd($response);
+//         $response
+//                 ->assertStatus(200);
+//     }
 }

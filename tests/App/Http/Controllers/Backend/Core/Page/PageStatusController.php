@@ -18,7 +18,7 @@ class PageStatusController extends Controller
         $this->repo     = new Repository($model);
         $this->model    = $model;
         $this->route_path    = 'admin.page';
-        $this->view_path    	= 'backend.page';
+        $this->view_path    	= 'backend.core.page';
         // $this->middleware('permission:page inactive', ['only' => ['inactive']]);
         // $this->middleware('permission:page change status', ['only' => ['mark']]);
     }

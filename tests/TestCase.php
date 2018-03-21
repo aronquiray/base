@@ -44,8 +44,9 @@ class TestCase extends Orchestra
             Route::group([
                 'namespace'  => 'Core\Page',
             ], function () {
-                Route::post('page/disabled', 'PageStatusController@inactive')->name('page.disabled');
+                // Route::post('page/disabled', 'PageStatusController@inactive')->name('page.disabled');
                 Route::post('page/table', 'PagesTableController')->name('page.table');
+                Route::get('page/disabled', 'PageStatusController@disabled')->name('page.disabled');
                 Route::patch('page/{page}/status', 'PageStatusController')->name('page.status');
                 Route::resource('page', 'PagesController');
             });
