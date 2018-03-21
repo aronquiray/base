@@ -34,8 +34,7 @@ class TestDataTable extends TestCase
     {
         $faker = Faker::create();
         $now = now()->format('Y-m-d H:i:s');
-        foreach(range(1,20) as $index)
-        {
+        foreach (range(1, 20) as $index) {
             Page::create([
                     'title' => $faker->sentence(),
                     'status' => 'enable',
@@ -46,8 +45,7 @@ class TestDataTable extends TestCase
 
         $pages = [];
 
-        foreach(Page::all() as $page)
-        {
+        foreach (Page::all() as $page) {
             $pages[] = [
                 "title"=> $page->title,
                 "slug"=> $page->slug,
@@ -86,7 +84,7 @@ class TestDataTable extends TestCase
             "draw"=> 0,
             "recordsTotal"=> count($pages),
             "recordsFiltered"=>  count($pages),
-            "data"=>$pages            
+            "data"=>$pages
         ];
 
         
@@ -95,15 +93,14 @@ class TestDataTable extends TestCase
         $response
                 ->assertStatus(200)
                 ->assertJson($expectedJson);
-    }    
+    }
     
     public function testWithSofdeletedDataOneRowNotDeleted()
     {
         PageSoftDelete::truncate();
         $faker = Faker::create();
         $now = now()->format('Y-m-d H:i:s');
-        foreach(range(1, 20) as $index)
-        {
+        foreach (range(1, 20) as $index) {
             $p = PageSoftDelete::create([
                     'title' => $faker->sentence(),
                     'status' => 'enable',
@@ -116,8 +113,7 @@ class TestDataTable extends TestCase
 
         $pages = [];
 
-        foreach(PageSoftDelete::all() as $page)
-        {
+        foreach (PageSoftDelete::all() as $page) {
             $pages[] = [
                 "title"=> $page->title,
                 "slug"=> $page->slug,
@@ -156,7 +152,7 @@ class TestDataTable extends TestCase
             "draw"=> 0,
             "recordsTotal"=> count($pages),
             "recordsFiltered"=> count($pages),
-            "data"=>$pages            
+            "data"=>$pages
         ];
 
         
@@ -165,15 +161,14 @@ class TestDataTable extends TestCase
         $response
                 ->assertStatus(200)
                 ->assertJson($expectedJson);
-    }   
+    }
 
     public function testWithSofdeletedDataOneRowYESDeleted()
     {
         PageSoftDelete::truncate();
         $faker = Faker::create();
         $now = now()->format('Y-m-d H:i:s');
-        foreach(range(1,1) as $index)
-        {
+        foreach (range(1, 1) as $index) {
             $p = PageSoftDelete::create([
                     'title' => $faker->sentence(),
                     'status' => 'enable',
@@ -186,8 +181,7 @@ class TestDataTable extends TestCase
 
         $pages = [];
 
-        foreach(PageSoftDelete::withTrashed()->get() as $page)
-        {
+        foreach (PageSoftDelete::withTrashed()->get() as $page) {
             $pages[] = [
                 "title"=> $page->title,
                 "slug"=> $page->slug,
@@ -226,7 +220,7 @@ class TestDataTable extends TestCase
             "draw"=> 0,
             "recordsTotal"=> count($pages),
             "recordsFiltered"=> count($pages),
-            "data"=>$pages            
+            "data"=>$pages
         ];
 
         
