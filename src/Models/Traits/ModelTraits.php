@@ -14,9 +14,6 @@ trait ModelTraits
     public function base(string $key) : string
     {
         $config = $this->baseable();
-        if (! is_array($config)) {
-            $config = ['source' => $config];
-        }
         if (array_key_exists($key, $config)) {
             $key = $config[$key];
         } else {
