@@ -9,6 +9,7 @@ use App\Models\Core\Page;
 use App\Models\Core\PageSoftDelete;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Route;
+use View;
 
 class TestCase extends Orchestra
 {
@@ -23,6 +24,7 @@ class TestCase extends Orchestra
         $this->setUpDatabase($this->app);
         $this->setUpSeed();
         $this->setUpRoutes();
+        View::addLocation(__DIR__.'/resources/views/');
     }
 
 
