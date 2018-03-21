@@ -40,7 +40,7 @@ trait ModelTraits
         foreach ($links as $l => $link) {
             if (
                 (array_key_exists('permission', $link) && ! $user->can($link['permission'])) ||  
-                (is_null($keys) && ! in_array($l, $keys))
+                (! is_null($keys) && ! in_array($l, $keys))
             ) {
                 array_forget($links, $l);
             }
