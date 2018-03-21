@@ -15,12 +15,13 @@ trait ModelTraits
     {
         $config = $this->baseable();
         if (! is_array($config)) {
-            $config = ['source' => $this->baseable()];
+            $config = ['source' => $config];
         }
         if (array_key_exists($key, $config)) {
-            return $config[$key];
+            $key = $config[$key];
+        } else {
+            $key = $config['source'];
         }
-        $key = $config['source'];
         return $this->$key;
     }
 
@@ -39,11 +40,12 @@ trait ModelTraits
 
         foreach ($links as $l => $link) {
             if (
-                (array_key_exists('permission', $link) && ! $user->can($link['permission'])) ||
+                (array_key_exists('permission', $link) && ! $user->can($link['permission'])) ||  
                 (! is_null($keys) && ! in_array($l, $keys))
             ) {
                 array_forget($links, $l);
             }
+            
         }
 
         return $links;

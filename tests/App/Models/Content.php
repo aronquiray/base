@@ -25,7 +25,7 @@ class Content extends Model
     public function baseable() :array
     {
         return [
-            'source' => 'name'
+            'history_name' => 'name'
         ];
     }
 
