@@ -134,12 +134,10 @@ class BaseRepository
                 case 'restoring':
                 case 'restored':
                     return $args[0];
-                break;
                 case 'stored':
                 case 'updating':
                 case 'updated':
                     return $args[1];
-                break;
             }
         }
 
