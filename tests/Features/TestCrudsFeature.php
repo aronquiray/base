@@ -96,4 +96,32 @@ class TestCrudsFeature extends TestCase
 
         $this->assertDatabaseMissing((new Page)->getTable(), ['id'=>1]);
     }
+
+    public function testLogStoreWithCustomeRedirecttion()
+    {
+        $this->expectsEvents(BaseStoringEvent::class);
+        $this->expectsEvents(BaseStoredEvent::class);
+
+        $customeRedirection = 'http://test-url.com/';
+
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->json('POST', route('admin.page.store'), [
+            'title' => 'Salliess',
+            'description' => 'description test',
+            'status' => 'enable',
+            '_submission' => $customeRedirection,
+        ]);
+        
+        $response
+            ->assertStatus(302)
+            ->assertSessionHas('flash_success', 'Salliess has been created.')
+            ->assertRedirect($customeRedirection);
+
+        $this->assertDatabaseHas((new Page)->getTable(), [
+            'title' => 'Salliess',
+            'description' => 'description test',
+            'status' => 'enable',
+        ]);
+    }
 }
