@@ -19,8 +19,10 @@ class PagesSoftDeleteController extends Controller
     {
         $this->model = $model;
         $this->repo = new Repository($model);
-        $this->route_path = 'admin.page-sd';
-        $this->view_path    	= 'backend.core.page';
+        $this->route_path = Model::routeAdminPath;
+        $this->view_path    	= 'backend.core.page';// for testing only
+        // $this->view_path    = Model::viewBackendPath;
+        
         // parent::__construct();
     }
 
@@ -33,45 +35,4 @@ class PagesSoftDeleteController extends Controller
     {
         return Model::class;
     }
-
-    // /**
-    //  * @param Request $request
-    //  * @param Model $model | nullable
-    //  *
-    //  * @return array
-    //  */
-    // public function generateStub(Request $request) : array
-    // {
-    //     return $request->only(['title', 'description', 'status']);
-    // }
-
-
-    // /**
-    //  * Validate input on store
-    //  *
-    //  * @return array
-    //  */
-    // public function storeRules(Request $request) : array
-    // {
-    //     return [
-    //         'title' => 'required|unique:pages,id'
-    //     ];
-    // }
-    
-    // /**
-    //  * Validate input on update
-    //  *
-    //  * @param Model $model | nullable
-    //  *
-    //  * @return array
-    //  */
-    // public function updateRules(Request $request, $model) : array
-    // {
-    //     return [
-    //     ];
-    // }
-
-    // public function deleted()
-    // {
-    // }
 }

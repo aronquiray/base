@@ -107,8 +107,6 @@ class TestDataTable extends TestCase
                     'description' => $faker->sentence(50),
                     'updated_at' => $now,
                 ]);
-            // $p->deleted_at =$now;
-            // $p->save();
         }
 
         $pages = [];

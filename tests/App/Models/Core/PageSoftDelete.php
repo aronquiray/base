@@ -19,11 +19,11 @@ class PageSoftDelete extends Model
     ];
 
 
-    public $module_name          = 'page-sd';
-    public $view_backend_path    = 'backend.core.page-sd';
-    public $view_frontend_path   = 'frontend.core.page-sd';
-    public $route_admin_path     = 'admin.page-sd';
-    public $route_frontend_path  = 'frontend.page-sd';
+    public const moduleName         = 'page-sd';
+    public const viewBackendPath    = 'backend.core.page-sd';
+    public const viewFrontendPath   = 'frontend.core.page-sd';
+    public const routeAdminPath     = 'admin.page-sd';
+    public const routeFrontendPath  =  'frontend.page-sd';
 
     /**
      * Return the sluggable configuration array for this model.

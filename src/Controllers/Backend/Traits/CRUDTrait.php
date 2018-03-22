@@ -13,12 +13,12 @@ trait CRUDTrait
      *
      * @return void
      */
-    protected function _redirectAfterAction(String $submission = null, $args) : String
+    protected function _redirectAfterAction(string $submission = null, $args) : string
     {
-        if ($submission && strpos($submission, 'http') !== false) {
+        if (!is_null($submission) && strpos($submission, 'http') !== false) {
             return $submission;
         }
         $submission = $submission ?? 'show';
-        return route("$this->route_path.$submission", $args);
+        return route($this->route_path . '.' . $submission, $args);
     }
 }

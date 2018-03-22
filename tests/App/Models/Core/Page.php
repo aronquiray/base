@@ -18,11 +18,11 @@ class Page extends Model
     ];
 
 
-    public $module_name          = 'page';
-    public $view_backend_path    = 'backend.core.page';
-    public $view_frontend_path   = 'frontend.core.page';
-    public $route_admin_path     = 'admin.page';
-    public $route_frontend_path  = 'frontend.page';
+    public const moduleName         = 'page';
+    public const viewBackendPath    = 'backend.core.page';
+    public const viewFrontendPath   = 'frontend.core.page';
+    public const routeAdminPath     = 'admin.page';
+    public const routeFrontendPath  = 'frontend.page';
 
     /**
      * Return the sluggable configuration array for this model.

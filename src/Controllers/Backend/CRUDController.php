@@ -19,8 +19,8 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function __construct()
     {
-        $this->view_path    = $this->model->view_backend_path;
-        $this->route_path   = $this->model->route_admin_path;
+        $this->view_path    = $this->model::viewBackendPath;
+        $this->route_path   = $this->model::routeAdminPath;
     }
 
 
@@ -101,7 +101,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     {
         $model = $this->getModel($slug);
         $this->repo->destroy($model);
-        $redirect = route("{$this->route_path}." . (method_exists($this->model, 'bootSoftDeletes') ? 'deleted' : 'index'));
+        $redirect = route($this->route_path . '.' . (method_exists($this->model, 'bootSoftDeletes') ? 'deleted' : 'index'));
         return $this->response('destroy', $request->ajax(), $model, $redirect);
     }
 }

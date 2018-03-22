@@ -88,7 +88,7 @@ class TestCrudsFeature extends TestCase
         $response = $this->withHeaders([
             'X-Header' => 'Value',
         ])->json('DELETE', route('admin.page.destroy', $this->page), []);
-       
+
         $response
             ->assertStatus(302)
             ->assertSessionHas('flash_success', 'Title Name has been deleted.')
