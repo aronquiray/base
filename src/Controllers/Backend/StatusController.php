@@ -4,6 +4,7 @@ namespace HalcyonLaravel\Base\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
+use HalcyonLaravel\Base\Exceptions\StatusControllerException;
 
 /**
  * Class StatusController.
@@ -30,6 +31,10 @@ abstract class StatusController extends Controller
         $model = $this->getModel($routeKeyNameValue);
         $statusKey = $this->model->statusKeyName();
         $status = $request->status ?? null;
+        if(is_null($status))
+        {
+            throw StatusControllerException::required();
+        }
         $this->repo->update([ $this->model->statusKeyName() => $status ], $model);
         $redirect = route($this->route_path . '.status', $status) ;
         $message = trans("base::actions.mark.", ['Name' => $model->base(config('base.responseBaseableName')), 'Status' => 'test']);
