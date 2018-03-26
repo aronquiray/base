@@ -46,7 +46,7 @@ class TestStatusController extends TestCase
 
         
     public function testStatusRequiredException()
-    {        
+    {
         $response = $this->json('PATCH', route('admin.page.status', $this->page));
 
         $response
@@ -54,6 +54,5 @@ class TestStatusController extends TestCase
             ->assertJson([
                 'message'=>'The status is required.'
         ]);
-
     }
 }

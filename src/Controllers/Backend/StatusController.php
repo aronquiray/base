@@ -31,8 +31,7 @@ abstract class StatusController extends Controller
         $model = $this->getModel($routeKeyNameValue);
         $statusKey = $this->model->statusKeyName();
         $status = $request->status ?? null;
-        if(is_null($status))
-        {
+        if (is_null($status)) {
             throw StatusControllerException::required();
         }
         $this->repo->update([ $this->model->statusKeyName() => $status ], $model);
