@@ -33,7 +33,7 @@ class TestCrudsResourcesFeature extends TestCase
 
     public function testDisabled()
     {
-        $this->json('GET', route('admin.page.disabled'))
+        $this->json('GET', route('admin.page.status', 'disable'))
             ->assertStatus(200);
     }
 

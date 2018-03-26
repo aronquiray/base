@@ -54,7 +54,7 @@ class TestDataTable extends TestCase
                     "type"=> "success",
                     "label"=> "Enable",
                     "value"=> "enable",
-                    "link"=> "http://localhost/admin/page/{$page->slug}/status",
+                    "link"=> "http://localhost/admin/page/status/{$page->slug}",
                     "can"=> false
                 ],
                 "template"=> null,
@@ -120,7 +120,7 @@ class TestDataTable extends TestCase
                     "type"=> "success",
                     "label"=> "Enable",
                     "value"=> "enable",
-                    "link"=> "http://localhost/admin/page-sd/{$page->slug}/status",
+                    "link"=> "http://localhost/admin/page-sd/status/{$page->slug}",
                     "can"=> false
                 ],
                 "template"=> null,
@@ -188,7 +188,7 @@ class TestDataTable extends TestCase
                     "type"=> "success",
                     "label"=> "Enable",
                     "value"=> "enable",
-                    "link"=> "http://localhost/admin/page-sd/{$page->slug}/status",
+                    "link"=> "http://localhost/admin/page-sd/status/{$page->slug}",
                     "can"=> false
                 ],
                 "template"=> null,

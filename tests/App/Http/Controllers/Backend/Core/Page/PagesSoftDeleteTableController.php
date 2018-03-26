@@ -48,7 +48,7 @@ class PagesSoftDeleteTableController extends Controller
                     'type' => $model->status == "enable" ? 'success' : 'danger',
                     'label' => ucfirst($model->status),
                     'value' => $model->status,
-                    'link' => route('admin.page-sd.status', $model),
+                    'link' => route('admin.page-sd.status.update', $model),
                     'can' => $user->can('page change status')
                 ];
             })

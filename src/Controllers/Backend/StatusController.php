@@ -8,7 +8,7 @@ use HalcyonLaravel\Base\Controllers\BaseController as Controller;
 /**
  * Class StatusController.
  */
-abstract class StatusController extends Controller 
+abstract class StatusController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

@@ -6,8 +6,8 @@ interface ModelStatusContract
 {
     /**
      * Return the array of statuses.
-     * ex. [ 0  => 'Disabled', 1 => 'Active' ], [ 'Disabled', 'Active'], [ 'disabled' => 'Disabled', 'active' => 'Active' ]  
-     * 
+     * ex. [ 0  => 'Disabled', 1 => 'Active' ], [ 'Disabled', 'Active'], [ 'disabled' => 'Disabled', 'active' => 'Active' ]
+     *
      * @return array
      */
     public function statuses() : array;
