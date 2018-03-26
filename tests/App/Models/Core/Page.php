@@ -5,8 +5,9 @@ namespace App\Models\Core;
 use HalcyonLaravel\Base\Models\Model;
 use Spatie\Sluggable\SlugOptions;
 use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits;
+use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
 
-class Page extends Model
+class Page extends Model implements ModelStatusContract
 {
     use ModelDefaultTraits;
 
@@ -64,5 +65,29 @@ class Page extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+
+    /**
+     * Return the array of statuses.
+     * ex. [ 0  => 'Disabled', 1 => 'Active' ], [ 'Disabled', 'Active'], [ 'disabled' => 'Disabled', 'active' => 'Active' ]
+     *
+     * @return array
+     */
+    public function statuses() : array
+    {
+        return [
+            'enable' => 'Enable', 'disable' => 'Disable'
+        ];
+    }
+
+    /**
+     * Return the column for the status on this model.
+     *
+     * @return array
+     */
+    public function statusKeyName(): string
+    {
+        return 'status';
     }
 }

@@ -42,8 +42,8 @@ class TestCase extends Orchestra
             // 'middleware' => 'admin'
         ], function () {
             Route::post('page/table', 'PagesTableController')->name('page.table');
-            Route::get('page/disabled', 'PageStatusController@disabled')->name('page.disabled');
-            Route::patch('page/{page}/status', 'PageStatusController')->name('page.status');
+            Route::get('page/status/{status}', 'PageStatusController@status')->name('page.status');
+            Route::patch('page/status/{page}', 'PageStatusController@update')->name('page.status.update');
             Route::resource('page', 'PagesController');
         });
 
@@ -62,7 +62,7 @@ class TestCase extends Orchestra
                     'namespace'  => 'Core\Page',
                 ], function () {
                     Route::post('page-sd/table', 'PagesSoftDeleteTableController')->name('page-sd.table');
-                    Route::patch('page-sd/{page_sd}/status', 'PageStatusController')->name('page-sd.status');
+                    Route::patch('page-sd/status/{page_sd}', 'PageStatusController@update')->name('page-sd.status.update');
                     Route::resource('page-sd', 'PagesSDController');
                 });
         });
@@ -115,7 +115,7 @@ class TestCase extends Orchestra
             $table->string('type')->unique()->nullable();
             $table->string('template')->nullable();
             $table->text('description')->nullable();
-            $table->enum('status', ['enable', 'disabled']);
+            $table->enum('status', ['enable', 'disable']);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -146,7 +146,7 @@ class TestCase extends Orchestra
             $table->string('type')->unique()->nullable();
             $table->string('template')->nullable();
             $table->text('description')->nullable();
-            $table->enum('status', ['enable', 'disabled']);
+            $table->enum('status', ['enable', 'disable']);
             $table->timestamps();
         });
     }
