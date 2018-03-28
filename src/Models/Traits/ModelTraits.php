@@ -30,10 +30,18 @@ trait ModelTraits
      *
      * @return array $links
      */
-    public function actions(string $group, array $keys = null) : array
+    public function actions(string $group, array $keys = null, $type = null) : array
     {
         $user = auth()->user();
         $links = $this->links()[$group];
+
+        if(!is_null($type))
+        {
+            $keys = [
+                'show',
+                'edit',
+            ];
+        }
 
         foreach ($links as $l => $link) {
             if (
