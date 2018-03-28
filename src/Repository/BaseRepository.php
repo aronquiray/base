@@ -40,7 +40,7 @@ class BaseRepository
      *
      * @return QueryBuilder $query
      */
-    public function table(array $request) : Builder
+    public function table(array $request = null) : Builder
     {
         $fillable = array_merge($this->model->getFillable(), ['updated_at']);
         $query = $this->model->select($fillable);
