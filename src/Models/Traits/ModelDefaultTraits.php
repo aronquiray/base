@@ -34,7 +34,7 @@ trait ModelDefaultTraits
                
         ];
 
-        if (method_exists(app(get_class($this)), 'bootSoftDeletes')) {
+        if (method_exists($this, 'bootSoftDeletes')) {
             $links['backend']['restore'] = [
                     'type' => 'restore',
                     'url' => route(self::routeAdminPath.'.restore', $this),

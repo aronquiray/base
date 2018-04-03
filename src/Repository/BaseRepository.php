@@ -42,7 +42,7 @@ class BaseRepository
      */
     public function table(array $request = null) : Builder
     {
-        $isHasSoftDelete = method_exists(app(get_class($this->model)), 'bootSoftDeletes');
+        $isHasSoftDelete = method_exists($this->model, 'bootSoftDeletes');
 
         $otherFields = ['updated_at'];
         if ($isHasSoftDelete) {
