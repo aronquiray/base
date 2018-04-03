@@ -191,9 +191,10 @@ class BaseRepository
     public function update($data, $model)
     {
         return $this->action(function () use ($data, $model) {
+            $oldModel = $model->getOriginal();
             $model = $this->updating($data, $model);
             $model->update($data);
-            return $this->updated($data, $model);
+            return $this->updated($data, $model, $oldModel);
         });
     }
 
