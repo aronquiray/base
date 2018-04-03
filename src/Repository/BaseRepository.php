@@ -97,8 +97,7 @@ class BaseRepository
          * load method if existed on instance, else execute default behavior.
          */
         if (isset($this->$method)) {
-            $func = $this->$method;
-            return call_user_func_array($func, $args);
+            return call_user_func_array($this->$method, $args);
         }
 
         if (in_array($method, [
