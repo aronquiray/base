@@ -7,7 +7,7 @@ trait ModelTraits
     /**
       * Returns the value of a given key in the baseable function
       *
-      * @param String $key
+      * @param string $key
       *
       * @return mixed
       */
@@ -26,14 +26,15 @@ trait ModelTraits
     /**
      * Returns the list of links within the selected group
      *
-     * @param String $group
+     * @param string $group
      *
      * @return array $links
      */
     public function actions(string $group, array $keys = null) : array
     {
         $user = auth()->user();
-        $links = $this->links()[$group];
+        
+        $links = array_merge($this->links(), $this->additionalLinks())[$group];
 
         foreach ($links as $l => $link) {
             if (

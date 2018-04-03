@@ -42,10 +42,17 @@ class BaseRepository
      */
     public function table(array $request = null) : Builder
     {
-        $fillable = array_merge($this->model->getFillable(), ['updated_at']);
+        $isHasSoftDelete = method_exists(app(get_class($this->model)), 'bootSoftDeletes');
+
+        $otherFields = ['updated_at'];
+        if ($isHasSoftDelete) {
+            $otherFields[] = 'deleted_at';
+        }
+
+        $fillable = array_merge($this->model->getFillable(), $otherFields);
         $query = $this->model->select($fillable);
 
-        if (method_exists(app(get_class($this->model)), 'bootSoftDeletes')) {
+        if ($isHasSoftDelete) {
             if (isset($request['trashOnly']) && $request['trashOnly']) {
                 $query->onlyTrashed();
             }
