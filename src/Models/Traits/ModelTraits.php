@@ -52,25 +52,24 @@ trait ModelTraits
         return $links;
     }
 
-
     /**
      * Returns the list of permissoin for this group.
      *
-     * @param array $keys
+     * @param mixed $keys
      *
      * @return array $permissions
      */
-
-    public function permission(array $keys = null)
+    public function permission($keys = null)
     {
         $permissions = $this->permissions();
-        if (! is_null($keys)) {
+        if (! is_null($keys) && is_array($keys)) {
             foreach ($permissions as $p => $permission) {
                 if (! in_array($p, $keys)) {
                     array_forget($permissions, $p);
                 }
             }
+            return $permissions;
         }
-        return collect($permissions);
+        return $permissions[$keys];
     }
 }
