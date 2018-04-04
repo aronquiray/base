@@ -4,7 +4,7 @@ namespace HalcyonLaravel\Base\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use HalcyonLaravel\Base\Models\Contracts\ModelContract;
+use HalcyonLaravel\Base\Models\Model;
 
 abstract class BaseController extends Controller
 {
@@ -56,9 +56,12 @@ abstract class BaseController extends Controller
      *
      * @return Illuminate\Database\Eloquent\Model
      */
-    public function response(String $process, bool $isAjax, ModelContract $model, String $redirect = null, String $message = null)
+    public function response(String $process, bool $isAjax, Model $model = null, String $redirect = null, String $message = null)
     {
-        $message = $message ?: trans("base::actions.$process", ['name' => $model->base(config('base.responseBaseableName')) ]);
+        if (! is_null($model) && is_null($message)) {
+            $message = trans("base::actions.$process", ['name' => $model->base(config('base.responseBaseableName')) ]);
+        }
+
         return $isAjax ? response()->json(['message' => $message, 'link' => $redirect]) : redirect($redirect)->withFlashSuccess($message);
     }
 }

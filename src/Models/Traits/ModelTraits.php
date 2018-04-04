@@ -34,7 +34,11 @@ trait ModelTraits
     {
         $user = auth()->user();
         
-        $links = array_merge($this->links(), $this->additionalLinks())[$group];
+        if (method_exists($this, 'additionalLinks')) {
+            $links = array_merge($this->links(), $this->additionalLinks())[$group];
+        } else {
+            $links = $this->links()[$group];
+        }
 
         foreach ($links as $l => $link) {
             if (
@@ -46,5 +50,27 @@ trait ModelTraits
         }
 
         return $links;
+    }
+
+
+    /**
+     * Returns the list of permissoin for this group.
+     *
+     * @param array $keys
+     *
+     * @return array $permissions
+     */
+
+    public function permission(array $keys = null)
+    {
+        $permissions = $this->permissions();
+        if (! is_null($keys)) {
+            foreach ($permissions as $p => $permission) {
+                if (! in_array($p, $keys)) {
+                    array_forget($permissions, $p);
+                }
+            }
+        }
+        return $permissions;
     }
 }

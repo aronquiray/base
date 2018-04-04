@@ -51,12 +51,4 @@ trait ModelDefaultTraits
         }
         return $links;
     }
-
-
-
-
-    public function additionalLinks() : array
-    {
-        return [];
-    }
 }
