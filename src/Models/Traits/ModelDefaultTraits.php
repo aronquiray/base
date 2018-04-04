@@ -18,14 +18,17 @@ trait ModelDefaultTraits
             'backend' => [
                 'show' 		=> [
                     'type' => 'show',
+                    'perminssion' => $this->permission(['show'])->first(),
                     'url' => route(self::routeAdminPath.'.show', $this)
                 ],
                 'edit' 		=> [
                     'type' => 'edit',
+                    'perminssion' => $this->permission(['edit'])->first(),
                     'url' => route(self::routeAdminPath.'.edit', $this)
                 ],
                 'destroy' 	=> [
                     'type' => 'destroy',
+                    'perminssion' => $this->permission(['destroy'])->first(),
                     'url' => route(self::routeAdminPath.'.destroy', $this),
                     'group' => 'more',
                     'redirect' => route(self::routeAdminPath.'.index')
@@ -37,6 +40,7 @@ trait ModelDefaultTraits
         if (method_exists($this, 'bootSoftDeletes')) {
             $links['backend']['restore'] = [
                     'type' => 'restore',
+                    'perminssion' => $this->permission(['restore'])->first(),
                     'url' => route(self::routeAdminPath.'.restore', $this),
                     // 'group' => 'more',
                     'redirect' => route(self::routeAdminPath.'.index')
@@ -44,6 +48,7 @@ trait ModelDefaultTraits
                 
             $links['backend']['purge' ] = [
                     'type' => 'purge',
+                    'perminssion' => $this->permission(['purge'])->first(),
                     'url' => route(self::routeAdminPath.'.purge', $this),
                     // 'group' => 'more',
                     'redirect' => route(self::routeAdminPath.'.index')

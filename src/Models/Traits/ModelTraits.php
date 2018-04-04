@@ -71,6 +71,6 @@ trait ModelTraits
                 }
             }
         }
-        return $permissions;
+        return collect($permissions);
     }
 }

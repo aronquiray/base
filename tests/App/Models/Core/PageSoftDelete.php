@@ -69,6 +69,8 @@ class PageSoftDelete extends Model
             'create' => 'page softdelete create',
             'edit' => 'page softdelete edit',
             'destroy' => 'page softdelete destroy',
+            'restore' => 'page softdelete restore',
+            'purge' => 'page softdelete purge',
 
         ];
     }
@@ -82,5 +84,11 @@ class PageSoftDelete extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+
+    public function additionalLinks()
+    {
+        return [];
     }
 }
