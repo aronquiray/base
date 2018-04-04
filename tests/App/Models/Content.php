@@ -45,7 +45,7 @@ class Content extends Model
      *
      * @return array
      */
-    public function permissions() : array
+    public function permissions(string $group = null) : array
     {
         return [
             'index' => 'content index',

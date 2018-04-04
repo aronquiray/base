@@ -61,7 +61,7 @@ class Page extends Model implements ModelStatusContract
      *
      * @return array
      */
-    public function permissions() : array
+    public function permissions(string $group = null) : array
     {
         return [
             'index' => 'page index',
