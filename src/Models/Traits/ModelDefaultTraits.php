@@ -13,7 +13,10 @@ trait ModelDefaultTraits
     {
         $links =  [
             'frontend' => [
-                // 'show' => ['type' => 'show', 'url' => route("{$this->route_frontend_path}.show", $this)],
+                'show' 		=> [
+                    'type' => 'show',
+                    'url' => route(self::routeFrontendPath.'.show', $this)
+                ],
             ],
             'backend' => [
                 'show' 		=> [

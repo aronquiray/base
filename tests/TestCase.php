@@ -35,6 +35,11 @@ class TestCase extends Orchestra
 
     protected function setUpRoutes()
     {
+
+        // just test
+        Route::get('test', 'PageStatusController@status')->name('frontend.page.show');
+        Route::get('test2', 'PageStatusController@status')->name('frontend.page-sd.show');
+
         Route::group([
             'namespace' => 'App\Http\Controllers\Backend\Core\Page',
             'prefix' => 'admin',
