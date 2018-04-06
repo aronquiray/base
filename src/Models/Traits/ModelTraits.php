@@ -30,7 +30,7 @@ trait ModelTraits
      *
      * @return array $links
      */
-    public function actions(string $group, array $keys = null) : array
+    public function actions(string $group, $keys = null, bool $onlyLinks = false)
     {
         $user = auth()->user();
         
@@ -43,12 +43,23 @@ trait ModelTraits
         foreach ($links as $l => $link) {
             if (
                 (array_key_exists('permission', $link) && ! $user->can($link['permission'])) ||
-                (! is_null($keys) && ! in_array($l, $keys))
+                (! is_null($keys) && is_array($keys) && ! in_array($l, $keys)) || 
+                (! is_null($keys) && ! is_array($keys) && $keys != $l)
             ) {
                 array_forget($links, $l);
             }
         }
 
+        if ($onlyLinks == true) {
+            $filter = [];
+            foreach ($links as $l => $link) {
+                $filter[$l] = $link['url'];
+            }
+            $links = $filter;
+        }
+        if (! is_null($keys) && is_string($keys) && count($links) == 1) {
+            return $links[$keys];
+        }
         return $links;
     }
 
