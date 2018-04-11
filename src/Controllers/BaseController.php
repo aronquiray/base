@@ -2,7 +2,6 @@
 
 namespace HalcyonLaravel\Base\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use HalcyonLaravel\Base\Models\Model;
 
