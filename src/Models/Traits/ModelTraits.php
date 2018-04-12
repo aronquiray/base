@@ -42,7 +42,7 @@ trait ModelTraits
 
         foreach ($links as $l => $link) {
             if (
-                (array_key_exists('permission', $link) && ! $user->can($link['permission'])) ||
+                (array_key_exists('permission', $link) && $user && ! $user->can($link['permission'])) ||
                 (! is_null($keys) && is_array($keys) && ! in_array($l, $keys)) ||
                 (! is_null($keys) && ! is_array($keys) && $keys != $l)
             ) {

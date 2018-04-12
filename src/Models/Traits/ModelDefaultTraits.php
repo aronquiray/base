@@ -12,12 +12,6 @@ trait ModelDefaultTraits
     public function links() : array
     {
         $links =  [
-            'frontend' => [
-                'show' 		=> [
-                    'type' => 'show',
-                    'url' => route(self::routeFrontendPath.'.show', $this)
-                ],
-            ],
             'backend' => [
                 'show' 		=> [
                     'type' => 'show',
