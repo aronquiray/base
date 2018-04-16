@@ -70,7 +70,9 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->storeRules($request));
+        $validations = $this->storeRules($request);
+        $this->validate($request, $validations['rules'], $validations['messages']);
+
         $data = $this->generateStub($request);
         $model = $this->repo->store($data);
         return $this->response('store', $request->ajax(), $model, $this->_redirectAfterAction($request->_submission, $model));
@@ -85,7 +87,10 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function update(Request $request, String $routeKeyName)
     {
         $model = $this->getModel($routeKeyName);
-        $this->validate($request, $this->updateRules($request, $model));
+
+        $validations = $this->updateRules($request, $model);
+        $this->validate($request, $validations['rules'], $validations['messages']);
+
         $data = $this->generateStub($request, $model);
         $model = $this->repo->update($data, $model);
         return $this->response('update', $request->ajax(), $model, $this->_redirectAfterAction($request->_submission, $model));

@@ -52,7 +52,13 @@ class PagesController extends Controller
     public function storeRules(Request $request) : array
     {
         return [
-            'title' => 'required|unique:pages,id'
+            'rules' => [
+                'title' => 'required|unique:pages,id'
+            ],
+            // custome validation messages
+            'messages' => [
+                'title.required' => 'The title field is required.',
+            ],
         ];
     }
     
@@ -66,6 +72,13 @@ class PagesController extends Controller
     public function updateRules(Request $request, $model) : array
     {
         return [
+            'rules' => [
+                // 'title' => 'required|unique:pages,id'
+            ],
+            // custome validation messages
+            'messages' => [
+                // 'title.required' => 'The title field is required.',
+            ],
         ];
     }
 
