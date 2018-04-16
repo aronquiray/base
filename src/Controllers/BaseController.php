@@ -36,14 +36,14 @@ abstract class BaseController extends Controller
      *
      * @return Illuminate\Database\Eloquent\Model
      */
-    public function getModel($key, $trash = false, array $fields = [])
+    public function getModel($key, $trash = false, array $fields = null)
     {
         $model = $this->model->where($this->model->getRouteKeyName(), $key);
         if ($trash && method_exists($this->model, 'bootSoftDeletes')) {
             $model->withTrashed();
         }
 
-        if (count($fields)) {
+        if (!is_null($fields)) {
             foreach ($fields as $f => $field) {
                 $model = $model->where($f, $field);
             }
