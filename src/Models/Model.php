@@ -5,48 +5,34 @@ namespace HalcyonLaravel\Base\Models;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 use Spatie\Sluggable\HasSlug;
-use HalcyonLaravel\Base\Models\Contracts\ModelContract;
 use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 
 /**
  * Class Model.
  */
-abstract class Model extends BaseModel implements ModelContract
+abstract class Model extends BaseModel
 {
     use HasSlug, ModelTraits;
+    
+    
+    /**
+     * Return the links related to this model.
+     *
+     * @return array
+     */
+    abstract public function links(): array;
 
     /**
-     * Module Name
+     * Return the baseable configuration array for this model.
      *
-     * @return String
+     * @return array
      */
-    public $module_name;
+    abstract public function baseable(): array;
 
     /**
-     * Path of the module for the crud backend
+     * Return all the permissions for this model.
      *
-     * @return String
+     * @return array
      */
-    public $view_backend_path;
-
-    /**
-     * Path of the module for the crud frontend
-     *
-     * @return String
-     */
-    public $view_frontend_path;
-
-    /**
-     * Path of the module for the admin route
-     *
-     * @return String
-     */
-    public $route_admin_path;
-
-    /**
-     * Path of the module for the frontend route
-     *
-     * @return String
-     */
-    public $route_frontend_path;
+    abstract public function permissions(): array;
 }

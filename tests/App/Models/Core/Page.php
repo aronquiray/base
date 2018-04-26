@@ -56,6 +56,22 @@ class Page extends Model implements ModelStatusContract
         ];
     }
 
+    /**
+     * Return the permissions related to this model.
+     *
+     * @return array
+     */
+    public function permissions() : array
+    {
+        return [
+            'index' => 'page index',
+            'show' => 'page show',
+            'create' => 'page create',
+            'edit' => 'page edit',
+            'destroy' => 'page destroy',
+
+        ];
+    }
 
     /**
      * Get the options for generating the slug.

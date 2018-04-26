@@ -40,12 +40,19 @@ class BaseRepository
      *
      * @return QueryBuilder $query
      */
-    public function table(array $request) : Builder
+    public function table(array $request = null) : Builder
     {
-        $fillable = array_merge($this->model->getFillable(), ['updated_at']);
+        $isHasSoftDelete = method_exists($this->model, 'bootSoftDeletes');
+
+        $otherFields = ['updated_at'];
+        if ($isHasSoftDelete) {
+            $otherFields[] = 'deleted_at';
+        }
+
+        $fillable = array_merge($this->model->getFillable(), $otherFields);
         $query = $this->model->select($fillable);
 
-        if (method_exists(app(get_class($this->model)), 'bootSoftDeletes')) {
+        if ($isHasSoftDelete) {
             if (isset($request['trashOnly']) && $request['trashOnly']) {
                 $query->onlyTrashed();
             }
@@ -84,16 +91,23 @@ class BaseRepository
     /**
      * Handle inaccessible methods
      */
-    public function __call($name, $args)
+    public function __call($method, $args)
     {
-        if (in_array($name, [
+        /**
+         * load method if existed on instance, else execute default behavior.
+         */
+        if (isset($this->$method)) {
+            return call_user_func_array($this->$method, $args);
+        }
+
+        if (in_array($method, [
             'storing', 'stored',
             'updating', 'updated',
             'deleting', 'deleted',
             'restoring', 'restored',
             'purging', 'purged',
         ])) {
-            switch ($name) {
+            switch ($method) {
                 case 'storing':
                     event(new BaseStoringEvent);
                 break;
@@ -125,7 +139,7 @@ class BaseRepository
                     event(new BasePurgedEvent);
                 break;
             }
-            switch ($name) {
+            switch ($method) {
                 case 'storing':
                 case 'purged':
                 case 'deleting':
@@ -141,7 +155,7 @@ class BaseRepository
             }
         }
 
-        $this->_handleErrors(trans('base::errors.function_not_found', ['functionName' => $name]));
+        $this->_handleErrors(trans('base::errors.function_not_found', ['functionName' => $method]));
     }
 
     /**
@@ -177,9 +191,10 @@ class BaseRepository
     public function update($data, $model)
     {
         return $this->action(function () use ($data, $model) {
+            $oldModel = $model->getOriginal();
             $model = $this->updating($data, $model);
             $model->update($data);
-            return $this->updated($data, $model);
+            return $this->updated($data, $model, $oldModel);
         });
     }
 

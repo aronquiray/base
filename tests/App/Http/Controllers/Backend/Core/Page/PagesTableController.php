@@ -24,6 +24,12 @@ class PagesTableController extends Controller
     public function __construct()
     {
         $this->repo = new  Repository(new Model);
+        $this->model = new Model;
+
+
+        //for testing only
+        $permissionMiddleware = implode(',', $this->model->permission(['index']));
+       
         // $this->middleware('permission:content list,content activity,content delete', ['only' => ['__invoke']]);
     }
 

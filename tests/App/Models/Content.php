@@ -39,6 +39,25 @@ class Content extends Model
         return [];
     }
 
+
+    /**
+     * Return the permissions related to this model.
+     *
+     * @return array
+     */
+    public function permissions() : array
+    {
+        return [
+            'index' => 'content index',
+            'show' => 'content show',
+            'create' => 'content create',
+            'edit' => 'content edit',
+            'destroy' => 'content destroy',
+
+        ];
+    }
+    
+    
     /**
      * Get the options for generating the slug.
      */

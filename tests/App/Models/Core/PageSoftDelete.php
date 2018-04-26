@@ -56,6 +56,25 @@ class PageSoftDelete extends Model
         ];
     }
 
+    /**
+     * Return the permissions related to this model.
+     *
+     * @return array
+     */
+    public function permissions() : array
+    {
+        return [
+            'index' => 'page softdelete index',
+            'show' => 'page softdelete show',
+            'create' => 'page softdelete create',
+            'edit' => 'page softdelete edit',
+            'destroy' => 'page softdelete destroy',
+            'restore' => 'page softdelete restore',
+            'purge' => 'page softdelete purge',
+
+        ];
+    }
+
  
     /**
      * Get the options for generating the slug.
@@ -65,5 +84,11 @@ class PageSoftDelete extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+
+    public function additionalLinks()
+    {
+        return [];
     }
 }

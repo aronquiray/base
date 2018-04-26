@@ -89,7 +89,7 @@ class TestDataTable extends TestCase
 
         
         $response = $this->json('POST', route('admin.page.table'), []);
-
+        
         $response
                 ->assertStatus(200)
                 ->assertJson($expectedJson);

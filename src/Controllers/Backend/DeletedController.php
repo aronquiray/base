@@ -10,7 +10,7 @@ use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 /**
  * Class DeletedController.
  */
-class DeletedController extends Controller
+abstract class DeletedController extends Controller
 {
     use ModelTraits;
 
