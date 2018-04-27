@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
 use App\Models\Core\PageSoftDelete as Model;
+use Illuminate\Database\Eloquent\Model as IlluminateModel;
 use HalcyonLaravel\Base\BasableOptions;
 
 
@@ -130,7 +131,7 @@ class PagesSDController extends Controller
       *
       * @return array
       */
-    public function crudRules(Request $request, $model = null) : BasableOptions
+    public function crudRules(Request $request, IlluminateModel $model = null) : BasableOptions
     {
         return BasableOptions::create()
             ->storeRules([

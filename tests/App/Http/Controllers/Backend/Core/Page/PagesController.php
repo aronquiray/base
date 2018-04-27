@@ -7,6 +7,7 @@ use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
 use App\Models\Core\Page as Model;
 use HalcyonLaravel\Base\BasableOptions;
+use Illuminate\Database\Eloquent\Model as IlluminateModel;
 
 /**
  * Class PagesController.
@@ -50,7 +51,7 @@ class PagesController extends Controller
      *
      * @return array
      */
-    public function crudRules(Request $request, $model = null) : BasableOptions
+    public function crudRules(Request $request, IlluminateModel $model = null) : BasableOptions
     {
         return BasableOptions::create()
             ->storeRules([
