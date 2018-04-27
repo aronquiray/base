@@ -3,6 +3,7 @@
 namespace HalcyonLaravel\Base\Controllers\Backend\Contracts;
 
 use Illuminate\Http\Request;
+use HalcyonLaravel\Base\BasableOptions;
 
 interface CRUDContract
 {
@@ -15,18 +16,9 @@ interface CRUDContract
     public function generateStub(Request $request) : array;
 
     /**
-     * Validate input on store
+     * Validate input on store and update
      *
      * @return array
      */
-    public function storeRules(Request $request) : array;
-    
-    /**
-     * Validate input on update
-     *
-     * @param Model $model | nullable
-     *
-     * @return array
-     */
-    public function updateRules(Request $request, $model) : array;
+    public function crudRules(Request $request, $model = null) : BasableOptions;
 }

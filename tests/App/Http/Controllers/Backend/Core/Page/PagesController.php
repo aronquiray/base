@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
 use App\Models\Core\Page as Model;
+use HalcyonLaravel\Base\BasableOptions;
 
 /**
  * Class PagesController.
@@ -45,45 +46,34 @@ class PagesController extends Controller
 
 
     /**
-     * Validate input on store
+     * Validate input on store/update
      *
      * @return array
      */
-    public function storeRules(Request $request) : array
+    public function crudRules(Request $request, $model = null) : BasableOptions
     {
-        return [
-            'rules' => [
+        return BasableOptions::create()
+            ->storeRules([
                 'title' => 'required|unique:pages,id'
-            ],
-            // custome validation messages
-            'messages' => [
+            ])
+            ->storeRuleMessages([
                 'title.required' => 'The title field is required.',
-            ],
-        ];
+            ])
+            ->updateRules([
+                'title' => 'required|unique:pages,id'
+            ])
+            ->updateRuleMessages([
+                'title.required' => 'The title field is required.',
+            ]);
     }
     
-    /**
-     * Validate input on update
-     *
-     * @param Model $model | nullable
-     *
-     * @return array
-     */
-    public function updateRules(Request $request, $model) : array
-    {
-        return [
-            'rules' => [
-                // 'title' => 'required|unique:pages,id'
-            ],
-            // custome validation messages
-            'messages' => [
-                // 'title.required' => 'The title field is required.',
-            ],
-        ];
-    }
-
     public function testForMethodNotFound()
     {
         $this->repo->imNotExist();
     }
+
+    // public function testGetModelWithFields()
+    // {
+    //     $this->getModel($routeKeyName);
+    // }
 }
