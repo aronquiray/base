@@ -71,7 +71,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function store(Request $request)
     {
         $basableOptions = $this->crudRules($request);
-        $this->validate($request, $basableOptions->storeRules, $basableOptions->storeRuleMessages);
+        $this->validate($request, $basableOptions->storeRules, $basableOptions->storeRuleMessages?:[]);
 
         $data = $this->generateStub($request);
         $model = $this->repo->store($data);
@@ -89,7 +89,7 @@ abstract class CRUDController extends Controller implements CRUDContract
         $model = $this->getModel($routeKeyName);
 
         $basableOptions = $this->crudRules($request, $model);
-        $this->validate($request, $basableOptions->updateRules, $basableOptions->updateRuleMessages);
+        $this->validate($request, $basableOptions->updateRules, $basableOptions->updateRuleMessages?:[]);
 
         $data = $this->generateStub($request, $model);
         $model = $this->repo->update($data, $model);
