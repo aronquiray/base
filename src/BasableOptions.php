@@ -19,9 +19,9 @@ class BasableOptions
     public function reset(): self
     {
         $this->storeRules = null;
-        $this->storeRuleMessages = null;
+        $this->storeRuleMessages = [];
         $this->updateRules = null;
-        $this->updateRuleMessages = null;
+        $this->updateRuleMessages = [];
 
         return $this;
     }
