@@ -4,6 +4,7 @@ namespace HalcyonLaravel\Base\Controllers\Backend\Contracts;
 
 use Illuminate\Http\Request;
 use HalcyonLaravel\Base\BasableOptions;
+use Illuminate\Database\Eloquent\Model as IlluminateModel;
 
 interface CRUDContract
 {
@@ -20,5 +21,5 @@ interface CRUDContract
      *
      * @return array
      */
-    public function crudRules(Request $request, $model = null) : BasableOptions;
+    public function crudRules(Request $request, IlluminateModel $model = null) : BasableOptions;
 }
