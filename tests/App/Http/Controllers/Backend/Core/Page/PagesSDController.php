@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
 use App\Models\Core\PageSoftDelete as Model;
+use HalcyonLaravel\Base\BasableOptions;
 
 
 use HalcyonLaravel\Base\Events\BaseStoringEvent;
@@ -124,29 +125,25 @@ class PagesSDController extends Controller
         return $request->only(['title', 'description', 'status']);
     }
 
-
     /**
-     * Validate input on store
-     *
-     * @return array
-     */
-    public function storeRules(Request $request) : array
+      * Validate input on store/update
+      *
+      * @return array
+      */
+    public function crudRules(Request $request, $model = null) : BasableOptions
     {
-        return [
-            'title' => 'required|unique:pages,id'
-        ];
-    }
-    
-    /**
-     * Validate input on update
-     *
-     * @param Model $model | nullable
-     *
-     * @return array
-     */
-    public function updateRules(Request $request, $model) : array
-    {
-        return [
-        ];
+        return BasableOptions::create()
+            ->storeRules([
+                'title' => 'required|unique:pages,id'
+            ])
+            ->storeRuleMessages([
+                'title.required' => 'The title field is required.',
+            ])
+            ->updateRules([
+                'title' => 'required|unique:pages,id'
+            ])
+            ->updateRuleMessages([
+                'title.required' => 'The title field is required.',
+            ]);
     }
 }
