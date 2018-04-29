@@ -34,5 +34,5 @@ abstract class Model extends BaseModel
      *
      * @return array
      */
-    abstract public function permissions(): array;
+    abstract public static function permissions(): array;
 }
