@@ -1,4 +1,4 @@
-# Halcyon Packages Base - v1.0.5
+# Halcyon Packages Base - v1.0.6
 
 
 ## Changes Log
