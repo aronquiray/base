@@ -34,9 +34,9 @@ abstract class StatusController extends Controller
         if (is_null($status)) {
             throw StatusControllerException::required();
         }
-        $this->repo->update([ $this->model->statusKeyName() => $status ], $model);
+        $this->repo->update([ $statusKey => $status ], $model);
         $redirect = route($this->route_path . '.status', $status) ;
-        $message = trans("base::actions.mark.", ['Name' => $model->base(config('base.responseBaseableName')), 'Status' => 'test']);
-        return $this->response('mark', $request->ajax(), $model, $redirect);
+        $message = trans("base::actions.mark", ['name' => $model->base(config('base.responseBaseableName')), 'status' => $status]);
+        return $this->response('mark', $request->ajax(), $model, $redirect, $message);
     }
 }
