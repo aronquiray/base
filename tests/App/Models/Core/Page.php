@@ -19,25 +19,11 @@ class Page extends Model implements ModelStatusContract
     ];
 
 
-    public const moduleName         = 'page';
-    public const viewBackendPath    = 'backend.core.page';
-    public const viewFrontendPath   = 'frontend.core.page';
-    public const routeAdminPath     = 'admin.page';
-    public const routeFrontendPath  = 'frontend.page';
-
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
-    }
+    public const MODULE_NAME         = 'page';
+    public const VIEW_BACKEND_PATH    = 'backend.core.page';
+    public const VIEW_FRONTEND_PATH   = 'frontend.core.page';
+    public const ROUTE_ADMIN_PATH     = 'admin.page';
+    public const ROUTE_FRONTEND_PATH  = 'frontend.page';
 
     public function getRouteKeyName()
     {
