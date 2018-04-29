@@ -12,8 +12,7 @@ class BasableOptions
 
     public static function create(): self
     {
-        (new self)->reset();
-        return new static();
+        return (new static())->reset();
     }
 
     public function reset(): self

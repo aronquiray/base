@@ -15,20 +15,20 @@ trait ModelDefaultTraits
             'backend' => [
                 'show' 		=> [
                     'type' => 'show',
-                    'perminssion' => $this->permission('show'),
-                    'url' => route(self::routeAdminPath.'.show', $this)
+                    'perminssion' =>self::permission('show'),
+                    'url' => route(self::ROUTE_ADMIN_PATH.'.show', $this)
                 ],
                 'edit' 		=> [
                     'type' => 'edit',
-                    'perminssion' => $this->permission('edit'),
-                    'url' => route(self::routeAdminPath.'.edit', $this)
+                    'perminssion' =>self::permission('edit'),
+                    'url' => route(self::ROUTE_ADMIN_PATH.'.edit', $this)
                 ],
                 'destroy' 	=> [
                     'type' => 'destroy',
-                    'perminssion' => $this->permission('destroy'),
-                    'url' => route(self::routeAdminPath.'.destroy', $this),
+                    'perminssion' =>self::permission('destroy'),
+                    'url' => route(self::ROUTE_ADMIN_PATH.'.destroy', $this),
                     'group' => 'more',
-                    'redirect' => route(self::routeAdminPath.'.index')
+                    'redirect' => route(self::ROUTE_ADMIN_PATH.'.index')
                 ],
             ]
                
@@ -37,18 +37,18 @@ trait ModelDefaultTraits
         if (method_exists($this, 'bootSoftDeletes')) {
             $links['backend']['restore'] = [
                     'type' => 'restore',
-                    'perminssion' => $this->permission('restore'),
-                    'url' => route(self::routeAdminPath.'.restore', $this),
+                    'perminssion' =>self::permission('restore'),
+                    'url' => route(self::ROUTE_ADMIN_PATH.'.restore', $this),
                     // 'group' => 'more',
-                    'redirect' => route(self::routeAdminPath.'.index')
+                    'redirect' => route(self::ROUTE_ADMIN_PATH.'.index')
                 ];
                 
             $links['backend']['purge' ] = [
                     'type' => 'purge',
-                    'perminssion' => $this->permission('purge'),
-                    'url' => route(self::routeAdminPath.'.purge', $this),
+                    'perminssion' =>self::permission('purge'),
+                    'url' => route(self::ROUTE_ADMIN_PATH.'.purge', $this),
                     // 'group' => 'more',
-                    'redirect' => route(self::routeAdminPath.'.index')
+                    'redirect' => route(self::ROUTE_ADMIN_PATH.'.index')
                 ];
         }
         return $links;

@@ -6,5 +6,5 @@ return [
     'destroy' 	=> ':name has been deleted.',
     'restore' 	=> ':name has been restored.',
     'purge' 	=> ':name has been permanently deleted.',
-    'mark' 		=> ':name is now :status'
+    'mark' 		=> ':name is now :status.'
 ];
