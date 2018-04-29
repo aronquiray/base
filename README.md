@@ -1,7 +1,7 @@
-# Halcyon Packages Base - v1.0.5 #
+# Halcyon Packages Base - v1.0.5
 
 
-## Changes Log ###
+## Changes Log
     v1.0.6
         * Fixes
             - Status message response when update status.
