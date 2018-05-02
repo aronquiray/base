@@ -19,7 +19,7 @@ class PagesSoftDeleteController extends Controller
     {
         $this->model = $model;
         $this->repo = new Repository($model);
-        $this->route_path = Model::routeAdminPath;
+        $this->route_path = Model::ROUTE_ADMIN_PATH;
         $this->view_path    	= 'backend.core.page';// for testing only
         // $this->view_path    = Model::viewBackendPath;
         

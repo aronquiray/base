@@ -7,14 +7,14 @@ trait ModelTraits
     /**
       * Returns the value of a given key in the baseable function
       *
-      * @param string $key
+      * @param string $key | null
       *
-      * @return mixed
+      * @return string
       */
-    public function base(string $key) : string
+    public function base(string $key = null) : string
     {
         $config = $this->baseable();
-        if (array_key_exists($key, $config)) {
+        if (array_key_exists($key, $config) && !is_null($key)) {
             $key = $config[$key];
         } else {
             $key = $config['source'];
@@ -70,9 +70,9 @@ trait ModelTraits
      *
      * @return array $permissions
      */
-    public function permission($keys = null)
+    public static function permission($keys = null)
     {
-        $permissions = $this->permissions();
+        $permissions = static::permissions();
         if (! is_null($keys) && is_array($keys)) {
             foreach ($permissions as $p => $permission) {
                 if (! in_array($p, $keys)) {
