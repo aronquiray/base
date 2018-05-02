@@ -17,20 +17,20 @@ trait ModelDefaultTraits
             'backend' => [
                 'show' 		=> [
                     'type' => 'show',
-                    'perminssion' => $this->permission('show'),
-                    'url' => array(self::routeAdminPath.'.show', $this)
+                    'perminssion' =>self::permission('show'),
+                    'url' => [self::ROUTE_ADMIN_PATH.'.show', $this]
                 ],
                 'edit' 		=> [
                     'type' => 'edit',
-                    'perminssion' => $this->permission('edit'),
-                    'url' => array(self::routeAdminPath.'.edit', $this)
+                    'perminssion' =>self::permission('edit'),
+                    'url' => [self::ROUTE_ADMIN_PATH.'.edit', $this]
                 ],
                 'destroy' 	=> [
                     'type' => 'destroy',
-                    'perminssion' => $this->permission('destroy'),
-                    'url' => array(self::routeAdminPath.'.destroy', $this),
+                    'perminssion' =>self::permission('destroy'),
+                    'url' => [self::ROUTE_ADMIN_PATH.'.destroy', $this],
                     'group' => 'more',
-                    'redirect' => route(self::routeAdminPath.'.index')
+                    'redirect' => [self::ROUTE_ADMIN_PATH.'.index']
                 ],
             ]
                
@@ -39,18 +39,18 @@ trait ModelDefaultTraits
         if (method_exists($this, 'bootSoftDeletes')) {
             $links['backend']['restore'] = [
                     'type' => 'restore',
-                    'perminssion' => $this->permission('restore'),
-                    'url' => array(self::routeAdminPath.'.restore', $this),
+                    'perminssion' =>self::permission('restore'),
+                    'url' => [self::ROUTE_ADMIN_PATH.'.restore', $this],
                     // 'group' => 'more',
-                    'redirect' => route(self::routeAdminPath.'.index')
+                    'redirect' => [self::ROUTE_ADMIN_PATH.'.index']
                 ];
                 
             $links['backend']['purge' ] = [
                     'type' => 'purge',
-                    'perminssion' => $this->permission('purge'),
-                    'url' => array(self::routeAdminPath.'.purge', $this),
+                    'perminssion' =>self::permission('purge'),
+                    'url' => [self::ROUTE_ADMIN_PATH.'.purge', $this],
                     // 'group' => 'more',
-                    'redirect' => array(self::routeAdminPath.'.index')
+                    'redirect' => [self::ROUTE_ADMIN_PATH.'.index']
                 ];
         }
 
@@ -58,6 +58,13 @@ trait ModelDefaultTraits
             if (!Route::has($link['url'][0])) {
                 array_forget($links['backend'], $type);
                 continue;
+            }
+            if (isset($links['backend'][$type]['redirect'])) {
+                if (!Route::has($link['redirect'][0])) {
+                    array_forget($links['backend'], $type);
+                    continue;
+                }
+                $links['backend'][$type]['redirect'] = route($link['redirect'][0]);
             }
             $links['backend'][$type]['url'] = route($link['url'][0], $link['url'][1]);
         }

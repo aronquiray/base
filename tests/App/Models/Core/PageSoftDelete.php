@@ -19,11 +19,11 @@ class PageSoftDelete extends Model
     ];
 
 
-    public const moduleName         = 'page-sd';
-    public const viewBackendPath    = 'backend.core.page-sd';
-    public const viewFrontendPath   = 'frontend.core.page-sd';
-    public const routeAdminPath     = 'admin.page-sd';
-    public const routeFrontendPath  =  'frontend.page-sd';
+    public const MODULE_NAME         = 'page-sd';
+    public const VIEW_BACKEND_PATH    = 'backend.core.page-sd';
+    public const VIEW_FRONTEND_PATH   = 'frontend.core.page-sd';
+    public const ROUTE_ADMIN_PATH     = 'admin.page-sd';
+    public const ROUTE_FRONTEND_PATH  =  'frontend.page-sd';
 
     /**
      * Return the sluggable configuration array for this model.
@@ -61,7 +61,7 @@ class PageSoftDelete extends Model
      *
      * @return array
      */
-    public function permissions() : array
+    public static function permissions() : array
     {
         return [
             'index' => 'page softdelete index',
