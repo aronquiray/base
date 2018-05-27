@@ -7,17 +7,6 @@ use HalcyonLaravel\Base\Tests\TestCase;
 use App\Models\Core\PageSoftDelete;
 use Route;
 
-
-
-use HalcyonLaravel\Base\Events\BaseDeletingEvent;
-use HalcyonLaravel\Base\Events\BaseDeletedEvent;
-
-use HalcyonLaravel\Base\Events\BaseRestoringEvent;
-use HalcyonLaravel\Base\Events\BaseRestoredEvent;
-
-use HalcyonLaravel\Base\Events\BasePurgingEvent;
-use HalcyonLaravel\Base\Events\BasePurgedEvent;
-
 class TestSoftDelete extends TestCase
 {
     protected $pageSoftdelete;
@@ -30,8 +19,6 @@ class TestSoftDelete extends TestCase
        
     public function testLogDeleteOnSoftdelete()
     {
-        $this->expectsEvents(BaseDeletingEvent::class);
-        $this->expectsEvents(BaseDeletedEvent::class);
         
         $response = $this->withHeaders([
             'X-Header' => 'Value',
@@ -51,8 +38,6 @@ class TestSoftDelete extends TestCase
     {
         $this->pageSoftdelete->deleted_at = now();
         $this->pageSoftdelete->save();
-        $this->expectsEvents(BaseRestoringEvent::class);
-        $this->expectsEvents(BaseRestoredEvent::class);
         
         $response = $this->withHeaders([
             'X-Header' => 'Value',
@@ -71,8 +56,6 @@ class TestSoftDelete extends TestCase
     {
         $this->pageSoftdelete->deleted_at = now();
         $this->pageSoftdelete->save();
-        $this->expectsEvents(BasePurgingEvent::class);
-        $this->expectsEvents(BasePurgedEvent::class);
         
         $response = $this->withHeaders([
             'X-Header' => 'Value',
@@ -104,8 +87,6 @@ class TestSoftDelete extends TestCase
 
     public function testOnRestoreOnNotDeleted()
     {
-        // $this->expectsEvents(BaseRestoringEvent::class);
-        // $this->expectsEvents(BaseRestoredEvent::class);
         
         $response = $this->withHeaders([
             'X-Header' => 'Value',
