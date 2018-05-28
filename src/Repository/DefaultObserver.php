@@ -4,7 +4,7 @@ namespace HalcyonLaravel\Base\Repository;
 
 use HalcyonLaravel\Base\Models\Model;
 
-class DefaultObserver
+class DefaultObserver extends ObserverContract
 {
     public static function storing(array $data) :array
     {

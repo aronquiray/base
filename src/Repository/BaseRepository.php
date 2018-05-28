@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use HalcyonLaravel\Base\Traits\Baseable;
 
 use HalcyonLaravel\Base\Exceptions\RepositoryException;
+use HalcyonLaravel\Base\Repository\ObserverContract;
 
 class BaseRepository
 {
@@ -16,7 +17,7 @@ class BaseRepository
      */
     protected $model;
 
-    protected $observer = DefaultObserver::class;
+    private $_observer = DefaultObserver::class;
 
     /**
      * BaseRepository Constructor
@@ -24,7 +25,12 @@ class BaseRepository
     public function __construct(Model $model)
     {
         $this->model =  $model;
-        $this->observer = new $this->observer;
+        $this->_observer = new $this->_observer;
+    }
+
+    protected function setObserver(ObserverContract $observer)
+    {
+        $this->_observer = $observer;
     }
 
     /**
@@ -99,9 +105,9 @@ class BaseRepository
     public function store($data)
     {
         return $this->action(function () use ($data) {
-            $data = $this->observer::storing($data);
+            $data = $this->_observer::storing($data);
             $model = $this->model::create($data);
-            return $this->observer::stored($model, $data);
+            return $this->_observer::stored($model, $data);
         });
     }
 
@@ -113,9 +119,9 @@ class BaseRepository
     public function update($data, $model)
     {
         return $this->action(function () use ($data, $model) {
-            $model = $this->observer::updating($model, $data);
+            $model = $this->_observer::updating($model, $data);
             $model->update($data);
-            return $this->observer::updated($model, $data);
+            return $this->_observer::updated($model, $data);
         });
     }
 
@@ -129,9 +135,9 @@ class BaseRepository
     public function destroy($model)
     {
         return $this->action(function () use ($model) {
-            $model = $this->observer::deleting($model);
+            $model = $this->_observer::deleting($model);
             $model->delete();
-            return $this->observer::deleted($model);
+            return $this->_observer::deleted($model);
         });
     }
 
@@ -149,9 +155,9 @@ class BaseRepository
         }
 
         return $this->action(function () use ($model) {
-            $model = $this->observer::restoring($model);
+            $model = $this->_observer::restoring($model);
             $model->restore();
-            return $this->observer::restored($model);
+            return $this->_observer::restored($model);
         });
     }
 
@@ -168,9 +174,9 @@ class BaseRepository
         }
 
         return $this->action(function () use ($model) {
-            $model = $this->observer::purging($model);
+            $model = $this->_observer::purging($model);
             $model->forceDelete();
-            return $this->observer::purged($model);
+            return $this->_observer::purged($model);
         });
     }
 }
