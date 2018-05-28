@@ -21,7 +21,7 @@ class DefaultObserver extends ObserverContract
         return $model;
     }
 
-    public static function updated(Model $model, array $data) :Model
+    public static function updated(Model $model, array $data, array $oldModel) :Model
     {
         return $model;
     }

@@ -10,7 +10,7 @@ abstract class ObserverContract
     abstract public static function stored(Model $model, array $data) :Model;
 
     abstract public static function updating(Model $model, array $data) :Model;
-    abstract public static function updated(Model $model, array $data) :Model;
+    abstract public static function updated(Model $model, array $data, array $oldModel) :Model;
 
     abstract public static function deleting(Model $model) :Model;
     abstract public static function deleted(Model $model) :Model;
