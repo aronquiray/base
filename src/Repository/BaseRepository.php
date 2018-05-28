@@ -16,12 +16,15 @@ class BaseRepository
      */
     protected $model;
 
+    protected $observer = DefaultObserver::class;
+
     /**
      * BaseRepository Constructor
      */
     public function __construct(Model $model)
     {
         $this->model =  $model;
+        $this->observer = new $this->observer;
     }
 
     /**
@@ -96,7 +99,9 @@ class BaseRepository
     public function store($data)
     {
         return $this->action(function () use ($data) {
-            return $this->model::create($data);
+            $data = $this->observer::storing($data);
+            $model = $this->model::create($data);
+            return $this->observer::stored($model, $data);
         });
     }
 
@@ -108,8 +113,9 @@ class BaseRepository
     public function update($data, $model)
     {
         return $this->action(function () use ($data, $model) {
+            $model = $this->observer::updating($model, $data);
             $model->update($data);
-            return $model;
+            return $this->observer::updated($model, $data);
         });
     }
 
@@ -123,8 +129,9 @@ class BaseRepository
     public function destroy($model)
     {
         return $this->action(function () use ($model) {
+            $model = $this->observer::deleting($model);
             $model->delete();
-            return $model;
+            return $this->observer::deleted($model);
         });
     }
 
@@ -142,8 +149,9 @@ class BaseRepository
         }
 
         return $this->action(function () use ($model) {
+            $model = $this->observer::restoring($model);
             $model->restore();
-            return $model;
+            return $this->observer::restored($model);
         });
     }
 
@@ -160,8 +168,9 @@ class BaseRepository
         }
 
         return $this->action(function () use ($model) {
+            $model = $this->observer::purging($model);
             $model->forceDelete();
-            return $model;
+            return $this->observer::purged($model);
         });
     }
 }
