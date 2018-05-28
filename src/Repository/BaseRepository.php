@@ -7,17 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use HalcyonLaravel\Base\Traits\Baseable;
 
-use HalcyonLaravel\Base\Events\BaseStoringEvent;
-use HalcyonLaravel\Base\Events\BaseStoredEvent;
-use HalcyonLaravel\Base\Events\BaseUpdatingEvent;
-use HalcyonLaravel\Base\Events\BaseUpdatedEvent;
-use HalcyonLaravel\Base\Events\BaseDeletingEvent;
-use HalcyonLaravel\Base\Events\BaseDeletedEvent;
-use HalcyonLaravel\Base\Events\BaseRestoringEvent;
-use HalcyonLaravel\Base\Events\BaseRestoredEvent;
-use HalcyonLaravel\Base\Events\BasePurgingEvent;
-use HalcyonLaravel\Base\Events\BasePurgedEvent;
-
 use HalcyonLaravel\Base\Exceptions\RepositoryException;
 
 class BaseRepository
