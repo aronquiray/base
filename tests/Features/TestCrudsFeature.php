@@ -6,29 +6,10 @@ use Illuminate\Database\Schema\Blueprint;
 use HalcyonLaravel\Base\Tests\TestCase;
 use App\Models\Core\Page;
 
-
-
-use HalcyonLaravel\Base\Events\BaseStoringEvent;
-use HalcyonLaravel\Base\Events\BaseStoredEvent;
-
-use HalcyonLaravel\Base\Events\BaseUpdatingEvent;
-use HalcyonLaravel\Base\Events\BaseUpdatedEvent;
-
-use HalcyonLaravel\Base\Events\BaseDeletingEvent;
-use HalcyonLaravel\Base\Events\BaseDeletedEvent;
-
-use HalcyonLaravel\Base\Events\BaseRestoringEvent;
-use HalcyonLaravel\Base\Events\BaseRestoredEvent;
-
-use HalcyonLaravel\Base\Events\BasePurgingEvent;
-use HalcyonLaravel\Base\Events\BasePurgedEvent;
-
 class TestCrudsFeature extends TestCase
 {
     public function testLogStore()
     {
-        $this->expectsEvents(BaseStoringEvent::class);
-        $this->expectsEvents(BaseStoredEvent::class);
 
         // Event::shouldReceive('fire')->with(m::on(function($event){
         //     return false;
@@ -65,8 +46,6 @@ class TestCrudsFeature extends TestCase
         ];
 
 
-        $this->expectsEvents(BaseUpdatingEvent::class);
-        $this->expectsEvents(BaseUpdatedEvent::class);
 
         $response = $this->withHeaders([
             'X-Header' => 'Value',
@@ -82,8 +61,6 @@ class TestCrudsFeature extends TestCase
 
     public function testLogDeleteOnNOTSoftdelete()
     {
-        $this->expectsEvents(BaseDeletingEvent::class);
-        $this->expectsEvents(BaseDeletedEvent::class);
 
         $response = $this->withHeaders([
             'X-Header' => 'Value',
@@ -99,8 +76,6 @@ class TestCrudsFeature extends TestCase
 
     public function testLogStoreWithCustomeRedirecttion()
     {
-        $this->expectsEvents(BaseStoringEvent::class);
-        $this->expectsEvents(BaseStoredEvent::class);
 
         $customeRedirection = 'http://test-url.com/';
 

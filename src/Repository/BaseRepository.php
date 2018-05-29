@@ -7,18 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use HalcyonLaravel\Base\Traits\Baseable;
 
-use HalcyonLaravel\Base\Events\BaseStoringEvent;
-use HalcyonLaravel\Base\Events\BaseStoredEvent;
-use HalcyonLaravel\Base\Events\BaseUpdatingEvent;
-use HalcyonLaravel\Base\Events\BaseUpdatedEvent;
-use HalcyonLaravel\Base\Events\BaseDeletingEvent;
-use HalcyonLaravel\Base\Events\BaseDeletedEvent;
-use HalcyonLaravel\Base\Events\BaseRestoringEvent;
-use HalcyonLaravel\Base\Events\BaseRestoredEvent;
-use HalcyonLaravel\Base\Events\BasePurgingEvent;
-use HalcyonLaravel\Base\Events\BasePurgedEvent;
-
 use HalcyonLaravel\Base\Exceptions\RepositoryException;
+use HalcyonLaravel\Base\Repository\ObserverContract;
 
 class BaseRepository
 {
@@ -27,12 +17,20 @@ class BaseRepository
      */
     protected $model;
 
+    private $_observer = DefaultObserver::class;
+
     /**
      * BaseRepository Constructor
      */
     public function __construct(Model $model)
     {
         $this->model =  $model;
+        $this->_observer = new $this->_observer;
+    }
+
+    protected function setObserver(ObserverContract $observer)
+    {
+        $this->_observer = $observer;
     }
 
     /**
@@ -89,76 +87,6 @@ class BaseRepository
     }
 
     /**
-     * Handle inaccessible methods
-     */
-    public function __call($method, $args)
-    {
-        /**
-         * load method if existed on instance, else execute default behavior.
-         */
-        if (isset($this->$method)) {
-            return call_user_func_array($this->$method, $args);
-        }
-
-        if (in_array($method, [
-            'storing', 'stored',
-            'updating', 'updated',
-            'deleting', 'deleted',
-            'restoring', 'restored',
-            'purging', 'purged',
-        ])) {
-            switch ($method) {
-                case 'storing':
-                    event(new BaseStoringEvent);
-                break;
-                case 'stored':
-                    event(new BaseStoredEvent);
-                break;
-                case 'updating':
-                    event(new BaseUpdatingEvent);
-                break;
-                case 'updated':
-                    event(new BaseUpdatedEvent);
-                break;
-                case 'deleting':
-                    event(new BaseDeletingEvent);
-                break;
-                case 'deleted':
-                    event(new BaseDeletedEvent);
-                break;
-                case 'restoring':
-                    event(new BaseRestoringEvent);
-                break;
-                case 'restored':
-                    event(new BaseRestoredEvent);
-                break;
-                case 'purging':
-                    event(new BasePurgingEvent);
-                break;
-                case 'purged':
-                    event(new BasePurgedEvent);
-                break;
-            }
-            switch ($method) {
-                case 'storing':
-                case 'purged':
-                case 'deleting':
-                case 'deleted':
-                case 'purging':
-                case 'restoring':
-                case 'restored':
-                    return $args[0];
-                case 'stored':
-                case 'updating':
-                case 'updated':
-                    return $args[1];
-            }
-        }
-
-        $this->_handleErrors(trans('base::errors.function_not_found', ['functionName' => $method]));
-    }
-
-    /**
      * Handle exception errors
      * @param Exception|String $e
      * @throws Exception $message
@@ -177,9 +105,9 @@ class BaseRepository
     public function store($data)
     {
         return $this->action(function () use ($data) {
-            $data = $this->storing($data);
+            $data = $this->_observer::storing($data);
             $model = $this->model::create($data);
-            return $this->stored($data, $model);
+            return $this->_observer::stored($model, $data);
         });
     }
 
@@ -192,9 +120,9 @@ class BaseRepository
     {
         return $this->action(function () use ($data, $model) {
             $oldModel = $model->getOriginal();
-            $model = $this->updating($data, $model);
+            $model = $this->_observer::updating($model, $data);
             $model->update($data);
-            return $this->updated($data, $model, $oldModel);
+            return $this->_observer::updated($model, $data, $oldModel);
         });
     }
 
@@ -208,9 +136,9 @@ class BaseRepository
     public function destroy($model)
     {
         return $this->action(function () use ($model) {
-            $model = $this->deleting($model);
+            $model = $this->_observer::deleting($model);
             $model->delete();
-            return $this->deleted($model);
+            return $this->_observer::deleted($model);
         });
     }
 
@@ -228,9 +156,9 @@ class BaseRepository
         }
 
         return $this->action(function () use ($model) {
-            $model = $this->restoring($model);
+            $model = $this->_observer::restoring($model);
             $model->restore();
-            return $this->restored($model);
+            return $this->_observer::restored($model);
         });
     }
 
@@ -247,9 +175,9 @@ class BaseRepository
         }
 
         return $this->action(function () use ($model) {
-            $model = $this->purging($model);
+            $model = $this->_observer::purging($model);
             $model->forceDelete();
-            return $this->purged($model);
+            return $this->_observer::purged($model);
         });
     }
 }
