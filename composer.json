@@ -26,8 +26,7 @@
         "extra": {
                 "laravel": {
                         "providers": [
-                                "HalcyonLaravel\\Base\\Providers\\BaseServiceProvider",
-                                "HalcyonLaravel\\Base\\Providers\\EventServiceProvider"
+                                "HalcyonLaravel\\Base\\Providers\\BaseServiceProvider"
                         ],
                         "aliases": {
                         }
