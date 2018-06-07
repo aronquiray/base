@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.8
+# Halcyon Packages Base - v1.0.9
 
 
 ## Changes Log 
+    v1.0.9: add .gitattribute
     v1.0.8: new repo observer
     v1.0.7: check route existence
     v1.0.6
