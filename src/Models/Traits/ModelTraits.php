@@ -35,7 +35,7 @@ trait ModelTraits
         $user = auth()->user();
         
         if (method_exists($this, 'additionalLinks')) {
-            $links = array_merge($this->links(), $this->additionalLinks())[$group];
+            $links = array_merge_recursive($this->links(), $this->additionalLinks())[$group];
         } else {
             $links = $this->links()[$group];
         }
