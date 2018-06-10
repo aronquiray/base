@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.9
+# Halcyon Packages Base - v1.0.10
 
 
 ## Changes Log 
+    v1.0.10: fix array_merge_recursive on `additionalLinks()`
     v1.0.9: add .gitattribute
     v1.0.8: new repo observer
     v1.0.7: check route existence
