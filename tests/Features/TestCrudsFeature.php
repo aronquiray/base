@@ -61,7 +61,6 @@ class TestCrudsFeature extends TestCase
 
     public function testLogDeleteOnNOTSoftdelete()
     {
-
         $response = $this->withHeaders([
             'X-Header' => 'Value',
         ])->json('DELETE', route('admin.page.destroy', $this->page), []);
@@ -76,7 +75,6 @@ class TestCrudsFeature extends TestCase
 
     public function testLogStoreWithCustomeRedirecttion()
     {
-
         $customeRedirection = 'http://test-url.com/';
 
         $response = $this->withHeaders([

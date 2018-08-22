@@ -10,6 +10,7 @@ use Spatie\Sluggable\SlugOptions;
 class Content extends Model
 {
     use HasSlug;
+    use HasSlug;
     
     protected $fillable = [
         'name',
