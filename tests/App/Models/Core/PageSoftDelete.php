@@ -4,11 +4,13 @@ namespace App\Models\Core;
 
 use HalcyonLaravel\Base\Models\Model;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Sluggable\HasSlug;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits;
 
 class PageSoftDelete extends Model
 {
+    use HasSlug;
     use SoftDeletes,ModelDefaultTraits;
     protected $table = 'pages_sd';
     /**

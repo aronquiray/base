@@ -19,7 +19,6 @@ class TestSoftDelete extends TestCase
        
     public function testLogDeleteOnSoftdelete()
     {
-        
         $response = $this->withHeaders([
             'X-Header' => 'Value',
             ])->json('DELETE', route('admin.page-sd.destroy', $this->pageSoftdelete), []);
@@ -87,7 +86,6 @@ class TestSoftDelete extends TestCase
 
     public function testOnRestoreOnNotDeleted()
     {
-        
         $response = $this->withHeaders([
             'X-Header' => 'Value',
             ])->json('PATCH', route('admin.page-sd.restore', $this->pageSoftdelete), []);

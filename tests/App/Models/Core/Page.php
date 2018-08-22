@@ -4,11 +4,13 @@ namespace App\Models\Core;
 
 use HalcyonLaravel\Base\Models\Model;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Sluggable\HasSlug;
 use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits;
 use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
 
 class Page extends Model implements ModelStatusContract
 {
+    use HasSlug;
     use ModelDefaultTraits;
 
     /**

@@ -4,7 +4,6 @@ namespace HalcyonLaravel\Base\Models;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
-use Spatie\Sluggable\HasSlug;
 use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 
 /**
@@ -12,7 +11,7 @@ use HalcyonLaravel\Base\Models\Traits\ModelTraits;
  */
 abstract class Model extends BaseModel
 {
-    use HasSlug, ModelTraits;
+    use ModelTraits;
     
     
     /**
