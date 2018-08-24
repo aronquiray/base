@@ -9,6 +9,7 @@ use HalcyonLaravel\Base\Traits\Baseable;
 
 use HalcyonLaravel\Base\Exceptions\RepositoryException;
 use HalcyonLaravel\Base\Repository\ObserverContract;
+use Schema;
 
 class BaseRepository
 {
@@ -38,17 +39,23 @@ class BaseRepository
      *
      * @return QueryBuilder $query
      */
-    public function table(array $request = null) : Builder
+    public function table(array $request = null, array $fields = [], bool $isAllFillable = true) : Builder
     {
         $isHasSoftDelete = method_exists($this->model, 'bootSoftDeletes');
 
-        $otherFields = ['updated_at'];
+        if (Schema::hasColumn($this->model->getTable(), 'updated_at')) {
+            $fields[] = 'updated_at';
+        }
         if ($isHasSoftDelete) {
-            $otherFields[] = 'deleted_at';
+            $fields[] = 'deleted_at';
         }
 
-        $fillable = array_merge($this->model->getFillable(), $otherFields);
-        $query = $this->model->select($fillable);
+        if ($isAllFillable) {
+            $fillable = array_merge($this->model->getFillable(), $fields);
+            $query = $this->model->select($fillable);
+        } else {
+            $query = $this->model->select($fields);
+        }
 
         if ($isHasSoftDelete) {
             if (isset($request['trashOnly']) && $request['trashOnly']) {
