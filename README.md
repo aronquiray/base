@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.11
+# Halcyon Packages Base - v1.0.12
 
 
 ## Changes Log 
+    v1.0.12: allow manage selection on table
     v1.0.11: HasSlug move in local models
     v1.0.10: fix array_merge_recursive on `additionalLinks()`
     v1.0.9: add .gitattribute
