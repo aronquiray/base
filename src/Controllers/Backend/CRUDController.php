@@ -29,7 +29,8 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function index()
     {
-        return view("{$this->view_path}.index");
+        $viewPath =  $this->view_path;
+        return view("{$this->view_path}.index", compact('viewPath'));
     }
 
     /**
@@ -37,7 +38,8 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function create()
     {
-        return view("{$this->view_path}.create");
+        $viewPath =  $this->view_path;
+        return view("{$this->view_path}.create", compact('viewPath'));
     }
 
     /**
@@ -48,7 +50,8 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function edit(String $routeKeyName)
     {
         $model = $this->getModel($routeKeyName);
-        return view("{$this->view_path}.edit", compact('model'));
+        $viewPath =  $this->view_path;
+        return view("{$this->view_path}.edit", compact('model', 'viewPath'));
     }
 
     /**
@@ -59,7 +62,8 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function show(String $routeKeyName)
     {
         $model = $this->getModel($routeKeyName);
-        return view("{$this->view_path}.show", compact('model'));
+        $viewPath =  $this->view_path;
+        return view("{$this->view_path}.show", compact('model', 'viewPath'));
     }
 
 
