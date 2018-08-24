@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.12
+# Halcyon Packages Base - v1.0.13
 
 
 ## Changes Log 
+    v1.0.13: add view path
     v1.0.12: allow manage selection on table
     v1.0.11: HasSlug move in local models
     v1.0.10: fix array_merge_recursive on `additionalLinks()`

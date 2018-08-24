@@ -19,7 +19,8 @@ abstract class DeletedController extends Controller
      */
     public function deleted()
     {
-        return view("{$this->view_path}.deleted");
+        $viewPath =  $this->view_path;
+        return view("{$this->view_path}.deleted", compact('viewPath'));
     }
 
     /**
