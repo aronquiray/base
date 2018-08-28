@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.13
+# Halcyon Packages Base - v1.0.14
 
 
 ## Changes Log 
+    v1.0.14: add route path
     v1.0.13: add view path
     v1.0.12: allow manage selection on table
     v1.0.11: HasSlug move in local models
