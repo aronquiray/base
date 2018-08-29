@@ -34,4 +34,9 @@ abstract class Model extends BaseModel
      * @return array
      */
     abstract public static function permissions(): array;
+
+    public function scopeExclude($query, array $columns = [])
+    {
+        return $query->select(array_diff($this->getFillable(), $columns));
+    }
 }
