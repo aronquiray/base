@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v1.0.15: Add exclude scope on abstract model
     v1.0.14: add route path
     v1.0.13: add view path
     v1.0.12: allow manage selection on table
