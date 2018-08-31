@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.14
+# Halcyon Packages Base - v1.0.16
 
 
 ## Changes Log 
+    v1.0.16: Add spatie tranlation
     v1.0.15: Add exclude scope on abstract model
     v1.0.14: add route path
     v1.0.13: add view path
