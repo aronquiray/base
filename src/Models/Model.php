@@ -39,4 +39,15 @@ abstract class Model extends BaseModel
     {
         return $query->select(array_diff($this->getFillable(), $columns));
     }
+
+    protected function getTrans($field)
+    {
+        $locale = config('app.locale');
+
+        if (session()->has('locale') && in_array(session()->get('locale'), array_keys(config('locale.languages')))) {
+            $locale = session()->get('locale');
+        }
+        
+        return $this->getTranslation($field, $locale);
+    }
 }
