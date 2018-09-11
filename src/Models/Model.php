@@ -5,6 +5,8 @@ namespace HalcyonLaravel\Base\Models;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 use HalcyonLaravel\Base\Models\Traits\ModelTraits;
+use Illuminate\Database\Eloquent\Builder;
+use Schema;
 
 /**
  * Class Model.
@@ -49,5 +51,17 @@ abstract class Model extends BaseModel
         }
 
         return $this->getTranslation($field, $locale);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('latest', function (Builder $builder) {
+            if (Schema::hasColumn((new static)->getTable(), 'updated_at')) {
+                $builder->latest('updated_at');
+            } elseif (Schema::hasColumn((new static)->getTable(), 'created_at')) {
+                $builder->latest('created_at');
+            }
+        });
     }
 }

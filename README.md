@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.18
+# Halcyon Packages Base - v1.0.20
 
 
 ## Changes Log 
+    v1.0.20: Add Global scope latest
     v1.0.19: Make observer protected
     v1.0.16: Add spatie tranlation
     v1.0.15: Add exclude scope on abstract model
