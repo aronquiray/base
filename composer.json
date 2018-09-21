@@ -2,7 +2,6 @@
         "name": "halcyon-laravel/base",
         "description": "Base",
         "require": {
-                "spatie/laravel-sluggable" : "^2.1",
                 "yajra/laravel-datatables-oracle": "~8.0",
                 "spatie/laravel-translatable": "^2.2"
         },

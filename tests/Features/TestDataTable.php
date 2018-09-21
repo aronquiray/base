@@ -48,13 +48,12 @@ class TestDataTable extends TestCase
         foreach (Page::all() as $page) {
             $pages[] = [
                 "title"=> $page->title,
-                "slug"=> $page->slug,
                 "description"=> $page->description,
                 "status"=> [
                     "type"=> "success",
                     "label"=> "Enable",
                     "value"=> "enable",
-                    "link"=> "http://localhost/admin/page/status/{$page->slug}",
+                    "link"=> "http://localhost/admin/page/status/{$page->id}",
                     "can"=> false
                 ],
                 "template"=> null,
@@ -64,15 +63,15 @@ class TestDataTable extends TestCase
                 "actions"=> [
                     "show"=> [
                         "type"=> "show",
-                        "url"=> "http://localhost/admin/page/{$page->slug}"
+                        "url"=> "http://localhost/admin/page/{$page->id}"
                     ],
                     "edit"=> [
                         "type"=> "edit",
-                        "url"=> "http://localhost/admin/page/{$page->slug}/edit"
+                        "url"=> "http://localhost/admin/page/{$page->id}/edit"
                     ],
                     "destroy"=> [
                         "type"=> "destroy",
-                        "url"=> "http://localhost/admin/page/{$page->slug}",
+                        "url"=> "http://localhost/admin/page/{$page->id}",
                         "group"=> "more",
                         "redirect"=> "http://localhost/admin/page"
                     ]
@@ -114,13 +113,12 @@ class TestDataTable extends TestCase
         foreach (PageSoftDelete::all() as $page) {
             $pages[] = [
                 "title"=> $page->title,
-                "slug"=> $page->slug,
                 "description"=> $page->description,
                 "status"=> [
                     "type"=> "success",
                     "label"=> "Enable",
                     "value"=> "enable",
-                    "link"=> "http://localhost/admin/page-sd/status/{$page->slug}",
+                    "link"=> "http://localhost/admin/page-sd/status/{$page->id}",
                     "can"=> false
                 ],
                 "template"=> null,
@@ -130,15 +128,15 @@ class TestDataTable extends TestCase
                 "actions"=> [
                     "show"=> [
                         "type"=> "show",
-                        "url"=> "http://localhost/admin/page-sd/{$page->slug}"
+                        "url"=> "http://localhost/admin/page-sd/{$page->id}"
                     ],
                     "edit"=> [
                         "type"=> "edit",
-                        "url"=> "http://localhost/admin/page-sd/{$page->slug}/edit"
+                        "url"=> "http://localhost/admin/page-sd/{$page->id}/edit"
                     ],
                     "destroy"=> [
                         "type"=> "destroy",
-                        "url"=> "http://localhost/admin/page-sd/{$page->slug}",
+                        "url"=> "http://localhost/admin/page-sd/{$page->id}",
                         "group"=> "more",
                         "redirect"=> "http://localhost/admin/page-sd"
                     ]
@@ -182,13 +180,12 @@ class TestDataTable extends TestCase
         foreach (PageSoftDelete::withTrashed()->get() as $page) {
             $pages[] = [
                 "title"=> $page->title,
-                "slug"=> $page->slug,
                 "description"=> $page->description,
                 "status"=> [
                     "type"=> "success",
                     "label"=> "Enable",
                     "value"=> "enable",
-                    "link"=> "http://localhost/admin/page-sd/status/{$page->slug}",
+                    "link"=> "http://localhost/admin/page-sd/status/{$page->id}",
                     "can"=> false
                 ],
                 "template"=> null,
@@ -198,15 +195,15 @@ class TestDataTable extends TestCase
                 "actions"=> [
                     "show"=> [
                         "type"=> "show",
-                        "url"=> "http://localhost/admin/page-sd/{$page->slug}"
+                        "url"=> "http://localhost/admin/page-sd/{$page->id}"
                     ],
                     "edit"=> [
                         "type"=> "edit",
-                        "url"=> "http://localhost/admin/page-sd/{$page->slug}/edit"
+                        "url"=> "http://localhost/admin/page-sd/{$page->id}/edit"
                     ],
                     "destroy"=> [
                         "type"=> "destroy",
-                        "url"=> "http://localhost/admin/page-sd/{$page->slug}",
+                        "url"=> "http://localhost/admin/page-sd/{$page->id}",
                         "group"=> "more",
                         "redirect"=> "http://localhost/admin/page-sd"
                     ]

@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.20
+# Halcyon Packages Base - v1.0.21
 
 
 ## Changes Log 
+    v1.0.21: Remove spatie slug
     v1.0.20: Add Global scope latest
     v1.0.19: Make observer protected
     v1.0.16: Add spatie tranlation

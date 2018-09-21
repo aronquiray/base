@@ -34,7 +34,7 @@ class User extends Authenticatable //implements BaseableInterface
     //     ;
 
     protected $fillable = [
-       'first_name', 'last_name', 'status',  'slug',
+       'first_name', 'last_name', 'status', 'id'
     ];
     /**
      * Return the baseable name for this model.
@@ -66,10 +66,6 @@ class User extends Authenticatable //implements BaseableInterface
     //     ];
     // }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
         
 
     /**

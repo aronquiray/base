@@ -4,18 +4,13 @@ namespace App\Models;
 
 use HalcyonLaravel\Base\Models\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 
 class Content extends Model
 {
-    use HasSlug;
-    use HasSlug;
-    
     protected $fillable = [
+        'id',
         'name',
         'content',
-        'slug',
     ];
 
     /**
@@ -56,16 +51,5 @@ class Content extends Model
             'destroy' => 'content destroy',
 
         ];
-    }
-    
-    
-    /**
-     * Get the options for generating the slug.
-     */
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom(['first_name', 'last_name'])
-            ->saveSlugsTo('slug');
     }
 }
