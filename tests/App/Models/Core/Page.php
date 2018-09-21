@@ -3,21 +3,18 @@
 namespace App\Models\Core;
 
 use HalcyonLaravel\Base\Models\Model;
-use Spatie\Sluggable\SlugOptions;
-use Spatie\Sluggable\HasSlug;
 use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits;
 use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
 
 class Page extends Model implements ModelStatusContract
 {
-    use HasSlug;
     use ModelDefaultTraits;
 
     /**
      * Declared Fillables
      */
     protected $fillable = [
-        'title', 'slug', 'description', 'status', 'template', 'type', 'url'
+        'id','title', 'description', 'status', 'template', 'type', 'url'
     ];
 
 
@@ -27,10 +24,6 @@ class Page extends Model implements ModelStatusContract
     public const ROUTE_ADMIN_PATH     = 'admin.page';
     public const ROUTE_FRONTEND_PATH  = 'frontend.page';
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
 
     /**
      * Return the baseable source for this model.
@@ -59,16 +52,6 @@ class Page extends Model implements ModelStatusContract
             'destroy' => 'page destroy',
 
         ];
-    }
-
-    /**
-     * Get the options for generating the slug.
-     */
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
     }
 
 

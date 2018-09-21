@@ -115,7 +115,6 @@ class TestCase extends Orchestra
         $this->app['db']->connection()->getSchemaBuilder()->create('pages_sd', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
-            $table->string('slug');
             $table->string('url')->nullable();
             $table->string('type')->unique()->nullable();
             $table->string('template')->nullable();
@@ -140,13 +139,11 @@ class TestCase extends Orchestra
             $table->increments('id');
             $table->string('name')->unique();
             $table->text('content');
-            $table->string('slug');
             $table->timestamps();
         });
         $app['db']->connection()->getSchemaBuilder()->create('pages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
-            $table->string('slug');
             $table->string('url')->nullable();
             $table->string('type')->unique()->nullable();
             $table->string('template')->nullable();

@@ -3,21 +3,18 @@
 namespace App\Models\Core;
 
 use HalcyonLaravel\Base\Models\Model;
-use Spatie\Sluggable\SlugOptions;
-use Spatie\Sluggable\HasSlug;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits;
 
 class PageSoftDelete extends Model
 {
-    use HasSlug;
     use SoftDeletes,ModelDefaultTraits;
     protected $table = 'pages_sd';
     /**
      * Declared Fillables
      */
     protected $fillable = [
-        'title', 'slug', 'description', 'status', 'template', 'type', 'url'
+       'id', 'title', 'description', 'status', 'template', 'type', 'url'
     ];
 
 
@@ -41,10 +38,6 @@ class PageSoftDelete extends Model
         ];
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
 
     /**
      * Return the baseable source for this model.
@@ -76,18 +69,6 @@ class PageSoftDelete extends Model
 
         ];
     }
-
- 
-    /**
-     * Get the options for generating the slug.
-     */
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
-    }
-
 
     public function additionalLinks()
     {
