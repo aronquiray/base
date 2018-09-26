@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.21
+# Halcyon Packages Base - v1.0.22
 
 
 ## Changes Log 
+    v1.0.22: Use db transaction, to allow manage exception handler
     v1.0.21: Remove spatie slug
     v1.0.20: Add Global scope latest
     v1.0.19: Make observer protected
