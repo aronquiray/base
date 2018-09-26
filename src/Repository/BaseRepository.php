@@ -82,27 +82,21 @@ class BaseRepository
       */
     public function action($closure)
     {
-        try {
-            DB::beginTransaction();
-            $data = $closure();
-            DB::commit();
-            return $data;
-        } catch (\Exception $e) {
-            DB::rollback();
-            $this->_handleErrors($e);
-        }
+        return DB::transaction(function () use ($closure) {
+            return $closure();
+        });
     }
 
-    /**
-     * Handle exception errors
-     * @param Exception|String $e
-     * @throws Exception $message
-     */
-    private function _handleErrors($e)
-    {
-        $message = $e instanceof \Exception ? $e->getMessage() : $e;
-        throw new \Exception($message);
-    }
+    // /**
+    //  * Handle exception errors
+    //  * @param Exception|String $e
+    //  * @throws Exception $message
+    //  */
+    // private function _handleErrors($e)
+    // {
+    //     $message = $e instanceof \Exception ? $e->getMessage() : $e;
+    //     throw new \Exception($message);
+    // }
 
     /**
      * @param array|mixed
