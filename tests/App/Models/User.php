@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-// use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 // use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -19,8 +19,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable //implements BaseableInterface
 {
-    // use
-    // // HasRoles,
+    use HasRoles;
+
+    protected $guard_name = 'web';
     // // Notifiable,
     // //  Sluggable,
     // //  SluggableScopeHelpers,

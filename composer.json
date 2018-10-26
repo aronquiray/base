@@ -3,7 +3,8 @@
   "description": "Base",
   "require": {
     "yajra/laravel-datatables-oracle": "~8.0",
-    "spatie/laravel-translatable": "^2.2"
+    "spatie/laravel-translatable": "^2.2",
+    "spatie/laravel-permission": "^2.23"
   },
   "require-dev": {
     "orchestra/testbench": "~3.3.0|~3.4.2|^3.5.0",

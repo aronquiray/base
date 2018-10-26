@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Database\Schema\Blueprint;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Route;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use View;
 
 class TestCase extends Orchestra
@@ -37,6 +39,8 @@ class TestCase extends Orchestra
      */
     protected function setUpDatabase($app)
     {
+        include_once __DIR__.'/../vendor/spatie/laravel-permission/database/migrations/create_permission_tables.php.stub';
+        (new \CreatePermissionTables())->up();
         $this->app['db']->connection()->getSchemaBuilder()->create('pages_sd', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
@@ -78,6 +82,8 @@ class TestCase extends Orchestra
 
     protected function setUpSeed()
     {
+        app()['cache']->forget('spatie.permission.cache');
+
         $this->admin = User::create([
             'first_name' => 'Istrator',
             'last_name' => 'Admin',
@@ -100,6 +106,26 @@ class TestCase extends Orchestra
             'title' => 'Title Name',
             'status' => 'enable',
         ]);
+
+        // Permissions
+        $this->_permissions(Page::permissions());
+        $this->_permissions(PageSoftDelete::permissions());
+        $this->_permissions(Content::permissions());
+
+        $roleAdmin = Role::create(['name' => 'admin']);
+        $roleAdmin->givePermissionTo(Permission::all());
+        $this->admin->assignRole($roleAdmin);
+    }
+
+    private function _permissions($permissions): array
+    {
+
+        foreach ($permissions as $p) {
+            // Create Permissions
+            Permission::create(['name' => $p, 'guard_name' => 'web']);
+        }
+
+        return $permissions;
     }
 
     protected function setUpRoutes()
@@ -183,6 +209,7 @@ class TestCase extends Orchestra
 
             // --
             "Yajra\\DataTables\\DataTablesServiceProvider",
+            "Spatie\\Permission\\PermissionServiceProvider",
         ];
     }
 }

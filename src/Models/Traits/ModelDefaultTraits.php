@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Models\Traits;
 
-use Illuminate\Support\Facades\Route;
+use Route;
 
 trait ModelDefaultTraits
 {
