@@ -2,11 +2,10 @@
 
 namespace HalcyonLaravel\Base\Models;
 
-use Illuminate\Database\Eloquent\Model as BaseModel;
-
 use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 use Illuminate\Database\Eloquent\Builder;
-use Schema;
+use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class Model.
@@ -14,8 +13,26 @@ use Schema;
 abstract class Model extends BaseModel
 {
     use ModelTraits;
-    
-    
+
+    /**
+     * Return all the permissions for this model.
+     *
+     * @return array
+     */
+    abstract public static function permissions(): array;
+
+    public static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('latest', function (Builder $builder) {
+            if (Schema::hasColumn((new static)->getTable(), 'updated_at')) {
+                $builder->latest('updated_at');
+            } elseif (Schema::hasColumn((new static)->getTable(), 'created_at')) {
+                $builder->latest('created_at');
+            }
+        });
+    }
+
     /**
      * Return the links related to this model.
      *
@@ -31,17 +48,19 @@ abstract class Model extends BaseModel
     abstract public function baseable(): array;
 
     /**
-     * Return all the permissions for this model.
-     *
-     * @return array
+     * @param $query
+     * @param array $columns
+     * @return mixed
      */
-    abstract public static function permissions(): array;
-
     public function scopeExclude($query, array $columns = [])
     {
         return $query->select(array_diff($this->getFillable(), $columns));
     }
 
+    /**
+     * @param $field
+     * @return mixed
+     */
     public function getTrans($field)
     {
         $locale = config('app.locale');
@@ -51,17 +70,5 @@ abstract class Model extends BaseModel
         }
 
         return $this->getTranslation($field, $locale);
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope('latest', function (Builder $builder) {
-            if (Schema::hasColumn((new static)->getTable(), 'updated_at')) {
-                $builder->latest('updated_at');
-            } elseif (Schema::hasColumn((new static)->getTable(), 'created_at')) {
-                $builder->latest('created_at');
-            }
-        });
     }
 }

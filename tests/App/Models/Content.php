@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use HalcyonLaravel\Base\Models\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Content extends Model
 {
@@ -14,14 +13,31 @@ class Content extends Model
     ];
 
     /**
+     * Return the permissions related to this model.
+     *
+     * @return array
+     */
+    public static function permissions(): array
+    {
+        return [
+            'index' => 'content index',
+            'show' => 'content show',
+            'create' => 'content create',
+            'edit' => 'content edit',
+            'destroy' => 'content destroy',
+
+        ];
+    }
+
+    /**
      * Return the baseable name for this model.
      *
      * @return array
      */
-    public function baseable() :array
+    public function baseable(): array
     {
         return [
-            'history_name' => 'name'
+            'history_name' => 'name',
         ];
     }
 
@@ -33,23 +49,5 @@ class Content extends Model
     public function links(): array
     {
         return [];
-    }
-
-
-    /**
-     * Return the permissions related to this model.
-     *
-     * @return array
-     */
-    public static function permissions() : array
-    {
-        return [
-            'index' => 'content index',
-            'show' => 'content show',
-            'create' => 'content create',
-            'edit' => 'content edit',
-            'destroy' => 'content destroy',
-
-        ];
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend\Core\Page;
 
-use Illuminate\Http\Request;
-use HalcyonLaravel\Base\Controllers\BaseController as Controller;
-use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
 use App\Models\Core\Page as Model;
 use DataTables;
+use HalcyonLaravel\Base\Controllers\BaseController as Controller;
+use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
+use Illuminate\Http\Request;
 
 /**
  * Class PageTableController.
@@ -26,10 +26,8 @@ class PagesTableController extends Controller
         $this->repo = new  Repository(new Model);
         $this->model = new Model;
 
-
         //for testing only
         $permissionMiddleware = implode(',', $this->model->permission(['index']));
-       
         // $this->middleware('permission:content list,content activity,content delete', ['only' => ['__invoke']]);
     }
 
@@ -46,24 +44,21 @@ class PagesTableController extends Controller
         }
 
         $user = auth()->user();
+
         return DataTables::of($this->repo->table([
-                'trashOnly' => $trashOnly,
-        ]))
-            ->editColumn('status', function ($model) use ($user) {
+            'trashOnly' => $trashOnly,
+        ]))->editColumn('status', function ($model) use ($user) {
                 return [
                     'type' => $model->status == "enable" ? 'success' : 'danger',
                     'label' => ucfirst($model->status),
                     'value' => $model->status,
                     'link' => route('admin.page.status', $model),
-                    'can' => $user->can('page change status')
+                    'can' => $user->can('page change status'),
                 ];
-            })
-            ->editColumn('updated_at', function ($model) {
+            })->editColumn('updated_at', function ($model) {
                 return $model->updated_at->format('d M, Y h:m A');
-            })
-            ->addColumn('actions', function ($model) {
+            })->addColumn('actions', function ($model) {
                 return $model->actions('backend');
-            })
-            ->make(true);
+            })->make(true);
     }
 }

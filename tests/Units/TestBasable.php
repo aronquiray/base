@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Tests\Units;
 
-use  HalcyonLaravel\Base\Tests\TestCase;
+use HalcyonLaravel\Base\Tests\TestCase;
 
 // use App\Models\Core\Page;
 

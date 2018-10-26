@@ -2,24 +2,24 @@
 
 namespace HalcyonLaravel\Base\Controllers\Backend\Contracts;
 
-use Illuminate\Http\Request;
 use HalcyonLaravel\Base\BasableOptions;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
+use Illuminate\Http\Request;
 
 interface CRUDContract
 {
     /**
-     * @param Request $request
-     * @param Model $model | nullable
-     *
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
-    public function generateStub(Request $request) : array;
+    public function generateStub(Request $request): array;
 
     /**
      * Validate input on store and update
      *
-     * @return array
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Database\Eloquent\Model|null $model
+     * @return \HalcyonLaravel\Base\BasableOptions
      */
-    public function crudRules(Request $request, IlluminateModel $model = null) : BasableOptions;
+    public function crudRules(Request $request, IlluminateModel $model = null): BasableOptions;
 }

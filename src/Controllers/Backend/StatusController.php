@@ -2,9 +2,9 @@
 
 namespace HalcyonLaravel\Base\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
 use HalcyonLaravel\Base\Exceptions\StatusControllerException;
+use Illuminate\Http\Request;
 
 /**
  * Class StatusController.
@@ -12,19 +12,20 @@ use HalcyonLaravel\Base\Exceptions\StatusControllerException;
 abstract class StatusController extends Controller
 {
     /**
+     * @param string $type
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function status(string $type)
     {
         $statusKey = $this->model->statusKeyName();
+
         return view("{$this->view_path}.status", compact('type', 'statusKey'));
     }
 
     /**
-     * @param Request $request
-     * @param string $routeKeyName
-     *
-     * @return $response
+     * @param \Illuminate\Http\Request $request
+     * @param string $routeKeyNameValue
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, string $routeKeyNameValue)
     {
@@ -34,9 +35,13 @@ abstract class StatusController extends Controller
         if (is_null($status)) {
             throw StatusControllerException::required();
         }
-        $this->repo->update([ $statusKey => $status ], $model);
-        $redirect = route($this->route_path . '.status', $status) ;
-        $message = trans("base::actions.mark", ['name' => $model->base(config('base.responseBaseableName')), 'status' => $status]);
+        $this->repo->update([$statusKey => $status], $model);
+        $redirect = route($this->route_path.'.status', $status);
+        $message = trans("base::actions.mark", [
+            'name' => $model->base(config('base.responseBaseableName')),
+            'status' => $status,
+        ]);
+
         return $this->response('mark', $request->ajax(), $model, $redirect, $message);
     }
 }

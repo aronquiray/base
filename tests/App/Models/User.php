@@ -3,15 +3,12 @@
 namespace App\Models;
 
 // use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 // use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 // use Cviebrock\EloquentSluggable\Sluggable;
 // use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-
 
 // use PackageHalcyon\Meta\Traits\Metable;
 
@@ -34,20 +31,24 @@ class User extends Authenticatable //implements BaseableInterface
     //     ;
 
     protected $fillable = [
-       'first_name', 'last_name', 'status', 'id'
+        'first_name',
+        'last_name',
+        'status',
+        'id',
     ];
+
     /**
      * Return the baseable name for this model.
      *
      * @return String
      */
-    public function baseable() :array
+    public function baseable(): array
     {
         return [
             'source' => 'firs_name',
         ];
     }
-    
+
 
     /**
      * Return the sluggable configuration array for this model.
@@ -66,8 +67,6 @@ class User extends Authenticatable //implements BaseableInterface
     //     ];
     // }
 
-        
-
     /**
      * Return the action links for the model.
      *
@@ -79,35 +78,46 @@ class User extends Authenticatable //implements BaseableInterface
         $actions = [];
 
         // Frontend Links
-         
+
         if ($frontend) {
             $actions['show'] = ['type' => 'show', 'link' => route('frontend.user.show', $this)];
+
             return $actions;
         }
-         
 
         // Backend Links
-         
+
         if ($this->trashed()) {
             if ($user->can('user restore')) {
-                $actions['restore'] = ['type' => 'restore',   'link' => route('admin.user.restore', $this), 'redirect' => route('admin.user.index')];
+                $actions['restore'] = [
+                    'type' => 'restore',
+                    'link' => route('admin.user.restore', $this),
+                    'redirect' => route('admin.user.index'),
+                ];
             }
             if ($user->can('user restore')) {
-                $actions['purge'] = ['type' => 'purge',     'link' => route('admin.user.purge', $this), 'redirect' => route('admin.user.index')];
+                $actions['purge'] = [
+                    'type' => 'purge',
+                    'link' => route('admin.user.purge', $this),
+                    'redirect' => route('admin.user.index'),
+                ];
             }
 
             return $actions;
         }
-        
 
         if ($user->can('user show')) {
-            $actions['show'] = ['type' => 'show',      'link' => route('admin.user.show', $this)];
+            $actions['show'] = ['type' => 'show', 'link' => route('admin.user.show', $this)];
         }
         if ($user->can('user update')) {
-            $actions['edit'] = ['type' => 'edit',      'link' => route('admin.user.edit', $this)];
+            $actions['edit'] = ['type' => 'edit', 'link' => route('admin.user.edit', $this)];
         }
         if ($user->can('user delete')) {
-            $actions['delete'] = ['type' => 'delete',    'link' => route('admin.user.destroy', $this) , 'redirect' => route('admin.user.index')];
+            $actions['delete'] = [
+                'type' => 'delete',
+                'link' => route('admin.user.destroy', $this),
+                'redirect' => route('admin.user.index'),
+            ];
         }
 
         return $actions;

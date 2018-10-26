@@ -2,47 +2,43 @@
 
 namespace App\Models\Core;
 
+use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
 use HalcyonLaravel\Base\Models\Model;
 use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits;
-use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
 
 class Page extends Model implements ModelStatusContract
 {
     use ModelDefaultTraits;
 
+    public const MODULE_NAME = 'page';
+
+    public const VIEW_BACKEND_PATH = 'backend.core.page';
+
+    public const VIEW_FRONTEND_PATH = 'frontend.core.page';
+
+    public const ROUTE_ADMIN_PATH = 'admin.page';
+
+    public const ROUTE_FRONTEND_PATH = 'frontend.page';
+
     /**
      * Declared Fillables
      */
     protected $fillable = [
-        'id','title', 'description', 'status', 'template', 'type', 'url'
+        'id',
+        'title',
+        'description',
+        'status',
+        'template',
+        'type',
+        'url',
     ];
-
-
-    public const MODULE_NAME         = 'page';
-    public const VIEW_BACKEND_PATH    = 'backend.core.page';
-    public const VIEW_FRONTEND_PATH   = 'frontend.core.page';
-    public const ROUTE_ADMIN_PATH     = 'admin.page';
-    public const ROUTE_FRONTEND_PATH  = 'frontend.page';
-
-
-    /**
-     * Return the baseable source for this model.
-     *
-     * @return array
-     */
-    public function baseable() : array
-    {
-        return [
-            'source' => 'title'
-        ];
-    }
 
     /**
      * Return the permissions related to this model.
      *
      * @return array
      */
-    public static function permissions() : array
+    public static function permissions(): array
     {
         return [
             'index' => 'page index',
@@ -54,6 +50,17 @@ class Page extends Model implements ModelStatusContract
         ];
     }
 
+    /**
+     * Return the baseable source for this model.
+     *
+     * @return array
+     */
+    public function baseable(): array
+    {
+        return [
+            'source' => 'title',
+        ];
+    }
 
     /**
      * Return the array of statuses.
@@ -61,10 +68,11 @@ class Page extends Model implements ModelStatusContract
      *
      * @return array
      */
-    public function statuses() : array
+    public function statuses(): array
     {
         return [
-            'enable' => 'Enable', 'disable' => 'Disable'
+            'enable' => 'Enable',
+            'disable' => 'Disable',
         ];
     }
 

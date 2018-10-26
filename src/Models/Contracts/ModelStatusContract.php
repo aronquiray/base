@@ -10,12 +10,12 @@ interface ModelStatusContract
      *
      * @return array
      */
-    public function statuses() : array;
+    public function statuses(): array;
 
     /**
      * Return the column for the status on this model.
      *
-     * @return array
+     * @return string
      */
     public function statusKeyName(): string;
 }

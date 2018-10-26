@@ -2,7 +2,6 @@
 
 namespace HalcyonLaravel\Base\Controllers;
 
-use Illuminate\Http\Request;
 use HalcyonLaravel\Base\Models\Model;
 
 abstract class BaseController extends Controller
@@ -31,10 +30,10 @@ abstract class BaseController extends Controller
     /**
      * Return the model by the given key
      *
-     * @param String $key
+     * @param $key
      * @param bool $trash
-     *
-     * @return Illuminate\Database\Eloquent\Model
+     * @param array|null $fields
+     * @return mixed
      */
     public function getModel($key, $trash = false, array $fields = null)
     {
@@ -43,7 +42,7 @@ abstract class BaseController extends Controller
             $model->withTrashed();
         }
 
-        if (!is_null($fields)) {
+        if (! is_null($fields)) {
             foreach ($fields as $f => $field) {
                 $model = $model->where($f, $field);
             }
@@ -54,20 +53,28 @@ abstract class BaseController extends Controller
 
     /**
      * Return the response of the request with flash messages
+     *
      * @param String $process
      * @param bool $isAjax
-     * @param Model $model
-     * @param String $redirect
-     * @param String $message
-     *
-     * @return Illuminate\Database\Eloquent\Model
+     * @param \HalcyonLaravel\Base\Models\Model|null $model
+     * @param String|null $redirect
+     * @param String|null $message
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function response(String $process, bool $isAjax, Model $model = null, String $redirect = null, String $message = null)
-    {
+    public function response(
+        String $process,
+        bool $isAjax,
+        Model $model = null,
+        String $redirect = null,
+        String $message = null
+    ) {
         if (! is_null($model) && is_null($message)) {
-            $message = trans("base::actions.$process", ['name' => $model->base(config('base.responseBaseableName')) ]);
+            $message = trans("base::actions.$process", ['name' => $model->base(config('base.responseBaseableName'))]);
         }
 
-        return $isAjax ? response()->json(['message' => $message, 'link' => $redirect]) : redirect($redirect)->withFlashSuccess($message);
+        return $isAjax ? response()->json([
+            'message' => $message,
+            'link' => $redirect,
+        ]) : redirect($redirect)->withFlashSuccess($message);
     }
 }
