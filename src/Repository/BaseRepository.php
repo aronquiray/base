@@ -84,7 +84,7 @@ class BaseRepository
      */
 
     /**
-     * This will handle DB transaction actiosn
+     * This will handle DB transaction action
      *
      * @param $closure
      * @return mixed
