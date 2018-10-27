@@ -210,6 +210,7 @@ class TestCase extends Orchestra
             // --
             "Yajra\\DataTables\\DataTablesServiceProvider",
             "Spatie\\Permission\\PermissionServiceProvider",
+            "Prettus\\Repository\\Providers\\RepositoryServiceProvider",
         ];
     }
 }

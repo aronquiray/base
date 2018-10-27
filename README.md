@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.22
+# Halcyon Packages Base - v1.0.23
 
 
 ## Changes Log 
+    v1.0.23: Add Prettus Repository as Main Base Repository.
     v1.0.22: Use db transaction, to allow manage exception handler
     v1.0.21: Remove spatie slug
     v1.0.20: Add Global scope latest

@@ -103,7 +103,7 @@ abstract class CRUDController extends Controller implements CRUDContract
         $this->validate($request, $baseableOptions->updateRules, $baseableOptions->updateRuleMessages);
 
         $data = $this->generateStub($request, $model);
-        $model = $this->repo->update($data, $model);
+        $model = $this->repo->update($data, $model->id);
 
         return $this->response('update', $request->ajax(), $model, $this->_redirectAfterAction($request->_submission, $model));
     }

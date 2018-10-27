@@ -5,12 +5,16 @@ namespace HalcyonLaravel\Base\Repository;
 use Closure;
 use HalcyonLaravel\Base\Exceptions\RepositoryException;
 use HalcyonLaravel\Base\Models\Model as BaseModel;
+use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Prettus\Repository\Eloquent\BaseRepository as PrettusBaseRepository;
 
-class BaseRepository
+//use Prettus\Repository\Events\RepositoryEntityUpdated;
+
+class BaseRepository extends PrettusBaseRepository
 {
     /**
      * @var \Illuminate\Database\Eloquent\Model
@@ -31,6 +35,17 @@ class BaseRepository
     {
         $this->model = $model;
         $this->observer = new DefaultObserver;
+        parent::__construct(new Application);
+    }
+
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    function model()
+    {
+        return get_class($this->model);
     }
 
     /**
@@ -74,7 +89,7 @@ class BaseRepository
     {
         return $this->action(function () use ($data) {
             $data = $this->observer::storing($data);
-            $model = $this->model::create($data);
+            $model = $this->create($data);
 
             return $this->observer::stored($model, $data);
         });
@@ -95,15 +110,17 @@ class BaseRepository
 
     /**
      * @param array $data
-     * @param \HalcyonLaravel\Base\Models\Model $model
+     * @param int $modelId
      * @return \HalcyonLaravel\Base\Models\Model
      */
-    public function update(array $data, BaseModel $model): BaseModel
+    public function update(array $data, $modelId): BaseModel
     {
+        $model = $this->find($modelId);
+
         return $this->action(function () use ($data, $model) {
             $oldModel = $model->getOriginal();
             $model = $this->observer::updating($model, $data);
-            $model->update($data);
+            $model = parent::update($data, $model->id);
 
             return $this->observer::updated($model, $data, $oldModel);
         });
@@ -117,7 +134,7 @@ class BaseRepository
     {
         return $this->action(function () use ($model) {
             $model = $this->observer::deleting($model);
-            $model->delete();
+            $this->delete($model->id);
 
             return $this->observer::deleted($model);
         });
@@ -136,6 +153,8 @@ class BaseRepository
         return $this->action(function () use ($model) {
             $model = $this->observer::restoring($model);
             $model->restore();
+
+            //event(new RepositoryEntityUpdated(new static, $model));
 
             return $this->observer::restored($model);
         });
