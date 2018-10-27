@@ -2,7 +2,9 @@
 
 namespace HalcyonLaravel\Base\Repository;
 
+use Closure;
 use HalcyonLaravel\Base\Exceptions\RepositoryException;
+use HalcyonLaravel\Base\Models\Model as BaseModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -65,11 +67,10 @@ class BaseRepository
     }
 
     /**
-     * @param array|mixed
-     * @return mixed
-     * @throws \Exception
+     * @param array $data
+     * @return \HalcyonLaravel\Base\Models\Model
      */
-    public function store($data)
+    public function store(array $data): BaseModel
     {
         return $this->action(function () use ($data) {
             $data = $this->observer::storing($data);
@@ -78,21 +79,14 @@ class BaseRepository
             return $this->observer::stored($model, $data);
         });
     }
-    /**
-     * | ------------------------------------------------------------
-     * |
-     * |                  CRUD Actions
-     * |
-     * | ------------------------------------------------------------
-     */
 
     /**
      * This will handle DB transaction action
      *
-     * @param $closure
+     * @param \Closure $closure
      * @return mixed
      */
-    public function action($closure)
+    public function action(Closure $closure)
     {
         return DB::transaction(function () use ($closure) {
             return $closure();
@@ -100,11 +94,11 @@ class BaseRepository
     }
 
     /**
-     * @param $data
-     * @param $model
-     * @return mixed
+     * @param array $data
+     * @param \HalcyonLaravel\Base\Models\Model $model
+     * @return \HalcyonLaravel\Base\Models\Model
      */
-    public function update($data, $model)
+    public function update(array $data, BaseModel $model): BaseModel
     {
         return $this->action(function () use ($data, $model) {
             $oldModel = $model->getOriginal();
@@ -116,10 +110,10 @@ class BaseRepository
     }
 
     /**
-     * @param $model
-     * @return mixed
+     * @param \HalcyonLaravel\Base\Models\Model $model
+     * @return \HalcyonLaravel\Base\Models\Model
      */
-    public function destroy($model)
+    public function destroy(BaseModel $model): BaseModel
     {
         return $this->action(function () use ($model) {
             $model = $this->observer::deleting($model);
@@ -130,10 +124,10 @@ class BaseRepository
     }
 
     /**
-     * @param $model
-     * @return mixed
+     * @param \HalcyonLaravel\Base\Models\Model $model
+     * @return \HalcyonLaravel\Base\Models\Model
      */
-    public function restore($model)
+    public function restore(BAseModel $model): BaseModel
     {
         if (is_null($model->deleted_at)) {
             throw RepositoryException::notDeleted();
@@ -148,10 +142,10 @@ class BaseRepository
     }
 
     /**
-     * @param $model
-     * @return mixed
+     * @param \HalcyonLaravel\Base\Models\Model $model
+     * @return \HalcyonLaravel\Base\Models\Model
      */
-    public function purge($model)
+    public function purge(BaseModel $model): BaseModel
     {
         if (is_null($model->deleted_at)) {
             throw RepositoryException::notDeleted();
