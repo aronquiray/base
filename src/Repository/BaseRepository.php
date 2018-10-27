@@ -10,12 +10,16 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository as PrettusBaseRepository;
+use Prettus\Repository\Traits\CacheableRepository;
 
 //use Prettus\Repository\Events\RepositoryEntityUpdated;
 
-class BaseRepository extends PrettusBaseRepository
+class BaseRepository extends PrettusBaseRepository implements CacheableInterface
 {
+    use CacheableRepository;
+
     /**
      * @var \Illuminate\Database\Eloquent\Model
      */
