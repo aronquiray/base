@@ -11,11 +11,14 @@ use Illuminate\Support\Facades\Schema;
 class BaseRepository
 {
     /**
-     * @param Model $model
+     * @var \Illuminate\Database\Eloquent\Model
      */
     protected $model;
 
-    protected $observer = DefaultObserver::class;
+    /**
+     * @var \HalcyonLaravel\Base\Repository\DefaultObserver
+     */
+    protected $observer;
 
     /**
      * BaseRepository constructor.
@@ -25,7 +28,7 @@ class BaseRepository
     public function __construct(Model $model)
     {
         $this->model = $model;
-        $this->observer = new $this->observer;
+        $this->observer = new DefaultObserver;
     }
 
     /**
