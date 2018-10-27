@@ -25,9 +25,10 @@ abstract class Model extends BaseModel
     {
         parent::boot();
         static::addGlobalScope('latest', function (Builder $builder) {
-            if (Schema::hasColumn((new static)->getTable(), 'updated_at')) {
+            $tableName = (new static)->getTable();
+            if (Schema::hasColumn($tableName, 'updated_at')) {
                 $builder->latest('updated_at');
-            } elseif (Schema::hasColumn((new static)->getTable(), 'created_at')) {
+            } elseif (Schema::hasColumn($tableName, 'created_at')) {
                 $builder->latest('created_at');
             }
         });
