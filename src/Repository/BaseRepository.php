@@ -21,14 +21,14 @@ class BaseRepository extends PrettusBaseRepository implements CacheableInterface
     use CacheableRepository;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Model
-     */
-    protected $model;
-
-    /**
      * @var \HalcyonLaravel\Base\Repository\DefaultObserver
      */
     protected $observer;
+
+    /**
+     * @var \Illuminate\Database\Eloquent\Model
+     */
+    private $_model;
 
     /**
      * BaseRepository constructor.
@@ -37,7 +37,7 @@ class BaseRepository extends PrettusBaseRepository implements CacheableInterface
      */
     public function __construct(Model $model)
     {
-        $this->model = $model;
+        $this->_model = $model;
         $this->observer = new DefaultObserver;
         parent::__construct(new Application);
     }
@@ -49,7 +49,7 @@ class BaseRepository extends PrettusBaseRepository implements CacheableInterface
      */
     function model()
     {
-        return get_class($this->model);
+        return get_class($this->_model);
     }
 
     /**
