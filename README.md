@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.24
+# Halcyon Packages Base - v1.0.25
 
 
 ## Changes Log 
+    v1.0.25: Use repo for fetching. 
     v1.0.24: Fix using criterias.
     v1.0.23: Add Prettus Repository as Main Base Repository.
     v1.0.22: Use db transaction, to allow manage exception handler

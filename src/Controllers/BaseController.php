@@ -3,6 +3,7 @@
 namespace HalcyonLaravel\Base\Controllers;
 
 use HalcyonLaravel\Base\Models\Model;
+use HalcyonLaravel\Base\Repository\BaseRepository;
 
 abstract class BaseController extends Controller
 {
@@ -37,18 +38,28 @@ abstract class BaseController extends Controller
      */
     public function getModel($key, $trash = false, array $fields = null)
     {
-        $model = $this->model->where($this->model->getRouteKeyName(), $key);
-        if ($trash && method_exists($this->model, 'bootSoftDeletes')) {
-            $model->withTrashed();
-        }
+        $repo = new BaseRepository($this->model);
+
+        $where = [
+            $this->model->getRouteKeyName() => $key,
+        ];
 
         if (! is_null($fields)) {
-            foreach ($fields as $f => $field) {
-                $model = $model->where($f, $field);
-            }
+            array_merge($where, $fields);
         }
 
-        return $model->firstOrFail();
+        if ($trash && method_exists($this->model, 'bootSoftDeletes')) {
+            $model = $repo->scopeQuery(function ($query) {
+                return $query->withTrashed();
+            })->findWhere($where)->first();
+        } else {
+            $model = $repo->findWhere($where)->first();
+        }
+        if (is_null($model)) {
+            abort(404);
+        }
+
+        return $model;
     }
 
     /**
