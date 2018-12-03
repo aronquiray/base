@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v1.0.25
+# Halcyon Packages Base - v2.0.0
 
 
 ## Changes Log 
+	v2.0.0: Fix repo and model on controllers.
     v1.0.25: Use repo for fetching. 
     v1.0.24: Fix using criterias.
     v1.0.23: Add Prettus Repository as Main Base Repository.
