@@ -20,7 +20,6 @@ class PageStatusController extends Controller
 
         $this->route_path = Model::ROUTE_ADMIN_PATH;
         $this->view_path = Model::VIEW_BACKEND_PATH;
-        parent::__construct();
         // $this->middleware('permission:page inactive', ['only' => ['inactive']]);
         // $this->middleware('permission:page change status', ['only' => ['mark']]);
     }

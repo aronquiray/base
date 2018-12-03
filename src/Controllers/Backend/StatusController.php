@@ -11,21 +11,15 @@ use Illuminate\Http\Request;
  */
 abstract class StatusController extends Controller
 {
-    private $_model;
-
-    public function __construct()
-    {
-        $m = $this->repository()->model();
-        $this->_model = new $m;
-    }
-
     /**
      * @param string $type
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function status(string $type)
     {
-        $statusKey = $this->_model->statusKeyName();
+        $m = $this->repository()->model();
+        $model = new $m;
+        $statusKey = $model->statusKeyName();
 
         return view("{$this->view_path}.status", compact('type', 'statusKey'));
     }
@@ -38,7 +32,7 @@ abstract class StatusController extends Controller
     public function update(Request $request, string $routeKeyNameValue)
     {
         $model = $this->getModel($routeKeyNameValue);
-        $statusKey = $this->_model->statusKeyName();
+        $statusKey = $model->statusKeyName();
         $status = $request->status ?? null;
         if (is_null($status)) {
             throw new StatusControllerException(403, trans('base::exceptions.status_required'));
