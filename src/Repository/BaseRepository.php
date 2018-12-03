@@ -148,7 +148,7 @@ class BaseRepository extends PrettusBaseRepository implements CacheableInterface
      * @param \HalcyonLaravel\Base\Models\Model $model
      * @return \HalcyonLaravel\Base\Models\Model
      */
-    public function restore(BAseModel $model): BaseModel
+    public function restore(BaseModel $model): BaseModel
     {
         if (is_null($model->deleted_at)) {
             throw RepositoryException::notDeleted();
