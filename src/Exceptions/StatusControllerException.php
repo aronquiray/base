@@ -6,8 +6,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class StatusControllerException extends HttpException
 {
-    public static function required(): self
-    {
-        return new static(403, trans('base::exceptions.status_required'), null, []);
-    }
+    //public static function required(): self
+    //{
+    //    return new static(403, trans('base::exceptions.status_required'));
+    //}
 }

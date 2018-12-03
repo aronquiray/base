@@ -16,9 +16,7 @@ class TestCrudsFeature extends TestCase
 
         // Event::shouldIgnoreMissing();
 
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('POST', route('admin.page.store'), [
+        $response = $this->post(route('admin.page.store'), [
             'title' => 'Salliess',
             'description' => 'description test',
             'status' => 'enable',
@@ -41,9 +39,7 @@ class TestCrudsFeature extends TestCase
             'status' => 'enable',
         ];
 
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('PUT', route('admin.page.update', $this->page), $dataNew);
+        $response = $this->put(route('admin.page.update', $this->page), $dataNew);
 
         $response->assertStatus(302)->assertSessionHas('flash_success', 'new test title has been updated.')->assertRedirect(route('admin.page.show', Page::find(1)));
 
@@ -52,9 +48,7 @@ class TestCrudsFeature extends TestCase
 
     public function testLogDeleteOnNOTSoftdelete()
     {
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('DELETE', route('admin.page.destroy', $this->page), []);
+        $response = $this->delete(route('admin.page.destroy', $this->page), []);
 
         $response->assertStatus(302)->assertSessionHas('flash_success', 'Title Name has been deleted.')->assertRedirect(route('admin.page.index'));
 
@@ -65,9 +59,7 @@ class TestCrudsFeature extends TestCase
     {
         $customeRedirection = 'http://test-url.com/';
 
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('POST', route('admin.page.store'), [
+        $response = $this->post(route('admin.page.store'), [
             'title' => 'Salliess',
             'description' => 'description test',
             'status' => 'enable',

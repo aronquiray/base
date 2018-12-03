@@ -7,12 +7,9 @@ use HalcyonLaravel\Base\Repository\BaseRepository;
 
 abstract class BaseController extends Controller
 {
-    /**
-     * Model $model
-     *
-     * @return Model $model
-     */
-    protected $model;
+    protected $repository;
+
+    abstract public function repository(): BaseRepository;
 
     /**
      * View Path
@@ -38,17 +35,19 @@ abstract class BaseController extends Controller
      */
     public function getModel($key, $trash = false, array $fields = null)
     {
-        $repo = new BaseRepository($this->model);
+        $repo = $this->repository();
+        $m = $repo->model();
+        $modelClass = new $m;
 
         $where = [
-            $this->model->getRouteKeyName() => $key,
+            $modelClass->getRouteKeyName() => $key,
         ];
 
         if (! is_null($fields)) {
             array_merge($where, $fields);
         }
 
-        if ($trash && method_exists($this->model, 'bootSoftDeletes')) {
+        if ($trash && method_exists($modelClass, 'bootSoftDeletes')) {
             $model = $repo->scopeQuery(function ($query) {
                 return $query->withTrashed();
             })->findWhere($where)->first();

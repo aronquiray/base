@@ -7,7 +7,6 @@ use HalcyonLaravel\Base\Exceptions\RepositoryException;
 use HalcyonLaravel\Base\Models\Model as BaseModel;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Prettus\Repository\Contracts\CacheableInterface;
@@ -16,7 +15,7 @@ use Prettus\Repository\Traits\CacheableRepository;
 
 //use Prettus\Repository\Events\RepositoryEntityUpdated;
 
-class BaseRepository extends PrettusBaseRepository implements CacheableInterface
+abstract class BaseRepository extends PrettusBaseRepository implements CacheableInterface
 {
     use CacheableRepository;
 
@@ -26,31 +25,14 @@ class BaseRepository extends PrettusBaseRepository implements CacheableInterface
     protected $observer;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Model
-     */
-    private $_model;
-
-    /**
      * BaseRepository constructor.
-     *
-     * @param \Illuminate\Database\Eloquent\Model $model
      */
-    public function __construct(Model $model)
+    public function __construct()
     {
-        $this->_model = $model;
         $this->observer = new DefaultObserver;
         parent::__construct(new Application);
     }
 
-    /**
-     * Specify Model class name
-     *
-     * @return string
-     */
-    function model()
-    {
-        return get_class($this->_model);
-    }
 
     /**
      * @param array|null $request
@@ -151,7 +133,7 @@ class BaseRepository extends PrettusBaseRepository implements CacheableInterface
     public function restore(BaseModel $model): BaseModel
     {
         if (is_null($model->deleted_at)) {
-            throw RepositoryException::notDeleted();
+            throw new RepositoryException(403, trans('base::exceptions.not_deleted'));
         }
 
         return $this->action(function () use ($model) {
@@ -171,7 +153,7 @@ class BaseRepository extends PrettusBaseRepository implements CacheableInterface
     public function purge(BaseModel $model): BaseModel
     {
         if (is_null($model->deleted_at)) {
-            throw RepositoryException::notDeleted();
+            throw new RepositoryException(403, trans('base::exceptions.not_deleted'));
         }
 
         return $this->action(function () use ($model) {

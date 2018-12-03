@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Core\Page;
 
-use App\Models\Core\Page as Model;
+use App\Repositories\PageRepository;
 use HalcyonLaravel\Base\BasableOptions;
 use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
@@ -14,30 +14,21 @@ use Illuminate\Http\Request;
  */
 class PagesController extends Controller
 {
+    protected $pageRepository;
     /**
-     * PagesController Constructor
+     * PagesController constructor.
+     *
+     * @param \App\Repositories\PageRepository $pageRepository
      */
-    public function __construct(Model $model)
+    public function __construct(PageRepository $pageRepository)
     {
-        $this->model = $model;
-        $this->repo = new Repository($model);
+        $this->pageRepository = $pageRepository;
         parent::__construct();
     }
 
-    /**
-     * Specify Model class name.
-     *
-     * @return mixed
-     */
-    public function model()
-    {
-        return Model::class;
-    }
 
     /**
-     * @param Request $request
-     * @param Model $model | nullable
-     *
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function generateStub(Request $request): array
@@ -46,9 +37,9 @@ class PagesController extends Controller
     }
 
     /**
-     * Validate input on store/update
-     *
-     * @return array
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Database\Eloquent\Model|null $model
+     * @return \HalcyonLaravel\Base\BasableOptions
      */
     public function crudRules(Request $request, IlluminateModel $model = null): BasableOptions
     {
@@ -65,11 +56,15 @@ class PagesController extends Controller
 
     public function testForMethodNotFound()
     {
-        $this->repo->imNotExist();
+        $this->pageRepository->imNotExist();
     }
 
     // public function testGetModelWithFields()
     // {
     //     $this->getModel($routeKeyName);
     // }
+    public function repository(): Repository
+    {
+        return $this->pageRepository;
+    }
 }

@@ -27,12 +27,12 @@ abstract class DeletedController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      * @param String $routeKeyName
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function restore(Request $request, String $routeKeyName)
     {
         $model = $this->getModel($routeKeyName, $trash = true);
-        $this->repo->restore($model);
+        $this->repository()->restore($model);
 
         return $this->response('restore', $request->ajax(), $model, route("{$this->route_path}.index"));
     }
@@ -40,12 +40,12 @@ abstract class DeletedController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      * @param String $routeKeyName
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function purge(Request $request, String $routeKeyName)
     {
         $model = $this->getModel($routeKeyName, $trash = true);
-        $this->repo->purge($model);
+        $this->repository()->purge($model);
 
         return $this->response('purge', $request->ajax(), $model, route("{$this->route_path}.deleted"));
     }

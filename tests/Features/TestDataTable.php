@@ -13,12 +13,12 @@ class TestDataTable extends TestCase
     {
         parent::setUp();
         $this->actingAs($this->admin);
-        Page::truncate();
+        Page::query()->truncate();
     }
 
     public function testNoData()
     {
-        $response = $this->json('POST', route('admin.page.table'), []);
+        $response = $this->post(route('admin.page.table'), []);
 
         $response->assertStatus(200)->assertJson([
                 "draw" => 0,
@@ -91,7 +91,7 @@ class TestDataTable extends TestCase
 
     public function testWithSofdeletedDataOneRowNotDeleted()
     {
-        PageSoftDelete::truncate();
+        PageSoftDelete::query()->truncate();
         $faker = Faker::create();
         $now = now()->format('Y-m-d H:i:s');
         foreach (range(1, 20) as $index) {
@@ -153,7 +153,7 @@ class TestDataTable extends TestCase
 
     public function testWithSofdeletedDataOneRowYESDeleted()
     {
-        PageSoftDelete::truncate();
+        PageSoftDelete::query()->truncate();
         $faker = Faker::create();
         $now = now()->format('Y-m-d H:i:s');
         foreach (range(1, 1) as $index) {

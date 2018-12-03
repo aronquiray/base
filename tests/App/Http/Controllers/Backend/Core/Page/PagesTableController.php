@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Backend\Core\Page;
 
-use App\Models\Core\Page as Model;
+use App\Repositories\PageRepository;
 use DataTables;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
-use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
+use HalcyonLaravel\Base\Repository\BaseRepository;
 use Illuminate\Http\Request;
 
 /**
@@ -13,21 +13,22 @@ use Illuminate\Http\Request;
  */
 class PagesTableController extends Controller
 {
-    /**
-     * @var BlockRepository
-     */
-    protected $repo;
+    protected $pageRepository;
 
     /**
-     * @param BlockRepository $repo
+     * PagesTableController constructor.
+     *
+     * @param \App\Repositories\PageRepository $pageRepository
      */
-    public function __construct()
+    public function __construct(PageRepository $pageRepository)
     {
-        $this->repo = new  Repository(new Model);
-        $this->model = new Model;
+        $this->pageRepository = $pageRepository;
+
+        $m = $pageRepository->model();
+        $model = new $m;
 
         //for testing only
-        $permissionMiddleware = implode(',', $this->model->permission(['index']));
+        $permissionMiddleware = implode(',', $model->permission(['index']));
         // $this->middleware('permission:content list,content activity,content delete', ['only' => ['__invoke']]);
     }
 
@@ -45,20 +46,25 @@ class PagesTableController extends Controller
 
         $user = auth()->user();
 
-        return DataTables::of($this->repo->table([
+        return DataTables::of($this->pageRepository->table([
             'trashOnly' => $trashOnly,
         ]))->editColumn('status', function ($model) use ($user) {
-                return [
-                    'type' => $model->status == "enable" ? 'success' : 'danger',
-                    'label' => ucfirst($model->status),
-                    'value' => $model->status,
-                    'link' => route('admin.page.status', $model),
-                    'can' => $user->can('page change status'),
-                ];
-            })->editColumn('updated_at', function ($model) {
-                return $model->updated_at->format('d M, Y h:m A');
-            })->addColumn('actions', function ($model) {
-                return $model->actions('backend');
-            })->make(true);
+            return [
+                'type' => $model->status == "enable" ? 'success' : 'danger',
+                'label' => ucfirst($model->status),
+                'value' => $model->status,
+                'link' => route('admin.page.status', $model),
+                'can' => $user->can('page change status'),
+            ];
+        })->editColumn('updated_at', function ($model) {
+            return $model->updated_at->format('d M, Y h:m A');
+        })->addColumn('actions', function ($model) {
+            return $model->actions('backend');
+        })->make(true);
+    }
+
+    public function repository(): BaseRepository
+    {
+        return $this->pageRepository;
     }
 }

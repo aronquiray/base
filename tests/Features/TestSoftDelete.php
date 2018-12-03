@@ -17,9 +17,7 @@ class TestSoftDelete extends TestCase
 
     public function testLogDeleteOnSoftdelete()
     {
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('DELETE', route('admin.page-sd.destroy', $this->pageSoftdelete), []);
+        $response = $this->delete(route('admin.page-sd.destroy', $this->pageSoftdelete), []);
 
         $response->assertStatus(302)->assertSessionHas('flash_success', 'test me to delete has been deleted.')->assertRedirect(route('admin.page-sd.deleted'));
 
@@ -31,9 +29,7 @@ class TestSoftDelete extends TestCase
         $this->pageSoftdelete->deleted_at = now();
         $this->pageSoftdelete->save();
 
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('PATCH', route('admin.page-sd.restore', $this->pageSoftdelete), []);
+        $response = $this->patch(route('admin.page-sd.restore', $this->pageSoftdelete), []);
 
         $response->assertStatus(302)->assertSessionHas('flash_success', 'test me to delete has been restored.')->assertRedirect(route('admin.page-sd.index'));
 
@@ -48,9 +44,7 @@ class TestSoftDelete extends TestCase
         $this->pageSoftdelete->deleted_at = now();
         $this->pageSoftdelete->save();
 
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('DELETE', route('admin.page-sd.purge', $this->pageSoftdelete), []);
+        $response = $this->delete(route('admin.page-sd.purge', $this->pageSoftdelete), []);
 
         $response->assertStatus(302);
 
@@ -61,27 +55,25 @@ class TestSoftDelete extends TestCase
     {
         // $this->expectsEvents(BasePurgingEvent::class);
         // $this->expectsEvents(BasePurgedEvent::class);
+        //$this->expectException(RepositoryException::class);
 
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('DELETE', route('admin.page-sd.purge', $this->pageSoftdelete), []);
+        $response = $this->delete(route('admin.page-sd.purge', $this->pageSoftdelete));
 
-        $response->assertStatus(403)->assertJson([
-                'message' => 'This content has not been deleted yet.',
-            ]);
+        $response->assertStatus(403);
+
 
         $this->assertDatabaseHas((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
 
     public function testOnRestoreOnNotDeleted()
     {
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('PATCH', route('admin.page-sd.restore', $this->pageSoftdelete), []);
+        $response = $this->patch(route('admin.page-sd.restore', $this->pageSoftdelete), []);
 
-        $response->assertStatus(403)->assertJson([
-                'message' => 'This content has not been deleted yet.',
-            ]);
+        $response->assertStatus(403);
+
+        //$response->assertJson([
+        //    'message' => 'This content has not been deleted yet.',
+        //]);
 
         $this->assertDatabaseHas((new PageSoftDelete)->getTable(), [
             'id' => $this->pageSoftdelete->id,

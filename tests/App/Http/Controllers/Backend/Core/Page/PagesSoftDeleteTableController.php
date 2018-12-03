@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Core\Page;
 
-use App\Models\Core\PageSoftDelete as Model;
+use App\Repositories\PageDeleteRepository;
 use DataTables;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
@@ -13,17 +13,14 @@ use Illuminate\Http\Request;
  */
 class PagesSoftDeleteTableController extends Controller
 {
-    /**
-     * @var BlockRepository
-     */
-    protected $repo;
+    protected $pageDeleteRepository;
 
     /**
      * @param BlockRepository $repo
      */
-    public function __construct()
+    public function __construct(PageDeleteRepository $pageDeleteRepository)
     {
-        $this->repo = new  Repository(new Model);
+        $this->pageDeleteRepository = $pageDeleteRepository;
         // $this->middleware('permission:content list,content activity,content delete', ['only' => ['__invoke']]);
     }
 
@@ -41,7 +38,7 @@ class PagesSoftDeleteTableController extends Controller
 
         $user = auth()->user();
 
-        return DataTables::of($this->repo->table([
+        return DataTables::of($this->pageDeleteRepository->table([
             'trashOnly' => $trashOnly,
         ]))->editColumn('status', function ($model) use ($user) {
                 return [
@@ -56,5 +53,10 @@ class PagesSoftDeleteTableController extends Controller
             })->addColumn('actions', function ($model) {
                 return $model->actions('backend');
             })->make(true);
+    }
+
+    public function repository(): Repository
+    {
+        return $this->pageDeleteRepository;
     }
 }

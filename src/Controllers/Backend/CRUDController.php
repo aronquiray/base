@@ -15,12 +15,13 @@ abstract class CRUDController extends Controller implements CRUDContract
     use CRUDTrait;
 
     /**
-     * CRUDController Constructor
+     * CRUDController constructor.
      */
     public function __construct()
     {
-        $this->view_path = $this->model::VIEW_BACKEND_PATH;
-        $this->route_path = $this->model::ROUTE_ADMIN_PATH;
+        $model = $this->repository()->model();
+        $this->view_path = $model::VIEW_BACKEND_PATH;
+        $this->route_path = $model::ROUTE_ADMIN_PATH;
     }
 
     /**
@@ -47,7 +48,6 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * @param String $routeKeyName
-     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(String $routeKeyName)
@@ -61,7 +61,6 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * @param String $routeKeyName
-     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(String $routeKeyName)
@@ -74,9 +73,9 @@ abstract class CRUDController extends Controller implements CRUDContract
     }
 
     /**
-     * @param Request $request
-     *
-     * @return mixed $response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -84,16 +83,16 @@ abstract class CRUDController extends Controller implements CRUDContract
         $this->validate($request, $baseableOptions->storeRules, $baseableOptions->storeRuleMessages);
 
         $data = $this->generateStub($request);
-        $model = $this->repo->store($data);
+        $model = $this->repository()->store($data);
 
         return $this->response('store', $request->ajax(), $model, $this->_redirectAfterAction($request->_submission, $model));
     }
 
     /**
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      * @param String $routeKeyName
-     *
-     * @return mixed $response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, String $routeKeyName)
     {
@@ -103,7 +102,7 @@ abstract class CRUDController extends Controller implements CRUDContract
         $this->validate($request, $baseableOptions->updateRules, $baseableOptions->updateRuleMessages);
 
         $data = $this->generateStub($request, $model);
-        $model = $this->repo->update($data, $model->id);
+        $model = $this->repository()->update($data, $model->id);
 
         return $this->response('update', $request->ajax(), $model, $this->_redirectAfterAction($request->_submission, $model));
     }
@@ -111,13 +110,13 @@ abstract class CRUDController extends Controller implements CRUDContract
     /**
      * @param \Illuminate\Http\Request $request
      * @param $slug
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Request $request, $slug)
     {
         $model = $this->getModel($slug);
-        $this->repo->destroy($model);
-        $redirect = route($this->route_path.'.'.(method_exists($this->model, 'bootSoftDeletes') ? 'deleted' : 'index'));
+        $this->repository()->destroy($model);
+        $redirect = route($this->route_path.'.'.(method_exists($this->repository()->model(), 'bootSoftDeletes') ? 'deleted' : 'index'));
 
         return $this->response('destroy', $request->ajax(), $model, $redirect);
     }
