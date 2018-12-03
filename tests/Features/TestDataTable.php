@@ -2,9 +2,9 @@
 
 namespace HalcyonLaravel\Base\Tests\Features;
 
-use App\Models\Core\Page;
-use App\Models\Core\PageSoftDelete;
 use Faker\Factory as Faker;
+use HalcyonLaravel\Base\Tests\Models\Core\Page;
+use HalcyonLaravel\Base\Tests\Models\Core\PageSoftDelete;
 use HalcyonLaravel\Base\Tests\TestCase;
 
 class TestDataTable extends TestCase

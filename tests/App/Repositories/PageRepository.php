@@ -6,10 +6,10 @@
  * Time: 11:16 AM
  */
 
-namespace App\Repositories;
+namespace HalcyonLaravel\Base\Tests\Repositories;
 
-use App\Models\Core\Page;
 use HalcyonLaravel\Base\Repository\BaseRepository;
+use HalcyonLaravel\Base\Tests\Models\Core\Page;
 
 class PageRepository extends BaseRepository
 {

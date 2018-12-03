@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Core\Page;
+namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
-use App\Repositories\PageDeleteRepository;
 use DataTables;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
+use HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository;
 use Illuminate\Http\Request;
 
 /**

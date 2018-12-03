@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace HalcyonLaravel\Base\Tests\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

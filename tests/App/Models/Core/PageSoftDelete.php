@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Core;
+namespace HalcyonLaravel\Base\Tests\Models\Core;
 
 use HalcyonLaravel\Base\Models\Model;
 use HalcyonLaravel\Base\Models\Traits\ModelDefaultTraits;

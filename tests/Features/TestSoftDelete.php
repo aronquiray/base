@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Tests\Features;
 
-use App\Models\Core\PageSoftDelete;
+use HalcyonLaravel\Base\Tests\Models\Core\PageSoftDelete;
 use HalcyonLaravel\Base\Tests\TestCase;
 use Route;
 

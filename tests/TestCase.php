@@ -2,10 +2,10 @@
 
 namespace HalcyonLaravel\Base\Tests;
 
-use App\Models\Content;
-use App\Models\Core\Page;
-use App\Models\Core\PageSoftDelete;
-use App\Models\User;
+use HalcyonLaravel\Base\Tests\Models\Content;
+use HalcyonLaravel\Base\Tests\Models\Core\Page;
+use HalcyonLaravel\Base\Tests\Models\Core\PageSoftDelete;
+use HalcyonLaravel\Base\Tests\Models\User;
 use Illuminate\Database\Schema\Blueprint;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Route;
@@ -136,7 +136,7 @@ class TestCase extends Orchestra
         Route::get('test2', 'PageStatusController@status')->name('frontend.page-sd.show');
 
         Route::group([
-            'namespace' => 'App\Http\Controllers\Backend\Core\Page',
+            'namespace' => 'HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page',
             'prefix' => 'admin',
             'as' => 'admin.',
             // 'middleware' => 'admin'
@@ -149,7 +149,7 @@ class TestCase extends Orchestra
 
         // Softdelete
         Route::group([
-            'namespace' => 'App\Http\Controllers\Backend',
+            'namespace' => 'HalcyonLaravel\Base\Tests\Http\Controllers\Backend',
             'prefix' => 'admin',
             'as' => 'admin.',
             // 'middleware' => 'admin'

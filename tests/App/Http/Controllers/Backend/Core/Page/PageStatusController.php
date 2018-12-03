@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Core\Page;
+namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
-use App\Models\Core\Page as Model;
-use App\Repositories\PageRepository;
 use HalcyonLaravel\Base\Controllers\Backend\StatusController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository;
+use HalcyonLaravel\Base\Tests\Models\Core\Page as Model;
+use HalcyonLaravel\Base\Tests\Repositories\PageRepository;
 
 /**
  * Class ContentStatusController.

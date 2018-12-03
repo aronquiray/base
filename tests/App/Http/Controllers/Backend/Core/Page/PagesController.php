@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Core\Page;
+namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
-use App\Repositories\PageRepository;
 use HalcyonLaravel\Base\BasableOptions;
 use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
+use HalcyonLaravel\Base\Tests\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
 use Illuminate\Http\Request;
 
@@ -15,10 +15,10 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     protected $pageRepository;
+
     /**
      * PagesController constructor.
-     *
-     * @param \App\Repositories\PageRepository $pageRepository
+     * @param PageRepository $pageRepository
      */
     public function __construct(PageRepository $pageRepository)
     {

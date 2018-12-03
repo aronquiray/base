@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Tests\Features;
 
-use App\Models\Core\Page;
+use HalcyonLaravel\Base\Tests\Models\Core\Page;
 use HalcyonLaravel\Base\Tests\TestCase;
 
 class TestCrudsFeature extends TestCase

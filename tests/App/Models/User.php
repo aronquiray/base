@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace HalcyonLaravel\Base\Tests\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace HalcyonLaravel\Base\Tests\Models;
 
 use HalcyonLaravel\Base\Models\Model;
 

@@ -2,7 +2,7 @@
   "name": "halcyon-laravel/base",
   "description": "Base",
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.1",
     "yajra/laravel-datatables-oracle": "~8.0",
     "spatie/laravel-translatable": "^2.2",
     "spatie/laravel-permission": "^2.23",
@@ -21,8 +21,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "HalcyonLaravel\\Base\\Tests\\": "tests/",
-      "App\\": "tests/App/"
+      "HalcyonLaravel\\Base\\Tests\\": "tests/"
     }
   },
   "extra": {

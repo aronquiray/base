@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Tests\Units;
 
-use App\Models\Core\Page;
+use HalcyonLaravel\Base\Tests\Models\Core\Page;
 use HalcyonLaravel\Base\Tests\TestCase;
 
 class TestModelFunctions extends TestCase
