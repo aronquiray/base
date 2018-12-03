@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.0
+# Halcyon Packages Base - v2.0.1
 
 
 ## Changes Log 
+	v2.0.1: Fix multiple definition with main App.
 	v2.0.0: Fix repo and model on controllers.
     v1.0.25: Use repo for fetching. 
     v1.0.24: Fix using criterias.
