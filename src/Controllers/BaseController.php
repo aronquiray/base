@@ -2,22 +2,19 @@
 
 namespace HalcyonLaravel\Base\Controllers;
 
+use HalcyonLaravel\Base\Criterion\OrderByCriteria;
 use HalcyonLaravel\Base\Models\Model;
 use HalcyonLaravel\Base\Repository\BaseRepository;
 
 abstract class BaseController extends Controller
 {
     protected $repository;
-
-    abstract public function repository(): BaseRepository;
-
     /**
      * View Path
      *
      * @return String
      */
     protected $view_path;
-
     /**
      * Route Path
      *
@@ -36,6 +33,8 @@ abstract class BaseController extends Controller
     public function getModel($key, $trash = false, array $fields = null)
     {
         $repo = $this->repository();
+        $repo->popCriteria(new OrderByCriteria);
+
         $m = $repo->model();
         $modelClass = new $m;
 
@@ -43,7 +42,7 @@ abstract class BaseController extends Controller
             $modelClass->getRouteKeyName() => $key,
         ];
 
-        if (! is_null($fields)) {
+        if (!is_null($fields)) {
             array_merge($where, $fields);
         }
 
@@ -60,6 +59,8 @@ abstract class BaseController extends Controller
 
         return $model;
     }
+
+    abstract public function repository(): BaseRepository;
 
     /**
      * Return the response of the request with flash messages
@@ -78,7 +79,7 @@ abstract class BaseController extends Controller
         String $redirect = null,
         String $message = null
     ) {
-        if (! is_null($model) && is_null($message)) {
+        if (!is_null($model) && is_null($message)) {
             $message = trans("base::actions.$process", ['name' => $model->base(config('base.responseBaseableName'))]);
         }
 

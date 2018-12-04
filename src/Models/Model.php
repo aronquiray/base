@@ -3,9 +3,7 @@
 namespace HalcyonLaravel\Base\Models;
 
 use HalcyonLaravel\Base\Models\Traits\ModelTraits;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as BaseModel;
-use Illuminate\Support\Facades\Schema;
 
 /**
  * Class Model.
@@ -21,18 +19,6 @@ abstract class Model extends BaseModel
      */
     abstract public static function permissions(): array;
 
-    public static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope('latest', function (Builder $builder) {
-            $tableName = (new static)->getTable();
-            if (Schema::hasColumn($tableName, 'updated_at')) {
-                $builder->latest('updated_at');
-            } elseif (Schema::hasColumn($tableName, 'created_at')) {
-                $builder->latest('created_at');
-            }
-        });
-    }
 
     /**
      * Return the links related to this model.
