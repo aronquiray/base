@@ -13,7 +13,7 @@ use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 use Schema;
 
-class OrderByCriteria implements CriteriaInterface
+class AutoOrderBootedByCriteria implements CriteriaInterface
 {
 
     /**

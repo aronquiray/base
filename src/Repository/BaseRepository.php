@@ -3,7 +3,7 @@
 namespace HalcyonLaravel\Base\Repository;
 
 use Closure;
-use HalcyonLaravel\Base\Criterion\OrderByCriteria;
+use HalcyonLaravel\Base\Criterion\AutoOrderBootedByCriteria;
 use HalcyonLaravel\Base\Exceptions\RepositoryException;
 use HalcyonLaravel\Base\Models\Model as BaseModel;
 use Illuminate\Container\Container as Application;
@@ -39,7 +39,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      */
     public function boot()
     {
-        $this->pushCriteria(new OrderByCriteria);
+        $this->pushCriteria(new AutoOrderBootedByCriteria);
     }
 
     /**

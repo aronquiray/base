@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Controllers;
 
-use HalcyonLaravel\Base\Criterion\OrderByCriteria;
+use HalcyonLaravel\Base\Criterion\AutoOrderBootedByCriteria;
 use HalcyonLaravel\Base\Models\Model;
 use HalcyonLaravel\Base\Repository\BaseRepository;
 
@@ -33,7 +33,7 @@ abstract class BaseController extends Controller
     public function getModel($key, $trash = false, array $fields = null)
     {
         $repo = $this->repository();
-        $repo->popCriteria(new OrderByCriteria);
+        $repo->popCriteria(new AutoOrderBootedByCriteria);
 
         $m = $repo->model();
         $modelClass = new $m;

@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.2
+# Halcyon Packages Base - v2.0.3
 
 
 ## Changes Log 
+    v2.0.3: rename to AutoOrderBootedByCriteria
 	v2.0.2: Order by to criteria
 	v2.0.1: Fix multiple definition with main App.
 	v2.0.0: Fix repo and model on controllers.
