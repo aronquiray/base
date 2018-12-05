@@ -25,12 +25,12 @@ abstract class BaseController extends Controller
     /**
      * Return the model by the given key
      *
-     * @param $key
+     * @param string $key
      * @param bool $trash
      * @param array|null $customWhere
      * @return mixed
      */
-    public function getModel($key, $trash = false, array $customWhere = null)
+    public function getModel(string $key, bool $trash = false, array $customWhere = null)
     {
         $repo = $this->repository();
         $repo->popCriteria(new AutoOrderBootedByCriteria);
