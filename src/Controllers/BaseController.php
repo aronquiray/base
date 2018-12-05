@@ -27,10 +27,10 @@ abstract class BaseController extends Controller
      *
      * @param $key
      * @param bool $trash
-     * @param array|null $fields
+     * @param array|null $customWhere
      * @return mixed
      */
-    public function getModel($key, $trash = false, array $fields = null)
+    public function getModel($key, $trash = false, array $customWhere = null)
     {
         $repo = $this->repository();
         $repo->popCriteria(new AutoOrderBootedByCriteria);
@@ -42,8 +42,8 @@ abstract class BaseController extends Controller
             $modelClass->getRouteKeyName() => $key,
         ];
 
-        if (!is_null($fields)) {
-            array_merge($where, $fields);
+        if (!is_null($customWhere)) {
+            $where = array_merge($where, $customWhere);
         }
 
         if ($trash && method_exists($modelClass, 'bootSoftDeletes')) {
