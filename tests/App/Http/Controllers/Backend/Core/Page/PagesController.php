@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
-use HalcyonLaravel\Base\BasableOptions;
+use HalcyonLaravel\Base\BaseableOptions;
 use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
 use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
 use HalcyonLaravel\Base\Tests\Repositories\PageRepository;
@@ -39,11 +39,11 @@ class PagesController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      * @param \Illuminate\Database\Eloquent\Model|null $model
-     * @return \HalcyonLaravel\Base\BasableOptions
+     * @return \HalcyonLaravel\Base\BaseableOptions
      */
-    public function crudRules(Request $request, IlluminateModel $model = null): BasableOptions
+    public function crudRules(Request $request, IlluminateModel $model = null): BaseableOptions
     {
-        return BasableOptions::create()->storeRules([
+        return BaseableOptions::create()->storeRules([
                 'title' => 'required|unique:pages,id',
             ])->storeRuleMessages([
                 'title.required' => 'The title field is required.',

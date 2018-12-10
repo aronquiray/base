@@ -2,16 +2,14 @@
 
 namespace HalcyonLaravel\Base\Controllers\Backend;
 
-use HalcyonLaravel\Base\Controllers\BaseController as Controller;
-use HalcyonLaravel\Base\Models\Traits\ModelTraits;
+use HalcyonLaravel\Base\Controllers\BaseController;
 use Illuminate\Http\Request;
 
 /**
  * Class DeletedController.
  */
-abstract class DeletedController extends Controller
+abstract class DeletedController extends BaseController
 {
-    use ModelTraits;
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

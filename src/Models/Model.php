@@ -8,31 +8,9 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 /**
  * Class Model.
  */
-abstract class Model extends BaseModel
+abstract class Model extends BaseModel implements Contracts\BaseModel
 {
     use ModelTraits;
-
-    /**
-     * Return all the permissions for this model.
-     *
-     * @return array
-     */
-    abstract public static function permissions(): array;
-
-
-    /**
-     * Return the links related to this model.
-     *
-     * @return array
-     */
-    abstract public function links(): array;
-
-    /**
-     * Return the baseable configuration array for this model.
-     *
-     * @return array
-     */
-    abstract public function baseable(): array;
 
     /**
      * @param $query

@@ -19,7 +19,7 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function __construct()
     {
-        $model = $this->repository()->model();
+        $model = resolve($this->repository()->model());
         $this->view_path = $model::VIEW_BACKEND_PATH;
         $this->route_path = $model::ROUTE_ADMIN_PATH;
     }

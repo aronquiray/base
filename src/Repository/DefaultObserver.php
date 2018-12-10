@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Repository;
 
-use HalcyonLaravel\Base\Models\Model;
+use HalcyonLaravel\Base\Models\Contracts\BaseModel;
 
 class DefaultObserver extends ObserverContract
 {
@@ -16,86 +16,86 @@ class DefaultObserver extends ObserverContract
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
+     * @param BaseModel $model
      * @param array $data
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @return BaseModel
      */
-    public static function stored(Model $model, array $data): Model
+    public static function stored(BaseModel $model, array $data): BaseModel
     {
         return $model;
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
+     * @param BaseModel $model
      * @param array $data
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @return BaseModel
      */
-    public static function updating(Model $model, array $data): Model
+    public static function updating(BaseModel $model, array $data): BaseModel
     {
         return $model;
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
+     * @param BaseModel $model
      * @param array $data
      * @param array $oldModel
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @return BaseModel
      */
-    public static function updated(Model $model, array $data, array $oldModel): Model
+    public static function updated(BaseModel $model, array $data, array $oldModel): BaseModel
     {
         return $model;
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @param BaseModel $model
+     * @return BaseModel
      */
-    public static function deleting(Model $model): Model
+    public static function deleting(BaseModel $model): BaseModel
     {
         return $model;
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @param BaseModel $model
+     * @return BaseModel
      */
-    public static function deleted(Model $model): Model
+    public static function deleted(BaseModel $model): BaseModel
     {
         return $model;
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @param BaseModel $model
+     * @return BaseModel
      */
-    public static function restoring(Model $model): Model
+    public static function restoring(BaseModel $model): BaseModel
     {
         return $model;
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @param BaseModel $model
+     * @return BaseModel
      */
-    public static function restored(Model $model): Model
+    public static function restored(BaseModel $model): BaseModel
     {
         return $model;
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @param BaseModel $model
+     * @return BaseModel
      */
-    public static function purging(Model $model): Model
+    public static function purging(BaseModel $model): BaseModel
     {
         return $model;
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @param BaseModel $model
+     * @return BaseModel
      */
-    public static function purged(Model $model): Model
+    public static function purged(BaseModel $model): BaseModel
     {
         return $model;
     }

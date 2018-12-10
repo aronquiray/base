@@ -5,7 +5,7 @@ namespace HalcyonLaravel\Base\Repository;
 use Closure;
 use HalcyonLaravel\Base\Criterion\AutoOrderBootedByCriteria;
 use HalcyonLaravel\Base\Exceptions\RepositoryException;
-use HalcyonLaravel\Base\Models\Model as BaseModel;
+use HalcyonLaravel\Base\Models\Contracts\BaseModel;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -46,7 +46,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      * @param array|null $request
      * @param array $fields
      * @param bool $isAllFillable
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function table(array $request = null, array $fields = [], bool $isAllFillable = true): Builder
     {
@@ -77,7 +77,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
     /**
      * @param array $data
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @return BaseModel
      */
     public function store(array $data): BaseModel
     {
@@ -92,7 +92,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     /**
      * This will handle DB transaction action
      *
-     * @param \Closure $closure
+     * Closure $closure
      * @return mixed
      */
     public function action(Closure $closure)
@@ -104,8 +104,8 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
     /**
      * @param array $data
-     * @param int $modelId
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @param $modelId
+     * @return BaseModel
      */
     public function update(array $data, $modelId): BaseModel
     {
@@ -121,8 +121,8 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @param BaseModel $model
+     * @return BaseModel
      */
     public function destroy(BaseModel $model): BaseModel
     {
@@ -135,8 +135,8 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @param BaseModel $model
+     * @return BaseModel
      */
     public function restore(BaseModel $model): BaseModel
     {
@@ -155,8 +155,8 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
-     * @return \HalcyonLaravel\Base\Models\Model
+     * @param BaseModel $model
+     * @return BaseModel
      */
     public function purge(BaseModel $model): BaseModel
     {
@@ -173,7 +173,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Repository\ObserverContract $observer
+     * @param ObserverContract $observer
      */
     protected function setObserver(ObserverContract $observer)
     {

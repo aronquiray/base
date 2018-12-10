@@ -2,14 +2,14 @@
 
 namespace HalcyonLaravel\Base\Controllers\Backend;
 
-use HalcyonLaravel\Base\Controllers\BaseController as Controller;
+use HalcyonLaravel\Base\Controllers\BaseController;
 use HalcyonLaravel\Base\Exceptions\StatusControllerException;
 use Illuminate\Http\Request;
 
 /**
  * Class StatusController.
  */
-abstract class StatusController extends Controller
+abstract class StatusController extends BaseController
 {
     /**
      * @param string $type
@@ -17,8 +17,7 @@ abstract class StatusController extends Controller
      */
     public function status(string $type)
     {
-        $m = $this->repository()->model();
-        $model = new $m;
+        $model = resolve($this->repository()->model());
         $statusKey = $model->statusKeyName();
 
         return view("{$this->view_path}.status", compact('type', 'statusKey'));
@@ -38,7 +37,7 @@ abstract class StatusController extends Controller
             throw new StatusControllerException(403, trans('base::exceptions.status_required'));
         }
         $this->repository()->update([$statusKey => $status], $model->id);
-        $redirect = route($this->route_path.'.status', $status);
+        $redirect = route($this->route_path . '.status', $status);
         $message = trans("base::actions.mark", [
             'name' => $model->base(config('base.responseBaseableName')),
             'status' => $status,

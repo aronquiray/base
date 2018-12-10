@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base;
 
-class BasableOptions
+class BaseableOptions
 {
     public $storeRules;
 
@@ -13,7 +13,7 @@ class BasableOptions
     public $updateRuleMessages;
 
     /**
-     * @return \HalcyonLaravel\Base\BasableOptions
+     * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public static function create(): self
     {
@@ -21,7 +21,7 @@ class BasableOptions
     }
 
     /**
-     * @return \HalcyonLaravel\Base\BasableOptions
+     * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function reset(): self
     {
@@ -35,7 +35,7 @@ class BasableOptions
 
     /**
      * @param array $rules
-     * @return \HalcyonLaravel\Base\BasableOptions
+     * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function storeRules(array $rules): self
     {
@@ -46,7 +46,7 @@ class BasableOptions
 
     /**
      * @param array $messages
-     * @return \HalcyonLaravel\Base\BasableOptions
+     * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function storeRuleMessages(array $messages): self
     {
@@ -57,7 +57,7 @@ class BasableOptions
 
     /**
      * @param array $rules
-     * @return \HalcyonLaravel\Base\BasableOptions
+     * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function updateRules(array $rules): self
     {
@@ -68,7 +68,7 @@ class BasableOptions
 
     /**
      * @param array $messages
-     * @return \HalcyonLaravel\Base\BasableOptions
+     * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function updateRuleMessages(array $messages): self
     {

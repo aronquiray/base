@@ -35,8 +35,7 @@ abstract class BaseController extends Controller
         $repo = $this->repository();
         $repo->popCriteria(new AutoOrderBootedByCriteria);
 
-        $m = $repo->model();
-        $modelClass = new $m;
+        $modelClass = resolve($repo->model());
 
         $where = [
             $modelClass->getRouteKeyName() => $key,

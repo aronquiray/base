@@ -13,9 +13,9 @@ trait ModelTraits
     public static function permission($keys = null)
     {
         $permissions = static::permissions();
-        if (! is_null($keys) && is_array($keys)) {
+        if (!is_null($keys) && is_array($keys)) {
             foreach ($permissions as $p => $permission) {
-                if (! in_array($p, $keys)) {
+                if (!in_array($p, $keys)) {
                     array_forget($permissions, $p);
                 }
             }
@@ -35,7 +35,7 @@ trait ModelTraits
     public function base(string $key = null): string
     {
         $config = $this->baseable();
-        if (array_key_exists($key, $config) && ! is_null($key)) {
+        if (array_key_exists($key, $config) && !is_null($key)) {
             $key = $config[$key];
         } else {
             $key = $config['source'];
@@ -63,7 +63,10 @@ trait ModelTraits
         }
 
         foreach ($links as $l => $link) {
-            if ((array_key_exists('permission', $link) && $user && ! $user->can($link['permission'])) || (! is_null($keys) && is_array($keys) && ! in_array($l, $keys)) || (! is_null($keys) && ! is_array($keys) && $keys != $l)) {
+            if (
+                (array_key_exists('permission', $link) && $user && !$user->hasPermissionTo($link['permission'])) ||
+                (!is_null($keys) && is_array($keys) && !in_array($l, $keys)) ||
+                (!is_null($keys) && !is_array($keys) && $keys != $l)) {
                 array_forget($links, $l);
             }
         }
@@ -75,7 +78,7 @@ trait ModelTraits
             }
             $links = $filter;
         }
-        if (! is_null($keys) && is_string($keys) && count($links) == 1) {
+        if (!is_null($keys) && is_string($keys) && count($links) == 1) {
             return $links[$keys];
         }
 
