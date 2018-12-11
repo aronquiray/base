@@ -59,6 +59,9 @@ abstract class BaseController extends Controller
         return $model;
     }
 
+    /**
+     * @return BaseRepository
+     */
     abstract public function repository(): BaseRepository;
 
     /**

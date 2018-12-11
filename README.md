@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.6
+# Halcyon Packages Base - v2.0.7
 
 
 ## Changes Log 
+    v2.0.7: Resolve seeder helper from permission config.
     v2.0.6: Seeder Helper
     v2.0.5: Enhance, too many 
     v2.0.4: Fix custome where,not return value

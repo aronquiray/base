@@ -10,7 +10,6 @@ namespace HalcyonLaravel\Base\Database\Traits;
 
 use HalcyonLaravel\Base\Models\Contracts\BaseModel;
 use Illuminate\Http\UploadedFile;
-use Spatie\Permission\Models\Permission;
 
 trait SeederHelper
 {
@@ -25,7 +24,7 @@ trait SeederHelper
 
         $config = config('access.users');
         foreach ($modelClass::permissions() as $permissionName) {
-            $permission = Permission::create([
+            $permission = resolve(config('permission.models.permission'))::create([
                 'name' => $permissionName,
             ]);
             $roleModel::findByName($config['system_role'])->givePermissionTo($permission);
