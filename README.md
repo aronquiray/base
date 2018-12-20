@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.7
+# Halcyon Packages Base - v2.0.8
 
 
 ## Changes Log 
+    v2.0.8: Make protected
     v2.0.7: Resolve seeder helper from permission config.
     v2.0.6: Seeder Helper
     v2.0.5: Enhance, too many 
