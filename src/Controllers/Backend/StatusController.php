@@ -13,6 +13,7 @@ abstract class StatusController extends BaseController
 {
     /**
      * @param string $type
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function status(string $type)
@@ -25,7 +26,8 @@ abstract class StatusController extends BaseController
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param string $routeKeyNameValue
+     * @param string                   $routeKeyNameValue
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, string $routeKeyNameValue)

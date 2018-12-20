@@ -25,9 +25,10 @@ abstract class BaseController extends Controller
     /**
      * Return the model by the given key
      *
-     * @param string $key
-     * @param bool $trash
+     * @param string     $key
+     * @param bool       $trash
      * @param array|null $customWhere
+     *
      * @return mixed
      */
     public function getModel(string $key, bool $trash = false, array $customWhere = null)
@@ -67,11 +68,12 @@ abstract class BaseController extends Controller
     /**
      * Return the response of the request with flash messages
      *
-     * @param String $process
-     * @param bool $isAjax
+     * @param String                                 $process
+     * @param bool                                   $isAjax
      * @param \HalcyonLaravel\Base\Models\Model|null $model
-     * @param String|null $redirect
-     * @param String|null $message
+     * @param String|null                            $redirect
+     * @param String|null                            $message
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function response(

@@ -13,8 +13,9 @@ abstract class Model extends BaseModel implements Contracts\BaseModel
     use ModelTraits;
 
     /**
-     * @param $query
+     * @param       $query
      * @param array $columns
+     *
      * @return mixed
      */
     public function scopeExclude($query, array $columns = [])
@@ -24,6 +25,7 @@ abstract class Model extends BaseModel implements Contracts\BaseModel
 
     /**
      * @param $field
+     *
      * @return mixed
      */
     public function getTrans($field)

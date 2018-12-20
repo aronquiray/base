@@ -35,6 +35,7 @@ class BaseableOptions
 
     /**
      * @param array $rules
+     *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function storeRules(array $rules): self
@@ -46,6 +47,7 @@ class BaseableOptions
 
     /**
      * @param array $messages
+     *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function storeRuleMessages(array $messages): self
@@ -57,6 +59,7 @@ class BaseableOptions
 
     /**
      * @param array $rules
+     *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function updateRules(array $rules): self
@@ -68,6 +71,7 @@ class BaseableOptions
 
     /**
      * @param array $messages
+     *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function updateRuleMessages(array $messages): self

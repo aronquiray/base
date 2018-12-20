@@ -8,6 +8,7 @@ class DefaultObserver extends ObserverContract
 {
     /**
      * @param array $data
+     *
      * @return array
      */
     public static function storing(array $data): array
@@ -17,7 +18,8 @@ class DefaultObserver extends ObserverContract
 
     /**
      * @param BaseModel $model
-     * @param array $data
+     * @param array     $data
+     *
      * @return BaseModel
      */
     public static function stored(BaseModel $model, array $data): BaseModel
@@ -27,7 +29,8 @@ class DefaultObserver extends ObserverContract
 
     /**
      * @param BaseModel $model
-     * @param array $data
+     * @param array     $data
+     *
      * @return BaseModel
      */
     public static function updating(BaseModel $model, array $data): BaseModel
@@ -37,8 +40,9 @@ class DefaultObserver extends ObserverContract
 
     /**
      * @param BaseModel $model
-     * @param array $data
-     * @param array $oldModel
+     * @param array     $data
+     * @param array     $oldModel
+     *
      * @return BaseModel
      */
     public static function updated(BaseModel $model, array $data, array $oldModel): BaseModel
@@ -48,6 +52,7 @@ class DefaultObserver extends ObserverContract
 
     /**
      * @param BaseModel $model
+     *
      * @return BaseModel
      */
     public static function deleting(BaseModel $model): BaseModel
@@ -57,6 +62,7 @@ class DefaultObserver extends ObserverContract
 
     /**
      * @param BaseModel $model
+     *
      * @return BaseModel
      */
     public static function deleted(BaseModel $model): BaseModel
@@ -66,6 +72,7 @@ class DefaultObserver extends ObserverContract
 
     /**
      * @param BaseModel $model
+     *
      * @return BaseModel
      */
     public static function restoring(BaseModel $model): BaseModel
@@ -75,6 +82,7 @@ class DefaultObserver extends ObserverContract
 
     /**
      * @param BaseModel $model
+     *
      * @return BaseModel
      */
     public static function restored(BaseModel $model): BaseModel
@@ -84,6 +92,7 @@ class DefaultObserver extends ObserverContract
 
     /**
      * @param BaseModel $model
+     *
      * @return BaseModel
      */
     public static function purging(BaseModel $model): BaseModel
@@ -93,6 +102,7 @@ class DefaultObserver extends ObserverContract
 
     /**
      * @param BaseModel $model
+     *
      * @return BaseModel
      */
     public static function purged(BaseModel $model): BaseModel

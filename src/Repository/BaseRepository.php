@@ -44,8 +44,9 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
     /**
      * @param array|null $request
-     * @param array $fields
-     * @param bool $isAllFillable
+     * @param array      $fields
+     * @param bool       $isAllFillable
+     *
      * @return Builder
      */
     public function table(array $request = null, array $fields = [], bool $isAllFillable = true): Builder
@@ -77,6 +78,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
     /**
      * @param array $data
+     *
      * @return BaseModel
      */
     public function store(array $data): BaseModel
@@ -93,6 +95,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      * This will handle DB transaction action
      *
      * Closure $closure
+     *
      * @return mixed
      */
     public function action(Closure $closure)
@@ -104,7 +107,8 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
     /**
      * @param array $data
-     * @param $modelId
+     * @param       $modelId
+     *
      * @return BaseModel
      */
     public function update(array $data, $modelId): BaseModel
@@ -122,6 +126,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
     /**
      * @param BaseModel $model
+     *
      * @return BaseModel
      */
     public function destroy(BaseModel $model): BaseModel
@@ -136,6 +141,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
     /**
      * @param BaseModel $model
+     *
      * @return BaseModel
      */
     public function restore(BaseModel $model): BaseModel
@@ -156,6 +162,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
     /**
      * @param BaseModel $model
+     *
      * @return BaseModel
      */
     public function purge(BaseModel $model): BaseModel

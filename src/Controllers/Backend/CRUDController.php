@@ -48,6 +48,7 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * @param String $routeKeyName
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(String $routeKeyName)
@@ -61,6 +62,7 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * @param String $routeKeyName
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(String $routeKeyName)
@@ -74,6 +76,7 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -85,12 +88,14 @@ abstract class CRUDController extends Controller implements CRUDContract
         $data = $this->generateStub($request);
         $model = $this->repository()->store($data);
 
-        return $this->response('store', $request->ajax(), $model, $this->_redirectAfterAction($request->_submission, $model));
+        return $this->response('store', $request->ajax(), $model,
+            $this->_redirectAfterAction($request->_submission, $model));
     }
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param String $routeKeyName
+     * @param String                   $routeKeyName
+     *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -104,19 +109,22 @@ abstract class CRUDController extends Controller implements CRUDContract
         $data = $this->generateStub($request, $model);
         $model = $this->repository()->update($data, $model->id);
 
-        return $this->response('update', $request->ajax(), $model, $this->_redirectAfterAction($request->_submission, $model));
+        return $this->response('update', $request->ajax(), $model,
+            $this->_redirectAfterAction($request->_submission, $model));
     }
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param $slug
+     * @param                          $slug
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Request $request, $slug)
     {
         $model = $this->getModel($slug);
         $this->repository()->destroy($model);
-        $redirect = route($this->route_path.'.'.(method_exists($this->repository()->model(), 'bootSoftDeletes') ? 'deleted' : 'index'));
+        $redirect = route($this->route_path . '.' . (method_exists($this->repository()->model(),
+                'bootSoftDeletes') ? 'deleted' : 'index'));
 
         return $this->response('destroy', $request->ajax(), $model, $redirect);
     }

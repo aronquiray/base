@@ -15,8 +15,8 @@ trait SeederHelper
 {
     /**
      * @param BaseModel $modelClass
-     * @param bool $isAddToAdminRole
-     * @param array $except
+     * @param bool      $isAddToAdminRole
+     * @param array     $except
      */
     public function seederPermission(BaseModel $modelClass, bool $isAddToAdminRole = true, array $except = [])
     {

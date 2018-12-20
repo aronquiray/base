@@ -24,7 +24,8 @@ abstract class DeletedController extends BaseController
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param String $routeKeyName
+     * @param String                   $routeKeyName
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function restore(Request $request, String $routeKeyName)
@@ -37,7 +38,8 @@ abstract class DeletedController extends BaseController
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param String $routeKeyName
+     * @param String                   $routeKeyName
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function purge(Request $request, String $routeKeyName)
