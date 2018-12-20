@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.9
+# Halcyon Packages Base - v2.0.10
 
 
 ## Changes Log 
+    v2.0.10: Add param on criteria.
     v2.0.9: Add helpers
     v2.0.8: Make protected
     v2.0.7: Resolve seeder helper from permission config.
