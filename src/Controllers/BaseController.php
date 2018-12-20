@@ -2,7 +2,6 @@
 
 namespace HalcyonLaravel\Base\Controllers;
 
-use HalcyonLaravel\Base\Criterion\AutoOrderBootedByCriteria;
 use HalcyonLaravel\Base\Models\Model;
 use HalcyonLaravel\Base\Repository\BaseRepository;
 
@@ -34,7 +33,6 @@ abstract class BaseController extends Controller
     public function getModel(string $key, bool $trash = false, array $customWhere = null)
     {
         $repo = $this->repository();
-        $repo->popCriteria(new AutoOrderBootedByCriteria($repo));
 
         $modelClass = resolve($repo->model());
 

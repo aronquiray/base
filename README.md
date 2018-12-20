@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.10
+# Halcyon Packages Base - v2.0.11
 
 
 ## Changes Log 
+    v2.0.11: Remove boot criteria.
     v2.0.10: Add param on criteria.
     v2.0.9: Add helpers
     v2.0.8: Make protected
