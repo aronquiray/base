@@ -39,7 +39,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      */
     public function boot()
     {
-        $this->pushCriteria(new AutoOrderBootedByCriteria);
+        $this->pushCriteria(new AutoOrderBootedByCriteria($this));
     }
 
     /**

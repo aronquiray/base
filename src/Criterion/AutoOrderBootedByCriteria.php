@@ -10,10 +10,17 @@ namespace HalcyonLaravel\Base\Criterion;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
+use Prettus\Repository\Eloquent\BaseRepository;
 use Schema;
 
 class AutoOrderBootedByCriteria implements CriteriaInterface
 {
+    private $baseRepository;
+
+    public function __construct(BaseRepository $baseRepository)
+    {
+        $this->baseRepository = $baseRepository;
+    }
 
     /**
      * Apply criteria in query repository
@@ -25,7 +32,7 @@ class AutoOrderBootedByCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        $tableName = $model->getTable();
+        $tableName = app($this->baseRepository->model())->getTable();
         if (Schema::hasColumn($tableName, 'updated_at')) {
             return $model->latest('updated_at');
         } elseif (Schema::hasColumn($tableName, 'created_at')) {

@@ -34,7 +34,7 @@ abstract class BaseController extends Controller
     public function getModel(string $key, bool $trash = false, array $customWhere = null)
     {
         $repo = $this->repository();
-        $repo->popCriteria(new AutoOrderBootedByCriteria);
+        $repo->popCriteria(new AutoOrderBootedByCriteria($repo));
 
         $modelClass = resolve($repo->model());
 
