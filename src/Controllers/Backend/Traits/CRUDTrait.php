@@ -16,6 +16,6 @@ trait CRUDTrait
         }
         $submission = $submission ?? 'show';
 
-        return route($this->route_path.'.'.$submission, $args);
+        return route($this->routePath . '.' . $submission, $args);
     }
 }

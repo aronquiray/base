@@ -14,13 +14,13 @@ abstract class BaseController extends Controller
      *
      * @return String
      */
-    protected $view_path;
+    protected $viewPath;
     /**
      * Route Path
      *
      * @return String
      */
-    protected $route_path;
+    protected $routePath;
 
     /**
      * Return the model by the given key

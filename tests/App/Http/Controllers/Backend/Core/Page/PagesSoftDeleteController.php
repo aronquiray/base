@@ -22,8 +22,8 @@ class PagesSoftDeleteController extends Controller
     public function __construct(PageDeleteRepository $pageDeleteRepository)
     {
         $this->pageDeleteRepository = $pageDeleteRepository;
-        $this->route_path = Model::ROUTE_ADMIN_PATH;
-        $this->view_path = 'backend.core.page';// for testing only
+        $this->routePath = Model::ROUTE_ADMIN_PATH;
+        $this->viewPath = 'backend.core.page';// for testing only
         // $this->view_path    = Model::viewBackendPath;
 
         // parent::__construct();

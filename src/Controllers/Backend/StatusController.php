@@ -21,7 +21,7 @@ abstract class StatusController extends BaseController
         $model = resolve($this->repository()->model());
         $statusKey = $model->statusKeyName();
 
-        return view("{$this->view_path}.status", compact('type', 'statusKey'));
+        return view("{$this->viewPath}.status", compact('type', 'statusKey'));
     }
 
     /**
@@ -39,7 +39,7 @@ abstract class StatusController extends BaseController
             throw new StatusControllerException(403, trans('base::exceptions.status_required'));
         }
         $this->repository()->update([$statusKey => $status], $model->id);
-        $redirect = route($this->route_path . '.status', $status);
+        $redirect = route($this->routePath . '.status', $status);
         $message = trans("base::actions.mark", [
             'name' => $model->base(config('base.responseBaseableName')),
             'status' => $status,

@@ -16,10 +16,10 @@ abstract class DeletedController extends BaseController
      */
     public function deleted()
     {
-        $viewPath = $this->view_path;
-        $routePath = $this->route_path;
+        $viewPath = $this->viewPath;
+        $routePath = $this->routePath;
 
-        return view("{$this->view_path}.deleted", compact('viewPath', 'routePath'));
+        return view("{$this->viewPath}.deleted", compact('viewPath', 'routePath'));
     }
 
     /**
@@ -33,7 +33,7 @@ abstract class DeletedController extends BaseController
         $model = $this->getModel($routeKeyName, $trash = true);
         $this->repository()->restore($model);
 
-        return $this->response('restore', $request->ajax(), $model, route("{$this->route_path}.index"));
+        return $this->response('restore', $request->ajax(), $model, route("{$this->routePath}.index"));
     }
 
     /**
@@ -47,6 +47,6 @@ abstract class DeletedController extends BaseController
         $model = $this->getModel($routeKeyName, $trash = true);
         $this->repository()->purge($model);
 
-        return $this->response('purge', $request->ajax(), $model, route("{$this->route_path}.deleted"));
+        return $this->response('purge', $request->ajax(), $model, route("{$this->routePath}.deleted"));
     }
 }

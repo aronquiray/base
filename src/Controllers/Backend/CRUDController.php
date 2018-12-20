@@ -14,14 +14,17 @@ abstract class CRUDController extends Controller implements CRUDContract
 {
     use CRUDTrait;
 
+    protected $viewPath;
+    protected $routePath;
+
     /**
      * CRUDController constructor.
      */
     public function __construct()
     {
         $model = resolve($this->repository()->model());
-        $this->view_path = $model::VIEW_BACKEND_PATH;
-        $this->route_path = $model::ROUTE_ADMIN_PATH;
+        $this->viewPath = $model::VIEW_BACKEND_PATH;
+        $this->routePath = $model::ROUTE_ADMIN_PATH;
     }
 
     /**
@@ -29,10 +32,10 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function index()
     {
-        $viewPath = $this->view_path;
-        $routePath = $this->route_path;
+        $viewPath = $this->viewPath;
+        $routePath = $this->routePath;
 
-        return view("{$this->view_path}.index", compact('viewPath', 'routePath'));
+        return view("{$this->viewPath}.index", compact('viewPath', 'routePath'));
     }
 
     /**
@@ -40,10 +43,10 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function create()
     {
-        $viewPath = $this->view_path;
-        $routePath = $this->route_path;
+        $viewPath = $this->viewPath;
+        $routePath = $this->routePath;
 
-        return view("{$this->view_path}.create", compact('viewPath', 'routePath'));
+        return view("{$this->viewPath}.create", compact('viewPath', 'routePath'));
     }
 
     /**
@@ -54,10 +57,10 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function edit(String $routeKeyName)
     {
         $model = $this->getModel($routeKeyName);
-        $viewPath = $this->view_path;
-        $routePath = $this->route_path;
+        $viewPath = $this->viewPath;
+        $routePath = $this->routePath;
 
-        return view("{$this->view_path}.edit", compact('model', 'viewPath', 'routePath'));
+        return view("{$this->viewPath}.edit", compact('model', 'viewPath', 'routePath'));
     }
 
     /**
@@ -68,10 +71,10 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function show(String $routeKeyName)
     {
         $model = $this->getModel($routeKeyName);
-        $viewPath = $this->view_path;
-        $routePath = $this->route_path;
+        $viewPath = $this->viewPath;
+        $routePath = $this->routePath;
 
-        return view("{$this->view_path}.show", compact('model', 'viewPath', 'routePath'));
+        return view("{$this->viewPath}.show", compact('model', 'viewPath', 'routePath'));
     }
 
     /**
@@ -123,7 +126,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     {
         $model = $this->getModel($slug);
         $this->repository()->destroy($model);
-        $redirect = route($this->route_path . '.' . (method_exists($this->repository()->model(),
+        $redirect = route($this->routePath . '.' . (method_exists($this->repository()->model(),
                 'bootSoftDeletes') ? 'deleted' : 'index'));
 
         return $this->response('destroy', $request->ajax(), $model, $redirect);
