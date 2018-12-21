@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.13
+# Halcyon Packages Base - v2.0.14
 
 
 ## Changes Log 
+    v2.0.14: Make protected observer, then check instance
     v2.0.13: Make base available to all models.
     v2.0.12: Table repo update
     v2.0.11: Remove boot criteria.

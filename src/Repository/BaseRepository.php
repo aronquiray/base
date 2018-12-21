@@ -4,6 +4,7 @@ namespace HalcyonLaravel\Base\Repository;
 
 use Closure;
 use DB;
+use Exception;
 use HalcyonLaravel\Base\Criterion\Eloquent\LatestCriteria;
 use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashCriteria;
 use Prettus\Repository\Contracts\CacheableInterface;
@@ -18,7 +19,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 {
     use CacheableRepository;
 
-    private $observer = null;
+    protected $observer = null;
 
     /**
      * @param array|null $request
@@ -78,10 +79,19 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
     /**
      * @return bool
+     * @throws \Throwable
      */
     private function hasObserver(): bool
     {
-        return !is_null($this->observer);
+        $has = !is_null($this->observer);
+
+        if ($has) {
+            // check instance
+            throw_if(!($this->observer instanceof ObserverContract), Exception ::class,
+                "{$this->observer} muss instance of " . ObserverContract::class . '.');
+        }
+
+        return $has;
     }
 
     /**
