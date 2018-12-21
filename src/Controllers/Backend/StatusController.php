@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
  */
 abstract class StatusController extends BaseController
 {
+    protected $viewPath;
+
     /**
      * @param string $type
      *
