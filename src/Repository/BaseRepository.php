@@ -6,11 +6,9 @@ use Closure;
 use DB;
 use HalcyonLaravel\Base\Criterion\Eloquent\LatestCriteria;
 use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashCriteria;
-use HalcyonLaravel\Base\Exceptions\RepositoryException;
-use HalcyonLaravel\Base\Models\Contracts\BaseModel;
-use Illuminate\Container\Container as Application;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository as PrettusBaseRepository;
+use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Prettus\Repository\Traits\CacheableRepository;
 use Schema;
 
@@ -20,19 +18,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 {
     use CacheableRepository;
 
-    /**
-     * @var \HalcyonLaravel\Base\Repository\DefaultObserver
-     */
-    protected $observer;
-
-    /**
-     * BaseRepository constructor.
-     */
-    public function __construct()
-    {
-        $this->observer = new DefaultObserver;
-        parent::__construct(new Application);
-    }
+    private $observer = null;
 
     /**
      * @param array|null $request
@@ -72,28 +58,40 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param array $data
+     * @param array $attributes
      *
-     * @return BaseModel
+     * @return mixed
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(array $data): BaseModel
+    public function create(array $attributes)
     {
-        return $this->action(function () use ($data) {
-            $data = $this->observer::storing($data);
-            $model = $this->create($data);
+        if (!$this->hasObserver()) {
+            return parent::create($attributes);
+        }
 
-            return $this->observer::stored($model, $data);
+        return $this->action(function () use ($attributes) {
+            $data = $this->observer::creating($attributes);
+            $model = parent::create($data);
+            return $this->observer::created($model, $attributes);
         });
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasObserver(): bool
+    {
+        return !is_null($this->observer);
     }
 
     /**
      * This will handle DB transaction action
      *
-     * Closure $closure
+     * @param \Closure $closure
      *
      * @return mixed
      */
-    public function action(Closure $closure)
+    private function action(Closure $closure)
     {
         return DB::transaction(function () use ($closure) {
             return $closure();
@@ -101,75 +99,98 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param array $data
-     * @param       $modelId
+     * @param array $attributes
+     * @param       $id
      *
-     * @return BaseModel
+     * @return mixed
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(array $data, $modelId): BaseModel
+    public function update(array $attributes, $id)
     {
-        $model = $this->find($modelId);
+        if (!$this->hasObserver()) {
+            return parent::update($attributes, $id);
+        }
 
-        return $this->action(function () use ($data, $model) {
+        $model = $this->find($id);
+
+        return $this->action(function () use ($attributes, $model) {
             $oldModel = $model->getOriginal();
-            $model = $this->observer::updating($model, $data);
-            $model = parent::update($data, $model->id);
-
-            return $this->observer::updated($model, $data, $oldModel);
+            $model = $this->observer::updating($model, $attributes);
+            $model = parent::update($attributes, $model->id);
+            return $this->observer::updated($model, $attributes, $oldModel);
         });
     }
 
     /**
-     * @param BaseModel $model
+     * @param $id
      *
-     * @return BaseModel
+     * @return int|mixed
      */
-    public function destroy(BaseModel $model): BaseModel
+    public function delete($id)
     {
+        if (!$this->hasObserver()) {
+            return parent::delete($id);
+        }
+
+        $model = $this->find($id);
+
         return $this->action(function () use ($model) {
             $model = $this->observer::deleting($model);
-            $this->delete($model->id);
+            parent::delete($model->id);
 
             return $this->observer::deleted($model);
         });
     }
 
     /**
-     * @param BaseModel $model
+     * @param $id
      *
-     * @return BaseModel
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
-    public function restore(BaseModel $model): BaseModel
+    public function restore($id)
     {
-        if (is_null($model->deleted_at)) {
-            throw new RepositoryException(403, trans('base::exceptions.not_deleted'));
+        $this->pushCriteria(new OnlyTrashCriteria);
+        $model = $this->find($id);
+
+        if (!$this->hasObserver()) {
+            $model->restore();
+            event(new RepositoryEntityUpdated($this, $model));
+            return $model;
         }
 
         return $this->action(function () use ($model) {
             $model = $this->observer::restoring($model);
             $model->restore();
 
-            //event(new RepositoryEntityUpdated(new static, $model));
+            event(new RepositoryEntityUpdated($this, $model));
 
             return $this->observer::restored($model);
         });
     }
 
     /**
-     * @param BaseModel $model
+     * @param $id
      *
-     * @return BaseModel
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
-    public function purge(BaseModel $model): BaseModel
+    public function purge($id)
     {
-        if (is_null($model->deleted_at)) {
-            throw new RepositoryException(403, trans('base::exceptions.not_deleted'));
+        $this->pushCriteria(new OnlyTrashCriteria);
+        $model = $this->find($id);
+
+        if (!$this->hasObserver()) {
+            $model->forceDelete();
+            event(new RepositoryEntityUpdated($this, $model));
+            return $model;
         }
 
         return $this->action(function () use ($model) {
             $model = $this->observer::purging($model);
             $model->forceDelete();
 
+            event(new RepositoryEntityUpdated($this, $model));
             return $this->observer::purged($model);
         });
     }

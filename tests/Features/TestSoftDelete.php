@@ -59,7 +59,7 @@ class TestSoftDelete extends TestCase
 
         $response = $this->delete(route('admin.page-sd.purge', $this->pageSoftdelete));
 
-        $response->assertStatus(403);
+        $response->assertStatus(404);
 
 
         $this->assertDatabaseHas((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
@@ -69,7 +69,7 @@ class TestSoftDelete extends TestCase
     {
         $response = $this->patch(route('admin.page-sd.restore', $this->pageSoftdelete), []);
 
-        $response->assertStatus(403);
+        $response->assertStatus(404);
 
         //$response->assertJson([
         //    'message' => 'This content has not been deleted yet.',

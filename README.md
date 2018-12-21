@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.12
+# Halcyon Packages Base - v2.0.13
 
 
 ## Changes Log 
+    v2.0.13: Make base available to all models.
     v2.0.12: Table repo update
     v2.0.11: Remove boot criteria.
     v2.0.10: Add param on criteria.

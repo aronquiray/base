@@ -2,8 +2,6 @@
 
 namespace HalcyonLaravel\Base\Repository;
 
-use HalcyonLaravel\Base\Models\Contracts\BaseModel;
-
 abstract class ObserverContract
 {
     /**
@@ -14,69 +12,69 @@ abstract class ObserverContract
     abstract public static function storing(array $data): array;
 
     /**
-     * @param BaseModel $model
-     * @param array     $data
+     * @param       $model
+     * @param array $data
      *
-     * @return BaseModel
+     * @return mixed
      */
-    abstract public static function stored(BaseModel $model, array $data): BaseModel;
+    abstract public static function stored($model, array $data);
 
     /**
-     * @param BaseModel $model
-     * @param array     $data
+     * @param       $model
+     * @param array $data
      *
-     * @return BaseModel
+     * @return mixed
      */
-    abstract public static function updating(BaseModel $model, array $data): BaseModel;
+    abstract public static function updating($model, array $data);
 
     /**
-     * @param BaseModel $model
-     * @param array     $data
-     * @param array     $oldModel
+     * @param       $model
+     * @param array $data
+     * @param array $oldModel
      *
-     * @return BaseModel
+     * @return mixed
      */
-    abstract public static function updated(BaseModel $model, array $data, array $oldModel): BaseModel;
+    abstract public static function updated($model, array $data, array $oldModel);
 
     /**
-     * @param BaseModel $model
+     * @param $model
      *
-     * @return BaseModel
+     * @return mixed
      */
-    abstract public static function deleting(BaseModel $model): BaseModel;
+    abstract public static function deleting($model);
 
     /**
-     * @param BaseModel $model
+     * @param $model
      *
-     * @return BaseModel
+     * @return mixed
      */
-    abstract public static function deleted(BaseModel $model): BaseModel;
+    abstract public static function deleted($model);
 
     /**
-     * @param BaseModel $model
+     * @param $model
      *
-     * @return BaseModel
+     * @return mixed
      */
-    abstract public static function restoring(BaseModel $model): BaseModel;
+    abstract public static function restoring($model);
 
     /**
-     * @param BaseModel $model
+     * @param $model
      *
-     * @return BaseModel
+     * @return mixed
      */
-    abstract public static function restored(BaseModel $model): BaseModel;
+    abstract public static function restored($model);
 
     /**
-     * @param BaseModel $model
+     * @param $model
      *
-     * @return BaseModel
+     * @return mixed
      */
-    abstract public static function purging(BaseModel $model): BaseModel;
+    abstract public static function purging($model);
 
     /**
-     * @param BaseModel $model
+     * @param $model
      *
-     * @return BaseModel
+     * @return mixed
      */
-    abstract public static function purged(BaseModel $model): BaseModel;
+    abstract public static function purged($model);
 }

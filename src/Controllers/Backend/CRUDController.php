@@ -82,6 +82,7 @@ abstract class CRUDController extends Controller implements CRUDContract
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function store(Request $request)
     {
@@ -89,7 +90,7 @@ abstract class CRUDController extends Controller implements CRUDContract
         $this->validate($request, $baseableOptions->storeRules, $baseableOptions->storeRuleMessages);
 
         $data = $this->generateStub($request);
-        $model = $this->repository()->store($data);
+        $model = $this->repository()->create($data);
 
         return $this->response('store', $request->ajax(), $model,
             $this->_redirectAfterAction($request->_submission, $model));
@@ -101,6 +102,7 @@ abstract class CRUDController extends Controller implements CRUDContract
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function update(Request $request, String $routeKeyName)
     {
@@ -125,7 +127,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function destroy(Request $request, $slug)
     {
         $model = $this->getModel($slug);
-        $this->repository()->destroy($model);
+        $this->repository()->delete($model->id);
         $redirect = route($this->routePath . '.' . (method_exists($this->repository()->model(),
                 'bootSoftDeletes') ? 'deleted' : 'index'));
 
