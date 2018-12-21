@@ -3,15 +3,16 @@
 namespace HalcyonLaravel\Base\Repository;
 
 use Closure;
+use DB;
+use HalcyonLaravel\Base\Criterion\Eloquent\LatestCriteria;
+use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashCriteria;
 use HalcyonLaravel\Base\Exceptions\RepositoryException;
 use HalcyonLaravel\Base\Models\Contracts\BaseModel;
 use Illuminate\Container\Container as Application;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository as PrettusBaseRepository;
 use Prettus\Repository\Traits\CacheableRepository;
+use Schema;
 
 //use Prettus\Repository\Events\RepositoryEntityUpdated;
 
@@ -38,9 +39,10 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      * @param array      $fields
      * @param bool       $isAllFillable
      *
-     * @return Builder
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
-    public function table(array $request = null, array $fields = [], bool $isAllFillable = true): Builder
+    public function table(array $request = null, array $fields = [], bool $isAllFillable = true)
     {
         $isHasSoftDelete = method_exists($this->model, 'bootSoftDeletes');
 
@@ -51,20 +53,22 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
             $fields[] = 'deleted_at';
         }
 
+        $columns = null;
         if ($isAllFillable) {
-            $fillable = array_merge($this->model->getFillable(), $fields);
-            $query = $this->model->select($fillable);
+            $columns = array_merge($this->model->getFillable(), $fields);
         } else {
-            $query = $this->model->select($fields);
+            $columns = $fields;
         }
 
         if ($isHasSoftDelete) {
             if (isset($request['trashOnly']) && $request['trashOnly']) {
-                $query->onlyTrashed();
+                $this->pushCriteria(new OnlyTrashCriteria);
             }
         }
 
-        return $query;
+        $this->pushCriteria(new LatestCriteria);
+
+        return $this->all($columns);
     }
 
     /**
