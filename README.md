@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.14
+# Halcyon Packages Base - v2.0.15
 
 
 ## Changes Log 
+    v2.0.15: Repo construct
     v2.0.14: Make protected observer, then check instance
     v2.0.13: Make base available to all models.
     v2.0.12: Table repo update

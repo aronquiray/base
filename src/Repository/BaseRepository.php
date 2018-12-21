@@ -7,6 +7,7 @@ use DB;
 use Exception;
 use HalcyonLaravel\Base\Criterion\Eloquent\LatestCriteria;
 use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashCriteria;
+use Illuminate\Container\Container;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository as PrettusBaseRepository;
 use Prettus\Repository\Events\RepositoryEntityUpdated;
@@ -20,6 +21,11 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     use CacheableRepository;
 
     protected $observer = null;
+
+    public function __construct()
+    {
+        parent::__construct(app(Container::class));
+    }
 
     /**
      * @param array|null $request
@@ -63,6 +69,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      *
      * @return mixed
      * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @throws \Throwable
      */
     public function create(array $attributes)
     {
@@ -114,6 +121,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      *
      * @return mixed
      * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @throws \Throwable
      */
     public function update(array $attributes, $id)
     {
@@ -135,6 +143,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      * @param $id
      *
      * @return int|mixed
+     * @throws \Throwable
      */
     public function delete($id)
     {
@@ -157,6 +166,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      *
      * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException
+     * @throws \Throwable
      */
     public function restore($id)
     {
@@ -184,6 +194,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      *
      * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException
+     * @throws \Throwable
      */
     public function purge($id)
     {
@@ -206,7 +217,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param ObserverContract $observer
+     * @param \HalcyonLaravel\Base\Repository\ObserverContract $observer
      */
     protected function setObserver(ObserverContract $observer)
     {
