@@ -26,14 +26,6 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @return \Illuminate\Foundation\Application|mixed
-     */
-    public function resolveModel()
-    {
-        return app($this->model());
-    }
-
-    /**
      * @param array|null $request
      * @param array      $fields
      * @param bool       $isAllFillable

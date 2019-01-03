@@ -17,10 +17,11 @@ abstract class StatusController extends BaseController
      * @param string $type
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function status(string $type)
     {
-        $model = resolve($this->repository()->model());
+        $model = $this->repository()->makeModel();
         $statusKey = $model->statusKeyName();
 
         return view("{$this->viewPath}.status", compact('type', 'statusKey'));

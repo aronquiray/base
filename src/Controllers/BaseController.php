@@ -29,12 +29,13 @@ abstract class BaseController extends Controller
      * @param array|null $customWhere
      *
      * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function getModel(string $key, bool $trash = false, array $customWhere = null)
     {
         $repo = $this->repository();
 
-        $modelClass = $repo->resolveModel();
+        $modelClass = $repo->makeModel();
 
         $where = [
             $modelClass->getRouteKeyName() => $key,
