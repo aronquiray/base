@@ -84,9 +84,9 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
         }
 
         return $this->action(function () use ($attributes) {
-            $data = $this->observer::creating($attributes);
+            $data = $this->observer::storing($attributes);
             $model = parent::create($data);
-            return $this->observer::created($model, $attributes);
+            return $this->observer::stored($model, $attributes);
         });
     }
 
@@ -101,7 +101,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
         if ($has) {
             // check instance
             throw_if(!($this->observer instanceof ObserverContract), Exception ::class,
-                "{$this->observer} muss instance of " . ObserverContract::class . '.');
+                get_class($this->observer) . " must instance of " . ObserverContract::class . '.');
         }
 
         return $has;

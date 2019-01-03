@@ -38,7 +38,13 @@
   },
   "scripts": {
     "phpunit": [
-      "./vendor/bin/phpunit --verbose > output.txt -d memory_limit=2048M"
+      "./vendor/bin/phpunit --verbose > phpunit.txt -d memory_limit=2048M"
+    ],
+    "coverage": [
+      "./vendor/bin/phpunit --coverage-html ./coverage"
+    ],
+    "coverage-txt": [
+      "./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover"
     ],
     "test": "./vendor/bin/phpunit --verbose"
   }

@@ -146,6 +146,15 @@ class TestCase extends Orchestra
             Route::patch('page/status/{page}', 'PageStatusController@update')->name('page.status.update');
             Route::resource('page', 'PagesController');
         });
+        // for observer
+        Route::group([
+            'namespace' => 'HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page',
+            'prefix' => 'admin',
+            'as' => 'admin.',
+            // 'middleware' => 'admin'
+        ], function () {
+            Route::resource('page-observer', 'PagesObserverController');
+        });
 
         // Softdelete
         Route::group([
