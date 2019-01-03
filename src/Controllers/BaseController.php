@@ -34,7 +34,7 @@ abstract class BaseController extends Controller
     {
         $repo = $this->repository();
 
-        $modelClass = resolve($repo->model());
+        $modelClass = $repo->resolveModel();
 
         $where = [
             $modelClass->getRouteKeyName() => $key,

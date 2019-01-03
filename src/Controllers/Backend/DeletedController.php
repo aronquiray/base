@@ -28,6 +28,7 @@ abstract class DeletedController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Prettus\Repository\Exceptions\RepositoryException
+     * @throws \Throwable
      */
     public function restore(Request $request, String $routeKeyName)
     {
@@ -43,6 +44,7 @@ abstract class DeletedController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Prettus\Repository\Exceptions\RepositoryException
+     * @throws \Throwable
      */
     public function purge(Request $request, String $routeKeyName)
     {

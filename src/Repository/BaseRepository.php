@@ -14,8 +14,6 @@ use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Prettus\Repository\Traits\CacheableRepository;
 use Schema;
 
-//use Prettus\Repository\Events\RepositoryEntityUpdated;
-
 abstract class BaseRepository extends PrettusBaseRepository implements CacheableInterface
 {
     use CacheableRepository;
@@ -25,6 +23,14 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     public function __construct()
     {
         parent::__construct(app(Container::class));
+    }
+
+    /**
+     * @return \Illuminate\Foundation\Application|mixed
+     */
+    public function resolveModel()
+    {
+        return app($this->model());
     }
 
     /**

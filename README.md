@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.15
+# Halcyon Packages Base - v2.0.16
 
 
 ## Changes Log 
+    v2.0.16: Add resolve model on parent repo.
     v2.0.15: Repo construct
     v2.0.14: Make protected observer, then check instance
     v2.0.13: Make base available to all models.

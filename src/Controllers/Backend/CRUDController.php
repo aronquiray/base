@@ -22,7 +22,7 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function __construct()
     {
-        $model = resolve($this->repository()->model());
+        $model = $this->repository()->resolveModel();
         $this->viewPath = $model::VIEW_BACKEND_PATH;
         $this->routePath = $model::ROUTE_ADMIN_PATH;
     }
@@ -83,6 +83,7 @@ abstract class CRUDController extends Controller implements CRUDContract
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @throws \Throwable
      */
     public function store(Request $request)
     {
@@ -103,6 +104,7 @@ abstract class CRUDController extends Controller implements CRUDContract
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @throws \Throwable
      */
     public function update(Request $request, String $routeKeyName)
     {
@@ -123,6 +125,7 @@ abstract class CRUDController extends Controller implements CRUDContract
      * @param                          $slug
      *
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
      */
     public function destroy(Request $request, $slug)
     {
