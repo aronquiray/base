@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.18
+# Halcyon Packages Base - v2.0.19
 
 
 ## Changes Log 
+    v2.0.19: Fix table with datatables to builder
     v2.0.18: Revert resolveModel to makeModel from prettus repo
     v2.0.17: Fix check obsever on repo.
     v2.0.16: Add resolve model on parent repo.
