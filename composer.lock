@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "b4fd645bb11c13ccf4bff38aa4e343fa",
+  "content-hash": "382a89ee59dc635e1f5f1fb9840ee439",
   "packages": [
     {
       "name": "doctrine/inflector",
@@ -1806,26 +1806,26 @@
     },
     {
       "name": "spatie/laravel-translatable",
-      "version": "2.2.1",
+      "version": "3.1.1",
       "source": {
         "type": "git",
         "url": "https://github.com/spatie/laravel-translatable.git",
-        "reference": "107df7d9a75046a7552a995ed3d1971a9f98f833"
+        "reference": "7268e499e5ee427d239d678c9065c5a1da6ba659"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/107df7d9a75046a7552a995ed3d1971a9f98f833",
-        "reference": "107df7d9a75046a7552a995ed3d1971a9f98f833",
+        "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/7268e499e5ee427d239d678c9065c5a1da6ba659",
+        "reference": "7268e499e5ee427d239d678c9065c5a1da6ba659",
         "shasum": ""
       },
       "require": {
         "laravel/framework": "~5.5.0|~5.6.0|~5.7.0",
-        "php": "^7.0"
+        "php": "^7.1"
       },
       "require-dev": {
         "mockery/mockery": "^1.0",
         "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0",
-        "phpunit/phpunit": "^6.3|^7.0"
+        "phpunit/phpunit": "^7.4"
       },
       "type": "library",
       "extra": {
@@ -1874,7 +1874,7 @@
         "spatie",
         "translate"
       ],
-      "time": "2018-08-24T09:34:12+00:00"
+      "time": "2018-12-19T09:46:29+00:00"
     },
     {
       "name": "swiftmailer/swiftmailer",
