@@ -10,6 +10,7 @@ namespace HalcyonLaravel\Base\Database\Traits;
 
 use HalcyonLaravel\Base\Models\Contracts\BaseModel;
 use Illuminate\Http\UploadedFile;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 trait SeederHelper
 {
@@ -36,7 +37,13 @@ trait SeederHelper
         }
     }
 
-    public function seederUploader($model, $file, array $customProperties = null, $collectionName = 'images')
+    /**
+     * @param \Spatie\MediaLibrary\HasMedia\HasMedia $model
+     * @param                                        $file
+     * @param array|null                             $customProperties
+     * @param string                                 $collectionName
+     */
+    public function seederUploader(HasMedia $model, $file, array $customProperties = null, $collectionName = 'images')
     {
         if (is_string($file)) {
             if (!empty($customProperties)) {
