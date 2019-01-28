@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.21
+# Halcyon Packages Base - v2.0.22
 
 
 ## Changes Log 
+    v2.0.22: seeder image
     v2.0.21: Add inject on media seeder.
     v2.0.20: Add string parameter for query params.
     v2.0.19: Fix table with datatables to builder

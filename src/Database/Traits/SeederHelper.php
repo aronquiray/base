@@ -46,31 +46,38 @@ trait SeederHelper
     public function seederUploader(HasMedia $model, $file, array $customProperties = null, $collectionName = 'images')
     {
         if (is_string($file)) {
-            if (!empty($customProperties)) {
-                $model
-                    ->copyMedia(testFilePath($file))
-                    ->withCustomProperties($customProperties)
-                    ->toMediaCollection($collectionName);
+            $fileName = explode('/', $file);
+            $fileName = $fileName[count($fileName) - 1];
 
-            } else {
-                $model
-                    ->copyMedia(testFilePath($file))
-                    ->toMediaCollection($collectionName);
-            }
+        } else {
+            $fileName = $file->getClientOriginalName();
+        }
+
+        $fileName = explode('.', $fileName)[0];
+
+        $customProperties = array_merge([
+            'attributes' => [
+                'title' => $fileName,
+                'alt' => $fileName,
+            ],
+        ], $customProperties ?: []);
+
+        if (is_string($file)) {
+            $model
+                ->copyMedia(testFilePath($file))
+                ->withCustomProperties($customProperties)
+                ->toMediaCollection($collectionName);
+
+
         } elseif (get_class($file) instanceof UploadedFile) {
-            if (!empty($customProperties)) {
-                $model
-                    ->addMedia($file)
-                    ->withCustomProperties($customProperties)
-                    ->preservingOriginal()
-                    ->toMediaCollection($collectionName);
 
-            } else {
-                $model
-                    ->addMedia($file)
-                    ->preservingOriginal()
-                    ->toMediaCollection($collectionName);
-            }
+            $model
+                ->addMedia($file)
+                ->withCustomProperties($customProperties)
+                ->preservingOriginal()
+                ->toMediaCollection($collectionName);
+
+
         }
     }
 
