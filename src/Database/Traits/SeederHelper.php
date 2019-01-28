@@ -54,6 +54,7 @@ trait SeederHelper
         }
 
         $fileName = explode('.', $fileName)[0];
+        $fileName = str_replace('%20', ' ', $fileName);
 
         $customProperties = array_merge([
             'attributes' => [
