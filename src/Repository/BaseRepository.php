@@ -5,7 +5,6 @@ namespace HalcyonLaravel\Base\Repository;
 use Closure;
 use DB;
 use Exception;
-use HalcyonLaravel\Base\Criterion\Eloquent\LatestCriteria;
 use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashCriteria;
 use Illuminate\Container\Container;
 use Prettus\Repository\Contracts\CacheableInterface;
@@ -56,8 +55,6 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
                 $this->pushCriteria(new OnlyTrashCriteria);
             }
         }
-
-        $this->pushCriteria(new LatestCriteria);
 
         $this->applyCriteria();
         $this->applyScope();
