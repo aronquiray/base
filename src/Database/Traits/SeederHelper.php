@@ -9,7 +9,6 @@
 namespace HalcyonLaravel\Base\Database\Traits;
 
 use App\Models\Core\Page\Page;
-use Closure;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
@@ -22,9 +21,9 @@ trait SeederHelper
      * @param \Illuminate\Database\Eloquent\Model $model
      * @param string                              $view
      *
-     * @return \HalcyonLaravel\Base\Database\Traits\Page
+     * @return \App\Models\Core\Page\Page
      */
-    public function modelPageSeeder(Model $model, Closure $closure = null, string $view = 'index'): Page
+    public function modelPageSeeder(Model $model, string $view = 'index'): Page
     {
         $page = Page::create([
             'title' => ucfirst($model::MODULE_NAME),
@@ -37,9 +36,6 @@ trait SeederHelper
             'keywords' => 'page,' . kebab_case($model::MODULE_NAME),
         ]);
 
-        if (!is_null($closure)) {
-            $closure($page);
-        }
 
         return $page;
     }
