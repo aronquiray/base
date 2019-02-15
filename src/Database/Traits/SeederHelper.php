@@ -10,7 +10,7 @@ namespace HalcyonLaravel\Base\Database\Traits;
 
 use App\Models\Core\Page\Page;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface;
-use Illuminate\Database\Eloquent\Model;
+use HalcyonLaravel\Base\Models\Model;
 use Illuminate\Http\UploadedFile;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 
@@ -18,8 +18,8 @@ trait SeederHelper
 {
 
     /**
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @param string                              $view
+     * @param \HalcyonLaravel\Base\Models\Model $model
+     * @param string                            $view
      *
      * @return \App\Models\Core\Page\Page
      */
@@ -33,10 +33,8 @@ trait SeederHelper
         $page->metaTag()->create([
             'title' => ucfirst($model::MODULE_NAME),
             'description' => 'List of all ' . str_plural($model::MODULE_NAME),
-            'keywords' => 'page,' . kebab_case($model::MODULE_NAME),
+            'keywords' => 'page,' . str_replace('-', ',', kebab_case($model::MODULE_NAME)),
         ]);
-
-
         return $page;
     }
 

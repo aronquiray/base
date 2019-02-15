@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.30
+# Halcyon Packages Base - v2.0.31
 
 
 ## Changes Log 
+    v2.0.31: Seeder domain helper update
     v2.0.30: Update CrudContract 
     v2.0.29: Add page model seeder
     v2.0.27: Add permission seeder using array, update interface
