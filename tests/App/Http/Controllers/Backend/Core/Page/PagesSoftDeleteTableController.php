@@ -16,7 +16,9 @@ class PagesSoftDeleteTableController extends Controller
     protected $pageDeleteRepository;
 
     /**
-     * @param BlockRepository $repo
+     * PagesSoftDeleteTableController constructor.
+     *
+     * @param \HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository $pageDeleteRepository
      */
     public function __construct(PageDeleteRepository $pageDeleteRepository)
     {
@@ -25,9 +27,10 @@ class PagesSoftDeleteTableController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function __invoke(Request $request)
     {

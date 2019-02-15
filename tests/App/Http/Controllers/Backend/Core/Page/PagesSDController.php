@@ -18,21 +18,15 @@ class PagesSDController extends Controller
 
     /**
      * PagesSDController constructor.
-     * @param PageDeleteRepository $pageDeleteRepository
+     *
+     * @param \HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository $pageDeleteRepository
+     *
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function __construct(PageDeleteRepository $pageDeleteRepository)
     {
         $this->pageDeleteRepository = $pageDeleteRepository;
         parent::__construct();
-    }
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @return array
-     */
-    public function generateStub(Request $request): array
-    {
-        return $request->only(['title', 'description', 'status']);
     }
 
     /**
@@ -58,5 +52,16 @@ class PagesSDController extends Controller
     public function repository(): BaseRepository
     {
         return $this->pageDeleteRepository;
+    }
+
+    /**
+     * @param \Illuminate\Http\Request            $request
+     * @param \Illuminate\Database\Eloquent\Model $model
+     *
+     * @return array
+     */
+    public function generateStub(Request $request, IlluminateModel $model = null): array
+    {
+        return $request->only(['title', 'description', 'status']);
     }
 }

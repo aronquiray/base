@@ -20,22 +20,13 @@ class PagesObserverController extends Controller
      * PagesObserverController constructor.
      *
      * @param \HalcyonLaravel\Base\Tests\Repositories\PageObserverRepository $pageRepository
+     *
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function __construct(PageObserverRepository $pageRepository)
     {
         $this->pageObserverRepository = $pageRepository;
         parent::__construct();
-    }
-
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return array
-     */
-    public function generateStub(Request $request): array
-    {
-        return $request->only(['title', 'description', 'status']);
     }
 
     /**
@@ -69,5 +60,16 @@ class PagesObserverController extends Controller
     public function repository(): Repository
     {
         return $this->pageObserverRepository;
+    }
+
+    /**
+     * @param \Illuminate\Http\Request            $request
+     * @param \Illuminate\Database\Eloquent\Model $model
+     *
+     * @return array
+     */
+    public function generateStub(Request $request, IlluminateModel $model = null): array
+    {
+        return $request->only(['title', 'description', 'status']);
     }
 }

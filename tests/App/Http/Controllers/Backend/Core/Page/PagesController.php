@@ -18,22 +18,15 @@ class PagesController extends Controller
 
     /**
      * PagesController constructor.
-     * @param PageRepository $pageRepository
+     *
+     * @param \HalcyonLaravel\Base\Tests\Repositories\PageRepository $pageRepository
+     *
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function __construct(PageRepository $pageRepository)
     {
         $this->pageRepository = $pageRepository;
         parent::__construct();
-    }
-
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @return array
-     */
-    public function generateStub(Request $request): array
-    {
-        return $request->only(['title', 'description', 'status']);
     }
 
     /**
@@ -66,5 +59,16 @@ class PagesController extends Controller
     public function repository(): Repository
     {
         return $this->pageRepository;
+    }
+
+    /**
+     * @param \Illuminate\Http\Request            $request
+     * @param \Illuminate\Database\Eloquent\Model $model
+     *
+     * @return array
+     */
+    public function generateStub(Request $request, IlluminateModel $model = null): array
+    {
+        return $request->only(['title', 'description', 'status']);
     }
 }

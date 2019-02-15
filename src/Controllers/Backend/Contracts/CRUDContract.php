@@ -9,11 +9,12 @@ use Illuminate\Http\Request;
 interface CRUDContract
 {
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request            $request
+     * @param \Illuminate\Database\Eloquent\Model $model
      *
      * @return array
      */
-    public function generateStub(Request $request): array;
+    public function generateStub(Request $request, IlluminateModel $model = null): array;
 
     /**
      * Validate input on store and update

@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.29
+# Halcyon Packages Base - v2.0.30
 
 
 ## Changes Log 
+    v2.0.30: Update CrudContract 
     v2.0.29: Add page model seeder
     v2.0.27: Add permission seeder using array, update interface
     v2.0.26: Make abstract constant in model

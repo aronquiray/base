@@ -22,7 +22,9 @@ class TestCrudsFeature extends TestCase
             'status' => 'enable',
         ]);
 
-        $response->assertStatus(302)->assertSessionHas('flash_success', 'Salliess has been created.')->assertRedirect(route('admin.page.show', Page::find(2)));
+        $response->assertStatus(302)
+            ->assertSessionHas('flash_success', 'Salliess has been created.')
+            ->assertRedirect(route('admin.page.show', Page::find(2)));
 
         $this->assertDatabaseHas((new Page)->getTable(), [
             'title' => 'Salliess',
