@@ -8,23 +8,40 @@
 
 namespace HalcyonLaravel\Base\Database\Traits;
 
-use HalcyonLaravel\Base\Models\Contracts\BaseModel;
+use HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface;
 use Illuminate\Http\UploadedFile;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 trait SeederHelper
 {
     /**
-     * @param \HalcyonLaravel\Base\Models\Contracts\BaseModel $modelClass
-     * @param bool                                            $isAddToAdminRole
-     * @param array                                           $except
+     * @param \HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface $modelClass
+     * @param bool                                                               $isAddToAdminRole
+     * @param array                                                              $except
      */
-    public function seederPermission(BaseModel $modelClass, bool $isAddToAdminRole = true, array $except = [])
+    public function seederPermission(
+        BaseModelPermissionInterface $modelClass,
+        bool $isAddToAdminRole = true,
+        array $except = []
+    )
     {
+        $this->permissionStore($modelClass, $isAddToAdminRole, $except);
+    }
+
+    /**
+     * @param       $modelClassOrArray
+     * @param bool  $isAddToAdminRole
+     * @param array $except
+     */
+    private function permissionStore($modelClassOrArray, bool $isAddToAdminRole = true, array $except = [])
+    {
+
+        $permissionNames = is_array($modelClassOrArray) ? $modelClassOrArray : $modelClassOrArray::permissions();
+
         $roleModel = resolve(config('permission.models.role'));
 
         $config = config('access.users');
-        foreach ($modelClass::permissions() as $permissionName) {
+        foreach ($permissionNames as $permissionName) {
             $permission = resolve(config('permission.models.permission'))::create([
                 'name' => $permissionName,
             ]);
@@ -35,6 +52,16 @@ trait SeederHelper
                 }
             }
         }
+    }
+
+    /**
+     * @param array $permissionName
+     * @param bool  $isAddToAdminRole
+     * @param array $except
+     */
+    public function seederPermissionArray(array $permissionName, bool $isAddToAdminRole = true, array $except = [])
+    {
+        $this->permissionStore($permissionName, $isAddToAdminRole, $except);
     }
 
     /**

@@ -9,15 +9,9 @@
 namespace HalcyonLaravel\Base\Models\Contracts;
 
 
-interface BaseModel
+interface BaseModelInterface
 {
 
-    /**
-     * Return all the permissions for this model.
-     *
-     * @return array
-     */
-    public static function permissions(): array;
 
 
     /**

@@ -3,13 +3,15 @@
 namespace HalcyonLaravel\Base\Models;
 
 use HalcyonLaravel\Base\Enforcer;
+use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
+use HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface;
 use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
  * Class Model.
  */
-abstract class Model extends BaseModel implements Contracts\BaseModel
+abstract class Model extends BaseModel implements BaseModelInterface, BaseModelPermissionInterface
 {
     use ModelTraits;
 
