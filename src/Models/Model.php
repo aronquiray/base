@@ -2,6 +2,7 @@
 
 namespace HalcyonLaravel\Base\Models;
 
+use HalcyonLaravel\Base\Enforcer;
 use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
@@ -11,6 +12,25 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 abstract class Model extends BaseModel implements Contracts\BaseModel
 {
     use ModelTraits;
+
+    const MODULE_NAME = 'abstract';
+    const VIEW_BACKEND_PATH = 'abstract';
+    const VIEW_FRONTEND_PATH = 'abstract';
+    const ROUTE_ADMIN_PATH = 'abstract';
+    const ROUTE_FRONTEND_PATH = 'abstract';
+
+    /**
+     * Model constructor.
+     *
+     * @param array $attributes
+     *
+     * @throws \ReflectionException
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        Enforcer::__add(__CLASS__, get_called_class());
+    }
 
     /**
      * @param       $query

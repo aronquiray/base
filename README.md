@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.25
+# Halcyon Packages Base - v2.0.26
 
 
 ## Changes Log 
+    v2.0.26: Make abstract constant in model
     v2.0.25: Remove order in table query
     v2.0.24: Image seeder replace underscore and dash to space
     v2.0.23: Image seeder replace %20 to space
