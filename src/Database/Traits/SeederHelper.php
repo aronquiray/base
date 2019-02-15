@@ -8,12 +8,42 @@
 
 namespace HalcyonLaravel\Base\Database\Traits;
 
+use App\Models\Core\Page\Page;
+use Closure;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 trait SeederHelper
 {
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param string                              $view
+     *
+     * @return \HalcyonLaravel\Base\Database\Traits\Page
+     */
+    public function modelPageSeeder(Model $model, Closure $closure = null, string $view = 'index'): Page
+    {
+        $page = Page::create([
+            'title' => ucfirst($model::MODULE_NAME),
+            'pageable_type' => get_class($model),
+            'template' => $model::VIEW_FRONTEND_PATH . '.' . $view,
+        ]);
+        $page->metaTag()->create([
+            'title' => ucfirst($model::MODULE_NAME),
+            'description' => 'List of all ' . str_plural($model::MODULE_NAME),
+            'keywords' => 'page,' . kebab_case($model::MODULE_NAME),
+        ]);
+
+        if (!is_null($closure)) {
+            $closure($page);
+        }
+
+        return $page;
+    }
+
     /**
      * @param \HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface $modelClass
      * @param bool                                                               $isAddToAdminRole
@@ -23,8 +53,7 @@ trait SeederHelper
         BaseModelPermissionInterface $modelClass,
         bool $isAddToAdminRole = true,
         array $except = []
-    )
-    {
+    ) {
         $this->permissionStore($modelClass, $isAddToAdminRole, $except);
     }
 
