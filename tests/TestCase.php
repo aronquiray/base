@@ -29,7 +29,7 @@ class TestCase extends Orchestra
         $this->setUpDatabase($this->app);
         $this->setUpSeed();
         $this->setUpRoutes();
-        View::addLocation(__DIR__.'/resources/views/');
+        View::addLocation(__DIR__ . '/resources/views/');
     }
 
     /**
@@ -39,7 +39,7 @@ class TestCase extends Orchestra
      */
     protected function setUpDatabase($app)
     {
-        include_once __DIR__.'/../vendor/spatie/laravel-permission/database/migrations/create_permission_tables.php.stub';
+        include_once __DIR__ . '/../vendor/spatie/laravel-permission/database/migrations/create_permission_tables.php.stub';
         (new \CreatePermissionTables())->up();
         $this->app['db']->connection()->getSchemaBuilder()->create('pages_sd', function (Blueprint $table) {
             $table->increments('id');
@@ -164,8 +164,10 @@ class TestCase extends Orchestra
             // 'middleware' => 'admin'
         ], function () {
             Route::get('page-sd/deleted', 'Core\Page\PagesSoftDeleteController@deleted')->name('page-sd.deleted');
-            Route::patch('page-sd/{page_sd}/deleted', 'Core\Page\PagesSoftDeleteController@restore')->name('page-sd.restore');
-            Route::delete('page-sd/{page_sd}/deleted', 'Core\Page\PagesSoftDeleteController@purge')->name('page-sd.purge');
+            Route::patch('page-sd/{page_sd}/deleted',
+                'Core\Page\PagesSoftDeleteController@restore')->name('page-sd.restore');
+            Route::delete('page-sd/{page_sd}/deleted',
+                'Core\Page\PagesSoftDeleteController@purge')->name('page-sd.purge');
             Route::group([
                 'namespace' => 'Core\Page',
             ], function () {
@@ -191,6 +193,7 @@ class TestCase extends Orchestra
      * Define environment setup.
      *
      * @param  \Illuminate\Foundation\Application $app
+     *
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -208,6 +211,7 @@ class TestCase extends Orchestra
     {
         return [
             "DataTables" => "Yajra\\DataTables\\Facades\\DataTables",
+            "MetaTag" => "Fomvasss\\LaravelMetaTags\\Facade",
         ];
     }
 
@@ -220,6 +224,7 @@ class TestCase extends Orchestra
             "Yajra\\DataTables\\DataTablesServiceProvider",
             "Spatie\\Permission\\PermissionServiceProvider",
             "Prettus\\Repository\\Providers\\RepositoryServiceProvider",
+            "Fomvasss\\LaravelMetaTags\\ServiceProvider",
         ];
     }
 }

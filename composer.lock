@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "757137f5352ca173b324a3826f816255",
+  "content-hash": "33592e81df988e3cb14a7e045b753785",
   "packages": [
     {
       "name": "doctrine/inflector",
@@ -278,6 +278,68 @@
         "parser"
       ],
       "time": "2018-03-08T01:11:30+00:00"
+    },
+    {
+      "name": "fomvasss/laravel-meta-tags",
+      "version": "2.0.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/fomvasss/laravel-meta-tags.git",
+        "reference": "3e4768ba0395c3f175d57dc2c8e54f5453ad7db8"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/fomvasss/laravel-meta-tags/zipball/3e4768ba0395c3f175d57dc2c8e54f5453ad7db8",
+        "reference": "3e4768ba0395c3f175d57dc2c8e54f5453ad7db8",
+        "shasum": ""
+      },
+      "require": {
+        "illuminate/database": "5.5.*|5.6.*|5.7.*|5.8.*",
+        "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*",
+        "illuminate/view": "5.5.*|5.6.*|5.7.*|5.8.*",
+        "php": ">=7.0.0"
+      },
+      "type": "composer-package",
+      "extra": {
+        "laravel": {
+          "providers": [
+            "Fomvasss\\LaravelMetaTags\\ServiceProvider"
+          ],
+          "aliases": {
+            "MetaTag": "Fomvasss\\LaravelMetaTags\\Facade"
+          }
+        }
+      },
+      "autoload": {
+        "psr-4": {
+          "Fomvasss\\LaravelMetaTags\\": "src"
+        },
+        "files": [
+          "src/helpers.php"
+        ]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Vasyl Fomin",
+          "email": "fomvasss@gmail.com",
+          "role": "Developer"
+        }
+      ],
+      "description": "A package to manage SEO (meta-tags, xml-fields, etc.)",
+      "keywords": [
+        "Sitemap",
+        "laravel",
+        "meta",
+        "meta tags",
+        "seo",
+        "tags",
+        "xml-map"
+      ],
+      "time": "2019-02-11T19:28:19+00:00"
     },
     {
       "name": "guzzlehttp/guzzle",

@@ -4,9 +4,12 @@ namespace HalcyonLaravel\Base\Controllers\Backend;
 
 use HalcyonLaravel\Base\Controllers\BaseController;
 use Illuminate\Http\Request;
+use MetaTag;
 
 /**
- * Class DeletedController.
+ * Class DeletedController
+ *
+ * @package HalcyonLaravel\Base\Controllers\Backend
  */
 abstract class DeletedController extends BaseController
 {
@@ -16,6 +19,10 @@ abstract class DeletedController extends BaseController
      */
     public function deleted()
     {
+        MetaTag::setTags([
+            'title' => 'Deleted ' . $this->getModelName(),
+        ]);
+
         $viewPath = $this->viewPath;
         $routePath = $this->routePath;
 

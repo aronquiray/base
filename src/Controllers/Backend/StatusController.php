@@ -5,6 +5,7 @@ namespace HalcyonLaravel\Base\Controllers\Backend;
 use HalcyonLaravel\Base\Controllers\BaseController;
 use HalcyonLaravel\Base\Exceptions\StatusControllerException;
 use Illuminate\Http\Request;
+use MetaTag;
 
 /**
  * Class StatusController.
@@ -23,6 +24,10 @@ abstract class StatusController extends BaseController
     {
         $model = $this->repository()->makeModel();
         $statusKey = $model->statusKeyName();
+
+        MetaTag::setTags([
+            'title' => $this->getModelName() . ' ' . ucfirst($type) . ' Management',
+        ]);
 
         return view("{$this->viewPath}.status", compact('type', 'statusKey'));
     }

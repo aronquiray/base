@@ -6,6 +6,7 @@ use HalcyonLaravel\Base\Controllers\Backend\Contracts\CRUDContract;
 use HalcyonLaravel\Base\Controllers\Backend\Traits\CRUDTrait;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
 use Illuminate\Http\Request;
+use MetaTag;
 
 /**
  * Class CRUDController.
@@ -34,6 +35,10 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function index()
     {
+        MetaTag::setTags([
+            'title' => $this->getModelName() . ' Management',
+        ]);
+
         $viewPath = $this->viewPath;
         $routePath = $this->routePath;
 
@@ -45,6 +50,10 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function create()
     {
+        MetaTag::setTags([
+            'title' => 'Create ' . $this->getModelName(),
+        ]);
+
         $viewPath = $this->viewPath;
         $routePath = $this->routePath;
 
@@ -59,6 +68,10 @@ abstract class CRUDController extends Controller implements CRUDContract
      */
     public function edit(String $routeKeyName)
     {
+        MetaTag::setTags([
+            'title' => 'Edit ' . $this->getModelName(),
+        ]);
+
         $model = $this->getModel($routeKeyName);
         $viewPath = $this->viewPath;
         $routePath = $this->routePath;
@@ -75,6 +88,11 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function show(String $routeKeyName)
     {
         $model = $this->getModel($routeKeyName);
+
+        MetaTag::setTags([
+            'title' => 'View ' . $this->getModelName(),
+        ]);
+
         $viewPath = $this->viewPath;
         $routePath = $this->routePath;
 

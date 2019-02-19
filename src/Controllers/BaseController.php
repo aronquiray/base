@@ -91,4 +91,14 @@ abstract class BaseController extends Controller
             'link' => $redirect,
         ]) : redirect($redirect)->withFlashSuccess($message);
     }
+
+    protected function getModelName(): string
+    {
+        $model = $this->repository()->model();
+        $model = explode('\\', $model);
+        $model = $model[count($model) - 1];
+        $model = kebab_case($model);
+
+        return ucwords($model);
+    }
 }
