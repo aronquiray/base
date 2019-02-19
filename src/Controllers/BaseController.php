@@ -98,6 +98,7 @@ abstract class BaseController extends Controller
         $model = explode('\\', $model);
         $model = $model[count($model) - 1];
         $model = kebab_case($model);
+        $model = ucwords(str_replace('-', ' ', $model));
 
         return ucwords($model);
     }
