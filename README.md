@@ -1,8 +1,9 @@
-# Halcyon Packages Base - v2.0.32
+# Halcyon Packages Base - v2.0.33
 
 
 ## Changes Log 
-    v2.0.32: Add meta data
+    v2.0.33: Add meta data
+    v2.0.32: Nullable pageable template
     v2.0.31: Seeder domain helper update
     v2.0.30: Update CrudContract 
     v2.0.29: Add page model seeder

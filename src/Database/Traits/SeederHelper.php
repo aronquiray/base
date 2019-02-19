@@ -28,7 +28,7 @@ trait SeederHelper
         $page = Page::create([
             'title' => ucfirst($model::MODULE_NAME),
             'pageable_type' => get_class($model),
-            'template' => $model::VIEW_FRONTEND_PATH . '.' . $view,
+//            'template' => $model::VIEW_FRONTEND_PATH . '.' . $view,
         ]);
         $page->metaTag()->create([
             'title' => ucfirst($model::MODULE_NAME),
