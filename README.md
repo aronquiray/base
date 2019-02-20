@@ -2,7 +2,7 @@
 
 
 ## Changes Log 
-    v2.0.35: Update table page seeder with $has_content:bool
+    v2.0.33: Update table page seeder with $has_content:bool
     v2.0.34: Fix get model name
     v2.0.33: Add meta data
     v2.0.32: Nullable pageable template
