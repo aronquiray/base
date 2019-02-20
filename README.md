@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.34
+# Halcyon Packages Base - v2.0.36
 
 
 ## Changes Log 
+    v2.0.36: Update page seeder param
     v2.0.34: Fix get model name
     v2.0.33: Add meta data
     v2.0.32: Nullable pageable template

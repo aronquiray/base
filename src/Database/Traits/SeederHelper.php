@@ -19,16 +19,14 @@ trait SeederHelper
 
     /**
      * @param \HalcyonLaravel\Base\Models\Model $model
-     * @param string                            $view
      *
      * @return \App\Models\Core\Page\Page
      */
-    public function modelPageSeeder(Model $model, string $view = 'index'): Page
+    public function modelPageSeeder(Model $model): Page
     {
         $page = Page::create([
             'title' => ucfirst($model::MODULE_NAME),
             'pageable_type' => get_class($model),
-//            'template' => $model::VIEW_FRONTEND_PATH . '.' . $view,
         ]);
         $page->metaTag()->create([
             'title' => ucfirst($model::MODULE_NAME),
