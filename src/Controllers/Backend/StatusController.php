@@ -23,6 +23,11 @@ abstract class StatusController extends BaseController
     public function status(string $type)
     {
         $model = $this->repository()->makeModel();
+
+        if (!array_key_exists($type, $model->statuses())) {
+            abort(404);
+        }
+
         $statusKey = $model->statusKeyName();
 
         MetaTag::setTags([
