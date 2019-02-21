@@ -1,7 +1,8 @@
-# Halcyon Packages Base - v2.0.37
+# Halcyon Packages Base - v2.0.38
 
 
 ## Changes Log 
+    v2.0.38: Add status in repo base table
     v2.0.37: Fix status key not exist using 404
     v2.0.36: Update page seeder param
     v2.0.34: Fix get model name

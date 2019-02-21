@@ -2,10 +2,12 @@
 
 namespace HalcyonLaravel\Base\Repository;
 
+use App\Criterion\Eloquent\ThisEqualThatCriteria;
 use Closure;
 use DB;
 use Exception;
 use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashCriteria;
+use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
 use Illuminate\Container\Container;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository as PrettusBaseRepository;
@@ -50,6 +52,12 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
             $columns = $fields;
         }
 
+        if ($this->model instanceof ModelStatusContract) {
+            $statusKey = $this->model->statusKeyName();
+            if (array_key_exists($statusKey, $request)) {
+                $this->pushCriteria(new ThisEqualThatCriteria($statusKey, $request[$statusKey]));
+            }
+        }
         if ($isHasSoftDelete) {
             if (isset($request['trashOnly']) && $request['trashOnly']) {
                 $this->pushCriteria(new OnlyTrashCriteria);
