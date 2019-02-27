@@ -9,6 +9,7 @@
 namespace HalcyonLaravel\Base\Database\Traits;
 
 use App\Models\Core\Page\Page;
+use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface;
 use HalcyonLaravel\Base\Models\Model;
 use Illuminate\Http\UploadedFile;
@@ -93,18 +94,21 @@ trait SeederHelper
      */
     public function seederUploader(HasMedia $model, $file, array $customProperties = null, $collectionName = 'images')
     {
-        if (is_string($file)) {
-            $fileName = explode('/', $file);
-            $fileName = $fileName[count($fileName) - 1];
-
+        if ($model instanceof BaseModelInterface) {
+            $fileName = $model->base();
         } else {
-            $fileName = $file->getClientOriginalName();
-        }
+            if (is_string($file)) {
+                $fileName = explode('/', $file);
+                $fileName = $fileName[count($fileName) - 1];
 
-        $fileName = explode('.', $fileName)[0];
-        $fileName = str_replace('%20', ' ', $fileName);
-        $fileName = str_replace('-', ' ', $fileName);
-        $fileName = str_replace('_', ' ', $fileName);
+            } else {
+                $fileName = $file->getClientOriginalName();
+            }
+            $fileName = explode('.', $fileName)[0];
+            $fileName = str_replace('%20', ' ', $fileName);
+            $fileName = str_replace('-', ' ', $fileName);
+            $fileName = str_replace('_', ' ', $fileName);
+        }
 
         $customProperties = array_merge([
             'attributes' => [
