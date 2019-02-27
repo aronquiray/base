@@ -23,7 +23,7 @@ class TestCase extends Orchestra
 
     protected $page;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->setUpDatabase($this->app);
@@ -184,7 +184,7 @@ class TestCase extends Orchestra
         // Route::get('page', 'tt')->name('frontend.page.show');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
     }

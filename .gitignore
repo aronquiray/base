@@ -3,3 +3,4 @@ phpunit.txt
 /report
 /.idea
 /coverage
+.phpunit.result.cache

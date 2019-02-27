@@ -10,7 +10,7 @@ class TestSoftDelete extends TestCase
 {
     protected $pageSoftdelete;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
     }

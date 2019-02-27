@@ -9,7 +9,7 @@ use HalcyonLaravel\Base\Tests\TestCase;
 
 class TestDataTable extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->actingAs($this->admin);
