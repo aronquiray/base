@@ -2,24 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: Lloric Mayuga Garcia <lloricode@gmail.com>
- * Date: 12/3/18
- * Time: 11:16 AM
+ * Date: 3/3/19
+ * Time: 6:33 PM
  */
 
 namespace HalcyonLaravel\Base\Tests\Repositories;
 
-use HalcyonLaravel\Base\Repository\BaseRepository;
-use HalcyonLaravel\Base\Tests\Models\Core\PageSoftDelete;
+use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 
-class PageDeleteRepository extends BaseRepository
+interface PageDeleteRepository extends BaseRepositoryInterface
 {
-    /**
-     * Specify Model class name
-     *
-     * @return string
-     */
-    public function model()
-    {
-        return PageSoftDelete::class;
-    }
+
 }

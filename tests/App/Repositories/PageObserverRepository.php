@@ -2,31 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: Lloric Mayuga Garcia <lloricode@gmail.com>
- * Date: 12/3/18
- * Time: 11:16 AM
+ * Date: 3/3/19
+ * Time: 6:55 PM
  */
 
 namespace HalcyonLaravel\Base\Tests\Repositories;
 
-use HalcyonLaravel\Base\Repository\BaseRepository;
-use HalcyonLaravel\Base\Tests\App\Repositories\Observer;
-use HalcyonLaravel\Base\Tests\Models\Core\Page;
+use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 
-class PageObserverRepository extends BaseRepository
+interface PageObserverRepository extends BaseRepositoryInterface
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->setObserver(new Observer);
-    }
 
-    /**
-     * Specify Model class name
-     *
-     * @return string
-     */
-    public function model()
-    {
-        return Page::class;
-    }
 }

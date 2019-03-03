@@ -6,6 +6,12 @@ use HalcyonLaravel\Base\Tests\Models\Content;
 use HalcyonLaravel\Base\Tests\Models\Core\Page;
 use HalcyonLaravel\Base\Tests\Models\Core\PageSoftDelete;
 use HalcyonLaravel\Base\Tests\Models\User;
+use HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository;
+use HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepositoryEloquent;
+use HalcyonLaravel\Base\Tests\Repositories\PageObserverRepository;
+use HalcyonLaravel\Base\Tests\Repositories\PageObserverRepositoryEloquent;
+use HalcyonLaravel\Base\Tests\Repositories\PageRepository;
+use HalcyonLaravel\Base\Tests\Repositories\PageRepositoryEloquent;
 use Illuminate\Database\Schema\Blueprint;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Route;
@@ -29,6 +35,7 @@ class TestCase extends Orchestra
         $this->setUpDatabase($this->app);
         $this->setUpSeed();
         $this->setUpRoutes();
+        $this->bindingRepositories($this->app);
         View::addLocation(__DIR__ . '/resources/views/');
     }
 
@@ -182,6 +189,13 @@ class TestCase extends Orchestra
             'status' => 'enable',
         ]);
         // Route::get('page', 'tt')->name('frontend.page.show');
+    }
+
+    protected function bindingRepositories($app)
+    {
+        $app->bind(PageDeleteRepository::class, PageDeleteRepositoryEloquent::class);
+        $app->bind(PageObserverRepository::class, PageObserverRepositoryEloquent::class);
+        $app->bind(PageRepository::class, PageRepositoryEloquent::class);
     }
 
     public function tearDown(): void
