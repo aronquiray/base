@@ -2,6 +2,8 @@
 
 namespace HalcyonLaravel\Base\Models\Traits;
 
+use Illuminate\Support\Arr;
+
 trait ModelTraits
 {
     /**
@@ -70,7 +72,7 @@ trait ModelTraits
                 (array_key_exists('permission', $link) && $user && !$user->hasPermissionTo($link['permission'])) ||
                 (!is_null($keys) && is_array($keys) && !in_array($l, $keys)) ||
                 (!is_null($keys) && !is_array($keys) && $keys != $l)) {
-                array_forget($links, $l);
+                Arr::forget($links, $l);
             }
         }
 
