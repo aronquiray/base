@@ -53,6 +53,12 @@ class Content extends Model
      */
     public function links(): array
     {
-        return [];
+        return [
+            'backend' => [
+                'show' => [
+                    'xx' => 'show',
+                ],
+            ],
+        ];
     }
 }

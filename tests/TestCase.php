@@ -40,9 +40,6 @@ class TestCase extends Orchestra
 
         config([
             'halcyon-laravel.base' => [
-                'pwa' => [
-                    'enabled' => false,
-                ],
                 'responseBaseableName' => 'responseName',
             ],
         ]);

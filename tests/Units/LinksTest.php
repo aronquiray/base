@@ -17,6 +17,17 @@ class LinksTest extends TestCase
     /**
      * @test
      */
+    public function invalidKeyOnLinks()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Invalid attribute key [xx] on links.');
+        $this->content->actions('backend', null, true);
+
+    }
+
+    /**
+     * @test
+     */
     public function getGroupOnlyLink()
     {
 

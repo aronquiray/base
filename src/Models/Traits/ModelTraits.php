@@ -70,18 +70,26 @@ trait ModelTraits
             $links = $this->links()[$group];
         }
 
-//        if(array_key_exists('frontend',$links))
-//        dd(__METHOD__, $links, $this->links(), $group, get_class($this), method_exists($this, 'additionalLinks'));
-//        if (config('halcyon-laravel.base.pwa.enabled')) {
-//            dd(__METHOD__);
-//        }
-
         foreach ($links as $type => $link) {
             if (
                 (array_key_exists('permission', $link) && $user && !$user->hasPermissionTo($link['permission'])) ||
                 (!is_null($keys) && is_array($keys) && !in_array($type, $keys)) ||
                 (!is_null($keys) && !is_array($keys) && $keys != $type)) {
                 Arr::forget($links, $type);
+            }
+        }
+
+        $validAttributeKeys = [
+            'type',
+            'permission',
+            'url',
+            'group',
+            'redirect',
+        ];
+        foreach ($links as $link) {
+            foreach ($link as $keyAttribute => $v) {
+                abort_if(!in_array($keyAttribute, $validAttributeKeys), 500,
+                    "Invalid attribute key [$keyAttribute] on links.");
             }
         }
 
