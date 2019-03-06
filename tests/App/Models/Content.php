@@ -6,18 +6,17 @@ use HalcyonLaravel\Base\Models\Model;
 
 class Content extends Model
 {
+    public const MODULE_NAME = 'content';
+    public const VIEW_BACKEND_PATH = 'backend.content';
+    public const VIEW_FRONTEND_PATH = 'frontend.content';
+    public const ROUTE_ADMIN_PATH = 'admin.contents';
+    public const ROUTE_FRONTEND_PATH = 'frontend.contents';
     protected $fillable = [
         'id',
         'name',
         'content',
     ];
 
-    public const MODULE_NAME = 'content';
-    public const VIEW_BACKEND_PATH = 'backend.content';
-    public const VIEW_FRONTEND_PATH = 'frontend.content';
-    public const ROUTE_ADMIN_PATH = 'admin.contents';
-    public const ROUTE_FRONTEND_PATH = 'frontend.contents';
-    
     /**
      * Return the permissions related to this model.
      *

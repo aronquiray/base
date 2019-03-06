@@ -3,6 +3,7 @@
 namespace HalcyonLaravel\Base\Models\Traits;
 
 use Illuminate\Support\Arr;
+use Route;
 
 trait ModelTraits
 {
@@ -59,6 +60,8 @@ trait ModelTraits
      */
     public function actions(string $group, $keys = null, bool $onlyLinks = false)
     {
+        abort_if(!in_array($group, ['backend', 'frontend']), 500, 'Invalid action group.');
+
         $user = auth()->user();
 
         if (method_exists($this, 'additionalLinks')) {
@@ -67,19 +70,36 @@ trait ModelTraits
             $links = $this->links()[$group];
         }
 
-        foreach ($links as $l => $link) {
+//        if(array_key_exists('frontend',$links))
+//        dd(__METHOD__, $links, $this->links(), $group, get_class($this), method_exists($this, 'additionalLinks'));
+//        if (config('halcyon-laravel.base.pwa.enabled')) {
+//            dd(__METHOD__);
+//        }
+
+        foreach ($links as $type => $link) {
             if (
                 (array_key_exists('permission', $link) && $user && !$user->hasPermissionTo($link['permission'])) ||
-                (!is_null($keys) && is_array($keys) && !in_array($l, $keys)) ||
-                (!is_null($keys) && !is_array($keys) && $keys != $l)) {
-                Arr::forget($links, $l);
+                (!is_null($keys) && is_array($keys) && !in_array($type, $keys)) ||
+                (!is_null($keys) && !is_array($keys) && $keys != $type)) {
+                Arr::forget($links, $type);
             }
         }
 
+        // skip not existed route
+        $filter = [];
+        foreach ($links as $type => $link) {
+            $url = $this->generateUrl($link['url']);
+            if (!is_null($url)) {
+                $link['url'] = $url;
+                $filter[$type] = $link;
+            }
+        }
+        $links = $filter;
+
         if ($onlyLinks == true) {
             $filter = [];
-            foreach ($links as $l => $link) {
-                $filter[$l] = $link['url'];
+            foreach ($links as $type => $link) {
+                $filter[$type] = $link['url'];
             }
             $links = $filter;
         }
@@ -88,5 +108,24 @@ trait ModelTraits
         }
 
         return $links;
+    }
+
+    /**
+     * @param $urlOrRoute
+     *
+     * @return string|null
+     */
+    private function generateUrl($urlOrRoute)
+    {
+        if (filter_var($urlOrRoute, FILTER_VALIDATE_URL)) {
+            return $urlOrRoute;
+        }
+
+        $param = isset($urlOrRoute[1]) ? $urlOrRoute[1] : [];
+//        dd(__METHOD__,$urlOrRoute[0],$param);
+        if (Route::has($urlOrRoute[0])) {
+            return route($urlOrRoute[0], $param);
+        }
+        return null;
     }
 }

@@ -37,6 +37,15 @@ class TestCase extends Orchestra
         $this->setUpRoutes();
         $this->bindingRepositories($this->app);
         View::addLocation(__DIR__ . '/resources/views/');
+
+        config([
+            'halcyon-laravel.base' => [
+                'pwa' => [
+                    'enabled' => false,
+                ],
+                'responseBaseableName' => 'responseName',
+            ],
+        ]);
     }
 
     /**

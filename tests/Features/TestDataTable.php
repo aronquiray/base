@@ -28,7 +28,7 @@ class TestDataTable extends TestCase
             ]);
     }
 
-    public function testWithDataOneRow()
+    public function testWithDataOneRow_()
     {
         $faker = Faker::create();
         $now = now()->format('Y-m-d H:i:s');
@@ -62,16 +62,6 @@ class TestDataTable extends TestCase
                     "show" => [
                         "type" => "show",
                         "url" => "http://localhost/admin/page/{$page->id}",
-                    ],
-                    "edit" => [
-                        "type" => "edit",
-                        "url" => "http://localhost/admin/page/{$page->id}/edit",
-                    ],
-                    "destroy" => [
-                        "type" => "destroy",
-                        "url" => "http://localhost/admin/page/{$page->id}",
-                        "group" => "more",
-                        "redirect" => "http://localhost/admin/page",
                     ],
                 ],
             ];

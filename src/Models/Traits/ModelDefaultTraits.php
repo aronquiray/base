@@ -2,6 +2,7 @@
 
 namespace HalcyonLaravel\Base\Models\Traits;
 
+use Illuminate\Support\Arr;
 use Route;
 
 trait ModelDefaultTraits
@@ -56,12 +57,12 @@ trait ModelDefaultTraits
 
         foreach ($links['backend'] as $type => $link) {
             if (!Route::has($link['url'][0])) {
-                array_forget($links['backend'], $type);
+                Arr::forget($links['backend'], $type);
                 continue;
             }
             if (isset($links['backend'][$type]['redirect'])) {
                 if (!Route::has($link['redirect'][0])) {
-                    array_forget($links['backend'], $type);
+                    Arr::forget($links['backend'], $type);
                     continue;
                 }
                 $links['backend'][$type]['redirect'] = route($link['redirect'][0]);

@@ -85,4 +85,34 @@ class Page extends Model implements ModelStatusContract
     {
         return 'status';
     }
+
+
+    /**
+     * Return the links related to this model.
+     *
+     * @return array
+     */
+    public function links(): array
+    {
+        return [
+            'frontend' => [
+                'show' => [
+                    'type' => 'show',
+                    'url' => [self::ROUTE_FRONTEND_PATH . '.show', $this],
+                ],
+            ],
+            'backend' => [
+                'show' => [
+                    'type' => 'show',
+//                    'permission' => true,
+                    'url' => [self::ROUTE_ADMIN_PATH . '.show', $this],
+                ],
+                'test_not_existed' => [
+                    'type' => 'custom',
+//                    'permission' => true,
+                    'url' => ['xx'],
+                ],
+            ],
+        ];
+    }
 }
