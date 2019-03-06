@@ -104,12 +104,15 @@ class Page extends Model implements ModelStatusContract
             'backend' => [
                 'show' => [
                     'type' => 'show',
-//                    'permission' => true,
                     'url' => [self::ROUTE_ADMIN_PATH . '.show', $this],
+                ],
+                'destroy' => [
+                    'type' => 'destroy',
+                    'url' => [self::ROUTE_ADMIN_PATH . '.destroy', $this],
+                    'redirect' => [self::ROUTE_ADMIN_PATH . '.index'],
                 ],
                 'test_not_existed' => [
                     'type' => 'custom',
-//                    'permission' => true,
                     'url' => ['xx'],
                 ],
             ],

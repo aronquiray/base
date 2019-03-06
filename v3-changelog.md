@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v3.1.3: Forgot redirect checks on links
     v3.1.2: Throw exception on invalid key links
     v3.1.1: Enhance links/actions
     v3.1.0: Make test parallel to repo interface in base projects, Make base controller abstract

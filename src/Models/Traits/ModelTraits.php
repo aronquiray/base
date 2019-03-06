@@ -101,6 +101,14 @@ trait ModelTraits
                 $link['url'] = $url;
                 $filter[$type] = $link;
             }
+            if (isset($link['redirect'])) {
+                $url = $this->generateUrl($link['redirect']);
+                if (!is_null($url)) {
+                    $link = $filter[$type];
+                    $link['redirect'] = $url;
+                    $filter[$type] = $link;
+                }
+            }
         }
         $links = $filter;
 

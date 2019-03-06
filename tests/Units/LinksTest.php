@@ -31,7 +31,7 @@ class LinksTest extends TestCase
     public function getGroupOnlyLink()
     {
 
-        $links = $this->page->actions('backend', null, true);
+        $links = $this->page->actions('backend', ['show'], true);
 //        dd($links);
         $this->assertEquals($links, [
             'show' => route(Page::ROUTE_ADMIN_PATH . '.show', $this->page),
@@ -48,8 +48,12 @@ class LinksTest extends TestCase
         $this->assertEquals($links, [
             'show' => [
                 'type' => 'show',
-//                'permission' => true,
                 'url' => 'http://localhost/admin/page/' . $this->page->id,
+            ],
+            'destroy' => [
+                'type' => 'destroy',
+                'url' => 'http://localhost/admin/page/' . $this->page->id,
+                'redirect' => 'http://localhost/admin/page',
             ],
         ]);
     }
