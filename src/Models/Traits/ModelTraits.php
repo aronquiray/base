@@ -20,7 +20,7 @@ trait ModelTraits
         if (!is_null($keys) && is_array($keys)) {
             foreach ($permissions as $p => $permission) {
                 if (!in_array($p, $keys)) {
-                    array_forget($permissions, $p);
+                    Arr::forget($permissions, $p);
                 }
             }
 
@@ -82,14 +82,19 @@ trait ModelTraits
         $validAttributeKeys = [
             'type',
             'permission',
+            'label',
             'url',
             'group',
             'redirect',
+            'icon',
+            'class',
+
         ];
+        $currentClass = get_class($this);
         foreach ($links as $link) {
             foreach ($link as $keyAttribute => $v) {
                 abort_if(!in_array($keyAttribute, $validAttributeKeys), 500,
-                    "Invalid attribute key [$keyAttribute] on links.");
+                    "Invalid attribute key [$keyAttribute] on {$currentClass}::links().");
             }
         }
 

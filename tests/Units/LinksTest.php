@@ -20,7 +20,7 @@ class LinksTest extends TestCase
     public function invalidKeyOnLinks()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Invalid attribute key [xx] on links.');
+        $this->expectExceptionMessage('Invalid attribute key [xx] on ' . Content::class . '::links().');
         $this->content->actions('backend', null, true);
 
     }
