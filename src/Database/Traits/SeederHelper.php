@@ -13,6 +13,8 @@ use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface;
 use HalcyonLaravel\Base\Models\Model;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
+use Schema;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 trait SeederHelper
@@ -25,14 +27,24 @@ trait SeederHelper
      */
     public function modelPageSeeder(Model $model): Page
     {
-        $page = Page::create([
+        $tableName = (new Page)->getTable();
+
+        $prepare = [
             'title' => ucfirst($model::MODULE_NAME),
             'pageable_type' => get_class($model),
-        ]);
+        ];
+
+        foreach (array_keys($prepare) as $column => $value) {
+            if (!Schema::hasColumn($tableName, $column)) {
+                unset($prepare[$column]);
+            }
+        }
+
+        $page = Page::create($prepare);
         $page->metaTag()->create([
             'title' => ucfirst($model::MODULE_NAME),
-            'description' => 'List of all ' . str_plural($model::MODULE_NAME),
-            'keywords' => 'page,' . str_replace('-', ',', kebab_case($model::MODULE_NAME)),
+            'description' => 'List of all ' . Str::plural($model::MODULE_NAME),
+            'keywords' => 'page,' . str_replace('-', ',', Str::kebab($model::MODULE_NAME)),
         ]);
         return $page;
     }
