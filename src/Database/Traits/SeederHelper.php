@@ -34,7 +34,7 @@ trait SeederHelper
             'pageable_type' => get_class($model),
         ];
 
-        foreach (array_keys($prepare) as $column => $value) {
+        foreach ($prepare as $column => $value) {
             if (!Schema::hasColumn($tableName, $column)) {
                 unset($prepare[$column]);
             }
