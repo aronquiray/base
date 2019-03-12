@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 use MetaTag;
 
 /**
- * Class StatusController.
+ * Class StatusController
+ *
+ * @package HalcyonLaravel\Base\Controllers\Backend
  */
 abstract class StatusController extends BaseController
 {
+    /**
+     * @var
+     */
     protected $viewPath;
 
     /**

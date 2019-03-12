@@ -4,6 +4,11 @@ namespace HalcyonLaravel\Base\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class BaseServiceProvider
+ *
+ * @package HalcyonLaravel\Base\Providers
+ */
 class BaseServiceProvider extends ServiceProvider
 {
     /**

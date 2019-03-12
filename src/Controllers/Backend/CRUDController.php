@@ -15,7 +15,14 @@ abstract class CRUDController extends Controller implements CRUDContract
 {
     use CRUDTrait;
 
+    /**
+     * @var mixed
+     */
     protected $viewPath;
+
+    /**
+     * @var mixed
+     */
     protected $routePath;
 
     /**

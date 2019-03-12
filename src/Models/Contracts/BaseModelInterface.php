@@ -8,11 +8,13 @@
 
 namespace HalcyonLaravel\Base\Models\Contracts;
 
-
+/**
+ * Interface BaseModelInterface
+ *
+ * @package HalcyonLaravel\Base\Models\Contracts
+ */
 interface BaseModelInterface
 {
-
-
 
     /**
      * Return the links related to this model.

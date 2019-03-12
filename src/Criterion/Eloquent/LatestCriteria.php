@@ -11,10 +11,20 @@ namespace HalcyonLaravel\Base\Criterion\Eloquent;
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
+/**
+ * Class LatestCriteria
+ *
+ * @package HalcyonLaravel\Base\Criterion\Eloquent
+ */
 class LatestCriteria implements CriteriaInterface
 {
     private $column;
 
+    /**
+     * LatestCriteria constructor.
+     *
+     * @param string $column
+     */
     public function __construct(string $column = 'updated_at')
     {
         $this->column = $column;

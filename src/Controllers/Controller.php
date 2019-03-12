@@ -8,7 +8,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- * Class Controller.
+ * Class Controller
+ *
+ * @package HalcyonLaravel\Base\Controllers
  */
 abstract class Controller extends BaseController
 {

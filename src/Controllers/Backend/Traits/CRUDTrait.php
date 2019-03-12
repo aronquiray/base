@@ -2,6 +2,11 @@
 
 namespace HalcyonLaravel\Base\Controllers\Backend\Traits;
 
+/**
+ * Trait CRUDTrait
+ *
+ * @package HalcyonLaravel\Base\Controllers\Backend\Traits
+ */
 trait CRUDTrait
 {
     /**

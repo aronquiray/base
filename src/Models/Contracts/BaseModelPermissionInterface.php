@@ -8,6 +8,11 @@
 
 namespace HalcyonLaravel\Base\Models\Contracts;
 
+/**
+ * Interface BaseModelPermissionInterface
+ *
+ * @package HalcyonLaravel\Base\Models\Contracts
+ */
 interface BaseModelPermissionInterface
 {
     /**

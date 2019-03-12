@@ -2,6 +2,11 @@
 
 namespace HalcyonLaravel\Base\Repository;
 
+/**
+ * Class ObserverContract
+ *
+ * @package HalcyonLaravel\Base\Repository
+ */
 abstract class ObserverContract
 {
     /**

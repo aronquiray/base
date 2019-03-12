@@ -5,9 +5,13 @@ namespace HalcyonLaravel\Base\Controllers;
 use HalcyonLaravel\Base\Models\Model;
 use HalcyonLaravel\Base\Repository\BaseRepository;
 
+/**
+ * Class BaseController
+ *
+ * @package HalcyonLaravel\Base\Controllers
+ */
 abstract class BaseController extends Controller
 {
-    protected $repository;
     /**
      * View Path
      *

@@ -11,6 +11,11 @@ namespace HalcyonLaravel\Base\Criterion\Eloquent;
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
+/**
+ * Class ThisEqualThatCriteria
+ *
+ * @package HalcyonLaravel\Base\Criterion\Eloquent
+ */
 class ThisEqualThatCriteria implements CriteriaInterface
 {
     /**

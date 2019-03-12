@@ -5,6 +5,11 @@ namespace HalcyonLaravel\Base\Models\Traits;
 use Illuminate\Support\Arr;
 use Route;
 
+/**
+ * Trait ModelDefaultTraits
+ *
+ * @package HalcyonLaravel\Base\Models\Traits
+ */
 trait ModelDefaultTraits
 {
     /**

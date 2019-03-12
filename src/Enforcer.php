@@ -10,6 +10,11 @@ namespace HalcyonLaravel\Base;
 
 use ReflectionClass;
 
+/**
+ * Class Enforcer
+ *
+ * @package HalcyonLaravel\Base
+ */
 class Enforcer
 {
     /**

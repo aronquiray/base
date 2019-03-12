@@ -2,6 +2,11 @@
 
 namespace HalcyonLaravel\Base;
 
+/**
+ * Class BaseableOptions
+ *
+ * @package HalcyonLaravel\Base
+ */
 class BaseableOptions
 {
     public $storeRules;

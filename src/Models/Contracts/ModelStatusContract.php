@@ -2,6 +2,11 @@
 
 namespace HalcyonLaravel\Base\Models\Contracts;
 
+/**
+ * Interface ModelStatusContract
+ *
+ * @package HalcyonLaravel\Base\Models\Contracts
+ */
 interface ModelStatusContract
 {
     /**

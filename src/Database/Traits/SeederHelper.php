@@ -17,6 +17,11 @@ use Illuminate\Support\Str;
 use Schema;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 
+/**
+ * Trait SeederHelper
+ *
+ * @package HalcyonLaravel\Base\Database\Traits
+ */
 trait SeederHelper
 {
 

@@ -9,7 +9,9 @@ use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
- * Class Model.
+ * Class Model
+ *
+ * @package HalcyonLaravel\Base\Models
  */
 abstract class Model extends BaseModel implements BaseModelInterface, BaseModelPermissionInterface
 {

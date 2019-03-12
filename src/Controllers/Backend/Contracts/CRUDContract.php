@@ -6,6 +6,11 @@ use HalcyonLaravel\Base\BaseableOptions;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
 use Illuminate\Http\Request;
 
+/**
+ * Interface CRUDContract
+ *
+ * @package HalcyonLaravel\Base\Controllers\Backend\Contracts
+ */
 interface CRUDContract
 {
     /**
