@@ -2,11 +2,11 @@
 
 namespace HalcyonLaravel\Base\Repository;
 
-use App\Criterion\Eloquent\ThisEqualThatCriteria;
 use Closure;
 use DB;
 use Exception;
-use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashCriteria;
+use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashedCriteria;
+use HalcyonLaravel\Base\Criterion\Eloquent\ThisEqualThatCriteria;
 use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
 use Illuminate\Container\Container;
 use Prettus\Repository\Contracts\CacheableInterface;
@@ -15,12 +15,20 @@ use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Prettus\Repository\Traits\CacheableRepository;
 use Schema;
 
+/**
+ * Class BaseRepository
+ *
+ * @package HalcyonLaravel\Base\Repository
+ */
 abstract class BaseRepository extends PrettusBaseRepository implements CacheableInterface
 {
     use CacheableRepository;
 
     protected $observer = null;
 
+    /**
+     * BaseRepository constructor.
+     */
     public function __construct()
     {
         parent::__construct(app(Container::class));
@@ -38,13 +46,19 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     {
         $isHasSoftDelete = method_exists($this->model, 'bootSoftDeletes');
 
-        if (Schema::hasColumn($this->model->getTable(), 'updated_at')) {
-            $fields[] = 'updated_at';
+        $tableName = $this->model->getTable();
+
+        foreach (['id', 'updated_at'] as $column) {
+            if (Schema::hasColumn($tableName, $column)) {
+                $fields[] = 'updated_at';
+            }
         }
+
         if ($isHasSoftDelete) {
             $fields[] = 'deleted_at';
         }
 
+        $fields = empty($fields) ? ['*'] : $fields;
         $columns = null;
         if ($isAllFillable) {
             $columns = array_merge($this->model->getFillable(), $fields);
@@ -60,7 +74,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
         }
         if ($isHasSoftDelete) {
             if (isset($request['trashOnly']) && $request['trashOnly']) {
-                $this->pushCriteria(new OnlyTrashCriteria);
+                $this->pushCriteria(new OnlyTrashedCriteria);
             }
         }
 
@@ -113,8 +127,6 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * This will handle DB transaction action
-     *
      * @param \Closure $closure
      *
      * @return mixed
@@ -181,7 +193,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      */
     public function restore($id)
     {
-        $this->pushCriteria(new OnlyTrashCriteria);
+        $this->pushCriteria(new OnlyTrashedCriteria);
         $model = $this->find($id);
 
         if (!$this->hasObserver()) {
@@ -200,6 +212,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
         });
     }
 
+
     /**
      * @param $id
      *
@@ -209,7 +222,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      */
     public function purge($id)
     {
-        $this->pushCriteria(new OnlyTrashCriteria);
+        $this->pushCriteria(new OnlyTrashedCriteria);
         $model = $this->find($id);
 
         if (!$this->hasObserver()) {

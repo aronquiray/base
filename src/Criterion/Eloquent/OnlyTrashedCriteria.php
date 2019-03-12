@@ -11,7 +11,7 @@ namespace HalcyonLaravel\Base\Criterion\Eloquent;
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
-class OnlyTrashCriteria implements CriteriaInterface
+class OnlyTrashedCriteria implements CriteriaInterface
 {
 
     /**
