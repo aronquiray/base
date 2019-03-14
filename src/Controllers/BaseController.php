@@ -96,14 +96,12 @@ abstract class BaseController extends Controller
         ]) : redirect($redirect)->withFlashSuccess($message);
     }
 
+    /**
+     * @return string
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
     protected function getModelName(): string
     {
-        $model = $this->repository()->model();
-        $model = explode('\\', $model);
-        $model = $model[count($model) - 1];
-        $model = kebab_case($model);
-        $model = ucwords(str_replace('-', ' ', $model));
-
-        return ucwords($model);
+        return ucwords($this->repository()->makeModel()::MODULE_NAME);
     }
 }

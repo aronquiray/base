@@ -39,6 +39,7 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function index()
     {
@@ -54,6 +55,7 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function create()
     {
