@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v3.1.8: Enhance get model name, add config for page project level
     v3.1.7: Docs, and enhance table repo
     v3.1.6: Fix
     v3.1.5: Dynamically page create depend on project level
