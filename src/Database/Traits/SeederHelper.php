@@ -8,7 +8,6 @@
 
 namespace HalcyonLaravel\Base\Database\Traits;
 
-use App\Models\Core\Page\Page;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface;
 use HalcyonLaravel\Base\Models\Model;
@@ -28,11 +27,12 @@ trait SeederHelper
     /**
      * @param \HalcyonLaravel\Base\Models\Model $model
      *
-     * @return \App\Models\Core\Page\Page
+     * @return mixed
      */
-    public function modelPageSeeder(Model $model): Page
+    public function modelPageSeeder(Model $model)
     {
-        $tableName = (new Page)->getTable();
+        $pageModel = app(config('halcyon-laravel.base.models.page'));
+        $tableName = $pageModel->getTable();
 
         $prepare = [
             'title' => ucfirst($model::MODULE_NAME),
@@ -45,7 +45,7 @@ trait SeederHelper
             }
         }
 
-        $page = Page::create($prepare);
+        $page = $pageModel->create($prepare);
         $page->metaTag()->create([
             'title' => ucfirst($model::MODULE_NAME),
             'description' => 'List of all ' . Str::plural($model::MODULE_NAME),
@@ -74,10 +74,9 @@ trait SeederHelper
      */
     private function permissionStore($modelClassOrArray, bool $isAddToAdminRole = true, array $except = [])
     {
-
         $permissionNames = is_array($modelClassOrArray) ? $modelClassOrArray : $modelClassOrArray::permissions();
 
-        $roleModel = resolve(config('permission.models.role'));
+        $roleModel = app(config('permission.models.role'));
 
         $config = config('access.users');
         foreach ($permissionNames as $permissionName) {
