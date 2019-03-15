@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v3.1.10: Add logs on seeding file
     v3.1.9: Fix provider
     v3.1.8: Enhance get model name, add config for page project level
     v3.1.7: Docs, and enhance table repo
