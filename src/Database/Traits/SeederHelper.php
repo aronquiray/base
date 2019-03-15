@@ -110,6 +110,9 @@ trait SeederHelper
      */
     public function seederUploader(HasMedia $model, $file, array $customProperties = null, $collectionName = 'images')
     {
+        if (app()->environment() == 'testing') {
+            return;
+        }
         print_r("Seeding $file ... \n");
         if ($model instanceof BaseModelInterface) {
             $fileName = $model->base();
