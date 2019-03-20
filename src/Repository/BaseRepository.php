@@ -50,7 +50,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
         foreach (['id', 'updated_at'] as $column) {
             if (Schema::hasColumn($tableName, $column)) {
-                $fields[] = 'updated_at';
+                $fields[] = $column;
             }
         }
 
