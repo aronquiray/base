@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v3.1.13: Docs
     v3.1.12: Fix check coulumns on repo::table
     v3.1.11: Ignore upload when Testing
     v3.1.10: Add logs on seeding file
