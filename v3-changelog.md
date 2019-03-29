@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v3.1.14: Add check before delete on abstract observer
     v3.1.13: Docs
     v3.1.12: Fix check coulumns on repo::table
     v3.1.11: Ignore upload when Testing

@@ -2,6 +2,9 @@
 
 namespace HalcyonLaravel\Base\Repository;
 
+use Closure;
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * Class ObserverContract
  *
@@ -82,4 +85,23 @@ abstract class ObserverContract
      * @return mixed
      */
     abstract public static function purged($model);
+
+    /**
+     * @param string                              $type
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param \Closure                            $closure
+     */
+    protected static function checkBeforeDelete(string $type, Model $model, Closure $closure)
+    {
+        if (!in_array($type, ['purge', 'destroy'])) {
+            abort(500, 'Invalid parameter in ' . __METHOD__);
+        }
+
+        $isHasSoftDelete = method_exists($model, 'bootSoftDeletes');
+
+        if ($isHasSoftDelete && $type == 'purge' OR
+            !$isHasSoftDelete && $type == 'destroy') {
+            $closure();
+        }
+    }
 }
