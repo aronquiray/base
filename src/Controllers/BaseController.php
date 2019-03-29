@@ -3,7 +3,7 @@
 namespace HalcyonLaravel\Base\Controllers;
 
 use HalcyonLaravel\Base\Models\Model;
-use HalcyonLaravel\Base\Repository\BaseRepository;
+use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 
 /**
  * Class BaseController
@@ -26,14 +26,11 @@ abstract class BaseController extends Controller
     protected $routePath;
 
     /**
-     * Return the model by the given key
-     *
      * @param string     $key
      * @param bool       $trash
      * @param array|null $customWhere
      *
      * @return mixed
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function getModel(string $key, bool $trash = false, array $customWhere = null)
     {
@@ -64,9 +61,9 @@ abstract class BaseController extends Controller
     }
 
     /**
-     * @return BaseRepository
+     * @return \HalcyonLaravel\Base\Repository\BaseRepositoryInterface
      */
-    abstract public function repository(): BaseRepository;
+    abstract public function repository(): BaseRepositoryInterface;
 
     /**
      * Return the response of the request with flash messages

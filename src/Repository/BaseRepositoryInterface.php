@@ -8,14 +8,16 @@
 
 namespace HalcyonLaravel\Base\Repository;
 
+use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
  * Interface BaseRepositoryInterface
  *
  * @package HalcyonLaravel\Base\Repository
- * @method \Prettus\Repository\Eloquent\BaseRepository pushCriteria(\Prettus\Repository\Contracts\CriteriaInterface $param)
- * @method \Illuminate\Database\Eloquent\Model makeModel()
+ * @method \Prettus\Repository\Eloquent\BaseRepository pushCriteria(CriteriaInterface $param)
+ * @method Model makeModel()
  * @method model()
  */
 interface BaseRepositoryInterface extends RepositoryInterface

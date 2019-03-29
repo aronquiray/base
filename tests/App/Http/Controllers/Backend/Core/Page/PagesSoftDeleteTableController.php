@@ -4,7 +4,7 @@ namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
 use DataTables;
 use HalcyonLaravel\Base\Controllers\BaseController as Controller;
-use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
+use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 use HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository;
 use Illuminate\Http\Request;
 
@@ -58,7 +58,7 @@ class PagesSoftDeleteTableController extends Controller
             })->make(true);
     }
 
-    public function repository(): Repository
+    public function repository(): BaseRepositoryInterface
     {
         return $this->pageDeleteRepository;
     }

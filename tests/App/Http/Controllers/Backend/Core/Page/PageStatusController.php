@@ -3,7 +3,7 @@
 namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
 use HalcyonLaravel\Base\Controllers\Backend\StatusController as Controller;
-use HalcyonLaravel\Base\Repository\BaseRepository;
+use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 use HalcyonLaravel\Base\Tests\Models\Core\Page as Model;
 use HalcyonLaravel\Base\Tests\Repositories\PageRepository;
 
@@ -24,7 +24,7 @@ class PageStatusController extends Controller
         // $this->middleware('permission:page change status', ['only' => ['mark']]);
     }
 
-    public function repository(): BaseRepository
+    public function repository(): BaseRepositoryInterface
     {
         return $this->pageRepository;
     }

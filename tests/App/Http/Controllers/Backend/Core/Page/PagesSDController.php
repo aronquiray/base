@@ -4,7 +4,7 @@ namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
 use HalcyonLaravel\Base\BaseableOptions;
 use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
-use HalcyonLaravel\Base\Repository\BaseRepository;
+use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 use HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
 use Illuminate\Http\Request;
@@ -49,7 +49,7 @@ class PagesSDController extends Controller
         ]);
     }
 
-    public function repository(): BaseRepository
+    public function repository(): BaseRepositoryInterface
     {
         return $this->pageDeleteRepository;
     }

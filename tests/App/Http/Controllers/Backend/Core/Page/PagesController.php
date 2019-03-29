@@ -4,7 +4,7 @@ namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
 use HalcyonLaravel\Base\BaseableOptions;
 use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
-use HalcyonLaravel\Base\Repository\BaseRepository as Repository;
+use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 use HalcyonLaravel\Base\Tests\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
 use Illuminate\Http\Request;
@@ -56,7 +56,7 @@ class PagesController extends Controller
     // {
     //     $this->getModel($routeKeyName);
     // }
-    public function repository(): Repository
+    public function repository(): BaseRepositoryInterface
     {
         return $this->pageRepository;
     }

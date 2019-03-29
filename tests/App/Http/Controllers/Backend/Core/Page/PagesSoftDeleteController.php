@@ -3,7 +3,7 @@
 namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
 use HalcyonLaravel\Base\Controllers\Backend\DeletedController as Controller;
-use HalcyonLaravel\Base\Repository\BaseRepository;
+use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 use HalcyonLaravel\Base\Tests\Models\Core\PageSoftDelete as Model;
 use HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository;
 
@@ -29,7 +29,7 @@ class PagesSoftDeleteController extends Controller
         // parent::__construct();
     }
 
-    public function repository(): BaseRepository
+    public function repository(): BaseRepositoryInterface
     {
         return $this->pageDeleteRepository;
     }
