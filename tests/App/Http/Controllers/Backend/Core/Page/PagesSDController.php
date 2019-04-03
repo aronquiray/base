@@ -19,7 +19,7 @@ class PagesSDController extends Controller
     /**
      * PagesSDController constructor.
      *
-     * @param \HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository $pageDeleteRepository
+     * @param  \HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository  $pageDeleteRepository
      *
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
@@ -32,8 +32,9 @@ class PagesSDController extends Controller
     /**
      * Validate input on store/update
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Database\Eloquent\Model|null $model
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Database\Eloquent\Model|null  $model
+     *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function crudRules(Request $request, IlluminateModel $model = null): BaseableOptions
@@ -55,8 +56,8 @@ class PagesSDController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request            $request
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Database\Eloquent\Model  $model
      *
      * @return array
      */

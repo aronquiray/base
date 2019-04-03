@@ -11,7 +11,7 @@ class TestModelFunctions extends TestCase
         $links = $this->page->actions('backend', ['show'], true);
 
         $expected = [
-            "show" => 'http://localhost/admin/page/' . $this->page->id,
+            "show" => 'http://localhost/admin/page/'.$this->page->id,
         ];
 
         $this->assertEquals($expected, $links);
@@ -21,7 +21,7 @@ class TestModelFunctions extends TestCase
     {
         $link = $this->page->actions('backend', 'show', true);
 
-        $expected = 'http://localhost/admin/page/' . $this->page->id;
+        $expected = 'http://localhost/admin/page/'.$this->page->id;
 
         $this->assertEquals($expected, $link);
     }

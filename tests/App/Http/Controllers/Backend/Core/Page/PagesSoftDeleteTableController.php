@@ -18,7 +18,7 @@ class PagesSoftDeleteTableController extends Controller
     /**
      * PagesSoftDeleteTableController constructor.
      *
-     * @param \HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository $pageDeleteRepository
+     * @param  \HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository  $pageDeleteRepository
      */
     public function __construct(PageDeleteRepository $pageDeleteRepository)
     {
@@ -27,7 +27,7 @@ class PagesSoftDeleteTableController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
      * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException
@@ -44,18 +44,18 @@ class PagesSoftDeleteTableController extends Controller
         return DataTables::of($this->pageDeleteRepository->table([
             'trashOnly' => $trashOnly,
         ]))->editColumn('status', function ($model) use ($user) {
-                return [
-                    'type' => $model->status == "enable" ? 'success' : 'danger',
-                    'label' => ucfirst($model->status),
-                    'value' => $model->status,
-                    'link' => route('admin.page-sd.status.update', $model),
-                    'can' => $user->can('page change status'),
-                ];
-            })->editColumn('updated_at', function ($model) {
-                return $model->updated_at->format('d M, Y h:m A');
-            })->addColumn('actions', function ($model) {
-                return $model->actions('backend');
-            })->make(true);
+            return [
+                'type' => $model->status == "enable" ? 'success' : 'danger',
+                'label' => ucfirst($model->status),
+                'value' => $model->status,
+                'link' => route('admin.page-sd.status.update', $model),
+                'can' => $user->can('page change status'),
+            ];
+        })->editColumn('updated_at', function ($model) {
+            return $model->updated_at->format('d M, Y h:m A');
+        })->addColumn('actions', function ($model) {
+            return $model->actions('backend');
+        })->make(true);
     }
 
     public function repository(): BaseRepositoryInterface

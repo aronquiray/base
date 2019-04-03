@@ -19,7 +19,8 @@ class TestSoftDelete extends TestCase
     {
         $response = $this->delete(route('admin.page-sd.destroy', $this->pageSoftdelete), []);
 
-        $response->assertStatus(302)->assertSessionHas('flash_success', 'test me to delete has been deleted.')->assertRedirect(route('admin.page-sd.deleted'));
+        $response->assertStatus(302)->assertSessionHas('flash_success',
+            'test me to delete has been deleted.')->assertRedirect(route('admin.page-sd.deleted'));
 
         $this->assertSoftDeleted((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
@@ -31,7 +32,8 @@ class TestSoftDelete extends TestCase
 
         $response = $this->patch(route('admin.page-sd.restore', $this->pageSoftdelete), []);
 
-        $response->assertStatus(302)->assertSessionHas('flash_success', 'test me to delete has been restored.')->assertRedirect(route('admin.page-sd.index'));
+        $response->assertStatus(302)->assertSessionHas('flash_success',
+            'test me to delete has been restored.')->assertRedirect(route('admin.page-sd.index'));
 
         $this->assertDatabaseHas((new PageSoftDelete)->getTable(), [
             'id' => $this->pageSoftdelete->id,

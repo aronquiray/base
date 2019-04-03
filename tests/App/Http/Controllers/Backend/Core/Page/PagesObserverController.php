@@ -19,7 +19,7 @@ class PagesObserverController extends Controller
     /**
      * PagesObserverController constructor.
      *
-     * @param \HalcyonLaravel\Base\Tests\Repositories\PageObserverRepository $pageRepository
+     * @param  \HalcyonLaravel\Base\Tests\Repositories\PageObserverRepository  $pageRepository
      *
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
@@ -30,8 +30,8 @@ class PagesObserverController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request                 $request
-     * @param \Illuminate\Database\Eloquent\Model|null $model
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Database\Eloquent\Model|null  $model
      *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */
@@ -63,8 +63,8 @@ class PagesObserverController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request            $request
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Database\Eloquent\Model  $model
      *
      * @return array
      */

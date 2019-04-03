@@ -16,10 +16,10 @@ class TestExceptions extends TestCase
 
         //   dd($response);
         $response->assertStatus(500)->assertExactJson([
-                'message' => 'Server Error',
-                // 'exception:'=>[
-                //     'message'=>'not fooo',
-                // ]
-            ]);
+            'message' => 'Server Error',
+            // 'exception:'=>[
+            //     'message'=>'not fooo',
+            // ]
+        ]);
     }
 }

@@ -64,7 +64,8 @@ class Page extends Model implements ModelStatusContract
 
     /**
      * Return the array of statuses.
-     * ex. [ 0  => 'Disabled', 1 => 'Active' ], [ 'Disabled', 'Active'], [ 'disabled' => 'Disabled', 'active' => 'Active' ]
+     * ex. [ 0  => 'Disabled', 1 => 'Active' ], [ 'Disabled', 'Active'], [ 'disabled' => 'Disabled', 'active' =>
+     * 'Active' ]
      *
      * @return array
      */
@@ -98,18 +99,18 @@ class Page extends Model implements ModelStatusContract
             'frontend' => [
                 'show' => [
                     'type' => 'show',
-                    'url' => [self::ROUTE_FRONTEND_PATH . '.show', $this],
+                    'url' => [self::ROUTE_FRONTEND_PATH.'.show', $this],
                 ],
             ],
             'backend' => [
                 'show' => [
                     'type' => 'show',
-                    'url' => [self::ROUTE_ADMIN_PATH . '.show', $this],
+                    'url' => [self::ROUTE_ADMIN_PATH.'.show', $this],
                 ],
                 'destroy' => [
                     'type' => 'destroy',
-                    'url' => [self::ROUTE_ADMIN_PATH . '.destroy', $this],
-                    'redirect' => [self::ROUTE_ADMIN_PATH . '.index'],
+                    'url' => [self::ROUTE_ADMIN_PATH.'.destroy', $this],
+                    'redirect' => [self::ROUTE_ADMIN_PATH.'.index'],
                 ],
                 'test_not_existed' => [
                     'type' => 'custom',

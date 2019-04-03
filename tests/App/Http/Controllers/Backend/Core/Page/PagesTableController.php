@@ -17,7 +17,8 @@ class PagesTableController extends Controller
 
     /**
      * PagesTableController constructor.
-     * @param PageRepository $pageRepository
+     *
+     * @param  PageRepository  $pageRepository
      */
     public function __construct(PageRepository $pageRepository)
     {
@@ -32,7 +33,7 @@ class PagesTableController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
      * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException

@@ -43,7 +43,8 @@ class TestCrudsFeature extends TestCase
 
         $response = $this->put(route('admin.page.update', $this->page), $dataNew);
 
-        $response->assertStatus(302)->assertSessionHas('flash_success', 'new test title has been updated.')->assertRedirect(route('admin.page.show', Page::find(1)));
+        $response->assertStatus(302)->assertSessionHas('flash_success',
+            'new test title has been updated.')->assertRedirect(route('admin.page.show', Page::find(1)));
 
         $this->assertDatabaseHas((new Page)->getTable(), $dataNew);
     }
@@ -52,7 +53,8 @@ class TestCrudsFeature extends TestCase
     {
         $response = $this->delete(route('admin.page.destroy', $this->page), []);
 
-        $response->assertStatus(302)->assertSessionHas('flash_success', 'Title Name has been deleted.')->assertRedirect(route('admin.page.index'));
+        $response->assertStatus(302)->assertSessionHas('flash_success',
+            'Title Name has been deleted.')->assertRedirect(route('admin.page.index'));
 
         $this->assertDatabaseMissing((new Page)->getTable(), ['id' => 1]);
     }
@@ -68,7 +70,8 @@ class TestCrudsFeature extends TestCase
             '_submission' => $customeRedirection,
         ]);
 
-        $response->assertStatus(302)->assertSessionHas('flash_success', 'Salliess has been created.')->assertRedirect($customeRedirection);
+        $response->assertStatus(302)->assertSessionHas('flash_success',
+            'Salliess has been created.')->assertRedirect($customeRedirection);
 
         $this->assertDatabaseHas((new Page)->getTable(), [
             'title' => 'Salliess',

@@ -17,7 +17,7 @@ class PagesSoftDeleteController extends Controller
     /**
      * PagesSoftDeleteController constructor.
      *
-     * @param \HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository $pageDeleteRepository
+     * @param  \HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository  $pageDeleteRepository
      */
     public function __construct(PageDeleteRepository $pageDeleteRepository)
     {

@@ -21,11 +21,11 @@ class TestDataTable extends TestCase
         $response = $this->post(route('admin.page.table'), []);
 
         $response->assertStatus(200)->assertJson([
-                "draw" => 0,
-                "recordsTotal" => 0,
-                "recordsFiltered" => 0,
-                "data" => [],
-            ]);
+            "draw" => 0,
+            "recordsTotal" => 0,
+            "recordsFiltered" => 0,
+            "data" => [],
+        ]);
     }
 
     public function testWithDataOneRow_()

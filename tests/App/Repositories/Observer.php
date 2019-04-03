@@ -20,7 +20,7 @@ class Observer extends ObserverContract
 {
 
     /**
-     * @param array $data
+     * @param  array  $data
      *
      * @return array
      */
@@ -31,7 +31,7 @@ class Observer extends ObserverContract
 
     /**
      * @param       $model
-     * @param array $data
+     * @param  array  $data
      *
      * @return mixed
      */
@@ -43,7 +43,7 @@ class Observer extends ObserverContract
 
     /**
      * @param       $model
-     * @param array $data
+     * @param  array  $data
      *
      * @return mixed
      */
@@ -54,8 +54,8 @@ class Observer extends ObserverContract
 
     /**
      * @param       $model
-     * @param array $data
-     * @param array $oldModel
+     * @param  array  $data
+     * @param  array  $oldModel
      *
      * @return mixed
      */

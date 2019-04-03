@@ -19,7 +19,7 @@ class PagesController extends Controller
     /**
      * PagesController constructor.
      *
-     * @param \HalcyonLaravel\Base\Tests\Repositories\PageRepository $pageRepository
+     * @param  \HalcyonLaravel\Base\Tests\Repositories\PageRepository  $pageRepository
      *
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
@@ -30,21 +30,22 @@ class PagesController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Database\Eloquent\Model|null $model
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Database\Eloquent\Model|null  $model
+     *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */
     public function crudRules(Request $request, IlluminateModel $model = null): BaseableOptions
     {
         return BaseableOptions::create()->storeRules([
-                'title' => 'required|unique:pages,id',
-            ])->storeRuleMessages([
-                'title.required' => 'The title field is required.',
-            ])->updateRules([
-                'title' => 'required|unique:pages,id',
-            ])->updateRuleMessages([
-                'title.required' => 'The title field is required.',
-            ]);
+            'title' => 'required|unique:pages,id',
+        ])->storeRuleMessages([
+            'title.required' => 'The title field is required.',
+        ])->updateRules([
+            'title' => 'required|unique:pages,id',
+        ])->updateRuleMessages([
+            'title.required' => 'The title field is required.',
+        ]);
     }
 
     public function testForMethodNotFound()
@@ -62,8 +63,8 @@ class PagesController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request            $request
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Database\Eloquent\Model  $model
      *
      * @return array
      */

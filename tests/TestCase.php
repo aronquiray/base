@@ -2,6 +2,7 @@
 
 namespace HalcyonLaravel\Base\Tests;
 
+use CreatePermissionTables;
 use HalcyonLaravel\Base\Tests\Models\Content;
 use HalcyonLaravel\Base\Tests\Models\Core\Page;
 use HalcyonLaravel\Base\Tests\Models\Core\PageSoftDelete;
@@ -36,7 +37,7 @@ class TestCase extends Orchestra
         $this->setUpSeed();
         $this->setUpRoutes();
         $this->bindingRepositories($this->app);
-        View::addLocation(__DIR__ . '/resources/views/');
+        View::addLocation(__DIR__.'/resources/views/');
 
         config([
             'halcyon-laravel.base' => [
@@ -48,12 +49,12 @@ class TestCase extends Orchestra
     /**
      * Set up the database.
      *
-     * @param \Illuminate\Foundation\Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      */
     protected function setUpDatabase($app)
     {
-        include_once __DIR__ . '/../vendor/spatie/laravel-permission/database/migrations/create_permission_tables.php.stub';
-        (new \CreatePermissionTables())->up();
+        include_once __DIR__.'/../vendor/spatie/laravel-permission/database/migrations/create_permission_tables.php.stub';
+        (new CreatePermissionTables())->up();
         $this->app['db']->connection()->getSchemaBuilder()->create('pages_sd', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
@@ -212,7 +213,7 @@ class TestCase extends Orchestra
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      *
      * @return void
      */
