@@ -35,9 +35,9 @@ class ThisEqualThatCriteria implements CriteriaInterface
     /**
      * ThisEqualThatCriteria constructor.
      *
-     * @param string $field
-     * @param null   $value
-     * @param string $comparison
+     * @param  string  $field
+     * @param  null  $value
+     * @param  string  $comparison
      */
     public function __construct(string $field, $value = null, string $comparison = '=')
     {
@@ -48,7 +48,7 @@ class ThisEqualThatCriteria implements CriteriaInterface
 
     /**
      * @param                                                   $model
-     * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
+     * @param  \Prettus\Repository\Contracts\RepositoryInterface  $repository
      *
      * @return mixed
      */

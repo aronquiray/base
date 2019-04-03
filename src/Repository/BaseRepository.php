@@ -35,9 +35,9 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param array|null $request
-     * @param array      $fields
-     * @param bool       $isAllFillable
+     * @param  array|null  $request
+     * @param  array  $fields
+     * @param  bool  $isAllFillable
      *
      * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException
@@ -90,7 +90,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param array $attributes
+     * @param  array  $attributes
      *
      * @return mixed
      * @throws \Prettus\Validator\Exceptions\ValidatorException
@@ -120,14 +120,14 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
         if ($has) {
             // check instance
             throw_if(!($this->observer instanceof ObserverContract), Exception ::class,
-                get_class($this->observer) . " must instance of " . ObserverContract::class . '.');
+                get_class($this->observer)." must instance of ".ObserverContract::class.'.');
         }
 
         return $has;
     }
 
     /**
-     * @param \Closure $closure
+     * @param  \Closure  $closure
      *
      * @return mixed
      */
@@ -139,7 +139,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param array $attributes
+     * @param  array  $attributes
      * @param       $id
      *
      * @return mixed
@@ -241,7 +241,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Repository\ObserverContract $observer
+     * @param  \HalcyonLaravel\Base\Repository\ObserverContract  $observer
      */
     protected function setObserver(ObserverContract $observer)
     {

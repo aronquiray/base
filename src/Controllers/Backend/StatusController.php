@@ -20,7 +20,7 @@ abstract class StatusController extends BaseController
     protected $viewPath;
 
     /**
-     * @param string $type
+     * @param  string  $type
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Prettus\Repository\Exceptions\RepositoryException
@@ -36,15 +36,15 @@ abstract class StatusController extends BaseController
         $statusKey = $model->statusKeyName();
 
         MetaTag::setTags([
-            'title' => $this->getModelName() . ' ' . ucfirst($type) . ' Management',
+            'title' => $this->getModelName().' '.ucfirst($type).' Management',
         ]);
 
         return view("{$this->viewPath}.status", compact('type', 'statusKey'));
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param string                   $routeKeyNameValue
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $routeKeyNameValue
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Prettus\Validator\Exceptions\ValidatorException
@@ -59,7 +59,7 @@ abstract class StatusController extends BaseController
             throw new StatusControllerException(403, trans('base::exceptions.status_required'));
         }
         $this->repository()->update([$statusKey => $status], $model->id);
-        $redirect = route($this->routePath . '.status', $status);
+        $redirect = route($this->routePath.'.status', $status);
         $message = trans("base::actions.mark", [
             'name' => $model->base(config('base.responseBaseableName')),
             'status' => $status,

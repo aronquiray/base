@@ -14,8 +14,8 @@ use Illuminate\Http\Request;
 interface CRUDContract
 {
     /**
-     * @param \Illuminate\Http\Request            $request
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Database\Eloquent\Model  $model
      *
      * @return array
      */
@@ -24,8 +24,8 @@ interface CRUDContract
     /**
      * Validate input on store and update
      *
-     * @param \Illuminate\Http\Request                 $request
-     * @param \Illuminate\Database\Eloquent\Model|null $model
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Database\Eloquent\Model|null  $model
      *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */

@@ -44,7 +44,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function index()
     {
         MetaTag::setTags([
-            'title' => $this->getModelName() . ' Management',
+            'title' => $this->getModelName().' Management',
         ]);
 
         $viewPath = $this->viewPath;
@@ -60,7 +60,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function create()
     {
         MetaTag::setTags([
-            'title' => 'Create ' . $this->getModelName(),
+            'title' => 'Create '.$this->getModelName(),
         ]);
 
         $viewPath = $this->viewPath;
@@ -70,7 +70,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     }
 
     /**
-     * @param String $routeKeyName
+     * @param  String  $routeKeyName
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Prettus\Repository\Exceptions\RepositoryException
@@ -78,7 +78,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     public function edit(String $routeKeyName)
     {
         MetaTag::setTags([
-            'title' => 'Edit ' . $this->getModelName(),
+            'title' => 'Edit '.$this->getModelName(),
         ]);
 
         $model = $this->getModel($routeKeyName);
@@ -89,7 +89,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     }
 
     /**
-     * @param String $routeKeyName
+     * @param  String  $routeKeyName
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Prettus\Repository\Exceptions\RepositoryException
@@ -99,7 +99,7 @@ abstract class CRUDController extends Controller implements CRUDContract
         $model = $this->getModel($routeKeyName);
 
         MetaTag::setTags([
-            'title' => 'View ' . $this->getModelName(),
+            'title' => 'View '.$this->getModelName(),
         ]);
 
         $viewPath = $this->viewPath;
@@ -109,7 +109,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
@@ -129,8 +129,8 @@ abstract class CRUDController extends Controller implements CRUDContract
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param String                   $routeKeyName
+     * @param  \Illuminate\Http\Request  $request
+     * @param  String  $routeKeyName
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
@@ -152,7 +152,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @param                          $slug
      *
      * @return \Illuminate\Http\JsonResponse
@@ -162,7 +162,7 @@ abstract class CRUDController extends Controller implements CRUDContract
     {
         $model = $this->getModel($slug);
         $this->repository()->delete($model->id);
-        $redirect = route($this->routePath . '.' . (method_exists($this->repository()->model(),
+        $redirect = route($this->routePath.'.'.(method_exists($this->repository()->model(),
                 'bootSoftDeletes') ? 'deleted' : 'index'));
 
         return $this->response('destroy', $request->ajax(), $model, $redirect);

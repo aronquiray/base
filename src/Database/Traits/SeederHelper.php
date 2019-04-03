@@ -25,7 +25,7 @@ trait SeederHelper
 {
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Model $model
+     * @param  \HalcyonLaravel\Base\Models\Model  $model
      *
      * @return mixed
      */
@@ -48,16 +48,16 @@ trait SeederHelper
         $page = $pageModel->create($prepare);
         $page->metaTag()->create([
             'title' => ucfirst($model::MODULE_NAME),
-            'description' => 'List of all ' . Str::plural($model::MODULE_NAME),
-            'keywords' => 'page,' . str_replace('-', ',', Str::kebab($model::MODULE_NAME)),
+            'description' => 'List of all '.Str::plural($model::MODULE_NAME),
+            'keywords' => 'page,'.str_replace('-', ',', Str::kebab($model::MODULE_NAME)),
         ]);
         return $page;
     }
 
     /**
-     * @param \HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface $modelClass
-     * @param bool                                                               $isAddToAdminRole
-     * @param array                                                              $except
+     * @param  \HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface  $modelClass
+     * @param  bool  $isAddToAdminRole
+     * @param  array  $except
      */
     public function seederPermission(
         BaseModelPermissionInterface $modelClass,
@@ -69,8 +69,8 @@ trait SeederHelper
 
     /**
      * @param       $modelClassOrArray
-     * @param bool  $isAddToAdminRole
-     * @param array $except
+     * @param  bool  $isAddToAdminRole
+     * @param  array  $except
      */
     private function permissionStore($modelClassOrArray, bool $isAddToAdminRole = true, array $except = [])
     {
@@ -93,9 +93,9 @@ trait SeederHelper
     }
 
     /**
-     * @param array $permissionName
-     * @param bool  $isAddToAdminRole
-     * @param array $except
+     * @param  array  $permissionName
+     * @param  bool  $isAddToAdminRole
+     * @param  array  $except
      */
     public function seederPermissionArray(array $permissionName, bool $isAddToAdminRole = true, array $except = [])
     {
@@ -103,10 +103,10 @@ trait SeederHelper
     }
 
     /**
-     * @param \Spatie\MediaLibrary\HasMedia\HasMedia $model
+     * @param  \Spatie\MediaLibrary\HasMedia\HasMedia  $model
      * @param                                        $file
-     * @param array|null                             $customProperties
-     * @param string                                 $collectionName
+     * @param  array|null  $customProperties
+     * @param  string  $collectionName
      */
     public function seederUploader(HasMedia $model, $file, array $customProperties = null, $collectionName = 'images')
     {

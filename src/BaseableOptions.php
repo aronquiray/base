@@ -39,7 +39,7 @@ class BaseableOptions
     }
 
     /**
-     * @param array $rules
+     * @param  array  $rules
      *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */
@@ -51,7 +51,7 @@ class BaseableOptions
     }
 
     /**
-     * @param array $messages
+     * @param  array  $messages
      *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */
@@ -63,7 +63,7 @@ class BaseableOptions
     }
 
     /**
-     * @param array $rules
+     * @param  array  $rules
      *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */
@@ -75,7 +75,7 @@ class BaseableOptions
     }
 
     /**
-     * @param array $messages
+     * @param  array  $messages
      *
      * @return \HalcyonLaravel\Base\BaseableOptions
      */

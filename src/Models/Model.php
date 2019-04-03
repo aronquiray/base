@@ -26,7 +26,7 @@ abstract class Model extends BaseModel implements BaseModelInterface, BaseModelP
     /**
      * Model constructor.
      *
-     * @param array $attributes
+     * @param  array  $attributes
      *
      * @throws \ReflectionException
      */
@@ -38,7 +38,7 @@ abstract class Model extends BaseModel implements BaseModelInterface, BaseModelP
 
     /**
      * @param       $query
-     * @param array $columns
+     * @param  array  $columns
      *
      * @return mixed
      */

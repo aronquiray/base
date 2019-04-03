@@ -21,7 +21,7 @@ abstract class DeletedController extends BaseController
     public function deleted()
     {
         MetaTag::setTags([
-            'title' => 'Deleted ' . $this->getModelName(),
+            'title' => 'Deleted '.$this->getModelName(),
         ]);
 
         $viewPath = $this->viewPath;
@@ -31,8 +31,8 @@ abstract class DeletedController extends BaseController
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param String                   $routeKeyName
+     * @param  \Illuminate\Http\Request  $request
+     * @param  String  $routeKeyName
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Prettus\Repository\Exceptions\RepositoryException
@@ -47,8 +47,8 @@ abstract class DeletedController extends BaseController
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param String                   $routeKeyName
+     * @param  \Illuminate\Http\Request  $request
+     * @param  String  $routeKeyName
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Prettus\Repository\Exceptions\RepositoryException

@@ -23,7 +23,7 @@ class LatestCriteria implements CriteriaInterface
     /**
      * LatestCriteria constructor.
      *
-     * @param string $column
+     * @param  string  $column
      */
     public function __construct(string $column = 'updated_at')
     {
@@ -34,7 +34,7 @@ class LatestCriteria implements CriteriaInterface
      * Apply criteria in query repository
      *
      * @param                     $model
-     * @param RepositoryInterface $repository
+     * @param  RepositoryInterface  $repository
      *
      * @return mixed
      */

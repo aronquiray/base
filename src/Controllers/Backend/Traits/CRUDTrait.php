@@ -12,7 +12,7 @@ trait CRUDTrait
     /**
      * @param        $submission
      * @param        $args
-     * @param string $queryParams
+     * @param  string  $queryParams
      *
      * @return string
      */
@@ -23,6 +23,6 @@ trait CRUDTrait
         }
         $submission = $submission ?? 'show';
 
-        return route($this->routePath . '.' . $submission, $args) . $queryParams;
+        return route($this->routePath.'.'.$submission, $args).$queryParams;
     }
 }

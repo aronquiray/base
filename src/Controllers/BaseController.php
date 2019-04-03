@@ -26,9 +26,9 @@ abstract class BaseController extends Controller
     protected $routePath;
 
     /**
-     * @param string     $key
-     * @param bool       $trash
-     * @param array|null $customWhere
+     * @param  string  $key
+     * @param  bool  $trash
+     * @param  array|null  $customWhere
      *
      * @return mixed
      */
@@ -68,11 +68,11 @@ abstract class BaseController extends Controller
     /**
      * Return the response of the request with flash messages
      *
-     * @param String                                 $process
-     * @param bool                                   $isAjax
-     * @param \HalcyonLaravel\Base\Models\Model|null $model
-     * @param String|null                            $redirect
-     * @param String|null                            $message
+     * @param  String  $process
+     * @param  bool  $isAjax
+     * @param  \HalcyonLaravel\Base\Models\Model|null  $model
+     * @param  String|null  $redirect
+     * @param  String|null  $message
      *
      * @return \Illuminate\Http\JsonResponse
      */

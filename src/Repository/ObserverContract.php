@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 abstract class ObserverContract
 {
     /**
-     * @param array $data
+     * @param  array  $data
      *
      * @return array
      */
@@ -21,7 +21,7 @@ abstract class ObserverContract
 
     /**
      * @param       $model
-     * @param array $data
+     * @param  array  $data
      *
      * @return mixed
      */
@@ -29,7 +29,7 @@ abstract class ObserverContract
 
     /**
      * @param       $model
-     * @param array $data
+     * @param  array  $data
      *
      * @return mixed
      */
@@ -37,8 +37,8 @@ abstract class ObserverContract
 
     /**
      * @param       $model
-     * @param array $data
-     * @param array $oldModel
+     * @param  array  $data
+     * @param  array  $oldModel
      *
      * @return mixed
      */
@@ -87,14 +87,14 @@ abstract class ObserverContract
     abstract public static function purged($model);
 
     /**
-     * @param string                              $type
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @param \Closure                            $closure
+     * @param  string  $type
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  \Closure  $closure
      */
     protected static function checkBeforeDelete(string $type, Model $model, Closure $closure)
     {
         if (!in_array($type, ['purge', 'destroy'])) {
-            abort(500, 'Invalid parameter in ' . __METHOD__);
+            abort(500, 'Invalid parameter in '.__METHOD__);
         }
 
         $isHasSoftDelete = method_exists($model, 'bootSoftDeletes');

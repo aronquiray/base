@@ -23,9 +23,9 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface BaseRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param array|null $request
-     * @param array      $fields
-     * @param bool       $isAllFillable
+     * @param  array|null  $request
+     * @param  array  $fields
+     * @param  bool  $isAllFillable
      *
      * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException

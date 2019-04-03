@@ -15,7 +15,7 @@ trait ModelTraits
     /**
      * Returns the list of permission for this group.
      *
-     * @param null $keys
+     * @param  null  $keys
      *
      * @return mixed
      */
@@ -38,7 +38,7 @@ trait ModelTraits
     /**
      * Returns the value of a given key in the baseable function
      *
-     * @param string|null $key
+     * @param  string|null  $key
      *
      * @return string
      */
@@ -57,9 +57,9 @@ trait ModelTraits
     /**
      * Returns the list of links within the selected group
      *
-     * @param string $group
-     * @param null   $keys
-     * @param bool   $onlyLinks
+     * @param  string  $group
+     * @param  null  $keys
+     * @param  bool  $onlyLinks
      *
      * @return array|mixed
      */
