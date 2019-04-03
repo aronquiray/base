@@ -4,11 +4,11 @@ namespace HalcyonLaravel\Base\Repository;
 
 use Closure;
 use DB;
-use Exception;
 use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashedCriteria;
 use HalcyonLaravel\Base\Criterion\Eloquent\ThisEqualThatCriteria;
 use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
 use Illuminate\Container\Container;
+use InvalidArgumentException;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository as PrettusBaseRepository;
 use Prettus\Repository\Events\RepositoryEntityUpdated;
@@ -23,8 +23,6 @@ use Schema;
 abstract class BaseRepository extends PrettusBaseRepository implements CacheableInterface
 {
     use CacheableRepository;
-
-    protected $observer = null;
 
     /**
      * BaseRepository constructor.
@@ -103,9 +101,9 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
         }
 
         return $this->action(function () use ($attributes) {
-            $data = $this->observer::storing($attributes);
+            $data = $this->observer()::storing($attributes);
             $model = parent::create($data);
-            return $this->observer::stored($model, $attributes);
+            return $this->observer()::stored($model, $attributes);
         });
     }
 
@@ -115,15 +113,24 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      */
     private function hasObserver(): bool
     {
-        $has = !is_null($this->observer);
+        $has = !is_null($this->observer());
 
         if ($has) {
             // check instance
-            throw_if(!($this->observer instanceof ObserverContract), Exception ::class,
-                get_class($this->observer)." must instance of ".ObserverContract::class.'.');
+            if (!(app($this->observer()) instanceof ObserverContract)) {
+                throw new InvalidArgumentException($this->observer().' must instance of '.ObserverContract::class.'.');
+            }
         }
 
         return $has;
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function observer()
+    {
+        return null;
     }
 
     /**
@@ -156,9 +163,9 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
         return $this->action(function () use ($attributes, $model) {
             $oldModel = $model->getOriginal();
-            $model = $this->observer::updating($model, $attributes);
+            $model = $this->observer()::updating($model, $attributes);
             $model = parent::update($attributes, $model->id);
-            return $this->observer::updated($model, $attributes, $oldModel);
+            return $this->observer()::updated($model, $attributes, $oldModel);
         });
     }
 
@@ -177,10 +184,10 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
         $model = $this->find($id);
 
         return $this->action(function () use ($model) {
-            $model = $this->observer::deleting($model);
+            $model = $this->observer()::deleting($model);
             parent::delete($model->id);
 
-            return $this->observer::deleted($model);
+            return $this->observer()::deleted($model);
         });
     }
 
@@ -203,15 +210,14 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
         }
 
         return $this->action(function () use ($model) {
-            $model = $this->observer::restoring($model);
+            $model = $this->observer()::restoring($model);
             $model->restore();
 
             event(new RepositoryEntityUpdated($this, $model));
 
-            return $this->observer::restored($model);
+            return $this->observer()::restored($model);
         });
     }
-
 
     /**
      * @param $id
@@ -232,19 +238,11 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
         }
 
         return $this->action(function () use ($model) {
-            $model = $this->observer::purging($model);
+            $model = $this->observer()::purging($model);
             $model->forceDelete();
 
             event(new RepositoryEntityUpdated($this, $model));
-            return $this->observer::purged($model);
+            return $this->observer()::purged($model);
         });
-    }
-
-    /**
-     * @param  \HalcyonLaravel\Base\Repository\ObserverContract  $observer
-     */
-    protected function setObserver(ObserverContract $observer)
-    {
-        $this->observer = $observer;
     }
 }

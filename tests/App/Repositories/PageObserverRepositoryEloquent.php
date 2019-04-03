@@ -14,11 +14,6 @@ use HalcyonLaravel\Base\Tests\Models\Core\Page;
 
 class PageObserverRepositoryEloquent extends BaseRepository implements PageObserverRepository
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->setObserver(new Observer);
-    }
 
     /**
      * Specify Model class name
@@ -28,5 +23,10 @@ class PageObserverRepositoryEloquent extends BaseRepository implements PageObser
     public function model()
     {
         return Page::class;
+    }
+
+    protected function observer()
+    {
+        return Observer::class;
     }
 }
