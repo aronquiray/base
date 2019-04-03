@@ -7,7 +7,6 @@ use DB;
 use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashedCriteria;
 use HalcyonLaravel\Base\Criterion\Eloquent\ThisEqualThatCriteria;
 use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
-use Illuminate\Container\Container;
 use InvalidArgumentException;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository as PrettusBaseRepository;
@@ -23,14 +22,6 @@ use Schema;
 abstract class BaseRepository extends PrettusBaseRepository implements CacheableInterface
 {
     use CacheableRepository;
-
-    /**
-     * BaseRepository constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct(app(Container::class));
-    }
 
     /**
      * @param  array|null  $request
