@@ -18,11 +18,11 @@ class BaseServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/halcyon-laravel/base.php', 'halcyon-laravel.base');
-        $this->mergeConfigFrom(__DIR__.'/../config/repository.php', 'repository');
+        $this->mergeConfigFrom(__DIR__.'/../../config/halcyon-laravel/base.php', 'base');
+        $this->mergeConfigFrom(__DIR__.'/../../config/repository.php', 'repository');
 
         $this->publishes([
-            __DIR__.'/../config/halcyon-laravel/base.php' => config_path('halcyon-laravel/base.php'),
+            __DIR__.'/../config/base.php' => config_path('base.php'),
             __DIR__.'/../config/repository.php' => config_path('repository.php'),
         ]);
 

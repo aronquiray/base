@@ -10,7 +10,7 @@ namespace HalcyonLaravel\Base\Tests\Units;
 
 use HalcyonLaravel\Base\Tests\Models\TestMissingConstant;
 use HalcyonLaravel\Base\Tests\TestCase;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use InvalidArgumentException;
 
 class MissingModelConstantTest extends TestCase
 {
@@ -19,7 +19,7 @@ class MissingModelConstantTest extends TestCase
      */
     public function missingConstant()
     {
-        $this->expectException(HttpException::class);
+        $this->expectException(InvalidArgumentException::class);
         app(TestMissingConstant::class);
     }
 }

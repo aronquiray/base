@@ -44,11 +44,11 @@ trait ModelTraits
      */
     public function base(string $key = null): string
     {
-        $config = $this->baseable();
-        if (array_key_exists($key, $config) && !is_null($key)) {
-            $key = $config[$key];
+        $baseModelName = $this->baseable();
+        if (!is_null($key) && array_key_exists($key, $baseModelName)) {
+            $key = $baseModelName[$key];
         } else {
-            $key = $config['source'];
+            $key = isset($baseModelName['source']) ? $baseModelName['source'] : 'id';
         }
 
         return $this->$key;

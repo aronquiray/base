@@ -8,6 +8,7 @@
 
 namespace HalcyonLaravel\Base;
 
+use InvalidArgumentException;
 use ReflectionClass;
 
 /**
@@ -30,7 +31,7 @@ class Enforcer
         $constantsForced = $reflection->getConstants();
         foreach ($constantsForced as $constant => $value) {
             if (constant("$c::$constant") == "abstract") {
-                abort(500, "Undefined constant $c::$constant");
+                throw new InvalidArgumentException("Undefined constant $c::$constant");
             }
         }
     }

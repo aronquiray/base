@@ -31,7 +31,7 @@ trait SeederHelper
      */
     public function modelPageSeeder(Model $model)
     {
-        $pageModel = app(config('halcyon-laravel.base.models.page'));
+        $pageModel = app(config('base.models.page'));
         $tableName = $pageModel->getTable();
 
         $prepare = [
