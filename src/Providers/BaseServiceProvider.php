@@ -22,8 +22,8 @@ class BaseServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../../config/repository.php', 'repository');
 
         $this->publishes([
-            __DIR__.'/../config/base.php' => config_path('base.php'),
-            __DIR__.'/../config/repository.php' => config_path('repository.php'),
+            __DIR__.'/../../config/base.php' => config_path('base.php'),
+            __DIR__.'/../../config/repository.php' => config_path('repository.php'),
         ]);
 
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'base');
