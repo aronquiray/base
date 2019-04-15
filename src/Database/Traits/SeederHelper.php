@@ -20,6 +20,7 @@ use Spatie\MediaLibrary\HasMedia\HasMedia;
  * Trait SeederHelper
  *
  * @package HalcyonLaravel\Base\Database\Traits
+ * @codeCoverageIgnore
  */
 trait SeederHelper
 {

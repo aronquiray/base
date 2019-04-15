@@ -15,6 +15,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  * Class OnlyTrashedCriteria
  *
  * @package HalcyonLaravel\Base\Criterion\Eloquent
+ * @codeCoverageIgnore
  */
 class OnlyTrashedCriteria implements CriteriaInterface
 {

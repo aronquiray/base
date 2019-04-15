@@ -15,6 +15,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  * Class ThisEqualThatCriteria
  *
  * @package HalcyonLaravel\Base\Criterion\Eloquent
+ * @codeCoverageIgnore
  */
 class ThisEqualThatCriteria implements CriteriaInterface
 {

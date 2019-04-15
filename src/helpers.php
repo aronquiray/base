@@ -5,6 +5,7 @@ if (!function_exists('testFilePath')) {
      * @param  string  $filePath
      *
      * @return string
+     * @codeCoverageIgnore
      */
     function testFilePath(string $filePath)
     {

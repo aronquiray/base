@@ -15,6 +15,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  * Class LatestCriteria
  *
  * @package HalcyonLaravel\Base\Criterion\Eloquent
+ * @codeCoverageIgnore
  */
 class LatestCriteria implements CriteriaInterface
 {
