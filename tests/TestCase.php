@@ -93,7 +93,7 @@ class TestCase extends Orchestra
 
     protected function setUpSeed()
     {
-        app()['cache']->forget('spatie.permission.cache');
+        $this->app['cache']->forget('spatie.permission.cache');
 
         $this->admin = User::create([
             'first_name' => 'Istrator',
