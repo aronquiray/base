@@ -9,8 +9,8 @@ use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 use HalcyonLaravel\Base\Tests\Models\Content;
 use HalcyonLaravel\Base\Tests\Repositories\ContentRepository;
 use HalcyonLaravel\Base\Tests\TestCase;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class BaseControllerTest extends TestCase
@@ -114,8 +114,7 @@ class BaseControllerTest extends TestCase
                 return BaseableOptions::create();
             }
         };
-        $this->followingRedirects();
 
-        $this->assertInstanceOf(get_class(app(ResponseFactory::class)), $controller->response('update', true));
+        $this->assertInstanceOf(JsonResponse::class, $controller->response('update', true));
     }
 }
