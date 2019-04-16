@@ -14,4 +14,14 @@ class BaseControllerTest extends TestCase
         $this->get(route('admin.page.show', 'im-not-really-exist'))
             ->assertStatus(404);
     }
+
+    /**
+     * @test
+     */
+    public function status_show_404()
+    {
+
+        $this->get(route('admin.page.status', 'im-not-really-exist'))
+            ->assertStatus(404);
+    }
 }
