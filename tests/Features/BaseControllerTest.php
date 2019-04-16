@@ -6,6 +6,7 @@ use HalcyonLaravel\Base\Tests\TestCase;
 
 class BaseControllerTest extends TestCase
 {
+
     /**
      * @test
      */
@@ -22,5 +23,15 @@ class BaseControllerTest extends TestCase
     {
         $this->get(route('admin.page.status', 'im-not-really-exist'))
             ->assertStatus(404);
+    }
+
+    /**
+     * @test
+     */
+    public function status_invalid_model()
+    {
+//        $this->expectExceptionMessage('Model must implemented in '.ModelStatusContract::class);
+        $this->get(route('admin.content.status', 'im-not-really-exist'))
+            ->assertStatus(500);
     }
 }

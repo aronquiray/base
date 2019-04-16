@@ -7,6 +7,8 @@ use HalcyonLaravel\Base\Tests\Models\Content;
 use HalcyonLaravel\Base\Tests\Models\Core\Page;
 use HalcyonLaravel\Base\Tests\Models\Core\PageSoftDelete;
 use HalcyonLaravel\Base\Tests\Models\User;
+use HalcyonLaravel\Base\Tests\Repositories\ContentRepository;
+use HalcyonLaravel\Base\Tests\Repositories\ContentRepositoryEloquent;
 use HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepository;
 use HalcyonLaravel\Base\Tests\Repositories\PageDeleteRepositoryEloquent;
 use HalcyonLaravel\Base\Tests\Repositories\PageObserverRepository;
@@ -155,6 +157,7 @@ class TestCase extends Orchestra
             Route::post('page/table', 'PagesTableController')->name('page.table');
             Route::get('page/status/{status}', 'PageStatusController@status')->name('page.status');
             Route::patch('page/status/{page}', 'PageStatusController@update')->name('page.status.update');
+            Route::get('content/status/{status}', 'ContentStatusController@status')->name('content.status');
             Route::resource('page', 'PagesController');
         });
         // for observer
@@ -200,6 +203,7 @@ class TestCase extends Orchestra
         $this->app->bind(PageDeleteRepository::class, PageDeleteRepositoryEloquent::class);
         $this->app->bind(PageObserverRepository::class, PageObserverRepositoryEloquent::class);
         $this->app->bind(PageRepository::class, PageRepositoryEloquent::class);
+        $this->app->bind(ContentRepository::class, ContentRepositoryEloquent::class);
     }
 
     public function tearDown(): void
@@ -229,7 +233,7 @@ class TestCase extends Orchestra
     {
         return [
             "DataTables" => "Yajra\\DataTables\\Facades\\DataTables",
-            "MetaTag" => "Fomvasss\\LaravelMetaTags\\Facade",
+//            "MetaTag" => "Fomvasss\\LaravelMetaTags\\Facade",
         ];
     }
 

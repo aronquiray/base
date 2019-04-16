@@ -2,10 +2,12 @@
 
 namespace HalcyonLaravel\Base\Controllers\Backend;
 
+use Exception;
+use Fomvasss\LaravelMetaTags\Facade as MetaTag;
 use HalcyonLaravel\Base\Controllers\BaseController;
 use HalcyonLaravel\Base\Exceptions\StatusControllerException;
+use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
 use Illuminate\Http\Request;
-use MetaTag;
 
 /**
  * Class StatusController
@@ -23,10 +25,15 @@ abstract class StatusController extends BaseController
      * @param  string  $type
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
      */
     public function status(string $type)
     {
         $model = $this->repository()->makeModel();
+
+        if (!$model instanceof ModelStatusContract) {
+            throw new Exception('Model must implemented in '.ModelStatusContract::class);
+        }
 
         if (!array_key_exists($type, $model->statuses())) {
             abort(404);
@@ -38,7 +45,7 @@ abstract class StatusController extends BaseController
             'title' => $this->getModelName().' '.ucfirst($type).' Management',
         ]);
 
-        return view("{$this->viewPath}.status", compact('type', 'statusKey'));
+        return view($model::VIEW_BACKEND_PATH.'.status', compact('type', 'statusKey'));
     }
 
     /**

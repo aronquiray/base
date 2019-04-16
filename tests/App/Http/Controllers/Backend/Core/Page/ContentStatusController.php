@@ -4,19 +4,21 @@ namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
 use HalcyonLaravel\Base\Controllers\Backend\StatusController;
 use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
-use HalcyonLaravel\Base\Tests\Models\Core\Page as Model;
-use HalcyonLaravel\Base\Tests\Repositories\PageRepository;
+use HalcyonLaravel\Base\Tests\Models\Content as Model;
+use HalcyonLaravel\Base\Tests\Repositories\ContentRepository;
 
 /**
- * Class ContentStatusController.
+ * Class ContentStatusController
+ *
+ * @package HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page
  */
-class PageStatusController extends StatusController
+class ContentStatusController extends StatusController
 {
-    protected $pageRepository;
+    protected $contentRepository;
 
-    public function __construct(PageRepository $pageRepository)
+    public function __construct(ContentRepository $contentRepository)
     {
-        $this->pageRepository = $pageRepository;
+        $this->contentRepository = $contentRepository;
 
         $this->routePath = Model::ROUTE_ADMIN_PATH;
         $this->viewPath = Model::VIEW_BACKEND_PATH;
@@ -26,6 +28,6 @@ class PageStatusController extends StatusController
 
     public function repository(): BaseRepositoryInterface
     {
-        return $this->pageRepository;
+        return $this->contentRepository;
     }
 }

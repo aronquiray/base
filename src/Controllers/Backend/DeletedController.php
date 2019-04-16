@@ -2,9 +2,9 @@
 
 namespace HalcyonLaravel\Base\Controllers\Backend;
 
+use Fomvasss\LaravelMetaTags\Facade as MetaTag;
 use HalcyonLaravel\Base\Controllers\BaseController;
 use Illuminate\Http\Request;
-use MetaTag;
 
 /**
  * Class DeletedController
@@ -16,7 +16,6 @@ abstract class DeletedController extends BaseController
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function deleted()
     {
