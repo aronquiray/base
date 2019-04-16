@@ -95,7 +95,6 @@ abstract class BaseController extends Controller
 
     /**
      * @return string
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     protected function getModelName(): string
     {

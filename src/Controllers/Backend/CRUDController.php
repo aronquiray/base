@@ -27,8 +27,6 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * CRUDController constructor.
-     *
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function __construct()
     {
@@ -39,7 +37,6 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function index()
     {
@@ -55,7 +52,6 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function create()
     {
@@ -73,7 +69,6 @@ abstract class CRUDController extends Controller implements CRUDContract
      * @param  String  $routeKeyName
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function edit(String $routeKeyName)
     {
@@ -92,7 +87,6 @@ abstract class CRUDController extends Controller implements CRUDContract
      * @param  String  $routeKeyName
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function show(String $routeKeyName)
     {
@@ -113,8 +107,6 @@ abstract class CRUDController extends Controller implements CRUDContract
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     * @throws \Throwable
      */
     public function store(Request $request)
     {
@@ -134,8 +126,6 @@ abstract class CRUDController extends Controller implements CRUDContract
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     * @throws \Throwable
      */
     public function update(Request $request, String $routeKeyName)
     {
@@ -153,10 +143,9 @@ abstract class CRUDController extends Controller implements CRUDContract
 
     /**
      * @param  \Illuminate\Http\Request  $request
-     * @param                          $slug
+     * @param $slug
      *
      * @return \Illuminate\Http\JsonResponse
-     * @throws \Throwable
      */
     public function destroy(Request $request, $slug)
     {

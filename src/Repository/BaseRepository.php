@@ -3,16 +3,16 @@
 namespace HalcyonLaravel\Base\Repository;
 
 use Closure;
-use DB;
 use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashedCriteria;
 use HalcyonLaravel\Base\Criterion\Eloquent\ThisEqualThatCriteria;
 use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use InvalidArgumentException;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository as PrettusBaseRepository;
 use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Prettus\Repository\Traits\CacheableRepository;
-use Schema;
 
 /**
  * Class BaseRepository

@@ -47,8 +47,6 @@ abstract class StatusController extends BaseController
      * @param  string  $routeKeyNameValue
      *
      * @return \Illuminate\Http\JsonResponse
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     * @throws \Throwable
      */
     public function update(Request $request, string $routeKeyNameValue)
     {

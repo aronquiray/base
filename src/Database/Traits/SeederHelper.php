@@ -12,8 +12,8 @@ use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface;
 use HalcyonLaravel\Base\Models\Model;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use Schema;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 /**
