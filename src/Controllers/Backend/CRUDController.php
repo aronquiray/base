@@ -5,13 +5,15 @@ namespace HalcyonLaravel\Base\Controllers\Backend;
 use Fomvasss\LaravelMetaTags\Facade as MetaTag;
 use HalcyonLaravel\Base\Controllers\Backend\Contracts\CRUDContract;
 use HalcyonLaravel\Base\Controllers\Backend\Traits\CRUDTrait;
-use HalcyonLaravel\Base\Controllers\BaseController as Controller;
+use HalcyonLaravel\Base\Controllers\BaseController;
 use Illuminate\Http\Request;
 
 /**
- * Class CRUDController.
+ * Class CRUDController
+ *
+ * @package HalcyonLaravel\Base\Controllers\Backend
  */
-abstract class CRUDController extends Controller implements CRUDContract
+abstract class CRUDController extends BaseController implements CRUDContract
 {
     use CRUDTrait;
 
@@ -116,8 +118,12 @@ abstract class CRUDController extends Controller implements CRUDContract
         $data = $this->generateStub($request);
         $model = $this->repository()->create($data);
 
-        return $this->response('store', $request->ajax(), $model,
-            $this->_redirectAfterAction($request->_submission, $model));
+        return $this->response(
+            'store',
+            $request->ajax(),
+            $model,
+            $this->_redirectAfterAction($request->_submission, $model)
+        );
     }
 
     /**

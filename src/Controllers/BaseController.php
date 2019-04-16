@@ -88,10 +88,12 @@ abstract class BaseController extends Controller
             $message = trans("base::actions.$process", ['name' => $model->base(config('base.responseBaseableName'))]);
         }
 
-        return $isAjax ? response()->json([
-            'message' => $message,
-            'link' => $redirect,
-        ]) : redirect($redirect)->withFlashSuccess($message);
+        return $isAjax
+            ? response()->json([
+                'message' => $message,
+                'link' => $redirect,
+            ])
+            : redirect($redirect)->withFlashSuccess($message);
     }
 
     /**
