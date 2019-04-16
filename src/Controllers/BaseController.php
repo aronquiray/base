@@ -53,6 +53,7 @@ abstract class BaseController extends Controller
         } else {
             $model = $repo->findWhere($where)->first();
         }
+
         if (is_null($model)) {
             abort(404);
         }
