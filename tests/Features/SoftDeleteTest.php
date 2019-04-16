@@ -17,7 +17,6 @@ class SoftDeleteTest extends TestCase
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function log_delete_on_soft_delete()
     {
@@ -26,12 +25,11 @@ class SoftDeleteTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('flash_success',
             'test me to delete has been deleted.')->assertRedirect(route('admin.page-sd.deleted'));
 
-        $this->assertSoftDeleted((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
+        $this->assertSoftDeleted(app(PageSoftDelete::class)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function log_restore_on_soft_delete()
     {
@@ -43,7 +41,7 @@ class SoftDeleteTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('flash_success',
             'test me to delete has been restored.')->assertRedirect(route('admin.page-sd.index'));
 
-        $this->assertDatabaseHas((new PageSoftDelete)->getTable(), [
+        $this->assertDatabaseHas(app(PageSoftDelete::class)->getTable(), [
             'id' => $this->pageSoftdelete->id,
             'deleted_at' => null,
         ]);
@@ -51,7 +49,6 @@ class SoftDeleteTest extends TestCase
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function log_purge_on_soft_delete()
     {
@@ -62,12 +59,11 @@ class SoftDeleteTest extends TestCase
 
         $response->assertStatus(302);
 
-        $this->assertDatabaseMissing((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
+        $this->assertDatabaseMissing(app(PageSoftDelete::class)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function on_purge_on_not_deleted()
     {
@@ -80,12 +76,11 @@ class SoftDeleteTest extends TestCase
         $response->assertStatus(404);
 
 
-        $this->assertDatabaseHas((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
+        $this->assertDatabaseHas(app(PageSoftDelete::class)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function on_restore_on_not_deleted()
     {
@@ -97,7 +92,7 @@ class SoftDeleteTest extends TestCase
         //    'message' => 'This content has not been deleted yet.',
         //]);
 
-        $this->assertDatabaseHas((new PageSoftDelete)->getTable(), [
+        $this->assertDatabaseHas(app(PageSoftDelete::class)->getTable(), [
             'id' => $this->pageSoftdelete->id,
             'deleted_at' => null,
         ]);

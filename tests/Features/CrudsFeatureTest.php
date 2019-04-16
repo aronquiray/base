@@ -9,7 +9,6 @@ class CrudsFeatureTest extends TestCase
 {
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function log_store()
     {
@@ -30,7 +29,7 @@ class CrudsFeatureTest extends TestCase
             ->assertSessionHas('flash_success', 'Salliess has been created.')
             ->assertRedirect(route('admin.page.show', Page::find(2)));
 
-        $this->assertDatabaseHas((new Page)->getTable(), [
+        $this->assertDatabaseHas(app(Page::class)->getTable(), [
             'title' => 'Salliess',
             'description' => 'description test',
             'status' => 'enable',
@@ -39,7 +38,6 @@ class CrudsFeatureTest extends TestCase
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function log_update()
     {
@@ -54,12 +52,11 @@ class CrudsFeatureTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('flash_success',
             'new test title has been updated.')->assertRedirect(route('admin.page.show', Page::find(1)));
 
-        $this->assertDatabaseHas((new Page)->getTable(), $dataNew);
+        $this->assertDatabaseHas(app(Page::class)->getTable(), $dataNew);
     }
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function log_delete_on_not_softdelete()
     {
@@ -68,12 +65,11 @@ class CrudsFeatureTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('flash_success',
             'Title Name has been deleted.')->assertRedirect(route('admin.page.index'));
 
-        $this->assertDatabaseMissing((new Page)->getTable(), ['id' => 1]);
+        $this->assertDatabaseMissing(app(Page::class)->getTable(), ['id' => 1]);
     }
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function log_store_with_custom_redirection()
     {
@@ -89,7 +85,7 @@ class CrudsFeatureTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('flash_success',
             'Salliess has been created.')->assertRedirect($customRedirection);
 
-        $this->assertDatabaseHas((new Page)->getTable(), [
+        $this->assertDatabaseHas(app(Page::class)->getTable(), [
             'title' => 'Salliess',
             'description' => 'description test',
             'status' => 'enable',

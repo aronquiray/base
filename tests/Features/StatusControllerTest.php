@@ -16,7 +16,6 @@ class StatusControllerTest extends TestCase
     // }
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function update_status_to_enable()
     {
@@ -26,7 +25,7 @@ class StatusControllerTest extends TestCase
         $response = $this->patch(route('admin.page.status', $this->page), ['status' => 'enable']);
 
         $response->assertStatus(302);
-        $this->assertDatabaseHas((new Page)->getTable(), [
+        $this->assertDatabaseHas(app(Page::class)->getTable(), [
             'id' => $this->page->id,
             'status' => 'enable',
         ]);
@@ -34,7 +33,6 @@ class StatusControllerTest extends TestCase
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function update_status_to_disable()
     {
@@ -45,7 +43,7 @@ class StatusControllerTest extends TestCase
         $response = $this->patch(route('admin.page.status', $this->page), ['status' => 'disable']);
 
         $response->assertStatus(302);
-        $this->assertDatabaseHas((new Page)->getTable(), [
+        $this->assertDatabaseHas(app(Page::class)->getTable(), [
             'id' => $this->page->id,
             'status' => 'disable',
         ]);

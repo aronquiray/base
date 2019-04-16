@@ -9,7 +9,6 @@ class CrudsFeatureWithObserverTest extends TestCase
 {
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function log_store()
     {
@@ -28,7 +27,7 @@ class CrudsFeatureWithObserverTest extends TestCase
 
         $response->assertStatus(302)->assertSessionHas('flash_success', 'Salliess has been created.');
 
-        $this->assertDatabaseHas((new Page)->getTable(), [
+        $this->assertDatabaseHas(app(Page::class)->getTable(), [
             'title' => 'Salliess',
             'description' => 'description test',
             'status' => 'enable',
@@ -37,7 +36,6 @@ class CrudsFeatureWithObserverTest extends TestCase
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function log_update()
     {
@@ -51,12 +49,11 @@ class CrudsFeatureWithObserverTest extends TestCase
 
         $response->assertStatus(302)->assertSessionHas('flash_success', 'new test title has been updated.');
 
-        $this->assertDatabaseHas((new Page)->getTable(), $dataNew);
+        $this->assertDatabaseHas(app(Page::class)->getTable(), $dataNew);
     }
 
     /**
      * @test
-     * @throws \ReflectionException
      */
     public function log_delete_on_not_softdelete()
     {
@@ -64,7 +61,7 @@ class CrudsFeatureWithObserverTest extends TestCase
 
         $response->assertStatus(302)->assertSessionHas('flash_success', 'Title Name has been deleted.');
 
-        $this->assertDatabaseMissing((new Page)->getTable(), ['id' => 1]);
+        $this->assertDatabaseMissing(app(Page::class)->getTable(), ['id' => 1]);
     }
 
 }
