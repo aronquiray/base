@@ -35,10 +35,10 @@ class TestCase extends Orchestra
     public function setUp(): void
     {
         parent::setUp();
-        $this->setUpDatabase($this->app);
+        $this->setUpDatabase();
         $this->setUpSeed();
         $this->setUpRoutes();
-        $this->bindingRepositories($this->app);
+        $this->bindingRepositories();
         View::addLocation(__DIR__.'/resources/views/');
 
         config([
@@ -48,12 +48,7 @@ class TestCase extends Orchestra
         ]);
     }
 
-    /**
-     * Set up the database.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     */
-    protected function setUpDatabase($app)
+    protected function setUpDatabase()
     {
         include_once __DIR__.'/../vendor/spatie/laravel-permission/database/migrations/create_permission_tables.php.stub';
         (new CreatePermissionTables())->up();
@@ -70,7 +65,7 @@ class TestCase extends Orchestra
         });
 
         // test Migrations
-        $app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
+        $this->app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
@@ -78,13 +73,13 @@ class TestCase extends Orchestra
             $table->timestamps();
         });
 
-        $app['db']->connection()->getSchemaBuilder()->create('contents', function (Blueprint $table) {
+        $this->app['db']->connection()->getSchemaBuilder()->create('contents', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
             $table->text('content');
             $table->timestamps();
         });
-        $app['db']->connection()->getSchemaBuilder()->create('pages', function (Blueprint $table) {
+        $this->app['db']->connection()->getSchemaBuilder()->create('pages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
             $table->string('url')->nullable();
@@ -200,11 +195,11 @@ class TestCase extends Orchestra
         // Route::get('page', 'tt')->name('frontend.page.show');
     }
 
-    protected function bindingRepositories($app)
+    protected function bindingRepositories()
     {
-        $app->bind(PageDeleteRepository::class, PageDeleteRepositoryEloquent::class);
-        $app->bind(PageObserverRepository::class, PageObserverRepositoryEloquent::class);
-        $app->bind(PageRepository::class, PageRepositoryEloquent::class);
+        $this->app->bind(PageDeleteRepository::class, PageDeleteRepositoryEloquent::class);
+        $this->app->bind(PageObserverRepository::class, PageObserverRepositoryEloquent::class);
+        $this->app->bind(PageRepository::class, PageRepositoryEloquent::class);
     }
 
     public function tearDown(): void
