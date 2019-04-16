@@ -2,8 +2,8 @@
 
 namespace HalcyonLaravel\Base\Models\Traits;
 
+use Illuminate\Routing\Route;
 use Illuminate\Support\Arr;
-use Route;
 
 /**
  * Trait ModelDefaultTraits
