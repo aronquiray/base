@@ -30,6 +30,8 @@ class TestCase extends Orchestra
 
     protected $page;
 
+    protected $pageSoftdelete;
+
     public function setUp(): void
     {
         parent::setUp();
