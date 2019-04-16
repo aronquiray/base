@@ -20,8 +20,6 @@ class PagesController extends Controller
      * PagesController constructor.
      *
      * @param  \HalcyonLaravel\Base\Tests\Repositories\PageRepository  $pageRepository
-     *
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function __construct(PageRepository $pageRepository)
     {
