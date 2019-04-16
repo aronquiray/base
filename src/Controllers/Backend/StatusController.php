@@ -23,7 +23,6 @@ abstract class StatusController extends BaseController
      * @param  string  $type
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function status(string $type)
     {
