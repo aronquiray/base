@@ -17,7 +17,7 @@ class MissingModelConstantTest extends TestCase
     /**
      * @test
      */
-    public function missingConstant()
+    public function missing_constant()
     {
         $this->expectException(InvalidArgumentException::class);
         app(TestMissingConstant::class);

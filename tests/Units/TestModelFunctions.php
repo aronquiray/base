@@ -6,7 +6,7 @@ use HalcyonLaravel\Base\Tests\TestCase;
 
 class TestModelFunctions extends TestCase
 {
-    public function testGetLinks()
+    public function test_get_links()
     {
         $links = $this->page->actions('backend', ['show'], true);
 
@@ -17,7 +17,7 @@ class TestModelFunctions extends TestCase
         $this->assertEquals($expected, $links);
     }
 
-    public function testGetLink()
+    public function test_get_link()
     {
         $link = $this->page->actions('backend', 'show', true);
 

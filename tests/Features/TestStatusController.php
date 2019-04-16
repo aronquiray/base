@@ -15,7 +15,7 @@ class TestStatusController extends TestCase
     //     dd(\Artisan::output());
     // }
 
-    public function testUpdateStatusToEnable()
+    public function test_update_status_to_enable()
     {
         $this->page->status = 'disable';
         $this->page->save();
@@ -29,7 +29,7 @@ class TestStatusController extends TestCase
         ]);
     }
 
-    public function testUpdateStatusToDisable()
+    public function test_update_status_to_disable()
     {
         // just to make sure
         $this->page->status = 'enable';
@@ -44,7 +44,7 @@ class TestStatusController extends TestCase
         ]);
     }
 
-    public function testStatusRequiredException()
+    public function test_status_required_exception()
     {
         $response = $this->patch(route('admin.page.status', $this->page));
 

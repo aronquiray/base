@@ -7,7 +7,7 @@ use Route;
 
 class TestExceptions extends TestCase
 {
-    public function testMethodNotFound()
+    public function test_method_not_found()
     {
         Route::get('test',
             'HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page\PagesController@testForMethodNotFound')->name('test-me');

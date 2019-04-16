@@ -15,7 +15,7 @@ class TestSoftDelete extends TestCase
         parent::setUp();
     }
 
-    public function testLogDeleteOnSoftdelete()
+    public function test_log_delete_on_soft_delete()
     {
         $response = $this->delete(route('admin.page-sd.destroy', $this->pageSoftdelete), []);
 
@@ -25,7 +25,7 @@ class TestSoftDelete extends TestCase
         $this->assertSoftDeleted((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
 
-    public function testLogRestoreOnSoftdelete()
+    public function test_log_restore_on_soft_delete()
     {
         $this->pageSoftdelete->deleted_at = now();
         $this->pageSoftdelete->save();
@@ -41,7 +41,7 @@ class TestSoftDelete extends TestCase
         ]);
     }
 
-    public function testLogPurgeOnSoftdelete()
+    public function test_log_purge_on_soft_delete()
     {
         $this->pageSoftdelete->deleted_at = now();
         $this->pageSoftdelete->save();
@@ -53,7 +53,7 @@ class TestSoftDelete extends TestCase
         $this->assertDatabaseMissing((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
 
-    public function testOnPurgeOnNotDeleted()
+    public function test_on_purge_on_not_deleted()
     {
         // $this->expectsEvents(BasePurgingEvent::class);
         // $this->expectsEvents(BasePurgedEvent::class);
@@ -67,7 +67,7 @@ class TestSoftDelete extends TestCase
         $this->assertDatabaseHas((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
 
-    public function testOnRestoreOnNotDeleted()
+    public function test_on_restore_on_not_deleted()
     {
         $response = $this->patch(route('admin.page-sd.restore', $this->pageSoftdelete), []);
 

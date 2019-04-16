@@ -18,7 +18,7 @@ class LinksTest extends TestCase
     /**
      * @test
      */
-    public function invalidKeyOnLinks()
+    public function invalid_key_on_links()
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid attribute key [xx] on '.Content::class.'::links().');
@@ -29,7 +29,7 @@ class LinksTest extends TestCase
     /**
      * @test
      */
-    public function getGroupOnlyLink()
+    public function get_group_only_link()
     {
 
         $links = $this->page->actions('backend', ['show'], true);
@@ -42,7 +42,7 @@ class LinksTest extends TestCase
     /**
      * @test
      */
-    public function getGroup_()
+    public function get_group_()
     {
         $links = $this->page->actions('backend');
 //        dd(__METHOD__,$links);
@@ -62,7 +62,7 @@ class LinksTest extends TestCase
     /**
      * @test
      */
-    public function invalidGroup()
+    public function invalid_group()
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid action group.');

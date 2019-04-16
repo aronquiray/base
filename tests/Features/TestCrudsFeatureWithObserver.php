@@ -7,7 +7,7 @@ use HalcyonLaravel\Base\Tests\TestCase;
 
 class TestCrudsFeatureWithObserver extends TestCase
 {
-    public function testLogStore()
+    public function test_log_store()
     {
 
         // Event::shouldReceive('fire')->with(m::on(function($event){
@@ -31,7 +31,7 @@ class TestCrudsFeatureWithObserver extends TestCase
         ]);
     }
 
-    public function testLogUpdate()
+    public function test_log_update()
     {
         $dataNew = [
             'title' => 'new test title',
@@ -46,7 +46,7 @@ class TestCrudsFeatureWithObserver extends TestCase
         $this->assertDatabaseHas((new Page)->getTable(), $dataNew);
     }
 
-    public function testLogDeleteOnNOTSoftdelete()
+    public function test_log_delete_on_not_softdelete()
     {
         $response = $this->delete(route('admin.page-observer.destroy', $this->page), []);
 

@@ -7,7 +7,7 @@ use HalcyonLaravel\Base\Tests\TestCase;
 
 class TestCrudsFeature extends TestCase
 {
-    public function testLogStore()
+    public function test_log_store()
     {
 
         // Event::shouldReceive('fire')->with(m::on(function($event){
@@ -33,7 +33,7 @@ class TestCrudsFeature extends TestCase
         ]);
     }
 
-    public function testLogUpdate()
+    public function test_log_update()
     {
         $dataNew = [
             'title' => 'new test title',
@@ -49,7 +49,7 @@ class TestCrudsFeature extends TestCase
         $this->assertDatabaseHas((new Page)->getTable(), $dataNew);
     }
 
-    public function testLogDeleteOnNOTSoftdelete()
+    public function test_log_delete_on_not_softdelete()
     {
         $response = $this->delete(route('admin.page.destroy', $this->page), []);
 
@@ -59,19 +59,19 @@ class TestCrudsFeature extends TestCase
         $this->assertDatabaseMissing((new Page)->getTable(), ['id' => 1]);
     }
 
-    public function testLogStoreWithCustomeRedirecttion()
+    public function test_log_store_with_custom_redirection()
     {
-        $customeRedirection = 'http://test-url.com/';
+        $customRedirection = 'http://test-url.com/';
 
         $response = $this->post(route('admin.page.store'), [
             'title' => 'Salliess',
             'description' => 'description test',
             'status' => 'enable',
-            '_submission' => $customeRedirection,
+            '_submission' => $customRedirection,
         ]);
 
         $response->assertStatus(302)->assertSessionHas('flash_success',
-            'Salliess has been created.')->assertRedirect($customeRedirection);
+            'Salliess has been created.')->assertRedirect($customRedirection);
 
         $this->assertDatabaseHas((new Page)->getTable(), [
             'title' => 'Salliess',

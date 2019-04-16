@@ -16,7 +16,7 @@ class TestDataTable extends TestCase
         Page::query()->truncate();
     }
 
-    public function testNoData()
+    public function test_no_data()
     {
         $response = $this->post(route('admin.page.table'), []);
 
@@ -28,7 +28,7 @@ class TestDataTable extends TestCase
         ]);
     }
 
-    public function testWithDataOneRow_()
+    public function test_with_data_one_row_()
     {
         $faker = Faker::create();
         $now = now()->format('Y-m-d H:i:s');
@@ -79,7 +79,7 @@ class TestDataTable extends TestCase
         $response->assertStatus(200)->assertJson($expectedJson);
     }
 
-    public function testWithSofdeletedDataOneRowNotDeleted()
+    public function test_with_soft_deleted_data_one_row_not_deleted()
     {
         PageSoftDelete::query()->truncate();
         $faker = Faker::create();
@@ -141,7 +141,7 @@ class TestDataTable extends TestCase
         $response->assertStatus(200)->assertJson($expectedJson);
     }
 
-    public function testWithSofdeletedDataOneRowYESDeleted()
+    public function test_with_soft_deleted_data_one_row_yes_deleted()
     {
         PageSoftDelete::query()->truncate();
         $faker = Faker::create();
