@@ -14,11 +14,11 @@ use HalcyonLaravel\Base\Tests\Repositories\PageObserverRepositoryEloquent;
 use HalcyonLaravel\Base\Tests\Repositories\PageRepository;
 use HalcyonLaravel\Base\Tests\Repositories\PageRepositoryEloquent;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Route;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use View;
 
 class TestCase extends Orchestra
 {
