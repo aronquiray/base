@@ -5,7 +5,7 @@ namespace HalcyonLaravel\Base\Tests\Features;
 use HalcyonLaravel\Base\Tests\Models\Core\Page;
 use HalcyonLaravel\Base\Tests\TestCase;
 
-class TestCrudsFeatureWithObserver extends TestCase
+class CrudsFeatureWithObserverTest extends TestCase
 {
     public function test_log_store()
     {

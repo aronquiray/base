@@ -5,7 +5,7 @@ namespace HalcyonLaravel\Base\Tests\Units;
 use HalcyonLaravel\Base\Tests\TestCase;
 use Route;
 
-class TestExceptions extends TestCase
+class ExceptionTest extends TestCase
 {
     public function test_method_not_found()
     {

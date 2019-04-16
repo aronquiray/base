@@ -4,7 +4,7 @@ namespace HalcyonLaravel\Base\Tests\Features;
 
 use HalcyonLaravel\Base\Tests\TestCase;
 
-class TestCrudsResourcesFeature extends TestCase
+class CrudsResourcesFeatureTest extends TestCase
 {
     public function test_index()
     {

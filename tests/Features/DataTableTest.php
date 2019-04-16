@@ -7,7 +7,7 @@ use HalcyonLaravel\Base\Tests\Models\Core\Page;
 use HalcyonLaravel\Base\Tests\Models\Core\PageSoftDelete;
 use HalcyonLaravel\Base\Tests\TestCase;
 
-class TestDataTable extends TestCase
+class DataTableTest extends TestCase
 {
     public function setUp(): void
     {

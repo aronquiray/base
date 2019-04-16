@@ -4,7 +4,7 @@ namespace HalcyonLaravel\Base\Tests\Units;
 
 use HalcyonLaravel\Base\Tests\TestCase;
 
-class TestModelFunctions extends TestCase
+class ModelFunctionTest extends TestCase
 {
     public function test_get_links()
     {

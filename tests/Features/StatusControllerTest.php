@@ -5,7 +5,7 @@ namespace HalcyonLaravel\Base\Tests\Features;
 use HalcyonLaravel\Base\Tests\Models\Core\Page;
 use HalcyonLaravel\Base\Tests\TestCase;
 
-class TestStatusController extends TestCase
+class StatusControllerTest extends TestCase
 {
     // public function setUp()
     // {

@@ -6,7 +6,7 @@ use HalcyonLaravel\Base\Tests\TestCase;
 
 // use App\Models\Core\Page;
 
-class TestBasable extends TestCase
+class BasableTest extends TestCase
 {
     public function test_get_basable_value()
     {

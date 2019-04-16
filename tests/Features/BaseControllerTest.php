@@ -4,7 +4,7 @@ namespace HalcyonLaravel\Base\Tests\Features;
 
 use HalcyonLaravel\Base\Tests\TestCase;
 
-class TestBaseController extends TestCase
+class BaseControllerTest extends TestCase
 {
     /**
      * @test

@@ -6,7 +6,7 @@ use HalcyonLaravel\Base\Tests\Models\Core\PageSoftDelete;
 use HalcyonLaravel\Base\Tests\TestCase;
 use Route;
 
-class TestSoftDelete extends TestCase
+class SoftDeleteTest extends TestCase
 {
     protected $pageSoftdelete;
 
