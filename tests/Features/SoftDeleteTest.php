@@ -15,7 +15,11 @@ class SoftDeleteTest extends TestCase
         parent::setUp();
     }
 
-    public function test_log_delete_on_soft_delete()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function log_delete_on_soft_delete()
     {
         $response = $this->delete(route('admin.page-sd.destroy', $this->pageSoftdelete), []);
 
@@ -25,7 +29,11 @@ class SoftDeleteTest extends TestCase
         $this->assertSoftDeleted((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
 
-    public function test_log_restore_on_soft_delete()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function log_restore_on_soft_delete()
     {
         $this->pageSoftdelete->deleted_at = now();
         $this->pageSoftdelete->save();
@@ -41,7 +49,11 @@ class SoftDeleteTest extends TestCase
         ]);
     }
 
-    public function test_log_purge_on_soft_delete()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function log_purge_on_soft_delete()
     {
         $this->pageSoftdelete->deleted_at = now();
         $this->pageSoftdelete->save();
@@ -53,7 +65,11 @@ class SoftDeleteTest extends TestCase
         $this->assertDatabaseMissing((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
 
-    public function test_on_purge_on_not_deleted()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function on_purge_on_not_deleted()
     {
         // $this->expectsEvents(BasePurgingEvent::class);
         // $this->expectsEvents(BasePurgedEvent::class);
@@ -67,7 +83,11 @@ class SoftDeleteTest extends TestCase
         $this->assertDatabaseHas((new PageSoftDelete)->getTable(), ['id' => $this->pageSoftdelete->id,]);
     }
 
-    public function test_on_restore_on_not_deleted()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function on_restore_on_not_deleted()
     {
         $response = $this->patch(route('admin.page-sd.restore', $this->pageSoftdelete), []);
 

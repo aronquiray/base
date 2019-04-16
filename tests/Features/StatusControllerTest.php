@@ -14,8 +14,11 @@ class StatusControllerTest extends TestCase
     //     $this->Artisan('route:list');
     //     dd(\Artisan::output());
     // }
-
-    public function test_update_status_to_enable()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function update_status_to_enable()
     {
         $this->page->status = 'disable';
         $this->page->save();
@@ -29,7 +32,11 @@ class StatusControllerTest extends TestCase
         ]);
     }
 
-    public function test_update_status_to_disable()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function update_status_to_disable()
     {
         // just to make sure
         $this->page->status = 'enable';
@@ -44,7 +51,10 @@ class StatusControllerTest extends TestCase
         ]);
     }
 
-    public function test_status_required_exception()
+    /**
+     * @test
+     */
+    public function status_required_exception()
     {
         $response = $this->patch(route('admin.page.status', $this->page));
 

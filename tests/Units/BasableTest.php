@@ -8,7 +8,10 @@ use HalcyonLaravel\Base\Tests\TestCase;
 
 class BasableTest extends TestCase
 {
-    public function test_get_basable_value()
+    /**
+     * @test
+     */
+    public function get_basable_value()
     {
         $basableName = $this->content->base('history_name');
         $this->assertEquals('Content Name', $basableName);

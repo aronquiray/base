@@ -7,7 +7,11 @@ use HalcyonLaravel\Base\Tests\TestCase;
 
 class CrudsFeatureTest extends TestCase
 {
-    public function test_log_store()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function log_store()
     {
 
         // Event::shouldReceive('fire')->with(m::on(function($event){
@@ -33,7 +37,11 @@ class CrudsFeatureTest extends TestCase
         ]);
     }
 
-    public function test_log_update()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function log_update()
     {
         $dataNew = [
             'title' => 'new test title',
@@ -49,7 +57,11 @@ class CrudsFeatureTest extends TestCase
         $this->assertDatabaseHas((new Page)->getTable(), $dataNew);
     }
 
-    public function test_log_delete_on_not_softdelete()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function log_delete_on_not_softdelete()
     {
         $response = $this->delete(route('admin.page.destroy', $this->page), []);
 
@@ -59,7 +71,11 @@ class CrudsFeatureTest extends TestCase
         $this->assertDatabaseMissing((new Page)->getTable(), ['id' => 1]);
     }
 
-    public function test_log_store_with_custom_redirection()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function log_store_with_custom_redirection()
     {
         $customRedirection = 'http://test-url.com/';
 
