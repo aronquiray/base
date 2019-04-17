@@ -41,6 +41,7 @@ abstract class Model extends BaseModel implements BaseModelInterface, BaseModelP
      * @param  array  $columns
      *
      * @return mixed
+     * @codeCoverageIgnore
      */
     public function scopeExclude($query, array $columns = [])
     {
