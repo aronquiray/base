@@ -79,6 +79,6 @@ abstract class Model extends BaseModel implements BaseModelInterface, BaseModelP
             $locale = config('app.locale');
         }
 
-        return parent::getTranslation($key, $locale, $useFallbackLocale);
+        return $this->getTranslation($key, $locale, $useFallbackLocale);
     }
 }
