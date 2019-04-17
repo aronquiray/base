@@ -2,11 +2,13 @@
 
 namespace HalcyonLaravel\Base\Models;
 
+use Exception;
 use HalcyonLaravel\Base\Enforcer;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelPermissionInterface;
 use HalcyonLaravel\Base\Models\Traits\ModelTraits;
 use Illuminate\Database\Eloquent\Model as BaseModel;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * Class Model
@@ -32,8 +34,8 @@ abstract class Model extends BaseModel implements BaseModelInterface, BaseModelP
      */
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
         Enforcer::__add(__CLASS__, get_called_class());
+        parent::__construct($attributes);
     }
 
     /**
@@ -49,18 +51,34 @@ abstract class Model extends BaseModel implements BaseModelInterface, BaseModelP
     }
 
     /**
-     * @param $field
+     * @param  string  $key
+     * @param  string  $locale
+     * @param  bool  $useFallbackLocale
      *
      * @return mixed
+     * @throws \Exception
+     * @codeCoverageIgnore
      */
-    public function getTrans($field)
+    public function getTrans(string $key, string $locale = null, bool $useFallbackLocale = true)
     {
-        $locale = config('app.locale');
+        if (!is_class_uses_deep($this, HasTranslations::class)) {
+            throw new Exception('Model must uses '.HasTranslations::class);
+        }
 
-        if (session()->has('locale') && in_array(session()->get('locale'), array_keys(config('locale.languages')))) {
+        if (!is_null($locale)
+            && session()->has('locale')
+            && in_array(
+                session()->get('locale'),
+                array_keys(config('locale.languages'))
+            )
+        ) {
             $locale = session()->get('locale');
         }
 
-        return $this->getTranslation($field, $locale);
+        if (is_null($locale)) {
+            $locale = config('app.locale');
+        }
+
+        return parent::getTranslation($key, $locale, $useFallbackLocale);
     }
 }

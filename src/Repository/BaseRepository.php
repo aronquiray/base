@@ -6,6 +6,7 @@ use Closure;
 use HalcyonLaravel\Base\Criterion\Eloquent\OnlyTrashedCriteria;
 use HalcyonLaravel\Base\Criterion\Eloquent\ThisEqualThatCriteria;
 use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use InvalidArgumentException;
@@ -33,7 +34,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      */
     public function table(array $request = null, array $fields = [], bool $isAllFillable = true)
     {
-        $isHasSoftDelete = method_exists($this->model, 'bootSoftDeletes');
+        $isHasSoftDelete = is_class_uses_deep($this->model, SoftDeletes::class);
 
         $tableName = $this->model->getTable();
 
