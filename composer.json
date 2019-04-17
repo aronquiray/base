@@ -49,5 +49,10 @@
       "./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover"
     ],
     "test": "./vendor/bin/phpunit --verbose"
-  }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
