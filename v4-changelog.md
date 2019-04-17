@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v4.0.7: Test Enhancement
     v4.0.6: Fix publish config 
     v4.0.3: Update config remove to folder, ensure base not throw error
     v4.0.2: Remove contructor
