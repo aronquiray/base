@@ -140,7 +140,7 @@ trait SeederHelper
 
         if (is_string($file)) {
             $model
-                ->copyMedia(testFilePath($file))
+                ->copyMedia(test_file_path($file))
                 ->withCustomProperties($customProperties)
                 ->toMediaCollection($collectionName);
 
