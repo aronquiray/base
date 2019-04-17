@@ -4,6 +4,7 @@ namespace HalcyonLaravel\Base\Repository;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use InvalidArgumentException;
 
 /**
@@ -98,7 +99,7 @@ abstract class ObserverContract
             throw new InvalidArgumentException('Invalid parameter in '.__METHOD__);
         }
 
-        $isHasSoftDelete = method_exists($model, 'bootSoftDeletes');
+        $isHasSoftDelete = is_class_uses_deep($model, SoftDeletes::class);
 
         if ($isHasSoftDelete && $type == 'purge' OR
             !$isHasSoftDelete && $type == 'destroy') {
