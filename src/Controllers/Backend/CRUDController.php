@@ -68,11 +68,11 @@ abstract class CRUDController extends BaseController implements CRUDContract
     }
 
     /**
-     * @param  String  $routeKeyName
+     * @param  string  $routeKeyName
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(String $routeKeyName)
+    public function edit(string $routeKeyName)
     {
         MetaTag::setTags([
             'title' => 'Edit '.$this->getModelName(),
@@ -86,11 +86,11 @@ abstract class CRUDController extends BaseController implements CRUDContract
     }
 
     /**
-     * @param  String  $routeKeyName
+     * @param  string  $routeKeyName
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(String $routeKeyName)
+    public function show(string $routeKeyName)
     {
         $model = $this->getModel($routeKeyName);
 
@@ -128,12 +128,12 @@ abstract class CRUDController extends BaseController implements CRUDContract
 
     /**
      * @param  \Illuminate\Http\Request  $request
-     * @param  String  $routeKeyName
+     * @param  string  $routeKeyName
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(Request $request, String $routeKeyName)
+    public function update(Request $request, string $routeKeyName)
     {
         $model = $this->getModel($routeKeyName);
 
