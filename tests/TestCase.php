@@ -22,7 +22,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class TestCase extends Orchestra
+abstract class TestCase extends Orchestra
 {
     protected $user;
 
@@ -34,7 +34,7 @@ class TestCase extends Orchestra
 
     protected $pageSoftdelete;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->setUpDatabase();

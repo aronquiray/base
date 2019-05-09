@@ -2,6 +2,7 @@
 
 namespace HalcyonLaravel\Base\Providers;
 
+use HalcyonLaravel\Base\QueryCacheModelRepositoryHelper;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -27,5 +28,12 @@ class BaseServiceProvider extends ServiceProvider
         ]);
 
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'base');
+    }
+
+    public function register()
+    {
+        $this->app->bind('query.cache', function () {
+            return new QueryCacheModelRepositoryHelper;
+        });
     }
 }

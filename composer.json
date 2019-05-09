@@ -8,7 +8,8 @@
     "spatie/laravel-permission": "^2.23",
     "prettus/l5-repository": "^2.6",
     "spatie/laravel-medialibrary": "^7.5",
-    "fomvasss/laravel-meta-tags": "^2.0"
+    "fomvasss/laravel-meta-tags": "^2.0",
+    "ext-json": "*"
   },
   "require-dev": {
     "orchestra/testbench": "~3.8.0",
