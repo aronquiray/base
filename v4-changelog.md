@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v4.0.12: Add status code parameter on reponse
     v4.0.11: Move cache manager from project level
     v4.0.10: String to string
     v4.0.9: Fix test file path

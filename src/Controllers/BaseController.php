@@ -74,6 +74,7 @@ abstract class BaseController extends Controller
      * @param  \HalcyonLaravel\Base\Models\Model|null  $model
      * @param  String|null  $redirect
      * @param  String|null  $message
+     * @param  int|null  $statusCode
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -82,7 +83,8 @@ abstract class BaseController extends Controller
         bool $isAjax,
         Model $model = null,
         String $redirect = null,
-        String $message = null
+        String $message = null,
+        int $statusCode = null
     ) {
         if (!is_null($model) && is_null($message)) {
             $message = trans("base::actions.$process", ['name' => $model->base(config('base.responseBaseableName'))]);
@@ -92,8 +94,8 @@ abstract class BaseController extends Controller
             ? response()->json([
                 'message' => $message,
                 'link' => $redirect,
-            ])
-            : redirect($redirect)->withFlashSuccess($message);
+            ], $statusCode ?: 200)
+            : redirect($redirect, $statusCode ?: 302)->withFlashSuccess($message);
     }
 
     /**
