@@ -3,7 +3,8 @@
 namespace HalcyonLaravel\Base\Models\Traits;
 
 use Illuminate\Support\Arr;
-use Route;
+use Illuminate\Support\Facades\Route;
+use InvalidArgumentException;
 
 /**
  * Trait ModelTraits
@@ -98,8 +99,9 @@ trait ModelTraits
         $currentClass = get_class($this);
         foreach ($links as $link) {
             foreach ($link as $keyAttribute => $v) {
-                abort_if(!in_array($keyAttribute, $validAttributeKeys), 500,
-                    "Invalid attribute key [$keyAttribute] on {$currentClass}::links().");
+                if (!in_array($keyAttribute, $validAttributeKeys)) {
+                    throw new InvalidArgumentException("Invalid attribute key [$keyAttribute] on {$currentClass}::links().");
+                }
             }
         }
 
