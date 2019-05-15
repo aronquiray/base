@@ -77,7 +77,7 @@ trait ModelTraits
 
         foreach ($links as $type => $link) {
             if (
-                (array_key_exists('permission', $link) && $user && !$user->hasPermissionTo($link['permission'])) ||
+                (array_key_exists('permission', $link) && $user && !$user->can($link['permission'])) ||
                 (!is_null($keys) && is_array($keys) && !in_array($type, $keys)) ||
                 (!is_null($keys) && !is_array($keys) && $keys != $type)) {
                 Arr::forget($links, $type);
