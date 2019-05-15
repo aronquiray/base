@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v4.0.14: Try to use https://github.com/spatie/laravel-permission/wiki/Global-%22Admin%22-role (Gate)
     v4.0.13: Add helpers 
     v4.0.12: Add status code parameter on reponse
     v4.0.11: Move cache manager from project level
