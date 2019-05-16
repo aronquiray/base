@@ -66,9 +66,11 @@ trait ModelTraits
      */
     public function actions(string $group, $keys = null, bool $onlyLinks = false)
     {
-        abort_if(!in_array($group, ['backend', 'frontend']), 500, 'Invalid action group.');
+        if (!in_array($group, ['backend', 'frontend'])) {
+            throw new InvalidArgumentException('Invalid action group.');
+        }
 
-        $user = auth()->user();
+        $user = app('auth')->user();
 
         if (method_exists($this, 'additionalLinks')) {
             $links = array_merge_recursive($this->links(), $this->additionalLinks())[$group];
@@ -94,8 +96,8 @@ trait ModelTraits
             'redirect',
             'icon',
             'class',
-
         ];
+
         $currentClass = get_class($this);
         foreach ($links as $link) {
             foreach ($link as $keyAttribute => $v) {
