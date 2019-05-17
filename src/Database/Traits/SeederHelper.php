@@ -109,16 +109,22 @@ trait SeederHelper
 
     /**
      * @param  \Spatie\MediaLibrary\HasMedia\HasMedia  $model
-     * @param                                        $file
+     * @param $file
      * @param  array|null  $customProperties
      * @param  string  $collectionName
+     * @param  string|null  $defaultPath
      */
-    public function seederUploader(HasMedia $model, $file, array $customProperties = null, $collectionName = 'images')
-    {
+    public function seederUploader(
+        HasMedia $model,
+        $file,
+        array $customProperties = null,
+        $collectionName = 'images',
+        string $defaultPath = null
+    ) {
         if (app()->environment() == 'testing') {
             return;
         }
-        print_r("Seeding $file ... \n");
+        print_r(get_class($model)." Seeding $file ... \n");
         if ($model instanceof BaseModelInterface) {
             $fileName = $model->base();
         } else {
@@ -144,7 +150,7 @@ trait SeederHelper
 
         if (is_string($file)) {
             $model
-                ->copyMedia(test_file_path($file))
+                ->copyMedia(is_null($defaultPath) ? test_file_path($file) : ($defaultPath.DIRECTORY_SEPARATOR.$file))
                 ->withCustomProperties($customProperties)
                 ->toMediaCollection($collectionName);
 
@@ -159,7 +165,7 @@ trait SeederHelper
 
 
         }
-        print_r("Seeding done!\n");
+        print_r(get_class($model)." Seeding done!\n");
     }
 
 }

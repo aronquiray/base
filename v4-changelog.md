@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v4.0.17: Add parameter for default file path in image seeder
     v4.0.16: Minor update
     v4.0.15: Use can
     v4.0.14: Try to use https://github.com/spatie/laravel-permission/wiki/Global-%22Admin%22-role (Gate)
