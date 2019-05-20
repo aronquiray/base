@@ -5,11 +5,10 @@ return [
     'models' => [
         // used for page seeder
         'page' => 'App\Models\Core\Page\Page',
+        // used for media
+        'metaTag' => 'App\Models\MetaTag',
     ],
     'media' => [
-        'models' => [
-            'metaTag' => 'App\Models\MetaTag',
-        ],
         'route_names' => [
             'destroy' => 'webapi.admin.image.destroy',
 //            'upload' => 'webapi.admin.image.upload',

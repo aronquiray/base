@@ -4,6 +4,7 @@ namespace HalcyonLaravel\Base\Controllers;
 
 use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Model as HalcyonBaseModel;
+use Illuminate\Database\Eloquent\Model as IlluminateModel;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
@@ -212,14 +213,14 @@ abstract class ImageController extends Controller
     }
 
     /**
-     * @param $metaTag
+     * @param $model
      */
-    private function forMeta($metaTag)
+    private function forMeta(IlluminateModel $model)
     {
-        $metaTagModel = app(app('config')->get('base.media.models.metaTag'));
-        if ($metaTag instanceof $metaTagModel) {
-            $metaTag->update([
-                'og_image' => $metaTag->getFirstMediaUrl('images', 'og_image'),
+        $metaTagModel = app(app('config')->get('base.models.metaTag'));
+        if ($model instanceof $metaTagModel) {
+            $model->update([
+                'og_image' => $model->getFirstMediaUrl('images', 'og_image'),
             ]);
         }
     }
