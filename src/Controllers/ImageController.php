@@ -120,10 +120,8 @@ abstract class ImageController extends Controller
         );
 
         // update og_image field
-        $metaTagModel = app(app('config')->get('base.media.models.metaTag'));
-        if ($model instanceof $metaTagModel) {
-            $this->forMeta($model);
-        }
+        $this->forMeta($model);
+
 
         return response()->json([
             'status' => 'success',
@@ -218,9 +216,12 @@ abstract class ImageController extends Controller
      */
     private function forMeta($metaTag)
     {
-        $metaTag->update([
-            'og_image' => $metaTag->getFirstMediaUrl('images', 'og_image'),
-        ]);
+        $metaTagModel = app(app('config')->get('base.media.models.metaTag'));
+        if ($metaTag instanceof $metaTagModel) {
+            $metaTag->update([
+                'og_image' => $metaTag->getFirstMediaUrl('images', 'og_image'),
+            ]);
+        }
     }
 
     /**
