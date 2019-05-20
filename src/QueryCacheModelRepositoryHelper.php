@@ -27,7 +27,7 @@ class QueryCacheModelRepositoryHelper
         $this->cache = app('cache');
     }
 
-    public static function getFilePath()
+    public static function getFilePath(): string
     {
         return self::$storeFile = storage_path('framework/cache/query-cache-model-repository.json');
     }
@@ -61,7 +61,7 @@ class QueryCacheModelRepositoryHelper
      *
      * @return string
      */
-    private function getKeys(array $args)
+    private function getKeys(array $args): string
     {
         $args = serialize(implode('-', $args));
 
