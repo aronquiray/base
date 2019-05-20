@@ -29,4 +29,13 @@ interface BaseModelInterface
      * @return array
      */
     public function baseable(): array;
+
+    /**
+     * Returns the value of a given key in the baseable function
+     *
+     * @param  string|null  $key
+     *
+     * @return string
+     */
+    public function base(string $key = null): string;
 }
