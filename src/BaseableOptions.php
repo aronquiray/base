@@ -13,9 +13,13 @@ class BaseableOptions
 
     public $storeRuleMessages;
 
+    public $storeCustomAttributes;
+
     public $updateRules;
 
     public $updateRuleMessages;
+
+    public $updateCustomAttributes;
 
     /**
      * @return \HalcyonLaravel\Base\BaseableOptions
@@ -31,9 +35,11 @@ class BaseableOptions
     public function reset(): self
     {
         $this->storeRules = null;
+        $this->storeCustomAttributes = [];
         $this->storeRuleMessages = [];
         $this->updateRules = null;
         $this->updateRuleMessages = [];
+        $this->updateCustomAttributes = [];
 
         return $this;
     }
@@ -46,6 +52,30 @@ class BaseableOptions
     public function storeRules(array $rules): self
     {
         $this->storeRules = $rules;
+
+        return $this;
+    }
+
+    /**
+     * @param  array  $storeCustomAttributes
+     *
+     * @return \HalcyonLaravel\Base\BaseableOptions
+     */
+    public function storeCustomAttributes(array $storeCustomAttributes): self
+    {
+        $this->storeCustomAttributes = $storeCustomAttributes;
+
+        return $this;
+    }
+
+    /**
+     * @param  array  $updateCustomAttributes
+     *
+     * @return \HalcyonLaravel\Base\BaseableOptions
+     */
+    public function updateCustomAttributes(array $updateCustomAttributes): self
+    {
+        $this->updateCustomAttributes = $updateCustomAttributes;
 
         return $this;
     }
