@@ -6,6 +6,7 @@ use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Model as HalcyonBaseModel;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
 use Illuminate\Http\Request;
+use InvalidArgumentException;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
 use StdClass;
@@ -86,16 +87,34 @@ abstract class ImageController extends Controller
     {
         $this->validate($request, [
             'model' => 'required|in:'.$this->allowedModels(),
+            'collection' => 'nullable|string',
+            'conversion' => 'nullable|string',
         ]);
 
-        $this->validate($request, [
-            'image' => isset($this->validations()[$this->models()[$request->model]]) ? $this->validations()[$this->models()[$request->model]] : 'required|image',
-        ]);
-
-        $model = $this->getModel($request, $routeKeyValue);
+        $model = $this->getModel($request->model, $routeKeyValue);
 
         $collectionName = $request->collection ?? $model->collection_name ?? 'images';
         $conversion = $request->conversion ?? '';
+
+        $rules = isset($this->validations()[$this->models()[$request->model]]) ? $this->validations()[$this->models()[$request->model]] : [];
+
+        if (is_array($rules)) {
+            if (!empty($rules)) {
+                if (array_key_exists('*', $rules)) {
+                    $rules = $rules['*'];
+                } elseif (array_key_exists($collectionName, $rules)) {
+                    $rules = $rules[$collectionName];
+                } else {
+                    $rules = null;
+                }
+            }
+        } else {
+            throw  new InvalidArgumentException('Invalid argument, it must me an array.');
+        }
+
+        $this->validate($request, [
+            'image' => $rules ?: 'required|image',
+        ]);
 
         abort_if(is_null($collectionName), 422, 'No collection name specified, aborted.');
 
@@ -120,9 +139,8 @@ abstract class ImageController extends Controller
                 : ['attributes']
         );
 
-        // update og_image field
+        // update og_image field if model if MetaTag
         $this->forMeta($model);
-
 
         return response()->json([
             'status' => 'success',
@@ -141,20 +159,20 @@ abstract class ImageController extends Controller
 
     abstract protected function models(): array;
 
-    abstract protected function validations(): array;
-
     /**
-     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $modelName
      * @param  string  $routeKeyValue
      *
      * @return \Spatie\MediaLibrary\HasMedia\HasMedia
      */
-    private function getModel(Request $request, string $routeKeyValue): HasMedia
+    private function getModel(string $modelName, string $routeKeyValue): HasMedia
     {
-        $model = app($this->models()[$request->model]);
+        $model = app($this->models()[$modelName]);
 
         return $model::where($model->getRouteKeyName(), $routeKeyValue)->firstOrFail();
     }
+
+    abstract protected function validations(): array;
 
     /**
      * @param  string  $fileName_

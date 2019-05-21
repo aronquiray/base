@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v4.0.22: Fix image custom validation
     v4.0.21: Move config
     v4.0.20: Move ImageController from project level
     v4.0.18: Add function base() on BaseModelInterface
