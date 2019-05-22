@@ -135,7 +135,7 @@ abstract class ImageController extends Controller
 
         $image = $this->convertToUploaderImageFormat($latestImage, $conversion,
             defined($this->models()[$request->model].'::MEDIA_LIBRARY_CUSTOM_PROPERTIES')
-                ? ['attributes'] + $model::MEDIA_LIBRARY_CUSTOM_PROPERTIES
+                ? array_merge(['attributes'], $model::MEDIA_LIBRARY_CUSTOM_PROPERTIES)
                 : ['attributes']
         );
 

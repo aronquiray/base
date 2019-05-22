@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v4.0.24: Fix custom properties in image uploader
     v4.0.23: Add store/update customAttributes on baseableOptions
     v4.0.22: Fix image custom validation
     v4.0.21: Move config
