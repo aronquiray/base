@@ -1,11 +1,11 @@
 <?php
 
-namespace HalcyonLaravel\Base\Controllers\Backend;
+namespace HalcyonLaravel\Base\Http\Controllers\Backend;
 
 use Exception;
 use Fomvasss\LaravelMetaTags\Facade as MetaTag;
-use HalcyonLaravel\Base\Controllers\BaseController;
 use HalcyonLaravel\Base\Exceptions\StatusControllerException;
+use HalcyonLaravel\Base\Http\Controllers\BaseController;
 use HalcyonLaravel\Base\Models\Contracts\ModelStatusContract;
 use Illuminate\Http\Request;
 

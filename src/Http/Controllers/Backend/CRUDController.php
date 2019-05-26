@@ -1,11 +1,11 @@
 <?php
 
-namespace HalcyonLaravel\Base\Controllers\Backend;
+namespace HalcyonLaravel\Base\Http\Controllers\Backend;
 
 use Fomvasss\LaravelMetaTags\Facade as MetaTag;
-use HalcyonLaravel\Base\Controllers\Backend\Contracts\CRUDContract;
-use HalcyonLaravel\Base\Controllers\Backend\Traits\CRUDTrait;
-use HalcyonLaravel\Base\Controllers\BaseController;
+use HalcyonLaravel\Base\Http\Controllers\Backend\Contracts\CRUDContract;
+use HalcyonLaravel\Base\Http\Controllers\Backend\Traits\CRUDTrait;
+use HalcyonLaravel\Base\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
 /**

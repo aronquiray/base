@@ -1,6 +1,6 @@
 <?php
 
-namespace HalcyonLaravel\Base\Controllers\Backend\Traits;
+namespace HalcyonLaravel\Base\Http\Controllers\Backend\Traits;
 
 /**
  * Trait CRUDTrait

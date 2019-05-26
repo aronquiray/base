@@ -3,7 +3,7 @@
 namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
 use DataTables;
-use HalcyonLaravel\Base\Controllers\BaseController as Controller;
+use HalcyonLaravel\Base\Http\Controllers\BaseController;
 use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 use HalcyonLaravel\Base\Tests\Repositories\PageRepository;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 /**
  * Class PageTableController.
  */
-class PagesTableController extends Controller
+class PagesTableController extends BaseController
 {
     protected $pageRepository;
 

@@ -3,8 +3,8 @@
 namespace HalcyonLaravel\Base\Tests\Units;
 
 use HalcyonLaravel\Base\BaseableOptions;
-use HalcyonLaravel\Base\Controllers\Backend\CRUDController;
-use HalcyonLaravel\Base\Controllers\BaseController;
+use HalcyonLaravel\Base\Http\Controllers\Backend\CRUDController;
+use HalcyonLaravel\Base\Http\Controllers\BaseController;
 use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 use HalcyonLaravel\Base\Tests\Models\Content;
 use HalcyonLaravel\Base\Tests\Repositories\ContentRepository;

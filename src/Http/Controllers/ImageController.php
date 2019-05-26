@@ -1,6 +1,6 @@
 <?php
 
-namespace HalcyonLaravel\Base\Controllers;
+namespace HalcyonLaravel\Base\Http\Controllers;
 
 use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Model as HalcyonBaseModel;

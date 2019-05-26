@@ -1,6 +1,6 @@
 <?php
 
-namespace HalcyonLaravel\Base\Controllers\Backend\Contracts;
+namespace HalcyonLaravel\Base\Http\Controllers\Backend\Contracts;
 
 use HalcyonLaravel\Base\BaseableOptions;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;

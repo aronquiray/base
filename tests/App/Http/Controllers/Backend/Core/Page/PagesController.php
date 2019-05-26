@@ -3,7 +3,7 @@
 namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
 use HalcyonLaravel\Base\BaseableOptions;
-use HalcyonLaravel\Base\Controllers\Backend\CRUDController as Controller;
+use HalcyonLaravel\Base\Http\Controllers\Backend\CRUDController;
 use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 use HalcyonLaravel\Base\Tests\Repositories\PageRepository;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 /**
  * Class PagesController.
  */
-class PagesController extends Controller
+class PagesController extends CRUDController
 {
     protected $pageRepository;
 

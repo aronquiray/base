@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Tests\Http\Controllers\Backend\Core\Page;
 
-use HalcyonLaravel\Base\Controllers\Backend\StatusController;
+use HalcyonLaravel\Base\Http\Controllers\Backend\StatusController;
 use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 use HalcyonLaravel\Base\Tests\Models\Content as Model;
 use HalcyonLaravel\Base\Tests\Repositories\ContentRepository;

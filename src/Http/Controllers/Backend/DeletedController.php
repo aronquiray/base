@@ -1,9 +1,9 @@
 <?php
 
-namespace HalcyonLaravel\Base\Controllers\Backend;
+namespace HalcyonLaravel\Base\Http\Controllers\Backend;
 
 use Fomvasss\LaravelMetaTags\Facade as MetaTag;
-use HalcyonLaravel\Base\Controllers\BaseController;
+use HalcyonLaravel\Base\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
 /**
