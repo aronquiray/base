@@ -81,15 +81,12 @@ trait SeederHelper
 
         $config = config('access.users');
         foreach ($permissionNames as $permissionName) {
-//            $permission = resolve(config('permission.models.permission'))::create([
-//                'name' => $permissionName,
-//            ]);
+            $permission = app(config('permission.models.permission'))::create([
+                'name' => $permissionName,
+            ]);
 //            https://github.com/spatie/laravel-permission/wiki/Global-%22Admin%22-role
 //            $roleModel::findByName($config['system_role'])->givePermissionTo($permission);
             if ($isAddToAdminRole) {
-                $permission = resolve(config('permission.models.permission'))::create([
-                    'name' => $permissionName,
-                ]);
                 if (!in_array($permissionName, $except)) {
                     $roleModel::findByName($config['admin_role'])->givePermissionTo($permission);
                 }

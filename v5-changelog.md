@@ -2,4 +2,5 @@
 
 
 ## Changes Log 
+    v5.0.1: Fix permission seeder
     v5.0.0: Update folder structures, Add media API
