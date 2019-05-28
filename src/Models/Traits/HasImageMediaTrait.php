@@ -18,15 +18,21 @@ trait HasImageMediaTrait
      * @param  string  $field
      * @param  array  $attributes
      * @param  bool  $lazyLoad
+     * @param  float|null  $width
+     * @param  float|null  $height
      *
-     * @return \Spatie\Html\Elements\Img|string
+     * @return \Spatie\Html\Elements\Img
      */
     public function getFirstMediaImage(
         string $collection = 'images',
         string $conversionName = '',
         string $field = 'title',
         array $attributes = [],
-        bool $lazyLoad = true
+        bool $lazyLoad = true,
+
+        // for none image result
+        float $width = null,
+        float $height = null
     ) {
 
         $media = $this->getFirstMedia($collection);
@@ -36,7 +42,12 @@ trait HasImageMediaTrait
                     'title' => $this->{$field},
                 ] + $attributes;
 
-            return html()->img(null, $this->{$field})->attributes($attributes);
+            $src = null;
+            if (!is_null($width) && !is_null($height)) {
+                $src = dummy_image($width, $height, $attributes['title']);
+            }
+
+            return html()->img($src, $this->{$field})->attributes($attributes);
         }
 
         return $media->getMediaImage($conversionName, $field, $attributes, $lazyLoad);
