@@ -19,6 +19,28 @@ use StdClass;
 abstract class ImageController extends Controller
 {
     /**
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function order(Request $request)
+    {
+        $this->validate($request, [
+            'orderedIds.*' => 'required|integer'
+        ]);
+
+        Media::setNewOrder($request->orderedIds);
+
+        app('query.cache')->flush();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'done order',
+        ], 200);
+    }
+
+    /**
      * @param  \Spatie\MediaLibrary\Models\Media  $media
      *
      * @return \Illuminate\Http\JsonResponse
