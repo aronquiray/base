@@ -18,8 +18,12 @@ class Media extends \Spatie\MediaLibrary\Models\Media
     ) {
         $media = $this;
 
+        $model = app('query.cache')->queryCache(function () {
+            return $this->model;
+        }, $this->id);
+
         $attributes += [
-            'title' => $this->model->{$field},
+            'title' => $model->{$field},
         ];
 
         $attributeString = collect($attributes + $media->getCustomProperty('attributes'))
