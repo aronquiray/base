@@ -10,11 +10,19 @@ class Media extends \Spatie\MediaLibrary\Models\Media
         string $conversionName = '',
         string $field = 'title',
         array $attributes = [],
-        bool $lazyLoad = true
+        bool $lazyLoad = true,
+
+        // for none image result
+        float $width = null,
+        float $height = null
     ) {
         $media = $this;
 
-        $attributeString = collect($media->getCustomProperty('attributes') + $attributes)
+        $attributes += [
+            'title' => $this->model->{$field},
+        ];
+
+        $attributeString = collect($attributes + $media->getCustomProperty('attributes'))
             ->map(function ($value, $name) use ($lazyLoad) {
                 if ($name == 'class' && $lazyLoad) {
                     return $name.'="lazy '.$value.'"';
@@ -23,6 +31,10 @@ class Media extends \Spatie\MediaLibrary\Models\Media
             })->implode(' ');
 
         $src = $media->getUrl($conversionName);
+
+        if (!file_exists($media->getPath()) && !is_null($width) && !is_null($height)) {
+            $src = dummy_image($width, $height, $attributes['title']);
+        }
 
         // testing propose
 //        $file = $media->getPath($conversionName);

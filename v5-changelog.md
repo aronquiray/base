@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.3: Fix add custom properties
     v5.0.2: Add image for none image result
     v5.0.1: Fix permission seeder
     v5.0.0: Update folder structures, Add media API

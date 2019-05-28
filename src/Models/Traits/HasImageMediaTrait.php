@@ -50,7 +50,7 @@ trait HasImageMediaTrait
             return html()->img($src, $this->{$field})->attributes($attributes);
         }
 
-        return $media->getMediaImage($conversionName, $field, $attributes, $lazyLoad);
+        return $media->getMediaImage($conversionName, $field, $attributes, $lazyLoad, $width, $height);
     }
 
     /**
