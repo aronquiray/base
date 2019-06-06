@@ -149,6 +149,7 @@ trait SeederHelper
             $model
                 ->copyMedia(is_null($defaultPath) ? test_file_path($file) : ($defaultPath.DIRECTORY_SEPARATOR.$file))
                 ->withCustomProperties($customProperties)
+                ->usingFileName($fileName.'.'.pathinfo($file, PATHINFO_EXTENSION))
                 ->toMediaCollection($collectionName);
 
 
@@ -158,6 +159,7 @@ trait SeederHelper
                 ->addMedia($file)
                 ->withCustomProperties($customProperties)
                 ->preservingOriginal()
+                ->usingFileName($fileName.'.'.$file->clientExtension())
                 ->toMediaCollection($collectionName);
 
 

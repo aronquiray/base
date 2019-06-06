@@ -154,6 +154,7 @@ abstract class ImageController extends Controller
                     'title' => $fileName,
                 ]
             ])
+            ->usingFileName($fileName.'.'.$request->image->clientExtension())
             ->toMediaCollection($collectionName);
 
         $image = $this->convertToUploaderImageFormat($latestImage, $conversion,
