@@ -1,7 +1,8 @@
 <?php
 
-namespace HalcyonLaravel\Base\Http\Controllers;
+namespace HalcyonLaravel\Base\Http\Controllers\Backend;
 
+use HalcyonLaravel\Base\Http\Controllers\Controller;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Model as HalcyonBaseModel;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
