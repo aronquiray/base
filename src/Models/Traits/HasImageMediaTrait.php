@@ -100,6 +100,7 @@ trait HasImageMediaTrait
         return $this->getMedia($collection_name)->map(function ($media) use ($conversion, $allowedProperties) {
             $obj = new StdClass;
 
+            $obj->id = $media->id;
             $obj->name = $media->file_name;
             $obj->source = $media->getUrl(($media->mime_type == 'image/x-icon') ? '' : $conversion);
             $obj->thumbnail = $media->getUrl(($media->mime_type == 'image/x-icon') ? '' : 'thumbnail');

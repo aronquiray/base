@@ -224,6 +224,7 @@ abstract class ImageController extends Controller
     {
         $image = new StdClass;
 
+        $image->id = $media->id;
         $image->name = $media->file_name;
         $image->source = $media->getUrl($conversion);
 
