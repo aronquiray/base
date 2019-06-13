@@ -125,14 +125,14 @@ trait SeederHelper
         if ($model instanceof BaseModelInterface) {
             $fileName = $model->base();
         } else {
-            if (is_string($file)) {
+            if (filter_var($file, FILTER_VALIDATE_URL) OR is_string($file)) {
                 $fileName = explode('/', $file);
                 $fileName = $fileName[count($fileName) - 1];
 
             } else {
                 $fileName = $file->getClientOriginalName();
             }
-            $fileName = explode('.', $fileName)[0];
+//            $fileName = explode('.', $fileName)[0];
             $fileName = str_replace('%20', ' ', $fileName);
             $fileName = str_replace('-', ' ', $fileName);
             $fileName = str_replace('_', ' ', $fileName);
@@ -145,25 +145,30 @@ trait SeederHelper
             ],
         ], $customProperties ?: []);
 
-        if (is_string($file)) {
-            $model
+        if (filter_var($file, FILTER_VALIDATE_URL)) {
+            $media = $model
+                ->addMediaFromUrl($file)
+//                ->usingFileName($fileName.'.'.pathinfo($file, PATHINFO_EXTENSION));
+                ->usingFileName($fileName);
+        } elseif (is_string($file)) {
+            $media = $model
                 ->copyMedia(is_null($defaultPath) ? test_file_path($file) : ($defaultPath.DIRECTORY_SEPARATOR.$file))
-                ->withCustomProperties($customProperties)
-                ->usingFileName($fileName.'.'.pathinfo($file, PATHINFO_EXTENSION))
-                ->toMediaCollection($collectionName);
-
+//                ->usingFileName($fileName.'.'.pathinfo($file, PATHINFO_EXTENSION));
+                ->usingFileName($fileName);
 
         } elseif (get_class($file) instanceof UploadedFile) {
 
-            $model
+            $media = $model
                 ->addMedia($file)
-                ->withCustomProperties($customProperties)
                 ->preservingOriginal()
-                ->usingFileName($fileName.'.'.$file->clientExtension())
-                ->toMediaCollection($collectionName);
-
-
+//                ->usingFileName($fileName.'.'.$file->clientExtension());
+                ->usingFileName($fileName);
         }
+
+        $media
+            ->withCustomProperties($customProperties)
+            ->toMediaCollection($collectionName);
+
         print_r(get_class($model)." Seeding done!\n");
     }
 

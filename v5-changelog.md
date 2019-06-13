@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.8: Add url on media uploader
     v5.0.7: Fix ordering images when new uploads
     v5.0.6: Enhance uploaders
     v5.0.5: Caching data from media model
