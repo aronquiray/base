@@ -123,6 +123,10 @@ trait HasImageMediaTrait
      */
     public function getMedia(string $collectionName = 'default', $filters = []): Collection
     {
+        if (app()->runningInConsole()) {
+            return $this->getMediaOverride($collectionName, $filters);
+        }
+
         return app('query.cache')->queryCache(function () use ($collectionName, $filters) {
             return $this->getMediaOverride($collectionName, $filters);
         }, [get_class($this), $this->id, $collectionName, implode(',', $filters)]);

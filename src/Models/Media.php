@@ -18,7 +18,7 @@ class Media extends \Spatie\MediaLibrary\Models\Media
     ) {
         $media = $this;
 
-        $model = app('query.cache')->queryCache(function () {
+        $model = app()->runningInConsole() ? $this->model : app('query.cache')->queryCache(function () {
             return $this->model;
         }, $this->id);
 
