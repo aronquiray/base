@@ -35,7 +35,7 @@ class Media extends \Spatie\MediaLibrary\Models\Media
 //        if (!file_exists($media->getPath()) && !is_null($width) && !is_null($height)) {
 //            $src = dummy_image($width, $height, $attributes['title']);
 //        }
-        if (!file_exists($media->getPath()) && method_exists($model, 'mediaDefaultSizes')) {
+        if (!file_exists($media->getPath($conversionName)) && method_exists($model, 'mediaDefaultSizes')) {
             $sizes = $model->mediaDefaultSizes();
             if (isset($sizes[$this->collection_name][$conversionName])) {
                 $size = $sizes[$this->collection_name][$conversionName];
