@@ -147,22 +147,22 @@ trait SeederHelper
 
         if (filter_var($file, FILTER_VALIDATE_URL)) {
             $media = $model
-                ->addMediaFromUrl($file)
+                ->addMediaFromUrl($file);
 //                ->usingFileName($fileName.'.'.pathinfo($file, PATHINFO_EXTENSION));
-                ->usingFileName($fileName);
+//                ->usingFileName($fileName);
         } elseif (is_string($file)) {
             $media = $model
-                ->copyMedia(is_null($defaultPath) ? test_file_path($file) : ($defaultPath.DIRECTORY_SEPARATOR.$file))
+                ->copyMedia(is_null($defaultPath) ? test_file_path($file) : ($defaultPath.DIRECTORY_SEPARATOR.$file));
 //                ->usingFileName($fileName.'.'.pathinfo($file, PATHINFO_EXTENSION));
-                ->usingFileName($fileName);
+//                ->usingFileName($fileName);
 
         } elseif (get_class($file) instanceof UploadedFile) {
 
             $media = $model
                 ->addMedia($file)
-                ->preservingOriginal()
+                ->preservingOriginal();
 //                ->usingFileName($fileName.'.'.$file->clientExtension());
-                ->usingFileName($fileName);
+//                ->usingFileName($fileName);
         }
 
         $media

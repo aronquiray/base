@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.10: Add mediaDefaultSizes, revert using name
     v5.0.9: Disable cache on console in media library
     v5.0.8: Add url on media uploader
     v5.0.7: Fix ordering images when new uploads

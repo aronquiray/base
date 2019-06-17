@@ -28,11 +28,7 @@ trait HasImageMediaTrait
         string $conversionName = '',
         string $field = 'title',
         array $attributes = [],
-        bool $lazyLoad = true,
-
-        // for none image result
-        float $width = null,
-        float $height = null
+        bool $lazyLoad = true
     ) {
 
         $media = $this->getFirstMedia($collection);
@@ -43,14 +39,21 @@ trait HasImageMediaTrait
                 ] + $attributes;
 
             $src = null;
-            if (!is_null($width) && !is_null($height)) {
-                $src = dummy_image($width, $height, $attributes['title']);
+//            if (!is_null($width) && !is_null($height)) {
+//                $src = dummy_image($width, $height, $attributes['title']);
+//            }
+            if (method_exists($this, 'mediaDefaultSizes')) {
+                $sizes = $this->mediaDefaultSizes();
+                if (isset($sizes[$collection][$conversionName])) {
+                    $size = $sizes[$collection][$conversionName];
+                    $src = dummy_image($size['width'], $size['height'], $attributes['title']);
+                }
             }
 
             return html()->img($src, $this->{$field})->attributes($attributes);
         }
 
-        return $media->getMediaImage($conversionName, $field, $attributes, $lazyLoad, $width, $height);
+        return $media->getMediaImage($conversionName, $field, $attributes, $lazyLoad);
     }
 
     /**

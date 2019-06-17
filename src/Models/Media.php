@@ -10,11 +10,7 @@ class Media extends \Spatie\MediaLibrary\Models\Media
         string $conversionName = '',
         string $field = 'title',
         array $attributes = [],
-        bool $lazyLoad = true,
-
-        // for none image result
-        float $width = null,
-        float $height = null
+        bool $lazyLoad = true
     ) {
         $media = $this;
 
@@ -36,8 +32,15 @@ class Media extends \Spatie\MediaLibrary\Models\Media
 
         $src = $media->getUrl($conversionName);
 
-        if (!file_exists($media->getPath()) && !is_null($width) && !is_null($height)) {
-            $src = dummy_image($width, $height, $attributes['title']);
+//        if (!file_exists($media->getPath()) && !is_null($width) && !is_null($height)) {
+//            $src = dummy_image($width, $height, $attributes['title']);
+//        }
+        if (!file_exists($media->getPath()) && method_exists($model, 'mediaDefaultSizes')) {
+            $sizes = $model->mediaDefaultSizes();
+            if (isset($sizes[$this->collection_name][$conversionName])) {
+                $size = $sizes[$this->collection_name][$conversionName];
+                $src = dummy_image($size['width'], $size['height'], $attributes['title']);
+            }
         }
 
         // testing propose
