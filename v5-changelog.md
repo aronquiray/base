@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.13: Update version spatie/laravel-translatable to ^4.0
     v5.0.12: Remove usingFilename in media updloader api
     v5.0.11: Fix get media path
     v5.0.10: Add mediaDefaultSizes, revert using name
