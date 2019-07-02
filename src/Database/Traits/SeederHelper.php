@@ -121,7 +121,7 @@ trait SeederHelper
         if (app()->environment() == 'testing') {
             return;
         }
-        print_r(get_class($model)." Seeding $file ... \n");
+        print_r(get_class($model)." [{$model->id}] Seeding $file ... \n");
         if ($model instanceof BaseModelInterface) {
             $fileName = $model->base();
         } else {
@@ -169,7 +169,7 @@ trait SeederHelper
             ->withCustomProperties($customProperties)
             ->toMediaCollection($collectionName);
 
-        print_r(get_class($model)." Seeding done!\n");
+        print_r(get_class($model)." [{$model->id}] Seeding done!\n");
     }
 
 }
