@@ -112,9 +112,8 @@ abstract class ImageController extends Controller
             'model' => 'required|in:'.$this->allowedModels(),
             'collection' => 'nullable|string',
             'conversion' => 'nullable|string',
+            'is_single' => 'nullable|bool',
         ]);
-
-//        dd(__METHOD__, $requestData['is_multiple']);
 
         $model = $this->getModel($requestData['model'], $routeKeyValue);
 
@@ -149,7 +148,7 @@ abstract class ImageController extends Controller
             $fileName = $this->getFileName($requestImage->getClientOriginalName());
         }
 
-        $latestImage = $model->addMedia($requestImage)
+        $media = $model->addMedia($requestImage)
             ->withCustomProperties([
                 'attributes' => [
                     'alt' => $fileName,
@@ -159,7 +158,9 @@ abstract class ImageController extends Controller
 //            ->usingFileName($fileName.'.'.$requestImage->clientExtension())
             ->toMediaCollection($collectionName);
 
-        $image = $this->convertToUploaderImageFormat($latestImage, $conversion,
+        $this->checkClearOtherMedia($model, $media, $collectionName, $requestData);
+
+        $image = $this->convertToUploaderImageFormat($media, $conversion,
             defined($this->models()[$requestData['model']].'::MEDIA_LIBRARY_CUSTOM_PROPERTIES')
                 ? array_merge(['attributes'], $model::MEDIA_LIBRARY_CUSTOM_PROPERTIES)
                 : ['attributes']
@@ -213,6 +214,20 @@ abstract class ImageController extends Controller
         $fileName = str_replace('%20', ' ', $fileName);
         $fileName = str_replace('-', ' ', $fileName);
         return str_replace('_', ' ', $fileName);
+    }
+
+    /**
+     * @param  \Spatie\MediaLibrary\HasMedia\HasMedia  $model
+     * @param  \Spatie\MediaLibrary\Models\Media  $media
+     * @param  string  $collectionName
+     * @param  array  $requestData
+     */
+    private function checkClearOtherMedia(HasMedia $model, Media $media, string $collectionName, array $requestData)
+    {
+        $isSingle = isset($requestData['is_single']) ? ((bool) $requestData['is_single']) : null;
+        if (is_bool($isSingle) && $isSingle === true) {
+            $model->clearMediaCollectionExcept($collectionName, $media);
+        }
     }
 
     /**

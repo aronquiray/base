@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.21: Add force single upload
     v5.0.20: Enhance request validation in image api controller
     v5.0.19: typo
     v5.0.18: version
