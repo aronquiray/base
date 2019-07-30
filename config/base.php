@@ -8,6 +8,11 @@ return [
         // used for media
         'metaTag' => 'App\Models\MetaTag',
     ],
+    // used in middleman's
+    'repositories' => [
+        'page' => App\Repositories\Core\Page\PageRepository::class,
+        'domain' => App\Repositories\Core\Domain\DomainRepository::class,
+    ],
     'media' => [
         'route_names' => [
             'destroy' => 'webapi.admin.image.destroy',

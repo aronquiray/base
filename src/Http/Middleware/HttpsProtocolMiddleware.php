@@ -11,7 +11,7 @@ class HttpsProtocolMiddleware
     {
         $scheme = 'https';
 
-        if (strpos(app('config')->get('app.url'), "$scheme://") !== false) {
+        if (strpos(config('app.url'), "$scheme://") !== false) {
 
             if (!$request->secure()) {
                 return redirect()->secure($request->getRequestUri());

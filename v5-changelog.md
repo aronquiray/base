@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.16: Add middleware PageStatusMiddleware, SiteMiddleware
     v5.0.15: Just add model id on image seeder 
     v5.0.14: Allow 3.1 on spatie/laravel-translatable
     v5.0.13: Update version spatie/laravel-translatable to ^4.0
