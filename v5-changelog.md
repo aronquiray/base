@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.17: Add HasDomains trait and Domain Model from project level
     v5.0.16: Add middleware PageStatusMiddleware, SiteMiddleware
     v5.0.15: Just add model id on image seeder 
     v5.0.14: Allow 3.1 on spatie/laravel-translatable
