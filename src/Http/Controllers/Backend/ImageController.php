@@ -27,11 +27,11 @@ abstract class ImageController extends Controller
      */
     public function order(Request $request)
     {
-        $this->validate($request, [
+        $requestData = $this->validate($request, [
             'orderedIds.*' => 'required|integer'
         ]);
 
-        Media::setNewOrder($request->orderedIds);
+        Media::setNewOrder($requestData['orderedIds']);
 
         app('query.cache')->flush();
 
@@ -108,18 +108,20 @@ abstract class ImageController extends Controller
      */
     public function upload(Request $request, string $routeKeyValue)
     {
-        $this->validate($request, [
+        $requestData = $this->validate($request, [
             'model' => 'required|in:'.$this->allowedModels(),
             'collection' => 'nullable|string',
             'conversion' => 'nullable|string',
         ]);
 
-        $model = $this->getModel($request->model, $routeKeyValue);
+//        dd(__METHOD__, $requestData['is_multiple']);
 
-        $collectionName = $request->collection ?? $model->collection_name ?? 'images';
-        $conversion = $request->conversion ?? '';
+        $model = $this->getModel($requestData['model'], $routeKeyValue);
 
-        $rules = isset($this->validations()[$this->models()[$request->model]]) ? $this->validations()[$this->models()[$request->model]] : [];
+        $collectionName = $requestData['collection'] ?? $model->collection_name ?? 'images';
+        $conversion = $requestData['conversion'] ?? '';
+
+        $rules = isset($this->validations()[$this->models()[$requestData['model']]]) ? $this->validations()[$this->models()[$requestData['model']]] : [];
 
         if (is_array($rules)) {
             if (!empty($rules)) {
@@ -135,30 +137,30 @@ abstract class ImageController extends Controller
             throw  new InvalidArgumentException('Invalid argument, it must me an array.');
         }
 
-        $this->validate($request, [
+        $requestImage = $this->validate($request, [
             'image' => $rules ?: 'required|image',
-        ]);
+        ])['image'];
 
         abort_if(is_null($collectionName), 422, 'No collection name specified, aborted.');
 
         if ($model instanceof BaseModelInterface) {
             $fileName = $model->base();
         } else {
-            $fileName = $this->getFileName($request->image->getClientOriginalName());
+            $fileName = $this->getFileName($requestImage->getClientOriginalName());
         }
 
-        $latestImage = $model->addMedia($request->image)
+        $latestImage = $model->addMedia($requestImage)
             ->withCustomProperties([
                 'attributes' => [
                     'alt' => $fileName,
                     'title' => $fileName,
                 ]
             ])
-//            ->usingFileName($fileName.'.'.$request->image->clientExtension())
+//            ->usingFileName($fileName.'.'.$requestImage->clientExtension())
             ->toMediaCollection($collectionName);
 
         $image = $this->convertToUploaderImageFormat($latestImage, $conversion,
-            defined($this->models()[$request->model].'::MEDIA_LIBRARY_CUSTOM_PROPERTIES')
+            defined($this->models()[$requestData['model']].'::MEDIA_LIBRARY_CUSTOM_PROPERTIES')
                 ? array_merge(['attributes'], $model::MEDIA_LIBRARY_CUSTOM_PROPERTIES)
                 : ['attributes']
         );
@@ -277,11 +279,11 @@ abstract class ImageController extends Controller
      */
     public function updateProperty(Request $request, Media $media)
     {
-        $this->validate($request, [
+        $requestData = $this->validate($request, [
             'properties' => 'required',
         ]);
 
-        foreach ($request->properties as $key => $property) {
+        foreach ($requestData['properties'] as $key => $property) {
             $media->setCustomProperty($key, $property);
         }
 

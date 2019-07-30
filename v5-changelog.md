@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.20: Enhance request validation in image api controller
     v5.0.19: typo
     v5.0.18: version
     v5.0.17: Add HasDomains trait and Domain Model from project level, Fix trait
