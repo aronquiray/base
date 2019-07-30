@@ -12,7 +12,7 @@ class SiteMiddleware
 
     public function __construct()
     {
-        $this->domainRepository = app(config('base.repositories.page',
+        $this->domainRepository = app(config('base.repositories.domain',
             'App\Repositories\Core\Domain\DomainRepository'));
     }
 
