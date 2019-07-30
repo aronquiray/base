@@ -80,7 +80,7 @@ trait HasDomains
     {
         return $query->whereHas('domains', function ($query) use ($machineName) {
             if (is_null($machineName)) {
-                $currentBaseUrl = parse_url(app('url')->to('/'))['host'];
+                $currentBaseUrl = current_base_url();
                 $query->where('domain', $currentBaseUrl);
             } else {
                 $query->where('machine_name', $machineName);
