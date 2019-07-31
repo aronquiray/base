@@ -14,9 +14,12 @@ class Media extends \Spatie\MediaLibrary\Models\Media
     ) {
         $media = $this;
 
-        $model = app()->runningInConsole() ? $this->model : app('query.cache')->queryCache(function () {
-            return $this->model;
-        }, $this->id);
+        $model = app()->runningInConsole() ? $this->model : app('query.cache')->queryCache(
+            $this->id,
+            function () {
+                return $this->model;
+            }
+        );
 
         $attributes += [
             'title' => $model->{$field},
