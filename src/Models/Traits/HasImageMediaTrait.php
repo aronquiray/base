@@ -130,9 +130,12 @@ trait HasImageMediaTrait
             return $this->getMediaOverride($collectionName, $filters);
         }
 
-        return app('query.cache')->queryCache(function () use ($collectionName, $filters) {
-            return $this->getMediaOverride($collectionName, $filters);
-        }, [get_class($this), $this->id, $collectionName, implode(',', $filters)]);
+        return app('query.cache')->queryCache(
+            [get_class($this), $this->id, $collectionName, implode(',', $filters)],
+            function () use ($collectionName, $filters) {
+                return $this->getMediaOverride($collectionName, $filters);
+            }
+        );
     }
 
     /**

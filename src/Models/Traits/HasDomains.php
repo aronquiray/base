@@ -28,9 +28,12 @@ trait HasDomains
      */
     public function getDomainTitles(bool $isStringReturn = true, string $glue = ', ')
     {
-        $domains = app('query.cache')->queryCache(function () {
-            return $this->domains()->get(['machine_name', 'title']);
-        }, [get_class($this), $this->id, 'title', 'machine_name']);
+        $domains = app('query.cache')->queryCache(
+            [get_class($this), $this->id, 'title', 'machine_name'],
+            function () {
+                return $this->domains()->get(['machine_name', 'title']);
+            }
+        );
 
         $domainTitles = [];
         foreach ($domains as $domain) {
@@ -63,9 +66,12 @@ trait HasDomains
         $class = Str::kebab($class);
         $class = Str::plural($class);
 
-        $domain = app('query.cache')->queryCache(function () {
-            return $this->domains()->first(['domain']);
-        }, [get_class($this), $this->id, 'domain']);
+        $domain = app('query.cache')->queryCache(
+            [get_class($this), $this->id, 'domain'],
+            function () {
+                return $this->domains()->first(['domain']);
+            }
+        );
 
         return add_scheme_host($domain->domain)."/$class/".$this->slug;
     }
