@@ -40,10 +40,6 @@ class QueryCacheModelRepositoryHelper
      */
     public function queryCache(Closure $closure, $keys)
     {
-//        if (config('cache.default') == 'array' OR strpos(app('request')->headers->get('user-agent'), 'GuzzleHttp') !== false) {
-//            return $closure();
-//        }
-
         $keys = Arr::wrap($keys);
 
         $r = new ReflectionObject($closure);
@@ -63,19 +59,19 @@ class QueryCacheModelRepositoryHelper
      */
     private function getKeys(array $args): string
     {
-        $args = serialize(implode('-', $args));
-
         // get who call this
         $backTrace = debug_backtrace()[2];
-
         try {
             $called = "{$backTrace['class']}@{$backTrace['function']}";
         } catch (Exception $e) {
             $called = 'noneClass@xxx';
         }
-        $host = parse_url(app('url')->to('/'))['host'];
 
-        return sprintf('%s:%s-%s', $host, $called, md5($called.$args.app('request')->fullUrl()));
+        return sprintf('%s:%s-%s',
+            current_base_url(),
+            $called,
+            md5($called.serialize(implode('-', $args)).app('request')->fullUrl())
+        );
     }
 
     /**

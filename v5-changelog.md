@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.23: Enhance query cache 
     v5.0.22: Add domain model in config
     v5.0.21: Add force single upload
     v5.0.20: Enhance request validation in image api controller
