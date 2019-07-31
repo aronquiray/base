@@ -248,8 +248,8 @@ abstract class ImageController extends Controller
         // issue on background task, so return original immediately
         $image->thumbnail = $media->getUrl();
 
-        $image->deleteUrl = route(app('config')->get('base.media.route_names.destroy'), $media);
-        $image->updatePropertyUrl = route(app('config')->get('base.media.route_names.update_properties'), $media);
+        $image->deleteUrl = route(config('base.media.route_names.destroy'), $media);
+        $image->updatePropertyUrl = route(config('base.media.route_names.update_properties'), $media);
         $image->properties = $this->formatCustomProperties($media->custom_properties, $allowedProperties);
 
         return $image;
@@ -277,7 +277,7 @@ abstract class ImageController extends Controller
      */
     private function forMeta(IlluminateModel $model)
     {
-        $metaTagModel = app(app('config')->get('base.models.metaTag'));
+        $metaTagModel = app(config('base.models.metaTag', 'App\Models\MetaTag'));
         if ($model instanceof $metaTagModel) {
             $model->update([
                 'og_image' => $model->getFirstMediaUrl('images', 'og_image'),

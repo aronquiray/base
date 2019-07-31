@@ -52,7 +52,7 @@ trait HasDomains
      */
     public function domains(): MorphToMany
     {
-        return $this->morphToMany(Domain::class, 'domainable');
+        return $this->morphToMany(config('base.models.domain', Domain::class), 'domainable');
     }
 
 
@@ -80,8 +80,7 @@ trait HasDomains
     {
         return $query->whereHas('domains', function ($query) use ($machineName) {
             if (is_null($machineName)) {
-                $currentBaseUrl = current_base_url();
-                $query->where('domain', $currentBaseUrl);
+                $query->where('domain', current_base_url());
             } else {
                 $query->where('machine_name', $machineName);
             }
