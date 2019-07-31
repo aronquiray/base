@@ -27,18 +27,21 @@ class QueryCacheModelRepositoryHelper
         $this->cache = app('cache');
     }
 
+    /**
+     * @return string
+     */
     public static function getFilePath(): string
     {
         return self::$storeFile = storage_path('framework/cache/query-cache-model-repository.json');
     }
 
     /**
+     * @param $keys
      * @param  \Closure  $closure
-     * @param          $keys
      *
      * @return mixed
      */
-    public function queryCache(Closure $closure, $keys)
+    public function queryCache($keys, Closure $closure)
     {
         $keys = Arr::wrap($keys);
 
@@ -88,6 +91,9 @@ class QueryCacheModelRepositoryHelper
         self::putToJson($content);
     }
 
+    /**
+     * @return array
+     */
     private static function getStoredKeys(): array
     {
         if (!file_exists(self::$storeFile)) {
@@ -97,6 +103,9 @@ class QueryCacheModelRepositoryHelper
         return json_decode(file_get_contents(self::$storeFile), true) ?: [];
     }
 
+    /**
+     * @param  array  $data
+     */
     private static function putToJson(array $data)
     {
 //        JSON_PRETTY_PRINT
@@ -104,7 +113,7 @@ class QueryCacheModelRepositoryHelper
     }
 
     /**
-     * @throws \Exception
+     *
      */
     public function flush()
     {
