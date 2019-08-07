@@ -49,10 +49,11 @@ abstract class ImageController extends Controller
      */
     public function destroy(Media $media)
     {
-        $model = $media->model()->first();
+        $model = $media->model;
         $modelClassName = get_class($model);
+        $mediaCount = $model->getMedia($media->collection_name)->count();
 
-        if ($model->media->count() > 1) {
+        if ($mediaCount > 1) {
             return $this->processDelete($media);
         }
 

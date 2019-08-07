@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.27: Fix delete image in multiple collection
     v5.0.24-26: wip
     v5.0.23: Enhance query cache 
     v5.0.22: Add domain model in config
