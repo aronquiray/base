@@ -69,11 +69,11 @@ trait HasDomains
         $domain = app('query.cache')->queryCache(
             [get_class($this), $this->id, 'domain'],
             function () {
-                return $this->domains()->first(['domain']);
+                return $this->domains()->first(['domain'])->domain;
             }
         );
 
-        return add_scheme_host($domain->domain)."/$class/".$this->slug;
+        return add_scheme_host($domain)."/$class/".$this->slug;
     }
 
     /**
