@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.0.29: Edit Image seed debug
     v5.0.28: Fix "Serialization of 'Closure' is not allowed" on cache domain url
     v5.0.27: Fix delete image in multiple collection
     v5.0.24-26: wip
