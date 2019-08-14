@@ -241,6 +241,7 @@ abstract class TestCase extends Orchestra
     {
         return [
             "HalcyonLaravel\\Base\\Providers\\BaseServiceProvider",
+            "HalcyonLaravel\\Base\\Providers\\BaseEventServiceProvider",
 
             // --
             "Yajra\\DataTables\\DataTablesServiceProvider",
