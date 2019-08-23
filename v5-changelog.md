@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.2.2: Add return builder
     v5.2.1: Fix not retun on table repo
     v5.2.0: Use cache on repo table
     v5.1.0: Add Event listener for clearing cache
