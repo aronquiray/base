@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.2.0: Use cache on repo table
     v5.1.0: Add Event listener for clearing cache
     v5.0.29: Edit Image seed debug
     v5.0.28: Fix "Serialization of 'Closure' is not allowed" on cache domain url

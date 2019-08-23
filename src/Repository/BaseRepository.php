@@ -68,15 +68,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
             }
         }
 
-        $this->applyCriteria();
-        $this->applyScope();
-
-        $builder = $this->model->select($columns);
-
-        $this->resetModel();
-        $this->resetScope();
-
-        return $builder;
+        $this->all($columns);
     }
 
     /**
