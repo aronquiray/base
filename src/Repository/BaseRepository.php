@@ -29,7 +29,6 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      * @param  array  $fields
      * @param  bool  $isAllFillable
      *
-     * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function table(array $request = null, array $fields = [], bool $isAllFillable = true)
