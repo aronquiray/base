@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.2.3: Enhance repo interface 
     v5.2.2: Add return builder
     v5.2.1: Fix not retun on table repo
     v5.2.0: Use cache on repo table

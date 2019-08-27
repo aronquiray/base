@@ -26,11 +26,17 @@ interface BaseRepositoryInterface extends RepositoryInterface
      * @param  array|null  $request
      * @param  array  $fields
      * @param  bool  $isAllFillable
+     * @param  bool  $isReturnBuilder
      *
      * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
-    public function table(array $request = null, array $fields = [], bool $isAllFillable = true);
+    public function table(
+        array $request = null,
+        array $fields = [],
+        bool $isAllFillable = true,
+        bool $isReturnBuilder = false
+    );
 
     /**
      * @param $id

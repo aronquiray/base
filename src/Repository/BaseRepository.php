@@ -20,7 +20,7 @@ use Prettus\Repository\Traits\CacheableRepository;
  *
  * @package HalcyonLaravel\Base\Repository
  */
-abstract class BaseRepository extends PrettusBaseRepository implements CacheableInterface
+abstract class BaseRepository extends PrettusBaseRepository implements CacheableInterface, BaseRepositoryInterface
 {
     use CacheableRepository;
 
@@ -38,8 +38,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
         array $fields = [],
         bool $isAllFillable = true,
         bool $isReturnBuilder = false
-    )
-    {
+    ) {
         $isHasSoftDelete = is_class_uses_deep($this->model, SoftDeletes::class);
 
         $tableName = $this->model->getTable();
