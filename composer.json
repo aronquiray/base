@@ -1,6 +1,7 @@
 {
   "name": "halcyon-laravel/base",
   "description": "Base",
+  "license": "proprietary",
   "repositories": [
     {
       "type": "vcs",
