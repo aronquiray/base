@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.2.5: Remove return builder parameter on table, as need to return builder only
     v5.2.4: Add license "proprietary" as closed-source
     v5.2.3: Enhance repo interface 
     v5.2.2: Add return builder

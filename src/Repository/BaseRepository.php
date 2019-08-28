@@ -28,7 +28,6 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
      * @param  array|null  $request
      * @param  array  $fields
      * @param  bool  $isAllFillable
-     * @param  bool  $isReturnBuilder
      *
      * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException
@@ -36,8 +35,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
     public function table(
         array $request = null,
         array $fields = [],
-        bool $isAllFillable = true,
-        bool $isReturnBuilder = false
+        bool $isAllFillable = true
     ) {
         $isHasSoftDelete = is_class_uses_deep($this->model, SoftDeletes::class);
 
@@ -73,8 +71,6 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
             }
         }
 
-        if ($isReturnBuilder) {
-
             $this->applyCriteria();
             $this->applyScope();
 
@@ -84,9 +80,6 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
             $this->resetScope();
 
             return $builder;
-        }
-
-        return $this->all($columns);
     }
 
     /**
