@@ -67,7 +67,7 @@ abstract class ImageController extends Controller
             return $this->processDelete($media);
         }
 
-        $collectionName = 'all collection names.';
+        $collectionName = 'all collection names';
         if (
             array_key_exists($modelClassName, $this->noneRequiredModels()) &&
             $this->noneRequiredModels()[$modelClassName] != '*'
@@ -81,7 +81,7 @@ abstract class ImageController extends Controller
 
         return response()->json([
             'status' => 'failed',
-            'message' => "Image required in [{$modelClassName}] with {$collectionName}",
+            'message' => "Image required in [{$modelClassName}] with [{$collectionName}].",
         ], 422);
     }
 
@@ -173,7 +173,7 @@ abstract class ImageController extends Controller
         return response()->json([
             'status' => 'success',
             'data' => $image,
-            'message' => 'Success upload for ['.get_class($model).']',
+            'message' => 'Success upload for ['.$requestData['model'].'] with collection name ['.$collectionName.']',
         ], 200);
     }
 
