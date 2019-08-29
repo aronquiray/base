@@ -7,6 +7,7 @@ use HalcyonLaravel\Base\Criterion\Eloquent\ThisScopeCriteria;
 use HalcyonLaravel\Base\Criterion\Eloquent\WithTrashCriteria;
 use HalcyonLaravel\Base\Models\Model;
 use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Class BaseController
@@ -70,7 +71,7 @@ abstract class BaseController extends Controller
         $model = $repo->all()->first();
 
         if (is_null($model)) {
-            abort(404);
+            throw new ModelNotFoundException($model);
         }
 
         return $model;

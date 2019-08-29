@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.2.8: Replace abort to ModelNotFoundException
     v5.2.7: Enhance and add $queryScope parameter on get model from base controller
     v5.2.6: Update upload messages
     v5.2.5: Remove return builder parameter on table, as need to return builder only
