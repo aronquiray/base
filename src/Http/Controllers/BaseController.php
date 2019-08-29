@@ -2,6 +2,9 @@
 
 namespace HalcyonLaravel\Base\Http\Controllers;
 
+use HalcyonLaravel\Base\Criterion\Eloquent\ThisEqualThatCriteria;
+use HalcyonLaravel\Base\Criterion\Eloquent\ThisScopeCriteria;
+use HalcyonLaravel\Base\Criterion\Eloquent\WithTrashCriteria;
 use HalcyonLaravel\Base\Models\Model;
 use HalcyonLaravel\Base\Repository\BaseRepositoryInterface;
 
@@ -29,10 +32,11 @@ abstract class BaseController extends Controller
      * @param  string  $key
      * @param  bool  $trash
      * @param  array|null  $customWhere
+     * @param  string|null  $queryScope
      *
      * @return mixed
      */
-    public function getModel(string $key, bool $trash = false, array $customWhere = null)
+    public function getModel(string $key, bool $trash = false, array $customWhere = null, string $queryScope = null)
     {
         $repo = $this->repository();
 
@@ -46,13 +50,24 @@ abstract class BaseController extends Controller
             $where = array_merge($where, $customWhere);
         }
 
-        if ($trash && method_exists($modelClass, 'bootSoftDeletes')) {
-            $model = $repo->scopeQuery(function ($query) {
-                return $query->withTrashed();
-            })->findWhere($where)->first();
-        } else {
-            $model = $repo->findWhere($where)->first();
+        if (!is_null($queryScope)) {
+            $repo->pushCriteria(new ThisScopeCriteria($queryScope));
         }
+
+        if ($trash && method_exists($modelClass, 'bootSoftDeletes')) {
+//            $model = $repo->scopeQuery(function ($query) {
+//                return $query->withTrashed();
+//            })->findWhere($where)->first();
+            $repo->pushCriteria(new WithTrashCriteria);
+        }
+//        else {
+//            $model = $repo->findWhere($where)->first();
+        foreach ($where as $field => $value) {
+            $repo->pushCriteria(new ThisEqualThatCriteria($field, $value));
+        }
+//        }
+
+        $model = $repo->all()->first();
 
         if (is_null($model)) {
             abort(404);
