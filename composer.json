@@ -1,6 +1,6 @@
 {
   "name": "halcyon-laravel/base",
-  "description": "Base",
+  "description": "Base logic for Core-boilerplate",
   "license": "proprietary",
   "repositories": [
     {
@@ -16,7 +16,7 @@
     "prettus/l5-repository": "^2.6",
     "spatie/laravel-html": "^2.22",
     "spatie/laravel-medialibrary": "^7.5",
-    "spatie/laravel-permission": "^2.23",
+    "spatie/laravel-permission": "^3.0",
     "spatie/laravel-translatable": "^3.1|^4.0",
     "yajra/laravel-datatables-oracle": "~9.0"
   },

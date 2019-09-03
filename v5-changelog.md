@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.2.9: Update laravel-permission to ^v3
     v5.2.8: Replace abort to ModelNotFoundException
     v5.2.7: Enhance and add $queryScope parameter on get model from base controller
     v5.2.6: Update upload messages
