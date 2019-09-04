@@ -2,11 +2,11 @@
 
 namespace HalcyonLaravel\Base\Http\Controllers\Backend;
 
+use HalcyonLaravel\Base\Events\ImageUploadedUploadedEvent;
 use HalcyonLaravel\Base\Http\Controllers\Backend\Contracts\ImageContract;
 use HalcyonLaravel\Base\Http\Controllers\Controller;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Model as HalcyonBaseModel;
-use Illuminate\Database\Eloquent\Model as IlluminateModel;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -167,8 +167,7 @@ abstract class ImageController extends Controller implements ImageContract
                 : ['attributes']
         );
 
-        // update og_image field if model if MetaTag
-        $this->forMeta($model);
+        event(new ImageUploadedUploadedEvent($model, $media));
 
         return response()->json([
             'status' => 'success',
@@ -271,18 +270,6 @@ abstract class ImageController extends Controller implements ImageContract
         return $properties;
     }
 
-    /**
-     * @param $model
-     */
-    private function forMeta(IlluminateModel $model)
-    {
-        $metaTagModel = app(config('base.models.metaTag', 'App\Models\MetaTag'));
-        if ($model instanceof $metaTagModel) {
-            $model->update([
-                'og_image' => $model->getFirstMediaUrl('images', 'og_image'),
-            ]);
-        }
-    }
 
     /**
      * @param  \Illuminate\Http\Request  $request
