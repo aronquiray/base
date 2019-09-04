@@ -2,6 +2,7 @@
 
 namespace HalcyonLaravel\Base\Http\Controllers\Backend;
 
+use HalcyonLaravel\Base\Http\Controllers\Backend\Contracts\ImageContract;
 use HalcyonLaravel\Base\Http\Controllers\Controller;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
 use HalcyonLaravel\Base\Models\Model as HalcyonBaseModel;
@@ -17,7 +18,7 @@ use StdClass;
  *
  * @package App\Http\Controllers\WebApi\Backend\Image
  */
-abstract class ImageController extends Controller
+abstract class ImageController extends Controller implements ImageContract
 {
     /**
      * @param  \Illuminate\Http\Request  $request
@@ -98,7 +99,6 @@ abstract class ImageController extends Controller
         return response()->json([], 204);
     }
 
-    abstract protected function noneRequiredModels(): array;
 
     /**
      * @param  \Illuminate\Http\Request  $request
@@ -185,7 +185,6 @@ abstract class ImageController extends Controller
         return implode(',', array_keys($this->models()));
     }
 
-    abstract protected function models(): array;
 
     /**
      * @param  string  $modelName
@@ -200,7 +199,6 @@ abstract class ImageController extends Controller
         return $model::where($model->getRouteKeyName(), $routeKeyValue)->firstOrFail();
     }
 
-    abstract protected function validations(): array;
 
     /**
      * @param  string  $fileName_

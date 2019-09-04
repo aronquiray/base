@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.4.1: Add interface for move abstract function in image controller
     v5.3.0: version
     v5.2.9: Update laravel-permission to ^v3
     v5.2.8: Replace abort to ModelNotFoundException
