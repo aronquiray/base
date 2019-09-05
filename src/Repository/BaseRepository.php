@@ -41,7 +41,7 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
 
         $tableName = $this->model->getTable();
 
-        foreach (['id', 'updated_at'] as $column) {
+        foreach (['id', 'created_at', 'updated_at'] as $column) {
             if (Schema::hasColumn($tableName, $column)) {
                 $fields[] = $column;
             }
@@ -71,15 +71,15 @@ abstract class BaseRepository extends PrettusBaseRepository implements Cacheable
             }
         }
 
-            $this->applyCriteria();
-            $this->applyScope();
+        $this->applyCriteria();
+        $this->applyScope();
 
-            $builder = $this->model->select($columns);
+        $builder = $this->model->select($columns);
 
-            $this->resetModel();
-            $this->resetScope();
+        $this->resetModel();
+        $this->resetScope();
 
-            return $builder;
+        return $builder;
     }
 
     /**
