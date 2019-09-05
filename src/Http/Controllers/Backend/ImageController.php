@@ -2,7 +2,7 @@
 
 namespace HalcyonLaravel\Base\Http\Controllers\Backend;
 
-use HalcyonLaravel\Base\Events\ImagedUploadedEvent;
+use HalcyonLaravel\Base\Events\ImageUploadedEvent;
 use HalcyonLaravel\Base\Http\Controllers\Backend\Contracts\ImageContract;
 use HalcyonLaravel\Base\Http\Controllers\Controller;
 use HalcyonLaravel\Base\Models\Contracts\BaseModelInterface;
@@ -167,7 +167,7 @@ abstract class ImageController extends Controller implements ImageContract
                 : ['attributes']
         );
 
-        event(new ImagedUploadedEvent($model, $media));
+        event(new ImageUploadedEvent($model, $media));
 
         return response()->json([
             'status' => 'success',

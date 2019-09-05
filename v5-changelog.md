@@ -2,7 +2,7 @@
 
 
 ## Changes Log 
-    v5.4.6: Rename to ImagedUploadedEvent
+    v5.4.7: Rename to ImagedUploadedEvent
     v5.4.5: Enhance scope criteria parameter
     v5.4.4: Add optional parameter on scope criteria
     v5.4.3: Add created_at on table repo 
