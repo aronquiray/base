@@ -12,9 +12,15 @@ class ThisScopeCriteria implements CriteriaInterface
      */
     private $scopeName;
 
-    public function __construct(string $scopeName)
+    /**
+     * @var null
+     */
+    private $parameter;
+
+    public function __construct(string $scopeName, $parameter = null)
     {
         $this->scopeName = $scopeName;
+        $this->parameter = $parameter;
     }
 
     /**
@@ -27,6 +33,9 @@ class ThisScopeCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        return $model->{$this->scopeName}();
+        if (is_null($this->parameter)) {
+            return $model->{$this->scopeName}();
+        }
+        return $model->{$this->scopeName}($this->parameter);
     }
 }

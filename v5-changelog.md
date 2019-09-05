@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.4.4: Add optional parameter on scope criteria
     v5.4.3: Add created_at on table repo 
     v5.4.2: Add event in image controller
     v5.4.1: Add interface for move abstract function in image controller
