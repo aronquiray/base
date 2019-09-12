@@ -28,6 +28,14 @@ abstract class CRUDController extends BaseController implements CRUDContract
     protected $routePath;
 
     /**
+     * @var array
+     */
+    protected $checkChildRelationOnDestroy = [
+
+    ];
+
+
+    /**
      * CRUDController constructor.
      */
     public function __construct()
@@ -166,6 +174,23 @@ abstract class CRUDController extends BaseController implements CRUDContract
     public function destroy(Request $request, $slug)
     {
         $model = $this->getModel($slug);
+
+        foreach ($this->checkChildRelationOnDestroy as $item) {
+            if ($model->{$item}()->count() > 0) {
+                return $this->response(
+                    'destroy',
+                    $request->ajax(),
+                    $model,
+                    route($this->routePath.'.index'),
+                    trans('base::exceptions.not_deleted_has_child_data', [
+                        'name' => $model->base(config('base.responseBaseableName')),
+                        'child_relation' => $item,
+                    ]),
+                    422
+                );
+            }
+        }
+
         $this->repository()->delete($model->id);
         $redirect = route($this->routePath.'.'.(method_exists($this->repository()->model(),
                 'bootSoftDeletes') ? 'deleted' : 'index'));

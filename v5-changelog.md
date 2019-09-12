@@ -2,6 +2,7 @@
 
 
 ## Changes Log 
+    v5.6.0: Version, Add $checkChildRelationOnDestroy on CRUDController
     v5.5.8: Add Blueprint macros
     v5.4.7: Rename to ImagedUploadedEvent
     v5.4.5: Enhance scope criteria parameter
