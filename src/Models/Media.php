@@ -2,8 +2,20 @@
 
 namespace HalcyonLaravel\Base\Models;
 
+use Illuminate\Support\Str;
+
 class Media extends \Spatie\MediaLibrary\Models\Media
 {
+
+    public function generateTags(): array
+    {
+        $entity = Str::slug(class_basename($this->model_type), '_');
+        $id = $this->model_id;
+
+        return [
+            "media_entity_{$entity}_{$id}"
+        ];
+    }
 
     public function getMediaImage(
 //        string $collection = 'images',
