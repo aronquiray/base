@@ -6,16 +6,12 @@
     {
       "type": "vcs",
       "url": "git@bitbucket.org:halcyonlaravel/helpers.git"
-    },
-    {
-      "type": "vcs",
-      "url": "git@bitbucket.org:halcyonlaravel/temporary-read-only-laravel-meta-tags-1.git"
     }
   ],
   "require": {
     "php": ">=7.2",
     "ext-json": "*",
-    "fomvasss/laravel-meta-tags": "dev-patch-2",
+    "fomvasss/laravel-meta-tags": "^3.0",
     "halcyon-laravel/helpers": "^1.0",
     "prettus/l5-repository": "^2.6",
     "spatie/laravel-html": "^2.22",
