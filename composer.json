@@ -9,10 +9,10 @@
     }
   ],
   "require": {
-    "php": ">=7.2",
+    "php": ">=7.3",
     "ext-json": "*",
     "fomvasss/laravel-meta-tags": "^3.0",
-    "aronquiray/helpers": "^1.0",
+    "aronquiray/helpers": "^2.0",
     "prettus/l5-repository": "^2.6",
     "spatie/laravel-html": "^2.22",
     "spatie/laravel-medialibrary": "^7.5",
